@@ -7,6 +7,7 @@ import {
   appointments,
   availabilityExceptions,
   availabilityRules,
+  barberServices,
   payments,
   recurringSeries,
   seriesOccurrences,
@@ -14,6 +15,7 @@ import {
   users,
 } from "@/db/schema";
 import { computeDeposit } from "@/domain/payments/deposit";
+import { effectivePricing } from "@/domain/barbers/pricing";
 import { loadSettings } from "@/domain/booking/load";
 import { NotFoundError } from "@/domain/errors";
 import { paymentsEnabled } from "@/env";
@@ -115,7 +117,22 @@ async function materializeSeries(
     .where(eq(services.id, series.serviceId));
   if (!service) return;
   const settings = await loadSettings();
-  const { depositCents, remainderCents } = computeDeposit(service, settings);
+  // Apply the barber's price override when one exists. A pair removed after
+  // series creation must NOT strand the standing appointment - fall back to
+  // the shop price instead of rejecting.
+  const [offering] = await db
+    .select({ priceCents: barberServices.priceCents })
+    .from(barberServices)
+    .where(
+      and(
+        eq(barberServices.barberId, series.barberId),
+        eq(barberServices.serviceId, series.serviceId),
+      ),
+    );
+  const { depositCents, remainderCents } = computeDeposit(
+    effectivePricing(service, offering?.priceCents ?? null),
+    settings,
+  );
 
   // Expand from the LATER of today and the already-materialized horizon so
   // occurrences are never re-created after cancellation.

@@ -5,3 +5,6 @@ node_modules/
 next-env.d.ts
 .devdb.log
 .devdb.err.log
+.dev.log
+.dev.err.log
+uploads/

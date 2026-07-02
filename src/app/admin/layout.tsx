@@ -6,6 +6,7 @@ import { tryGetIdentity } from "@/auth/session";
 const TABS = [
   { href: "/admin", label: "Today" },
   { href: "/admin/calendar", label: "Calendar" },
+  { href: "/admin/barbers", label: "Barbers" },
   { href: "/admin/services", label: "Services" },
   { href: "/admin/hours", label: "Hours" },
   { href: "/admin/payments", label: "Payments" },

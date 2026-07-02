@@ -32,8 +32,11 @@ export default async function HomePage(): Promise<ReactNode> {
           Book your next cut online. Lock your slot with a deposit, set up a
           standing appointment, or join a membership.
         </p>
-        <div style={{ justifySelf: "center", display: "flex", gap: 12 }}>
+        <div style={{ justifySelf: "center", display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
           <ButtonLink href="/book">Book an appointment</ButtonLink>
+          <ButtonLink href="/barbers" variant="secondary">
+            Choose your barber
+          </ButtonLink>
           <ButtonLink href="/memberships" variant="secondary">
             Memberships
           </ButtonLink>

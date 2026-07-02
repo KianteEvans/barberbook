@@ -9,11 +9,12 @@ import { services } from "@/db/schema";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, EmptyState } from "@/components/ui/primitives";
 import {
-  loadActiveBarbers,
   loadSettings,
   loadSlotsForDay,
   todayInShopTz,
 } from "@/domain/booking/load";
+import { loadBarbersForService } from "@/domain/barbers/operations";
+import { effectivePricing } from "@/domain/barbers/pricing";
 import { formatMoney } from "@/domain/money";
 import { computeDeposit } from "@/domain/payments/deposit";
 
@@ -33,19 +34,24 @@ export default async function PickSlotPage({
   if (!service || !service.active) notFound();
 
   const settings = await loadSettings();
-  const barbers = await loadActiveBarbers();
+  const barbers = await loadBarbersForService(serviceId);
   if (barbers.length === 0) {
     return (
       <PageShell title="Book an appointment" maxWidth={760}>
-        <EmptyState title="No barbers available" hint="Check back soon." />
+        <EmptyState
+          title="No barbers offer this service right now"
+          hint="Try another service or check back soon."
+        />
       </PageShell>
     );
   }
 
-  const barberId = query.barber ?? barbers[0]!.id;
+  const selected = barbers.find((b) => b.id === query.barber) ?? barbers[0]!;
+  const barberId = selected.id;
   const today = todayInShopTz(settings.timezone);
   const date = query.date ?? today;
-  const { depositCents } = computeDeposit(service, settings);
+  const priced = effectivePricing(service, selected.overrideCents);
+  const { depositCents } = computeDeposit(priced, settings);
 
   const slots = await loadSlotsForDay({ barberId, serviceId, date });
 
@@ -61,7 +67,7 @@ export default async function PickSlotPage({
   return (
     <PageShell
       title={service.name}
-      subtitle={`Step 2 of 3 - pick a time - ${service.durationMin} min - ${formatMoney(service.priceCents)}${depositCents > 0 ? ` (${formatMoney(depositCents)} deposit)` : ""}`}
+      subtitle={`Step 2 of 3 - pick a time - ${service.durationMin} min - ${formatMoney(priced.priceCents)}${depositCents > 0 ? ` (${formatMoney(depositCents)} deposit)` : ""}`}
       maxWidth={760}
     >
       {barbers.length > 1 && (

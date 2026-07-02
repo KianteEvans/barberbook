@@ -1,7 +1,8 @@
 import { and, eq } from "drizzle-orm";
 import { db, isSlotTakenError } from "@/db/client";
-import { appointments, services } from "@/db/schema";
+import { appointments } from "@/db/schema";
 import { computeDeposit, refundEligibility } from "@/domain/payments/deposit";
+import { resolveBarberService } from "@/domain/barbers/operations";
 import { loadSettings } from "./load";
 import { ConflictError, NotFoundError, ValidationError } from "@/domain/errors";
 import { paymentsEnabled } from "@/env";
@@ -41,11 +42,9 @@ export async function createBookingOp(
   input: CreateBookingInput,
 ): Promise<CreatedBooking> {
   const settings = await loadSettings();
-  const [service] = await db
-    .select()
-    .from(services)
-    .where(eq(services.id, input.serviceId));
-  if (!service || !service.active) throw new NotFoundError("Service not found.");
+  // Resolves the barber's effective price and rejects (barber, service)
+  // pairs the barber does not offer.
+  const service = await resolveBarberService(input.barberId, input.serviceId);
   if (input.startAt.getTime() <= Date.now()) {
     throw new ValidationError("That time is in the past.");
   }

@@ -71,6 +71,24 @@ async function main(): Promise<void> {
       `;
     }
 
+    // Barber profile + offerings (all services; Cut + Beard has an override).
+    await sql`
+      UPDATE barbers SET
+        tagline = COALESCE(tagline, 'Fades, tapers, and razor work since 2012'),
+        bio = COALESCE(bio, 'Marco has been behind the chair for over a decade, specializing in skin fades, beard sculpting, and classic scissor work. Every cut ends with a hot towel and a straight-razor neck shave.')
+      WHERE display_name = 'Marco'
+    `;
+    const [{ count: offeringCount }] = await sql<[{ count: string }]>`
+      SELECT count(*)::text AS count FROM barber_services
+    `;
+    if (Number(offeringCount) === 0) {
+      await sql`
+        INSERT INTO barber_services (barber_id, service_id, price_cents)
+        SELECT b.id, s.id, CASE WHEN s.name = 'Cut + Beard' THEN 5500 ELSE NULL END
+        FROM barbers b CROSS JOIN services s
+      `;
+    }
+
     const [{ count: planCount }] = await sql<[{ count: string }]>`
       SELECT count(*)::text AS count FROM membership_plans
     `;

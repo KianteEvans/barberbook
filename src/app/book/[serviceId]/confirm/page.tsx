@@ -4,7 +4,8 @@ import { format } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { eq } from "drizzle-orm";
 import { db } from "@/db/client";
-import { barbers, services } from "@/db/schema";
+import { barbers } from "@/db/schema";
+import { resolveBarberService } from "@/domain/barbers/operations";
 import { tryGetIdentity } from "@/auth/session";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, Stat } from "@/components/ui/primitives";
@@ -36,9 +37,15 @@ export default async function ConfirmBookingPage({
     redirect(`/login?mode=signup&next=${encodeURIComponent(next)}`);
   }
 
-  const [service] = await db.select().from(services).where(eq(services.id, serviceId));
   const [barber] = await db.select().from(barbers).where(eq(barbers.id, query.barber));
-  if (!service || !barber) notFound();
+  if (!barber) notFound();
+  let service;
+  try {
+    // Barber-effective pricing; throws when the barber doesn't offer it.
+    service = await resolveBarberService(barber.id, serviceId);
+  } catch {
+    notFound();
+  }
 
   const settings = await loadSettings();
   const startAt = new Date(query.start);

@@ -6,6 +6,7 @@ import {
   boolean,
   timestamp,
   date,
+  primaryKey,
 } from "drizzle-orm/pg-core";
 
 /**
@@ -54,7 +55,36 @@ export const barbers = pgTable("barbers", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id").references(() => users.id),
   displayName: text("display_name").notNull(),
+  bio: text("bio"),
+  tagline: text("tagline"),
+  photoFile: text("photo_file"),
   active: boolean("active").notNull().default(true),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const barberServices = pgTable(
+  "barber_services",
+  {
+    barberId: uuid("barber_id")
+      .notNull()
+      .references(() => barbers.id, { onDelete: "cascade" }),
+    serviceId: uuid("service_id")
+      .notNull()
+      .references(() => services.id, { onDelete: "cascade" }),
+    // NULL = use the shop's standard service price.
+    priceCents: integer("price_cents"),
+  },
+  (t) => [primaryKey({ columns: [t.barberId, t.serviceId] })],
+);
+
+export const barberPhotos = pgTable("barber_photos", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  barberId: uuid("barber_id")
+    .notNull()
+    .references(() => barbers.id, { onDelete: "cascade" }),
+  fileName: text("file_name").notNull(),
+  caption: text("caption"),
+  sortOrder: integer("sort_order").notNull().default(0),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
