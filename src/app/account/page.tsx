@@ -1,0 +1,138 @@
+import type { ReactNode } from "react";
+import { redirect } from "next/navigation";
+import { desc, eq } from "drizzle-orm";
+import { format } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
+import { db } from "@/db/client";
+import { appointments, barbers, services } from "@/db/schema";
+import { tryGetIdentity } from "@/auth/session";
+import { PageShell } from "@/components/ui/PageShell";
+import { Card, Badge, EmptyState, ButtonLink, type BadgeTone } from "@/components/ui/primitives";
+import { loadSettings } from "@/domain/booking/load";
+import { formatMoney } from "@/domain/money";
+import { CancelButton } from "./CancelButton";
+
+export const dynamic = "force-dynamic";
+
+const statusTone: Record<string, BadgeTone> = {
+  pending_deposit: "warn",
+  confirmed: "info",
+  completed: "ok",
+  canceled: "neutral",
+  no_show: "danger",
+};
+
+export default async function AccountPage(): Promise<ReactNode> {
+  const identity = await tryGetIdentity();
+  if (!identity) redirect("/login?next=/account");
+
+  const settings = await loadSettings();
+  const mine = await db
+    .select({
+      id: appointments.id,
+      startAt: appointments.startAt,
+      status: appointments.status,
+      depositCents: appointments.depositCents,
+      remainderCents: appointments.remainderCents,
+      serviceName: services.name,
+      barberName: barbers.displayName,
+    })
+    .from(appointments)
+    .innerJoin(services, eq(appointments.serviceId, services.id))
+    .innerJoin(barbers, eq(appointments.barberId, barbers.id))
+    .where(eq(appointments.clientId, identity.userId))
+    .orderBy(desc(appointments.startAt))
+    .limit(50);
+
+  const now = Date.now();
+  const upcoming = mine.filter(
+    (a) =>
+      a.startAt.getTime() > now &&
+      (a.status === "confirmed" || a.status === "pending_deposit"),
+  );
+  const past = mine.filter((a) => !upcoming.includes(a));
+
+  return (
+    <PageShell
+      title="My appointments"
+      subtitle={identity.email}
+      action={<ButtonLink href="/book">Book an appointment</ButtonLink>}
+      maxWidth={760}
+    >
+      <Card title="Upcoming">
+        {upcoming.length === 0 ? (
+          <EmptyState
+            title="Nothing booked"
+            hint="Grab a slot before they fill up."
+            action={<ButtonLink href="/book">Book now</ButtonLink>}
+          />
+        ) : (
+          <div style={{ display: "grid", gap: 12 }}>
+            {upcoming.map((a) => {
+              const local = toZonedTime(a.startAt, settings.timezone);
+              return (
+                <div
+                  key={a.id}
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 12,
+                    border: "1px solid var(--border)",
+                    borderRadius: 10,
+                    padding: "12px 16px",
+                  }}
+                >
+                  <div style={{ display: "grid", gap: 2 }}>
+                    <span style={{ fontWeight: 700, fontSize: 14 }}>
+                      {a.serviceName} with {a.barberName}
+                    </span>
+                    <span style={{ color: "var(--muted)", fontSize: 13 }}>
+                      {format(local, "EEEE, MMM d - h:mm a")}
+                      {a.remainderCents > 0 &&
+                        ` - ${formatMoney(a.remainderCents)} due at the shop`}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <Badge tone={statusTone[a.status] ?? "neutral"}>
+                      {a.status.replace("_", " ")}
+                    </Badge>
+                    <CancelButton appointmentId={a.id} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </Card>
+
+      {past.length > 0 && (
+        <Card title="History">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Service</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {past.map((a) => (
+                <tr key={a.id}>
+                  <td>{format(toZonedTime(a.startAt, settings.timezone), "MMM d, yyyy - h:mm a")}</td>
+                  <td>{a.serviceName}</td>
+                  <td>
+                    <Badge tone={statusTone[a.status] ?? "neutral"}>
+                      {a.status.replace("_", " ")}
+                    </Badge>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Card>
+      )}
+    </PageShell>
+  );
+}

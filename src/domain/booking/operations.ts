@@ -1,0 +1,147 @@
+import { and, eq } from "drizzle-orm";
+import { db, isSlotTakenError } from "@/db/client";
+import { appointments, services } from "@/db/schema";
+import { computeDeposit, refundEligibility } from "@/domain/payments/deposit";
+import { loadSettings } from "./load";
+import { ConflictError, NotFoundError, ValidationError } from "@/domain/errors";
+import { paymentsEnabled } from "@/env";
+
+/**
+ * Booking mutations. The gist exclusion constraint is the double-booking
+ * arbiter: we INSERT and translate SQLSTATE 23P01 into a friendly conflict
+ * error instead of pre-checking.
+ */
+
+export const HOLD_MINUTES = 30;
+
+export interface CreateBookingInput {
+  readonly clientId: string;
+  readonly barberId: string;
+  readonly serviceId: string;
+  readonly startAt: Date;
+  /** Set when a membership credit covers this visit: no deposit, no balance. */
+  readonly creditId?: string;
+}
+
+export interface CreatedBooking {
+  readonly id: string;
+  readonly status: "pending_deposit" | "confirmed";
+  readonly depositCents: number;
+  readonly remainderCents: number;
+  readonly startAt: Date;
+  readonly endAt: Date;
+}
+
+/**
+ * Insert the appointment. With Stripe configured it lands as pending_deposit
+ * with a hold expiry (the caller then creates a Checkout Session); in
+ * "pay at shop" mode it confirms immediately.
+ */
+export async function createBookingOp(
+  input: CreateBookingInput,
+): Promise<CreatedBooking> {
+  const settings = await loadSettings();
+  const [service] = await db
+    .select()
+    .from(services)
+    .where(eq(services.id, input.serviceId));
+  if (!service || !service.active) throw new NotFoundError("Service not found.");
+  if (input.startAt.getTime() <= Date.now()) {
+    throw new ValidationError("That time is in the past.");
+  }
+
+  const covered = input.creditId !== undefined;
+  const { depositCents, remainderCents } = covered
+    ? { depositCents: 0, remainderCents: 0 }
+    : computeDeposit(service, settings);
+  const endAt = new Date(input.startAt.getTime() + service.durationMin * 60_000);
+  const online = !covered && paymentsEnabled && depositCents > 0;
+
+  try {
+    const [row] = await db
+      .insert(appointments)
+      .values({
+        clientId: input.clientId,
+        barberId: input.barberId,
+        serviceId: input.serviceId,
+        startAt: input.startAt,
+        endAt,
+        status: online ? "pending_deposit" : "confirmed",
+        holdExpiresAt: online
+          ? new Date(Date.now() + HOLD_MINUTES * 60_000)
+          : null,
+        depositCents,
+        remainderCents,
+        creditId: input.creditId ?? null,
+      })
+      .returning();
+    if (!row) throw new Error("insert failed");
+    return {
+      id: row.id,
+      status: online ? "pending_deposit" : "confirmed",
+      depositCents,
+      remainderCents,
+      startAt: row.startAt,
+      endAt: row.endAt,
+    };
+  } catch (err) {
+    if (isSlotTakenError(err)) {
+      throw new ConflictError(
+        "That slot was just taken. Please pick another time.",
+      );
+    }
+    throw err;
+  }
+}
+
+export interface CancelOutcome {
+  readonly refundDue: boolean;
+  readonly depositCents: number;
+  readonly stripePaymentIntentId: string | null;
+  /** Membership credit to return, when the visit was credit-covered. */
+  readonly creditId: string | null;
+}
+
+/**
+ * Cancel a live appointment. Returns whether the deposit should be refunded
+ * per the cancellation window; the caller (action) performs the Stripe refund.
+ */
+export async function cancelAppointmentOp({
+  appointmentId,
+  clientId,
+  now = new Date(),
+}: {
+  appointmentId: string;
+  /** When set, enforce ownership (client-initiated cancel). Admin passes null. */
+  clientId: string | null;
+  now?: Date;
+}): Promise<CancelOutcome> {
+  const settings = await loadSettings();
+  const where = clientId
+    ? and(eq(appointments.id, appointmentId), eq(appointments.clientId, clientId))
+    : eq(appointments.id, appointmentId);
+  const [appt] = await db.select().from(appointments).where(where);
+  if (!appt) throw new NotFoundError("Appointment not found.");
+  if (appt.status !== "confirmed" && appt.status !== "pending_deposit") {
+    throw new ValidationError("This appointment can no longer be canceled.");
+  }
+
+  await db
+    .update(appointments)
+    .set({ status: "canceled", canceledAt: now })
+    .where(eq(appointments.id, appt.id));
+
+  const refundDue =
+    appt.status === "confirmed" &&
+    appt.depositCents > 0 &&
+    appt.stripePaymentIntentId !== null &&
+    refundEligibility(appt.startAt, now, settings.cancellationWindowHours) ===
+      "full_refund";
+
+  return {
+    refundDue,
+    depositCents: appt.depositCents,
+    stripePaymentIntentId: appt.stripePaymentIntentId,
+    creditId: appt.creditId,
+  };
+}

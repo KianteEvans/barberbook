@@ -1,0 +1,193 @@
+import {
+  pgTable,
+  uuid,
+  text,
+  integer,
+  boolean,
+  timestamp,
+  date,
+} from "drizzle-orm/pg-core";
+
+/**
+ * Drizzle schema mirroring drizzle/0000_init.sql. The raw SQL migration is the
+ * source of truth (it carries the gist exclusion constraint); this file exists
+ * for typed query building only.
+ */
+
+export const users = pgTable("users", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  email: text("email").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
+  name: text("name").notNull(),
+  phone: text("phone"),
+  role: text("role", { enum: ["admin", "client"] }).notNull().default("client"),
+  stripeCustomerId: text("stripe_customer_id").unique(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const shopSettings = pgTable("shop_settings", {
+  id: integer("id").primaryKey(),
+  shopName: text("shop_name").notNull().default("BarberBook"),
+  timezone: text("timezone").notNull().default("America/New_York"),
+  cancellationWindowHours: integer("cancellation_window_hours").notNull().default(24),
+  depositMode: text("deposit_mode", { enum: ["fixed", "percent"] })
+    .notNull()
+    .default("fixed"),
+  depositValue: integer("deposit_value").notNull().default(1000),
+  noShowFeeCents: integer("no_show_fee_cents").notNull().default(0),
+  slotGranularityMin: integer("slot_granularity_min").notNull().default(15),
+  bufferMin: integer("buffer_min").notNull().default(0),
+});
+
+export const services = pgTable("services", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  description: text("description"),
+  durationMin: integer("duration_min").notNull(),
+  priceCents: integer("price_cents").notNull(),
+  depositCents: integer("deposit_cents"),
+  active: boolean("active").notNull().default(true),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const barbers = pgTable("barbers", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").references(() => users.id),
+  displayName: text("display_name").notNull(),
+  active: boolean("active").notNull().default(true),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const availabilityRules = pgTable("availability_rules", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  barberId: uuid("barber_id")
+    .notNull()
+    .references(() => barbers.id, { onDelete: "cascade" }),
+  weekday: integer("weekday").notNull(),
+  startMin: integer("start_min").notNull(),
+  endMin: integer("end_min").notNull(),
+});
+
+export const availabilityExceptions = pgTable("availability_exceptions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  barberId: uuid("barber_id")
+    .notNull()
+    .references(() => barbers.id, { onDelete: "cascade" }),
+  date: date("date").notNull(),
+  kind: text("kind", { enum: ["off", "custom"] }).notNull(),
+  startMin: integer("start_min"),
+  endMin: integer("end_min"),
+});
+
+export const membershipPlans = pgTable("membership_plans", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  description: text("description"),
+  stripeProductId: text("stripe_product_id"),
+  stripePriceId: text("stripe_price_id"),
+  creditsPerPeriod: integer("credits_per_period").notNull(),
+  priceCents: integer("price_cents").notNull(),
+  active: boolean("active").notNull().default(true),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const memberships = pgTable("memberships", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  clientId: uuid("client_id").notNull().references(() => users.id),
+  planId: uuid("plan_id").notNull().references(() => membershipPlans.id),
+  stripeSubscriptionId: text("stripe_subscription_id").unique(),
+  status: text("status", { enum: ["active", "past_due", "canceled"] })
+    .notNull()
+    .default("active"),
+  currentPeriodEnd: timestamp("current_period_end", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const membershipCredits = pgTable("membership_credits", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  membershipId: uuid("membership_id")
+    .notNull()
+    .references(() => memberships.id, { onDelete: "cascade" }),
+  granted: integer("granted").notNull(),
+  consumed: integer("consumed").notNull().default(0),
+  periodStart: timestamp("period_start", { withTimezone: true }).notNull(),
+  periodEnd: timestamp("period_end", { withTimezone: true }).notNull(),
+  stripeInvoiceId: text("stripe_invoice_id").unique(),
+});
+
+export const appointments = pgTable("appointments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  clientId: uuid("client_id").notNull().references(() => users.id),
+  barberId: uuid("barber_id").notNull().references(() => barbers.id),
+  serviceId: uuid("service_id").notNull().references(() => services.id),
+  startAt: timestamp("start_at", { withTimezone: true }).notNull(),
+  endAt: timestamp("end_at", { withTimezone: true }).notNull(),
+  status: text("status", {
+    enum: ["pending_deposit", "confirmed", "completed", "canceled", "no_show"],
+  })
+    .notNull()
+    .default("pending_deposit"),
+  holdExpiresAt: timestamp("hold_expires_at", { withTimezone: true }),
+  depositCents: integer("deposit_cents").notNull().default(0),
+  remainderCents: integer("remainder_cents").notNull().default(0),
+  stripeCheckoutSessionId: text("stripe_checkout_session_id"),
+  stripePaymentIntentId: text("stripe_payment_intent_id"),
+  creditId: uuid("credit_id").references(() => membershipCredits.id),
+  canceledAt: timestamp("canceled_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const recurringSeries = pgTable("recurring_series", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  clientId: uuid("client_id").notNull().references(() => users.id),
+  barberId: uuid("barber_id").notNull().references(() => barbers.id),
+  serviceId: uuid("service_id").notNull().references(() => services.id),
+  cadenceWeeks: integer("cadence_weeks").notNull(),
+  weekday: integer("weekday").notNull(),
+  timeMin: integer("time_min").notNull(),
+  status: text("status", { enum: ["active", "paused", "canceled"] })
+    .notNull()
+    .default("active"),
+  anchorDate: date("anchor_date").notNull(),
+  nextHorizonDate: date("next_horizon_date").notNull(),
+  stripePaymentMethodId: text("stripe_payment_method_id"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const seriesOccurrences = pgTable("series_occurrences", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  seriesId: uuid("series_id")
+    .notNull()
+    .references(() => recurringSeries.id, { onDelete: "cascade" }),
+  appointmentId: uuid("appointment_id").references(() => appointments.id),
+  scheduledDate: date("scheduled_date").notNull(),
+  status: text("status", { enum: ["booked", "conflict", "charge_failed", "skipped"] })
+    .notNull()
+    .default("booked"),
+  note: text("note"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const payments = pgTable("payments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  appointmentId: uuid("appointment_id").references(() => appointments.id),
+  membershipId: uuid("membership_id").references(() => memberships.id),
+  clientId: uuid("client_id").references(() => users.id),
+  type: text("type", {
+    enum: ["deposit", "remainder", "refund", "no_show_fee", "subscription"],
+  }).notNull(),
+  amountCents: integer("amount_cents").notNull(),
+  status: text("status", { enum: ["pending", "succeeded", "failed", "refunded"] })
+    .notNull()
+    .default("pending"),
+  stripePaymentIntentId: text("stripe_payment_intent_id"),
+  stripeRefundId: text("stripe_refund_id"),
+  failureMessage: text("failure_message"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const webhookEvents = pgTable("webhook_events", {
+  stripeEventId: text("stripe_event_id").primaryKey(),
+  type: text("type").notNull(),
+  processedAt: timestamp("processed_at", { withTimezone: true }).notNull().defaultNow(),
+});
