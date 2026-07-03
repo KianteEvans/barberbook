@@ -13,6 +13,7 @@ import {
 import { getAdminIdentity } from "@/auth/session";
 import { parseOrThrow, formObject, type ActionState } from "@/domain/forms";
 import { toActionError, ValidationError } from "@/domain/errors";
+import { deleteUpload, saveUpload } from "@/domain/barbers/uploads";
 
 /** Admin CRUD actions: services, weekly hours, time off, shop policy. */
 
@@ -158,7 +159,60 @@ export async function savePolicyAction(
     const input = parseOrThrow(policySchema, formObject(formData));
     await db.update(shopSettings).set(input).where(eq(shopSettings.id, 1));
     revalidatePath("/admin");
+    revalidatePath("/admin/settings");
     return { ok: true, detail: "Policy saved." };
+  } catch (err) {
+    return { ok: false, error: toActionError(err) };
+  }
+}
+
+/** Upload/replace the landing hero photo (reuses the barber-photo storage). */
+export async function saveHeroAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    await getAdminIdentity();
+    const photo = formData.get("photo");
+    if (!(photo instanceof File) || photo.size === 0) {
+      throw new ValidationError("Choose an image to upload.");
+    }
+    const fileName = await saveUpload(photo);
+    const [existing] = await db
+      .select({ heroFile: shopSettings.heroFile })
+      .from(shopSettings)
+      .where(eq(shopSettings.id, 1));
+    await db
+      .update(shopSettings)
+      .set({ heroFile: fileName })
+      .where(eq(shopSettings.id, 1));
+    if (existing?.heroFile) await deleteUpload(existing.heroFile);
+    revalidatePath("/");
+    revalidatePath("/admin/settings");
+    return { ok: true, detail: "Hero photo updated." };
+  } catch (err) {
+    return { ok: false, error: toActionError(err) };
+  }
+}
+
+export async function removeHeroAction(
+  _prev: ActionState,
+  _formData: FormData,
+): Promise<ActionState> {
+  try {
+    await getAdminIdentity();
+    const [existing] = await db
+      .select({ heroFile: shopSettings.heroFile })
+      .from(shopSettings)
+      .where(eq(shopSettings.id, 1));
+    await db
+      .update(shopSettings)
+      .set({ heroFile: null })
+      .where(eq(shopSettings.id, 1));
+    if (existing?.heroFile) await deleteUpload(existing.heroFile);
+    revalidatePath("/");
+    revalidatePath("/admin/settings");
+    return { ok: true, detail: "Hero photo removed." };
   } catch (err) {
     return { ok: false, error: toActionError(err) };
   }

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/Toaster";
 import { Footer } from "@/components/ui/Footer";
 import { NavLinks, type NavItem } from "@/components/ui/NavLinks";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { tryGetIdentity } from "@/auth/session";
 import { logoutAction } from "@/auth/actions";
 
@@ -32,6 +34,9 @@ export default async function RootLayout({
   children: ReactNode;
 }): Promise<ReactNode> {
   const identity = await tryGetIdentity();
+  // Theme cookie read server-side so the first paint is already themed.
+  const theme =
+    (await cookies()).get("bb_theme")?.value === "light" ? "light" : "dark";
 
   const items: NavItem[] = [
     { href: "/book", label: "Book now", emphasis: true },
@@ -42,7 +47,11 @@ export default async function RootLayout({
   ];
 
   return (
-    <html lang="en" className={`${body.variable} ${display.variable}`}>
+    <html
+      lang="en"
+      className={`${body.variable} ${display.variable}`}
+      data-theme={theme}
+    >
       <body>
         <nav
           style={{
@@ -83,6 +92,7 @@ export default async function RootLayout({
             }}
           >
             <NavLinks items={items} />
+            <ThemeToggle initialTheme={theme} />
             {identity ? (
               <form action={logoutAction} style={{ margin: 0 }}>
                 <button

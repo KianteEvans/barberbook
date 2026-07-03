@@ -38,6 +38,7 @@ export const shopSettings = pgTable("shop_settings", {
   noShowFeeCents: integer("no_show_fee_cents").notNull().default(0),
   slotGranularityMin: integer("slot_granularity_min").notNull().default(15),
   bufferMin: integer("buffer_min").notNull().default(0),
+  heroFile: text("hero_file"),
 });
 
 export const services = pgTable("services", {

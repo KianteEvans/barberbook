@@ -13,6 +13,7 @@ const TABS = [
   { href: "/admin/payments", label: "Payments" },
   { href: "/admin/series", label: "Series" },
   { href: "/admin/memberships", label: "Memberships" },
+  { href: "/admin/settings", label: "Settings" },
 ];
 
 /** Admin tab strip with an active-route indicator. */

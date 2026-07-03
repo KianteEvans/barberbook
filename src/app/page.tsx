@@ -25,66 +25,94 @@ export default async function HomePage(): Promise<ReactNode> {
     .from(membershipPlans)
     .where(eq(membershipPlans.active, true));
 
+  const heroFile = settings?.heroFile ?? null;
+
   return (
-    <main
-      style={{
-        maxWidth: 980,
-        margin: "0 auto",
-        padding: "clamp(24px, 6vw, 64px) clamp(16px, 4vw, 32px)",
-        display: "grid",
-        gap: 56,
-      }}
-    >
-      {/* Poster hero */}
+    <>
+      {/* Full-bleed poster hero: uploaded photo (always dark-styled for
+          contrast) or a theme-aware gradient backdrop. */}
       <section
-        className="fade-in-up"
-        style={{ textAlign: "center", display: "grid", gap: 18, justifyItems: "center" }}
+        className={heroFile ? "fade-in-up" : "fade-in-up hero-backdrop"}
+        {...(heroFile ? { "data-theme": "dark" } : {})}
+        style={{
+          display: "grid",
+          placeItems: "center",
+          minHeight: 420,
+          padding: "clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px)",
+          borderBottom: "1px solid var(--border)",
+          ...(heroFile
+            ? {
+                backgroundImage: `linear-gradient(rgba(8,8,10,0.55), rgba(8,8,10,0.78)), url(/api/uploads/${heroFile})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }
+            : {}),
+        }}
       >
-        <h1
-          className="display"
-          style={{
-            margin: 0,
-            fontSize: "clamp(40px, 8vw, 72px)",
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: "0.03em",
-            lineHeight: 1.05,
-          }}
-        >
-          {settings?.shopName ?? "BarberBook"}
-        </h1>
-        <div className="pole-stripe" style={{ width: 140 }} />
-        <p
-          style={{
-            margin: 0,
-            color: "var(--muted)",
-            fontSize: 16,
-            maxWidth: 520,
-            lineHeight: 1.6,
-          }}
-        >
-          Walk in sharp, walk out sharper. Lock your slot with a deposit, keep a
-          standing appointment, or join the club.
-        </p>
         <div
           style={{
-            display: "flex",
-            gap: 12,
-            flexWrap: "wrap",
-            justifyContent: "center",
-            marginTop: 6,
+            textAlign: "center",
+            display: "grid",
+            gap: 18,
+            justifyItems: "center",
+            ...(heroFile ? { color: "var(--text)" } : {}),
           }}
         >
-          <ButtonLink href="/book">Book an appointment</ButtonLink>
-          <ButtonLink href="/barbers" variant="secondary">
-            Choose your barber
-          </ButtonLink>
-          <ButtonLink href="/memberships" variant="secondary">
-            Memberships
-          </ButtonLink>
+          <h1
+            className="display"
+            style={{
+              margin: 0,
+              fontSize: "clamp(40px, 8vw, 72px)",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.03em",
+              lineHeight: 1.05,
+            }}
+          >
+            {settings?.shopName ?? "BarberBook"}
+          </h1>
+          <div className="pole-stripe" style={{ width: 140 }} />
+          <p
+            style={{
+              margin: 0,
+              color: "var(--muted)",
+              fontSize: 16,
+              maxWidth: 520,
+              lineHeight: 1.6,
+            }}
+          >
+            Walk in sharp, walk out sharper. Lock your slot with a deposit, keep a
+            standing appointment, or join the club.
+          </p>
+          <div
+            style={{
+              display: "flex",
+              gap: 12,
+              flexWrap: "wrap",
+              justifyContent: "center",
+              marginTop: 6,
+            }}
+          >
+            <ButtonLink href="/book">Book an appointment</ButtonLink>
+            <ButtonLink href="/barbers" variant="secondary">
+              Choose your barber
+            </ButtonLink>
+            <ButtonLink href="/memberships" variant="secondary">
+              Memberships
+            </ButtonLink>
+          </div>
         </div>
       </section>
 
+      <main
+        style={{
+          maxWidth: 980,
+          margin: "0 auto",
+          padding: "clamp(24px, 6vw, 64px) clamp(16px, 4vw, 32px)",
+          display: "grid",
+          gap: 56,
+        }}
+      >
       {/* Services showcase */}
       <section className="fade-in-up stagger-2" style={{ display: "grid", gap: 18 }}>
         <h2
@@ -297,6 +325,7 @@ export default async function HomePage(): Promise<ReactNode> {
           <ButtonLink href="/memberships">Join the club</ButtonLink>
         </section>
       )}
-    </main>
+      </main>
+    </>
   );
 }
