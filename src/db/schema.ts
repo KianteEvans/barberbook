@@ -39,6 +39,7 @@ export const shopSettings = pgTable("shop_settings", {
   slotGranularityMin: integer("slot_granularity_min").notNull().default(15),
   bufferMin: integer("buffer_min").notNull().default(0),
   heroFile: text("hero_file"),
+  backdrop: text("backdrop").notNull().default("skyline"),
 });
 
 export const services = pgTable("services", {

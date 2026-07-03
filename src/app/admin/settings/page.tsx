@@ -10,6 +10,7 @@ import {
   saveHeroAction,
   savePolicyAction,
 } from "@/domain/admin/actions";
+import { BACKDROPS, BACKDROP_LABELS } from "@/domain/backdrops";
 
 export const dynamic = "force-dynamic";
 
@@ -64,6 +65,15 @@ export default async function AdminSettingsPage(): Promise<ReactNode> {
               required
               defaultValue={String(settings.noShowFeeCents)}
             />
+          </Field>
+          <Field label="Landing backdrop">
+            <Select name="backdrop" defaultValue={settings.backdrop}>
+              {BACKDROPS.map((b) => (
+                <option key={b} value={b}>
+                  {BACKDROP_LABELS[b]}
+                </option>
+              ))}
+            </Select>
           </Field>
         </MutationForm>
       </Card>

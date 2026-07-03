@@ -206,6 +206,181 @@ tr:last-child td {
   transform: translateY(-1px);
 }
 
+/* --- Urban landing backdrops: wrapper gets `city-backdrop backdrop-<name>`.
+   All must stay readable in BOTH themes; cards/panels are opaque. --- */
+
+/* The city art replaces the hero's own glow so it runs uninterrupted. */
+.city-backdrop .hero-backdrop {
+  background: none;
+  box-shadow: none;
+}
+
+/* 1. Downtown: layered skyline silhouettes over a horizon glow. */
+.backdrop-skyline {
+  background:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='170'><g fill='%230a0c0f'><rect x='0' y='80' width='120' height='90'/><rect x='130' y='40' width='80' height='130'/><rect x='166' y='16' width='6' height='24'/><rect x='220' y='100' width='130' height='70'/><rect x='360' y='60' width='90' height='110'/><rect x='460' y='85' width='140' height='85'/><rect x='610' y='30' width='100' height='140'/><rect x='652' y='6' width='5' height='24'/><rect x='720' y='95' width='120' height='75'/><rect x='850' y='50' width='90' height='120'/><rect x='950' y='75' width='110' height='95'/><rect x='1070' y='35' width='90' height='135'/><rect x='1108' y='12' width='5' height='23'/></g></svg>")
+      bottom center / auto 170px repeat-x fixed,
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='260'><g fill='%23161a1f'><rect x='0' y='120' width='80' height='140'/><rect x='90' y='70' width='60' height='190'/><rect x='160' y='140' width='90' height='120'/><rect x='260' y='50' width='70' height='210'/><rect x='340' y='110' width='100' height='150'/><rect x='450' y='80' width='60' height='180'/><rect x='520' y='130' width='90' height='130'/><rect x='620' y='60' width='80' height='200'/><rect x='710' y='120' width='70' height='140'/><rect x='790' y='90' width='100' height='170'/><rect x='900' y='40' width='60' height='220'/><rect x='970' y='130' width='90' height='130'/><rect x='1070' y='100' width='60' height='160'/><rect x='1140' y='70' width='60' height='190'/></g></svg>")
+      bottom center / auto 260px repeat-x fixed,
+    linear-gradient(
+        180deg,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--accent) 9%, var(--bg)) 72%,
+        color-mix(in srgb, var(--accent) 15%, var(--bg)) 100%
+      )
+      fixed;
+}
+[data-theme="light"] .backdrop-skyline {
+  background:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='170'><g fill='%23c9bb98'><rect x='0' y='80' width='120' height='90'/><rect x='130' y='40' width='80' height='130'/><rect x='166' y='16' width='6' height='24'/><rect x='220' y='100' width='130' height='70'/><rect x='360' y='60' width='90' height='110'/><rect x='460' y='85' width='140' height='85'/><rect x='610' y='30' width='100' height='140'/><rect x='652' y='6' width='5' height='24'/><rect x='720' y='95' width='120' height='75'/><rect x='850' y='50' width='90' height='120'/><rect x='950' y='75' width='110' height='95'/><rect x='1070' y='35' width='90' height='135'/><rect x='1108' y='12' width='5' height='23'/></g></svg>")
+      bottom center / auto 170px repeat-x fixed,
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='260'><g fill='%23e2d8c0'><rect x='0' y='120' width='80' height='140'/><rect x='90' y='70' width='60' height='190'/><rect x='160' y='140' width='90' height='120'/><rect x='260' y='50' width='70' height='210'/><rect x='340' y='110' width='100' height='150'/><rect x='450' y='80' width='60' height='180'/><rect x='520' y='130' width='90' height='130'/><rect x='620' y='60' width='80' height='200'/><rect x='710' y='120' width='70' height='140'/><rect x='790' y='90' width='100' height='170'/><rect x='900' y='40' width='60' height='220'/><rect x='970' y='130' width='90' height='130'/><rect x='1070' y='100' width='60' height='160'/><rect x='1140' y='70' width='60' height='190'/></g></svg>")
+      bottom center / auto 260px repeat-x fixed,
+    linear-gradient(
+        180deg,
+        var(--bg) 0%,
+        color-mix(in srgb, var(--accent) 10%, var(--bg)) 72%,
+        color-mix(in srgb, var(--accent) 16%, var(--bg)) 100%
+      )
+      fixed;
+}
+
+/* 2. Back alley: low-contrast painted brick (two half-offset grids). */
+.backdrop-brick {
+  background-color: color-mix(in srgb, var(--accent) 4%, var(--bg));
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.22), transparent 260px),
+    linear-gradient(color-mix(in srgb, var(--cream) 7%, transparent) 2px, transparent 2px),
+    linear-gradient(90deg, color-mix(in srgb, var(--cream) 7%, transparent) 2px, transparent 2px),
+    linear-gradient(color-mix(in srgb, var(--cream) 7%, transparent) 2px, transparent 2px),
+    linear-gradient(90deg, color-mix(in srgb, var(--cream) 7%, transparent) 2px, transparent 2px);
+  background-size:
+    100% 100%,
+    122px 68px,
+    122px 68px,
+    122px 68px,
+    122px 68px;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    61px 34px,
+    61px 34px;
+}
+
+/* 3. Night shift: neon glows drifting in from the corners + light streaks. */
+.backdrop-neon {
+  background:
+    repeating-linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--cream) 3%, transparent) 0 1px,
+        transparent 1px 96px
+      )
+      fixed,
+    radial-gradient(
+        ellipse 50% 42% at 12% 18%,
+        rgba(255, 45, 150, 0.16),
+        transparent 68%
+      )
+      fixed,
+    radial-gradient(
+        ellipse 46% 40% at 88% 28%,
+        rgba(0, 190, 255, 0.13),
+        transparent 68%
+      )
+      fixed,
+    radial-gradient(
+        ellipse 62% 46% at 50% 104%,
+        color-mix(in srgb, var(--accent) 22%, transparent),
+        transparent 72%
+      )
+      fixed,
+    var(--bg);
+}
+[data-theme="light"] .backdrop-neon {
+  background:
+    repeating-linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--cream) 6%, transparent) 0 1px,
+        transparent 1px 96px
+      )
+      fixed,
+    radial-gradient(
+        ellipse 50% 42% at 12% 18%,
+        rgba(219, 39, 119, 0.1),
+        transparent 68%
+      )
+      fixed,
+    radial-gradient(
+        ellipse 46% 40% at 88% 28%,
+        rgba(2, 132, 199, 0.09),
+        transparent 68%
+      )
+      fixed,
+    radial-gradient(
+        ellipse 62% 46% at 50% 104%,
+        color-mix(in srgb, var(--accent) 14%, transparent),
+        transparent 72%
+      )
+      fixed,
+    var(--bg);
+}
+
+/* 4. City blocks: fine street grid with two brass avenues, calm center. */
+.backdrop-grid {
+  background:
+    radial-gradient(ellipse 78% 62% at 50% 38%, var(--bg) 18%, transparent 100%)
+      fixed,
+    linear-gradient(
+        45deg,
+        transparent 49.6%,
+        color-mix(in srgb, var(--accent) 24%, transparent) 49.6% 50.4%,
+        transparent 50.4%
+      )
+      fixed,
+    linear-gradient(
+        -60deg,
+        transparent 64.7%,
+        color-mix(in srgb, var(--accent) 16%, transparent) 64.7% 65.3%,
+        transparent 65.3%
+      )
+      fixed,
+    repeating-linear-gradient(
+        0deg,
+        color-mix(in srgb, var(--text) 8%, transparent) 0 1px,
+        transparent 1px 56px
+      )
+      fixed,
+    repeating-linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--text) 8%, transparent) 0 1px,
+        transparent 1px 56px
+      )
+      fixed,
+    var(--bg);
+}
+
+/* 5. Print shop: halftone dot fade + bold brass poster stripes. */
+.backdrop-halftone {
+  background:
+    linear-gradient(115deg, var(--bg) 42%, transparent 88%) fixed,
+    radial-gradient(
+        color-mix(in srgb, var(--text) 15%, transparent) 1.5px,
+        transparent 1.5px
+      )
+      0 0 / 18px 18px fixed,
+    linear-gradient(
+        115deg,
+        transparent 60%,
+        color-mix(in srgb, var(--accent) 22%, transparent) 60% 64%,
+        transparent 64% 67%,
+        color-mix(in srgb, var(--cream) 18%, transparent) 67% 68.5%,
+        transparent 68.5%
+      )
+      fixed,
+    var(--bg);
+}
+
 /* Landing hero fallback when no photo is uploaded: layered brand glow. */
 .hero-backdrop {
   background:

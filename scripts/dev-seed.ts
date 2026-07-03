@@ -20,8 +20,8 @@ async function main(): Promise<void> {
     await sql`
       INSERT INTO shop_settings (id, shop_name, timezone, cancellation_window_hours,
                                  deposit_mode, deposit_value, no_show_fee_cents,
-                                 slot_granularity_min, buffer_min)
-      VALUES (1, 'Fade Factory', 'America/New_York', 24, 'fixed', 1000, 1500, 15, 5)
+                                 slot_granularity_min, buffer_min, backdrop)
+      VALUES (1, 'Fade Factory', 'America/New_York', 24, 'fixed', 1000, 1500, 15, 5, 'skyline')
       ON CONFLICT (id) DO NOTHING
     `;
 

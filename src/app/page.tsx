@@ -10,14 +10,26 @@ import {
   shopSettings,
 } from "@/db/schema";
 import { Badge, ButtonLink } from "@/components/ui/primitives";
+import { isBackdrop, type Backdrop } from "@/domain/backdrops";
 import { effectivePricing } from "@/domain/barbers/pricing";
 import { parseSpecialties } from "@/domain/barbers/specialties";
 import { formatMoney } from "@/domain/money";
 
 export const dynamic = "force-dynamic";
 
-export default async function HomePage(): Promise<ReactNode> {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ backdrop?: string }>;
+}): Promise<ReactNode> {
+  const query = await searchParams;
   const [settings] = await db.select().from(shopSettings);
+  // ?backdrop= previews any style without saving; the stored one is default.
+  const backdrop: Backdrop = isBackdrop(query.backdrop)
+    ? query.backdrop
+    : isBackdrop(settings?.backdrop)
+      ? settings.backdrop
+      : "skyline";
   const activeBarbers = await db
     .select()
     .from(barbers)
@@ -48,7 +60,7 @@ export default async function HomePage(): Promise<ReactNode> {
   const heroFile = settings?.heroFile ?? null;
 
   return (
-    <>
+    <div className={`city-backdrop backdrop-${backdrop}`}>
       {/* Full-bleed poster hero: uploaded photo (always dark-styled for
           contrast) or a theme-aware gradient backdrop. */}
       <section
@@ -321,6 +333,6 @@ export default async function HomePage(): Promise<ReactNode> {
         </section>
       )}
       </main>
-    </>
+    </div>
   );
 }

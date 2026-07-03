@@ -14,6 +14,7 @@ import { getAdminIdentity } from "@/auth/session";
 import { parseOrThrow, formObject, type ActionState } from "@/domain/forms";
 import { toActionError, ValidationError } from "@/domain/errors";
 import { deleteUpload, saveUpload } from "@/domain/barbers/uploads";
+import { BACKDROPS } from "@/domain/backdrops";
 
 /** Admin CRUD actions: services, weekly hours, time off, shop policy. */
 
@@ -148,6 +149,7 @@ const policySchema = z.object({
   depositMode: z.enum(["fixed", "percent"]),
   depositValue: z.coerce.number().int().min(0),
   noShowFeeCents: z.coerce.number().int().min(0),
+  backdrop: z.enum(BACKDROPS),
 });
 
 export async function savePolicyAction(
@@ -158,9 +160,10 @@ export async function savePolicyAction(
     await getAdminIdentity();
     const input = parseOrThrow(policySchema, formObject(formData));
     await db.update(shopSettings).set(input).where(eq(shopSettings.id, 1));
+    revalidatePath("/");
     revalidatePath("/admin");
     revalidatePath("/admin/settings");
-    return { ok: true, detail: "Policy saved." };
+    return { ok: true, detail: "Settings saved." };
   } catch (err) {
     return { ok: false, error: toActionError(err) };
   }
