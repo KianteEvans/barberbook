@@ -58,6 +58,7 @@ export const barbers = pgTable("barbers", {
   displayName: text("display_name").notNull(),
   bio: text("bio"),
   tagline: text("tagline"),
+  specialties: text("specialties"),
   photoFile: text("photo_file"),
   active: boolean("active").notNull().default(true),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),

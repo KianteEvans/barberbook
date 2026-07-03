@@ -23,6 +23,7 @@ const barberSchema = z.object({
   displayName: z.string().min(1, "Name is required."),
   tagline: z.string().optional(),
   bio: z.string().optional(),
+  specialties: z.string().optional(),
   active: z.string().optional(),
 });
 
@@ -45,6 +46,7 @@ export async function upsertBarberAction(
       displayName: input.displayName,
       tagline: input.tagline || null,
       bio: input.bio || null,
+      specialties: input.specialties || null,
       active: input.active !== "off",
       ...(photoFile ? { photoFile } : {}),
     };

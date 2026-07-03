@@ -4,7 +4,8 @@ import { asc, eq } from "drizzle-orm";
 import { db } from "@/db/client";
 import { barbers } from "@/db/schema";
 import { PageShell } from "@/components/ui/PageShell";
-import { EmptyState } from "@/components/ui/primitives";
+import { Badge, EmptyState } from "@/components/ui/primitives";
+import { parseSpecialties } from "@/domain/barbers/specialties";
 
 export const dynamic = "force-dynamic";
 
@@ -81,10 +82,19 @@ export default async function BarbersPage(): Promise<ReactNode> {
                   {b.displayName.charAt(0)}
                 </div>
               )}
-              <div style={{ display: "grid", gap: 4 }}>
+              <div style={{ display: "grid", gap: 6 }}>
                 <span style={{ fontWeight: 800, fontSize: 17 }}>{b.displayName}</span>
                 {b.tagline && (
                   <span style={{ fontSize: 13, color: "var(--muted)" }}>{b.tagline}</span>
+                )}
+                {parseSpecialties(b.specialties).length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                    {parseSpecialties(b.specialties)
+                      .slice(0, 3)
+                      .map((s) => (
+                        <Badge key={s}>{s}</Badge>
+                      ))}
+                  </div>
                 )}
                 <span style={{ fontSize: 13, fontWeight: 600, color: "var(--accent)" }}>
                   View profile & book {">"}

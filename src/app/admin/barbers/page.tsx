@@ -19,7 +19,12 @@ export const dynamic = "force-dynamic";
 function BarberFields({
   defaults,
 }: {
-  defaults?: { displayName: string; tagline: string | null; bio: string | null };
+  defaults?: {
+    displayName: string;
+    tagline: string | null;
+    bio: string | null;
+    specialties: string | null;
+  };
 }): ReactNode {
   return (
     <>
@@ -31,6 +36,13 @@ function BarberFields({
       </Field>
       <Field label="Bio">
         <TextArea name="bio" rows={4} defaultValue={defaults?.bio ?? ""} />
+      </Field>
+      <Field label="Specialty cuts (comma-separated)">
+        <TextInput
+          name="specialties"
+          placeholder="Skin fade, Beard sculpt, Hot towel shave"
+          defaultValue={defaults?.specialties ?? ""}
+        />
       </Field>
       <Field label="Profile photo (JPEG/PNG/WebP, max 5MB)">
         <input type="file" name="photo" accept="image/jpeg,image/png,image/webp" />

@@ -74,6 +74,7 @@ export interface BarberProfile {
   readonly displayName: string;
   readonly bio: string | null;
   readonly tagline: string | null;
+  readonly specialties: string | null;
   readonly photoFile: string | null;
   readonly offerings: ResolvedService[];
   readonly photos: Array<{
@@ -121,6 +122,7 @@ export async function loadBarberProfile(barberId: string): Promise<BarberProfile
     displayName: barber.displayName,
     bio: barber.bio,
     tagline: barber.tagline,
+    specialties: barber.specialties,
     photoFile: barber.photoFile,
     offerings: offerings.map((o) => {
       const priced = effectivePricing(o, o.overrideCents);

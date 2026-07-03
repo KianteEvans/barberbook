@@ -38,26 +38,6 @@ async function main(): Promise<void> {
       ON CONFLICT (email) DO NOTHING
     `;
 
-    const [{ count: barberCount }] = await sql<[{ count: string }]>`
-      SELECT count(*)::text AS count FROM barbers
-    `;
-    if (Number(barberCount) === 0) {
-      const [admin] = await sql<[{ id: string }]>`
-        SELECT id FROM users WHERE email = 'admin@barberbook.local'
-      `;
-      const [barber] = await sql<[{ id: string }]>`
-        INSERT INTO barbers (user_id, display_name) VALUES (${admin!.id}, 'Marco')
-        RETURNING id
-      `;
-      // Tue-Sat 9:00-18:00 (weekday 0 = Sunday).
-      for (const weekday of [2, 3, 4, 5, 6]) {
-        await sql`
-          INSERT INTO availability_rules (barber_id, weekday, start_min, end_min)
-          VALUES (${barber!.id}, ${weekday}, 540, 1080)
-        `;
-      }
-    }
-
     const [{ count: serviceCount }] = await sql<[{ count: string }]>`
       SELECT count(*)::text AS count FROM services
     `;
@@ -71,22 +51,96 @@ async function main(): Promise<void> {
       `;
     }
 
-    // Barber profile + offerings (all services; Cut + Beard has an override).
-    await sql`
-      UPDATE barbers SET
-        tagline = COALESCE(tagline, 'Fades, tapers, and razor work since 2012'),
-        bio = COALESCE(bio, 'Marco has been behind the chair for over a decade, specializing in skin fades, beard sculpting, and classic scissor work. Every cut ends with a hot towel and a straight-razor neck shave.')
-      WHERE display_name = 'Marco'
+    // Five mock barbers with distinct profiles, hours, and pricing. Offerings
+    // use per-service overrides in cents; null = shop standard price.
+    const [{ count: barberCount }] = await sql<[{ count: string }]>`
+      SELECT count(*)::text AS count FROM barbers
     `;
-    const [{ count: offeringCount }] = await sql<[{ count: string }]>`
-      SELECT count(*)::text AS count FROM barber_services
-    `;
-    if (Number(offeringCount) === 0) {
-      await sql`
-        INSERT INTO barber_services (barber_id, service_id, price_cents)
-        SELECT b.id, s.id, CASE WHEN s.name = 'Cut + Beard' THEN 5500 ELSE NULL END
-        FROM barbers b CROSS JOIN services s
+    if (Number(barberCount) === 0) {
+      const [admin] = await sql<[{ id: string }]>`
+        SELECT id FROM users WHERE email = 'admin@barberbook.local'
       `;
+      const roster: Array<{
+        name: string;
+        tagline: string;
+        bio: string;
+        specialties: string;
+        userId: string | null;
+        weekdays: number[]; // 0 = Sunday
+        hours: [number, number]; // minutes from midnight
+        overrides: Record<string, number | null>; // service name -> cents
+      }> = [
+        {
+          name: "Marco",
+          tagline: "Fades, tapers, and razor work since 2012",
+          bio: "Marco has been behind the chair for over a decade, specializing in skin fades, beard sculpting, and classic scissor work. Every cut ends with a hot towel and a straight-razor neck shave.",
+          specialties: "Skin fade, Beard sculpt, Hot towel shave",
+          userId: admin!.id,
+          weekdays: [2, 3, 4, 5, 6],
+          hours: [540, 1080], // 9:00-18:00
+          overrides: { "Classic Cut": null, "Cut + Beard": 5500, "The Works": null },
+        },
+        {
+          name: 'Andre "Dre" Bishop',
+          tagline: "Precision fades and the sharpest lines in the city",
+          bio: "Dre came up cutting heads out of his mom's kitchen and never lost the hunger. Burst fades, crispy line-ups, and wave maintenance are his bread and butter - bring a photo and he will out-do it.",
+          specialties: "Burst fade, Line-up, Waves",
+          userId: null,
+          weekdays: [1, 2, 3, 4, 5],
+          hours: [600, 1140], // 10:00-19:00
+          overrides: { "Classic Cut": 3000, "Cut + Beard": null },
+        },
+        {
+          name: "Tony Ricci",
+          tagline: "Old-school scissor man, cutting since 1998",
+          bio: "Tony learned the trade in his uncle's shop in Bensonhurst and still does everything the old way: scissor over comb, hot lather, and a straight razor finished on a leather strop. Ask for the pompadour.",
+          specialties: "Scissor cut, Pompadour, Straight razor",
+          userId: null,
+          weekdays: [2, 3, 4, 5, 6],
+          hours: [480, 960], // 8:00-16:00
+          overrides: { "Classic Cut": 4000, "Cut + Beard": null, "The Works": 8500 },
+        },
+        {
+          name: "Kofi Mensah",
+          tagline: "Texture is the craft - curls, coils, and crops",
+          bio: "Kofi is the shop's texture specialist. Curly crops, twist setups, and sponge work that holds its shape all week. He will teach you the routine to keep it right between visits.",
+          specialties: "Curly crop, Twists, Sponge work",
+          userId: null,
+          weekdays: [3, 4, 5, 6, 0],
+          hours: [660, 1200], // 11:00-20:00
+          overrides: { "Classic Cut": null, "Cut + Beard": null, "The Works": null },
+        },
+        {
+          name: "Luz Ortega",
+          tagline: "Editorial cuts, freestyle designs, and the kids' chair",
+          bio: "Luz spent five years assisting on fashion shoots before taking a chair here. Shear-only cuts, freehand designs, and the most patient hands in the shop for first haircuts and kids.",
+          specialties: "Shear cut, Kids cuts, Freestyle designs",
+          userId: null,
+          weekdays: [1, 3, 5, 6],
+          hours: [540, 1020], // 9:00-17:00
+          overrides: { "Classic Cut": null, "The Works": 7000 },
+        },
+      ];
+
+      for (const b of roster) {
+        const [row] = await sql<[{ id: string }]>`
+          INSERT INTO barbers (user_id, display_name, tagline, bio, specialties)
+          VALUES (${b.userId}, ${b.name}, ${b.tagline}, ${b.bio}, ${b.specialties})
+          RETURNING id
+        `;
+        for (const weekday of b.weekdays) {
+          await sql`
+            INSERT INTO availability_rules (barber_id, weekday, start_min, end_min)
+            VALUES (${row!.id}, ${weekday}, ${b.hours[0]}, ${b.hours[1]})
+          `;
+        }
+        for (const [serviceName, cents] of Object.entries(b.overrides)) {
+          await sql`
+            INSERT INTO barber_services (barber_id, service_id, price_cents)
+            SELECT ${row!.id}, id, ${cents} FROM services WHERE name = ${serviceName}
+          `;
+        }
+      }
     }
 
     const [{ count: planCount }] = await sql<[{ count: string }]>`

@@ -1,25 +1,45 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { asc, eq } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import { db } from "@/db/client";
-import { barbers, membershipPlans, services, shopSettings } from "@/db/schema";
+import {
+  barberServices,
+  barbers,
+  membershipPlans,
+  services,
+  shopSettings,
+} from "@/db/schema";
 import { Badge, ButtonLink } from "@/components/ui/primitives";
+import { effectivePricing } from "@/domain/barbers/pricing";
+import { parseSpecialties } from "@/domain/barbers/specialties";
 import { formatMoney } from "@/domain/money";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage(): Promise<ReactNode> {
   const [settings] = await db.select().from(shopSettings);
-  const activeServices = await db
-    .select()
-    .from(services)
-    .where(eq(services.active, true))
-    .orderBy(asc(services.priceCents));
   const activeBarbers = await db
     .select()
     .from(barbers)
     .where(eq(barbers.active, true))
-    .orderBy(asc(barbers.displayName));
+    .orderBy(asc(barbers.createdAt));
+  // Every (barber, service) offering with its effective price, one query.
+  const offerings = await db
+    .select({
+      barberId: barberServices.barberId,
+      overrideCents: barberServices.priceCents,
+      priceCents: services.priceCents,
+      depositCents: services.depositCents,
+    })
+    .from(barberServices)
+    .innerJoin(services, and(eq(barberServices.serviceId, services.id)))
+    .where(eq(services.active, true));
+  const fromPriceByBarber = new Map<string, number>();
+  for (const o of offerings) {
+    const price = effectivePricing(o, o.overrideCents).priceCents;
+    const cur = fromPriceByBarber.get(o.barberId);
+    if (cur === undefined || price < cur) fromPriceByBarber.set(o.barberId, price);
+  }
   const [plan] = await db
     .select()
     .from(membershipPlans)
@@ -113,181 +133,156 @@ export default async function HomePage(): Promise<ReactNode> {
           gap: 56,
         }}
       >
-      {/* Services showcase */}
+      {/* The chairs: the roster IS the homepage. Book direct or open the
+          profile for history, specialty cuts, and their menu. */}
       <section className="fade-in-up stagger-2" style={{ display: "grid", gap: 18 }}>
-        <h2
-          className="display"
+        <div
           style={{
-            margin: 0,
-            fontSize: 22,
-            fontWeight: 600,
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+            gap: 12,
           }}
         >
-          The menu
-        </h2>
-        {activeServices.length === 0 ? (
+          <h2
+            className="display"
+            style={{
+              margin: 0,
+              fontSize: 22,
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+            }}
+          >
+            The chairs
+          </h2>
+          <span style={{ fontSize: 13, color: "var(--muted)" }}>
+            Pick your barber - book straight from here
+          </span>
+        </div>
+        {activeBarbers.length === 0 ? (
           <p style={{ margin: 0, color: "var(--muted)", fontSize: 14 }}>
-            No services yet - check back soon.
+            No barbers listed yet - check back soon.
           </p>
         ) : (
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-              gap: 14,
+              gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+              gap: 16,
             }}
           >
-            {activeServices.map((s) => (
-              <Link
-                key={s.id}
-                href={`/book/${s.id}`}
-                className="card-hover"
-                style={{
-                  display: "grid",
-                  gap: 10,
-                  alignContent: "start",
-                  background: "var(--panel)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-lg)",
-                  padding: "18px 20px",
-                  textDecoration: "none",
-                  color: "var(--text)",
-                  boxShadow: "var(--shadow-sm)",
-                }}
-              >
+            {activeBarbers.map((b, i) => {
+              const fromPrice = fromPriceByBarber.get(b.id);
+              const specialties = parseSpecialties(b.specialties).slice(0, 3);
+              return (
                 <div
+                  key={b.id}
+                  className={`card-hover fade-in-up stagger-${Math.min(i + 2, 6)}`}
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 10,
+                    display: "grid",
+                    gap: 12,
+                    alignContent: "start",
+                    background: "var(--panel)",
+                    border: "1px solid var(--border)",
+                    borderRadius: "var(--radius-lg)",
+                    padding: 16,
+                    boxShadow: "var(--shadow-sm)",
                   }}
                 >
-                  <span style={{ fontWeight: 700, fontSize: 15 }}>{s.name}</span>
-                  <Badge>{s.durationMin} min</Badge>
+                  <Link
+                    href={`/barbers/${b.id}`}
+                    style={{ textDecoration: "none", color: "var(--text)", display: "grid", gap: 12 }}
+                  >
+                    {b.photoFile ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={`/api/uploads/${b.photoFile}`}
+                        alt={b.displayName}
+                        style={{
+                          width: "100%",
+                          aspectRatio: "1",
+                          objectFit: "cover",
+                          borderRadius: "var(--radius)",
+                          border: "1px solid var(--border-strong)",
+                        }}
+                      />
+                    ) : (
+                      <div
+                        className="display"
+                        style={{
+                          width: "100%",
+                          aspectRatio: "1",
+                          borderRadius: "var(--radius)",
+                          background: "var(--panel-2)",
+                          border: "1px solid var(--border)",
+                          display: "grid",
+                          placeItems: "center",
+                          fontSize: 84,
+                          fontWeight: 700,
+                          color: "color-mix(in srgb, var(--accent) 30%, transparent)",
+                        }}
+                      >
+                        {b.displayName.charAt(0)}
+                      </div>
+                    )}
+                    <div style={{ display: "grid", gap: 6 }}>
+                      <span
+                        className="display"
+                        style={{ fontWeight: 600, fontSize: 20, letterSpacing: "0.02em" }}
+                      >
+                        {b.displayName}
+                      </span>
+                      {b.tagline && (
+                        <span style={{ fontSize: 12.5, color: "var(--muted)", lineHeight: 1.5 }}>
+                          {b.tagline}
+                        </span>
+                      )}
+                      {specialties.length > 0 && (
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                          {specialties.map((s) => (
+                            <Badge key={s}>{s}</Badge>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 10,
+                      borderTop: "1px solid var(--border)",
+                      paddingTop: 12,
+                    }}
+                  >
+                    {fromPrice !== undefined ? (
+                      <span style={{ fontSize: 13, color: "var(--muted)" }}>
+                        From{" "}
+                        <span
+                          className="display"
+                          style={{ fontSize: 17, fontWeight: 600, color: "var(--text)" }}
+                        >
+                          {formatMoney(fromPrice)}
+                        </span>
+                      </span>
+                    ) : (
+                      <span style={{ fontSize: 12, color: "var(--muted)" }}>Menu coming soon</span>
+                    )}
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <ButtonLink href={`/barbers/${b.id}`} variant="secondary">
+                        Profile
+                      </ButtonLink>
+                      <ButtonLink href={`/book?barber=${b.id}`}>Book</ButtonLink>
+                    </div>
+                  </div>
                 </div>
-                {s.description && (
-                  <span style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5 }}>
-                    {s.description}
-                  </span>
-                )}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "baseline",
-                    justifyContent: "space-between",
-                    marginTop: 4,
-                  }}
-                >
-                  <span className="display" style={{ fontSize: 22, fontWeight: 600 }}>
-                    {formatMoney(s.priceCents)}
-                  </span>
-                  <span style={{ fontSize: 13, fontWeight: 700, color: "var(--accent)" }}>
-                    Book {">"}
-                  </span>
-                </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
         )}
       </section>
-
-      {/* Meet the barbers */}
-      {activeBarbers.length > 0 && (
-        <section className="fade-in-up stagger-3" style={{ display: "grid", gap: 18 }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "baseline",
-              justifyContent: "space-between",
-              gap: 12,
-            }}
-          >
-            <h2
-              className="display"
-              style={{
-                margin: 0,
-                fontSize: 22,
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.05em",
-              }}
-            >
-              The chairs
-            </h2>
-            <Link href="/barbers" style={{ fontSize: 13, fontWeight: 600 }}>
-              All barbers {">"}
-            </Link>
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-              gap: 14,
-            }}
-          >
-            {activeBarbers.slice(0, 4).map((b) => (
-              <Link
-                key={b.id}
-                href={`/barbers/${b.id}`}
-                className="card-hover"
-                style={{
-                  display: "grid",
-                  gap: 10,
-                  background: "var(--panel)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-lg)",
-                  padding: 14,
-                  textDecoration: "none",
-                  color: "var(--text)",
-                  boxShadow: "var(--shadow-sm)",
-                }}
-              >
-                {b.photoFile ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={`/api/uploads/${b.photoFile}`}
-                    alt={b.displayName}
-                    style={{
-                      width: "100%",
-                      aspectRatio: "1",
-                      objectFit: "cover",
-                      borderRadius: "var(--radius)",
-                      border: "1px solid var(--border-strong)",
-                    }}
-                  />
-                ) : (
-                  <div
-                    className="display"
-                    style={{
-                      width: "100%",
-                      aspectRatio: "1",
-                      borderRadius: "var(--radius)",
-                      background: "var(--panel-2)",
-                      border: "1px solid var(--border)",
-                      display: "grid",
-                      placeItems: "center",
-                      fontSize: 84,
-                      fontWeight: 700,
-                      color: "color-mix(in srgb, var(--accent) 30%, transparent)",
-                    }}
-                  >
-                    {b.displayName.charAt(0)}
-                  </div>
-                )}
-                <div style={{ display: "grid", gap: 2 }}>
-                  <span style={{ fontWeight: 700, fontSize: 15 }}>{b.displayName}</span>
-                  {b.tagline && (
-                    <span style={{ fontSize: 12, color: "var(--muted)" }}>{b.tagline}</span>
-                  )}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* Membership teaser */}
       {plan && (

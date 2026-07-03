@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, Badge, ButtonLink, EmptyState } from "@/components/ui/primitives";
 import { loadBarberProfile } from "@/domain/barbers/operations";
+import { parseSpecialties } from "@/domain/barbers/specialties";
 import { formatMoney } from "@/domain/money";
 
 export const dynamic = "force-dynamic";
@@ -61,19 +62,40 @@ export default async function BarberProfilePage({
             {profile.displayName.charAt(0)}
           </div>
         )}
-        {profile.bio && (
-          <p
-            style={{
-              margin: 0,
-              flex: "1 1 320px",
-              fontSize: 14,
-              lineHeight: 1.7,
-              color: "var(--muted)",
-            }}
-          >
-            {profile.bio}
-          </p>
-        )}
+        <div style={{ flex: "1 1 320px", display: "grid", gap: 14, alignContent: "start" }}>
+          {parseSpecialties(profile.specialties).length > 0 && (
+            <div style={{ display: "grid", gap: 8 }}>
+              <span
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                  color: "var(--muted)",
+                }}
+              >
+                Specialty cuts
+              </span>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                {parseSpecialties(profile.specialties).map((s) => (
+                  <Badge key={s}>{s}</Badge>
+                ))}
+              </div>
+            </div>
+          )}
+          {profile.bio && (
+            <p
+              style={{
+                margin: 0,
+                fontSize: 14,
+                lineHeight: 1.7,
+                color: "var(--muted)",
+              }}
+            >
+              {profile.bio}
+            </p>
+          )}
+        </div>
       </div>
 
       <Card title={`Book with ${profile.displayName}`}>
