@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { CheckIcon } from "@/components/ui/icons";
 
 /**
  * Polls the appointment status until it leaves pending_deposit. The Stripe
@@ -33,9 +34,38 @@ export function StatusPoller({
 
   if (status === "confirmed" || status === "completed") {
     return (
-      <div role="status" style={{ display: "grid", gap: 6, textAlign: "center" }}>
-        <p style={{ margin: 0, fontSize: 40 }}>{"✅"}</p>
-        <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>You are booked!</p>
+      <div
+        role="status"
+        style={{ display: "grid", gap: 10, textAlign: "center", justifyItems: "center" }}
+      >
+        <span
+          className="check-pop"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 64,
+            height: 64,
+            borderRadius: "var(--radius-full)",
+            background: "color-mix(in srgb, var(--accent) 15%, transparent)",
+            border: "2px solid var(--accent)",
+            color: "var(--accent)",
+          }}
+        >
+          <CheckIcon size={32} />
+        </span>
+        <p
+          className="display"
+          style={{
+            margin: 0,
+            fontWeight: 600,
+            fontSize: 22,
+            textTransform: "uppercase",
+            letterSpacing: "0.04em",
+          }}
+        >
+          You are booked
+        </p>
         <p style={{ margin: 0, color: "var(--muted)", fontSize: 13 }}>
           A spot has been locked in for you. See you soon.
         </p>

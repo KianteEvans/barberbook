@@ -1,17 +1,43 @@
 :root {
-  --bg: #0f1113;
-  --panel: #17191c;
-  --panel-2: #1e2126;
-  --border: #2a2e34;
-  --text: #eceff2;
-  --muted: #9aa3ad;
-  --accent: #d9a441;
-  --accent-ink: #17130a;
+  /* Surfaces: richer near-blacks with a warm cast */
+  --bg: #0b0c0e;
+  --panel: #141619;
+  --panel-2: #1b1e23;
+  --panel-hover: #1f2228;
+  --border: #2a2d33;
+  --border-strong: #3d4149;
+
+  /* Ink */
+  --text: #f0ede5;
+  --muted: #9aa1a9;
+
+  /* Brass + partners */
+  --accent: #d9a13b;
+  --accent-bright: #e9b654;
+  --accent-ink: #171204;
+  --cream: #f3e9d2;
+
+  /* Status */
   --ok: #4ade80;
   --warn: #fbbf24;
   --danger: #f87171;
   --info: #60a5fa;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.3);
   --shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+
+  /* Shape */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --radius-full: 999px;
+
+  /* Motion */
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 * {
@@ -25,12 +51,12 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family:
+    var(--font-body),
     ui-sans-serif,
     system-ui,
     -apple-system,
     "Segoe UI",
     Roboto,
-    "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -55,6 +81,13 @@ button:focus-visible {
   outline-offset: 1px;
 }
 
+/* Display type: condensed poster face for headings and big numbers. */
+.display {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* Tables */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -62,8 +95,10 @@ table {
 
 th {
   text-align: left;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: var(--muted);
   padding: 8px 12px;
   border-bottom: 1px solid var(--border);
@@ -81,6 +116,170 @@ tr:last-child td {
   border-bottom: none;
 }
 
+/* --- Interaction utilities (inline styles cannot express these) --- */
+
+.card-hover {
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-strong) !important;
+}
+
+.btn {
+  transition:
+    filter var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+.btn:hover {
+  filter: brightness(1.08);
+}
+
+.btn-secondary:hover {
+  filter: none;
+  background: var(--panel-hover) !important;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.control {
+  transition: box-shadow var(--dur-fast) var(--ease);
+}
+
+.control:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+.nav-link {
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.nav-link:hover {
+  color: var(--accent-bright) !important;
+}
+
+/* Slot / date chips in the booking flow. */
+.chip {
+  transition:
+    background var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.chip:hover {
+  background: var(--panel-hover) !important;
+  border-color: var(--accent) !important;
+  transform: translateY(-1px);
+}
+
+/* --- Barber-pole stripe: sparing accent rule. --- */
+.pole-stripe {
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--accent) 0 10px,
+    var(--cream) 10px 14px,
+    transparent 14px 24px
+  );
+}
+
+/* --- Keyframes --- */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base opacity stays 1: with reduced motion the guard sets animation: none
+   and the content must remain visible. */
+.fade-in-up {
+  animation: fadeInUp 400ms var(--ease);
+  animation-fill-mode: backwards;
+}
+
+.stagger-1 { animation-delay: 60ms; }
+.stagger-2 { animation-delay: 120ms; }
+.stagger-3 { animation-delay: 180ms; }
+.stagger-4 { animation-delay: 240ms; }
+.stagger-5 { animation-delay: 300ms; }
+.stagger-6 { animation-delay: 360ms; }
+
+@keyframes drawerIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.drawer-panel {
+  animation: drawerIn var(--dur) var(--ease);
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.drawer-overlay {
+  animation: overlayIn var(--dur) var(--ease);
+  backdrop-filter: blur(3px);
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast-in {
+  animation: toastIn 200ms var(--ease);
+}
+
+@keyframes checkPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.check-pop {
+  animation: checkPop 400ms var(--ease);
+}
+
+/* Keep LAST: kills all motion for reduced-motion users. */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;

@@ -25,6 +25,7 @@ export default async function BarberProfilePage({
       title={profile.displayName}
       subtitle={profile.tagline ?? undefined}
       maxWidth={880}
+      stripe
     >
       <div style={{ display: "flex", gap: 24, flexWrap: "wrap", alignItems: "flex-start" }}>
         {profile.photoFile ? (
@@ -43,17 +44,18 @@ export default async function BarberProfilePage({
           />
         ) : (
           <div
+            className="display"
             style={{
               width: 200,
               height: 200,
-              borderRadius: 16,
-              border: "1px dashed var(--border)",
+              borderRadius: "var(--radius-lg)",
+              border: "1px solid var(--border)",
               display: "grid",
               placeItems: "center",
-              fontSize: 72,
-              fontWeight: 800,
-              color: "var(--muted)",
-              background: "var(--panel)",
+              fontSize: 96,
+              fontWeight: 700,
+              color: "color-mix(in srgb, var(--accent) 30%, transparent)",
+              background: "var(--panel-2)",
             }}
           >
             {profile.displayName.charAt(0)}
@@ -115,7 +117,7 @@ export default async function BarberProfilePage({
                   </span>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                  <span style={{ fontWeight: 800, fontSize: 17 }}>
+                  <span className="display" style={{ fontWeight: 600, fontSize: 20 }}>
                     {formatMoney(s.priceCents)}
                   </span>
                   <ButtonLink href={`/book/${s.id}?barber=${profile.id}`}>

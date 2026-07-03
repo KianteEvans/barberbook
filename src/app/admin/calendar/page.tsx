@@ -127,17 +127,22 @@ export default async function AdminCalendarPage({
                   display: "grid",
                   alignContent: "start",
                   gap: 8,
-                  background: "var(--panel)",
+                  background: isToday
+                    ? "color-mix(in srgb, var(--accent) 4%, var(--panel))"
+                    : "var(--panel)",
                   border: `1px solid ${isToday ? "var(--accent)" : "var(--border)"}`,
-                  borderRadius: 10,
+                  borderRadius: "var(--radius)",
                   padding: 10,
                   minHeight: 160,
                 }}
               >
                 <span
+                  className="display"
                   style={{
-                    fontSize: 12,
-                    fontWeight: 700,
+                    fontSize: 13,
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
                     color: isToday ? "var(--accent)" : "var(--muted)",
                   }}
                 >

@@ -7,12 +7,15 @@ export function PageShell({
   action,
   children,
   maxWidth = 1080,
+  stripe = false,
 }: {
   title: string;
   subtitle?: string;
   action?: ReactNode;
   children: ReactNode;
   maxWidth?: number;
+  /** Show the barber-pole rule under the title (public pages only). */
+  stripe?: boolean;
 }): ReactNode {
   return (
     <main
@@ -33,10 +36,22 @@ export function PageShell({
           gap: 12,
         }}
       >
-        <div>
-          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 800 }}>{title}</h1>
+        <div style={{ display: "grid", gap: 6 }}>
+          <h1
+            className="display"
+            style={{
+              margin: 0,
+              fontSize: 26,
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.04em",
+            }}
+          >
+            {title}
+          </h1>
+          {stripe && <div className="pole-stripe" style={{ width: 72 }} />}
           {subtitle && (
-            <p style={{ margin: "4px 0 0", color: "var(--muted)", fontSize: 14 }}>
+            <p style={{ margin: 0, color: "var(--muted)", fontSize: 14 }}>
               {subtitle}
             </p>
           )}

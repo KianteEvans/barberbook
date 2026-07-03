@@ -1,25 +1,30 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
+import { ScissorsIcon } from "./icons";
 
 /** Shared server-renderable primitives: Card, Badge, Button-link, EmptyState. */
 
 export function Card({
   title,
   action,
+  hover = false,
   children,
   style,
 }: {
   title?: string;
   action?: ReactNode;
+  /** Lift + deepen shadow on hover (for clickable/scannable cards). */
+  hover?: boolean;
   children: ReactNode;
   style?: CSSProperties;
 }): ReactNode {
   return (
     <section
+      className={hover ? "card-hover" : undefined}
       style={{
         background: "var(--panel)",
         border: "1px solid var(--border)",
-        borderRadius: 12,
+        borderRadius: "var(--radius-lg)",
         padding: 20,
         boxShadow: "var(--shadow)",
         ...style,
@@ -36,7 +41,18 @@ export function Card({
           }}
         >
           {title && (
-            <h2 style={{ margin: 0, fontSize: 15, fontWeight: 700 }}>{title}</h2>
+            <h2
+              style={{
+                margin: 0,
+                fontSize: 13,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
+                color: "var(--text)",
+              }}
+            >
+              {title}
+            </h2>
           )}
           {action}
         </header>
@@ -70,10 +86,13 @@ export function Badge({
         display: "inline-block",
         background: t.bg,
         color: t.fg,
-        borderRadius: 999,
-        padding: "2px 10px",
-        fontSize: 12,
-        fontWeight: 600,
+        border: `1px solid color-mix(in srgb, ${t.fg} 30%, transparent)`,
+        borderRadius: "var(--radius-full)",
+        padding: "2px 8px",
+        fontSize: 11,
+        fontWeight: 700,
+        textTransform: "uppercase",
+        letterSpacing: "0.05em",
         whiteSpace: "nowrap",
       }}
     >
@@ -106,10 +125,11 @@ export function ButtonLink({
   return (
     <Link
       href={href}
+      className={variant === "primary" ? "btn" : "btn btn-secondary"}
       style={{
         ...styles,
         display: "inline-block",
-        borderRadius: 8,
+        borderRadius: "var(--radius-sm)",
         padding: "9px 18px",
         fontWeight: 600,
         fontSize: 13,
@@ -134,14 +154,17 @@ export function EmptyState({
     <div
       style={{
         border: "1px dashed var(--border)",
-        borderRadius: 12,
+        borderRadius: "var(--radius-lg)",
         padding: "36px 24px",
         textAlign: "center",
         display: "grid",
-        gap: 8,
+        gap: 10,
         justifyItems: "center",
       }}
     >
+      <span style={{ color: "var(--muted)", opacity: 0.7 }}>
+        <ScissorsIcon size={28} />
+      </span>
       <p style={{ margin: 0, fontWeight: 600, fontSize: 14 }}>{title}</p>
       {hint && (
         <p style={{ margin: 0, color: "var(--muted)", fontSize: 13 }}>{hint}</p>
@@ -161,8 +184,20 @@ export function Stat({
 }): ReactNode {
   return (
     <div style={{ display: "grid", gap: 2 }}>
-      <span style={{ fontSize: 12, color: "var(--muted)" }}>{label}</span>
-      <span style={{ fontSize: 16, fontWeight: 700 }}>{value}</span>
+      <span
+        style={{
+          fontSize: 11,
+          fontWeight: 600,
+          textTransform: "uppercase",
+          letterSpacing: "0.05em",
+          color: "var(--muted)",
+        }}
+      >
+        {label}
+      </span>
+      <span className="display" style={{ fontSize: 17, fontWeight: 600 }}>
+        {value}
+      </span>
     </div>
   );
 }

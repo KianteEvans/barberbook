@@ -48,6 +48,7 @@ export function AppointmentCard({ appt }: { appt: AppointmentCardData }): ReactN
     <>
       <button
         onClick={() => setOpen(true)}
+        className="card-hover"
         style={{
           display: "grid",
           gap: 2,

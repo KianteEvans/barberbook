@@ -46,9 +46,15 @@ export default async function AdminPaymentsPage(): Promise<ReactNode> {
   return (
     <PageShell title="Payments" subtitle="Deposits, remainders, fees, refunds, and subscriptions">
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12 }}>
-        <Card><Stat label="Collected" value={formatMoney(collected)} /></Card>
-        <Card><Stat label="Refunded" value={formatMoney(refunded)} /></Card>
-        <Card><Stat label="Failed charges" value={failed} /></Card>
+        <Card style={{ background: "linear-gradient(color-mix(in srgb, var(--ok) 6%, var(--panel)), var(--panel))" }}>
+          <Stat label="Collected" value={formatMoney(collected)} />
+        </Card>
+        <Card style={{ background: "linear-gradient(color-mix(in srgb, var(--info) 6%, var(--panel)), var(--panel))" }}>
+          <Stat label="Refunded" value={formatMoney(refunded)} />
+        </Card>
+        <Card style={{ background: "linear-gradient(color-mix(in srgb, var(--danger) 6%, var(--panel)), var(--panel))" }}>
+          <Stat label="Failed charges" value={failed} />
+        </Card>
       </div>
 
       <Card title="Ledger">

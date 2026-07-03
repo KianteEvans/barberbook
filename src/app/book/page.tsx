@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { PageShell } from "@/components/ui/PageShell";
 import { EmptyState } from "@/components/ui/primitives";
+import { StepIndicator } from "@/components/ui/StepIndicator";
 import { loadActiveServices } from "@/domain/booking/load";
 import { formatMoney } from "@/domain/money";
 
@@ -11,7 +12,8 @@ export default async function BookServicePage(): Promise<ReactNode> {
   const services = await loadActiveServices();
 
   return (
-    <PageShell title="Book an appointment" subtitle="Step 1 of 3 - pick a service" maxWidth={760}>
+    <PageShell title="Book an appointment" maxWidth={760} stripe>
+      <StepIndicator current={1} />
       {services.length === 0 ? (
         <EmptyState title="No services available" hint="Check back soon." />
       ) : (
@@ -20,6 +22,7 @@ export default async function BookServicePage(): Promise<ReactNode> {
             <Link
               key={s.id}
               href={`/book/${s.id}`}
+              className="card-hover"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -27,10 +30,11 @@ export default async function BookServicePage(): Promise<ReactNode> {
                 gap: 16,
                 background: "var(--panel)",
                 border: "1px solid var(--border)",
-                borderRadius: 12,
+                borderRadius: "var(--radius-lg)",
                 padding: "16px 20px",
                 textDecoration: "none",
                 color: "var(--text)",
+                boxShadow: "var(--shadow-sm)",
               }}
             >
               <div style={{ display: "grid", gap: 4 }}>
@@ -40,7 +44,7 @@ export default async function BookServicePage(): Promise<ReactNode> {
                 )}
                 <span style={{ color: "var(--muted)", fontSize: 12 }}>{s.durationMin} minutes</span>
               </div>
-              <span style={{ fontWeight: 700, fontSize: 16, whiteSpace: "nowrap" }}>
+              <span className="display" style={{ fontWeight: 600, fontSize: 19, whiteSpace: "nowrap" }}>
                 {formatMoney(s.priceCents)}
               </span>
             </Link>

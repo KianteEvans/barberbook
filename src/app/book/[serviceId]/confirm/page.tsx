@@ -10,6 +10,7 @@ import { tryGetIdentity } from "@/auth/session";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, Stat } from "@/components/ui/primitives";
 import { Field, Select } from "@/components/ui/fields";
+import { StepIndicator } from "@/components/ui/StepIndicator";
 import { MutationForm } from "@/components/ui/MutationForm";
 import { createBookingAction } from "@/domain/booking/actions";
 import { loadSettings } from "@/domain/booking/load";
@@ -56,14 +57,18 @@ export default async function ConfirmBookingPage({
   const canUseCredit = (membership?.creditsAvailable ?? 0) > 0;
 
   return (
-    <PageShell title="Confirm your booking" subtitle="Step 3 of 3" maxWidth={560}>
-      <Card>
+    <PageShell title="Confirm your booking" maxWidth={560} stripe>
+      <StepIndicator current={3} />
+      <Card style={{ padding: 0, overflow: "hidden" }}>
+        <div className="pole-stripe" style={{ borderRadius: 0 }} />
         <div
           style={{
+            background: "var(--panel-2)",
+            padding: 20,
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
             gap: 16,
-            marginBottom: 18,
+            borderBottom: "1px dashed var(--border-strong)",
           }}
         >
           <Stat label="Service" value={service.name} />
@@ -77,6 +82,7 @@ export default async function ConfirmBookingPage({
             </>
           )}
         </div>
+        <div style={{ padding: 20 }}>
 
         {collectDeposit ? (
           <p style={{ color: "var(--muted)", fontSize: 13, margin: "0 0 14px" }}>
@@ -150,6 +156,7 @@ export default async function ConfirmBookingPage({
             </label>
           )}
         </MutationForm>
+        </div>
       </Card>
     </PageShell>
   );

@@ -20,6 +20,7 @@ export default async function BarbersPage(): Promise<ReactNode> {
       title="Our barbers"
       subtitle="Pick your barber, browse their work, book your spot"
       maxWidth={880}
+      stripe
     >
       {active.length === 0 ? (
         <EmptyState title="No barbers listed yet" hint="Check back soon." />
@@ -35,16 +36,17 @@ export default async function BarbersPage(): Promise<ReactNode> {
             <Link
               key={b.id}
               href={`/barbers/${b.id}`}
+              className="card-hover"
               style={{
                 display: "grid",
                 gap: 12,
                 background: "var(--panel)",
                 border: "1px solid var(--border)",
-                borderRadius: 14,
+                borderRadius: "var(--radius-lg)",
                 padding: 18,
                 textDecoration: "none",
                 color: "var(--text)",
-                boxShadow: "var(--shadow)",
+                boxShadow: "var(--shadow-sm)",
               }}
             >
               {b.photoFile ? (
@@ -56,22 +58,23 @@ export default async function BarbersPage(): Promise<ReactNode> {
                     width: "100%",
                     aspectRatio: "1",
                     objectFit: "cover",
-                    borderRadius: 10,
-                    border: "1px solid var(--border)",
+                    borderRadius: "var(--radius)",
+                    border: "1px solid var(--border-strong)",
                   }}
                 />
               ) : (
                 <div
+                  className="display"
                   style={{
                     width: "100%",
                     aspectRatio: "1",
-                    borderRadius: 10,
-                    border: "1px dashed var(--border)",
+                    borderRadius: "var(--radius)",
+                    border: "1px solid var(--border)",
                     display: "grid",
                     placeItems: "center",
-                    fontSize: 56,
-                    fontWeight: 800,
-                    color: "var(--muted)",
+                    fontSize: 84,
+                    fontWeight: 700,
+                    color: "color-mix(in srgb, var(--accent) 30%, transparent)",
                     background: "var(--panel-2)",
                   }}
                 >

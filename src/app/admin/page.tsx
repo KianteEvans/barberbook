@@ -3,7 +3,7 @@ import { and, eq, gte, lt } from "drizzle-orm";
 import { db } from "@/db/client";
 import { appointments, services, users, barbers } from "@/db/schema";
 import { PageShell } from "@/components/ui/PageShell";
-import { Card, Badge, EmptyState, Stat, type BadgeTone } from "@/components/ui/primitives";
+import { Card, Badge, EmptyState, type BadgeTone } from "@/components/ui/primitives";
 import { formatMoney } from "@/domain/money";
 
 export const dynamic = "force-dynamic";
@@ -15,6 +15,27 @@ const statusTone: Record<string, BadgeTone> = {
   canceled: "neutral",
   no_show: "danger",
 };
+
+function StatBig({ label, value }: { label: string; value: string }): ReactNode {
+  return (
+    <div style={{ display: "grid", gap: 2 }}>
+      <span
+        style={{
+          fontSize: 11,
+          fontWeight: 600,
+          textTransform: "uppercase",
+          letterSpacing: "0.05em",
+          color: "var(--muted)",
+        }}
+      >
+        {label}
+      </span>
+      <span className="display" style={{ fontSize: 32, fontWeight: 700, lineHeight: 1.1 }}>
+        {value}
+      </span>
+    </div>
+  );
+}
 
 export default async function AdminTodayPage(): Promise<ReactNode> {
   const now = new Date();
@@ -50,9 +71,15 @@ export default async function AdminTodayPage(): Promise<ReactNode> {
   return (
     <PageShell title="Today" subtitle={now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12 }}>
-        <Card><Stat label="Appointments" value={todays.length} /></Card>
-        <Card><Stat label="Confirmed" value={confirmed.length} /></Card>
-        <Card><Stat label="Expected revenue" value={formatMoney(expectedRevenue)} /></Card>
+        <Card style={{ background: "linear-gradient(color-mix(in srgb, var(--info) 6%, var(--panel)), var(--panel))" }}>
+          <StatBig label="Appointments" value={String(todays.length)} />
+        </Card>
+        <Card style={{ background: "linear-gradient(color-mix(in srgb, var(--ok) 6%, var(--panel)), var(--panel))" }}>
+          <StatBig label="Confirmed" value={String(confirmed.length)} />
+        </Card>
+        <Card style={{ background: "linear-gradient(color-mix(in srgb, var(--accent) 6%, var(--panel)), var(--panel))" }}>
+          <StatBig label="Expected revenue" value={formatMoney(expectedRevenue)} />
+        </Card>
       </div>
 
       <Card title="Schedule">

@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 const controlStyle = {
   background: "var(--panel-2)",
   border: "1px solid var(--border)",
-  borderRadius: 8,
+  borderRadius: "var(--radius-sm)",
   padding: "9px 12px",
   fontSize: 14,
   color: "var(--text)",
@@ -21,7 +21,17 @@ export function Field({
   children: ReactNode;
 }): ReactNode {
   return (
-    <label style={{ display: "grid", gap: 6, fontSize: 13, fontWeight: 600 }}>
+    <label
+      style={{
+        display: "grid",
+        gap: 6,
+        fontSize: 12,
+        fontWeight: 600,
+        textTransform: "uppercase",
+        letterSpacing: "0.04em",
+        color: "var(--muted)",
+      }}
+    >
       {label}
       {children}
     </label>
@@ -38,7 +48,7 @@ export function TextInput(props: {
   max?: number | string;
   step?: number | string;
 }): ReactNode {
-  return <input {...props} style={controlStyle} />;
+  return <input {...props} className="control" style={controlStyle} />;
 }
 
 export function Select({
@@ -53,7 +63,13 @@ export function Select({
   children: ReactNode;
 }): ReactNode {
   return (
-    <select name={name} defaultValue={defaultValue} required={required} style={controlStyle}>
+    <select
+      name={name}
+      defaultValue={defaultValue}
+      required={required}
+      className="control"
+      style={controlStyle}
+    >
       {children}
     </select>
   );
@@ -65,5 +81,11 @@ export function TextArea(props: {
   placeholder?: string;
   rows?: number;
 }): ReactNode {
-  return <textarea {...props} style={{ ...controlStyle, resize: "vertical" }} />;
+  return (
+    <textarea
+      {...props}
+      className="control"
+      style={{ ...controlStyle, resize: "vertical" }}
+    />
+  );
 }

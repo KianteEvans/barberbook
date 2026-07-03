@@ -26,6 +26,7 @@ export default async function MembershipsPage(): Promise<ReactNode> {
       title="Memberships"
       subtitle="Prepaid cuts every month, priority booking, zero deposits"
       maxWidth={760}
+      stripe
     >
       {current && (
         <Card>
@@ -50,11 +51,18 @@ export default async function MembershipsPage(): Promise<ReactNode> {
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 12 }}>
           {plans.map((p) => (
-            <Card key={p.id} title={p.name}>
+            <Card key={p.id} title={p.name} hover>
               <div style={{ display: "grid", gap: 10 }}>
-                <span style={{ fontSize: 26, fontWeight: 800 }}>
+                <span className="display" style={{ fontSize: 30, fontWeight: 700 }}>
                   {formatMoney(p.priceCents)}
-                  <span style={{ fontSize: 13, fontWeight: 500, color: "var(--muted)" }}>
+                  <span
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 500,
+                      color: "var(--muted)",
+                      fontFamily: "var(--font-body)",
+                    }}
+                  >
                     /month
                   </span>
                 </span>

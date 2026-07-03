@@ -78,14 +78,15 @@ export function MutationForm({
       <button
         type="submit"
         disabled={pending}
+        className={variant === "primary" ? "btn" : "btn btn-secondary"}
         style={{
           justifySelf: "start",
           ...v,
-          borderRadius: 8,
+          borderRadius: "var(--radius-sm)",
           padding: "9px 18px",
           fontWeight: 600,
           fontSize: 13,
-          cursor: pending ? "default" : "pointer",
+          cursor: pending ? "progress" : "pointer",
           opacity: pending ? 0.6 : 1,
         }}
       >

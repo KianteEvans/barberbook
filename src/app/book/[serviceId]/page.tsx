@@ -8,6 +8,7 @@ import { db } from "@/db/client";
 import { services } from "@/db/schema";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, EmptyState } from "@/components/ui/primitives";
+import { StepIndicator } from "@/components/ui/StepIndicator";
 import {
   loadSettings,
   loadSlotsForDay,
@@ -67,18 +68,21 @@ export default async function PickSlotPage({
   return (
     <PageShell
       title={service.name}
-      subtitle={`Step 2 of 3 - pick a time - ${service.durationMin} min - ${formatMoney(priced.priceCents)}${depositCents > 0 ? ` (${formatMoney(depositCents)} deposit)` : ""}`}
+      subtitle={`${service.durationMin} min - ${formatMoney(priced.priceCents)}${depositCents > 0 ? ` (${formatMoney(depositCents)} deposit)` : ""}`}
       maxWidth={760}
+      stripe
     >
+      <StepIndicator current={2} />
       {barbers.length > 1 && (
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           {barbers.map((b) => (
             <Link
               key={b.id}
               href={hrefFor(date, b.id)}
+              className={b.id === barberId ? undefined : "chip"}
               style={{
                 padding: "7px 14px",
-                borderRadius: 999,
+                borderRadius: "var(--radius-full)",
                 fontSize: 13,
                 fontWeight: 600,
                 textDecoration: "none",
@@ -95,24 +99,40 @@ export default async function PickSlotPage({
 
       <div style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 4 }}>
         {days.map((d) => {
-          const label = format(new Date(`${d}T12:00:00Z`), "EEE d");
+          const selected = d === date;
+          const dayDate = new Date(`${d}T12:00:00Z`);
           return (
             <Link
               key={d}
               href={hrefFor(d, barberId)}
+              className={selected ? undefined : "chip"}
               style={{
-                padding: "8px 12px",
-                borderRadius: 8,
-                fontSize: 13,
-                fontWeight: 600,
+                display: "grid",
+                justifyItems: "center",
+                gap: 2,
+                padding: "8px 14px",
+                borderRadius: "var(--radius)",
                 textDecoration: "none",
                 whiteSpace: "nowrap",
-                color: d === date ? "var(--accent-ink)" : "var(--text)",
-                background: d === date ? "var(--accent)" : "var(--panel)",
-                border: "1px solid var(--border)",
+                color: selected ? "var(--accent-ink)" : "var(--text)",
+                background: selected ? "var(--accent)" : "var(--panel)",
+                border: `1px solid ${selected ? "var(--accent)" : "var(--border)"}`,
               }}
             >
-              {label}
+              <span
+                style={{
+                  fontSize: 10,
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                  opacity: 0.75,
+                }}
+              >
+                {format(dayDate, "EEE")}
+              </span>
+              <span className="display" style={{ fontSize: 17, fontWeight: 600, lineHeight: 1 }}>
+                {format(dayDate, "d")}
+              </span>
             </Link>
           );
         })}
@@ -128,7 +148,7 @@ export default async function PickSlotPage({
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(90px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(76px, 1fr))",
               gap: 8,
             }}
           >
@@ -138,10 +158,11 @@ export default async function PickSlotPage({
                 <Link
                   key={s.startUtc.toISOString()}
                   href={`/book/${serviceId}/confirm?barber=${barberId}&start=${encodeURIComponent(s.startUtc.toISOString())}`}
+                  className="chip"
                   style={{
                     textAlign: "center",
                     padding: "9px 4px",
-                    borderRadius: 8,
+                    borderRadius: "var(--radius-sm)",
                     border: "1px solid var(--border)",
                     background: "var(--panel-2)",
                     color: "var(--text)",

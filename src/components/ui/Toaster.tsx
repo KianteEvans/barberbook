@@ -51,6 +51,7 @@ export function Toaster(): ReactNode {
           key={t.id}
           role="status"
           onClick={() => dismiss(t.id)}
+          className="toast-in"
           style={{
             display: "flex",
             alignItems: "center",

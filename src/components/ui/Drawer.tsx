@@ -34,9 +34,11 @@ export function Drawer({
     >
       <div
         onClick={onClose}
+        className="drawer-overlay"
         style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)" }}
       />
       <div
+        className="drawer-panel"
         style={{
           position: "absolute",
           top: 0,
@@ -47,7 +49,7 @@ export function Drawer({
           borderLeft: "1px solid var(--border)",
           padding: 24,
           overflowY: "auto",
-          boxShadow: "var(--shadow)",
+          boxShadow: "var(--shadow-lg)",
         }}
       >
         <header
@@ -62,10 +64,11 @@ export function Drawer({
           <button
             onClick={onClose}
             aria-label="Close"
+            className="btn btn-secondary"
             style={{
               background: "transparent",
               border: "1px solid var(--border)",
-              borderRadius: 8,
+              borderRadius: "var(--radius-sm)",
               color: "var(--muted)",
               width: 30,
               height: 30,
