@@ -9,6 +9,9 @@ export const BACKDROPS = [
   "neon",
   "grid",
   "halftone",
+  "boogie",
+  "fresh",
+  "pinstripe",
 ] as const;
 
 export type Backdrop = (typeof BACKDROPS)[number];
@@ -19,6 +22,9 @@ export const BACKDROP_LABELS: Record<Backdrop, string> = {
   neon: "Night shift - neon glow",
   grid: "City blocks - street grid",
   halftone: "Print shop - halftone poster",
+  boogie: "Boogie Down - vinyl and block party",
+  fresh: "Tailored Fresh - tweed and gold rope",
+  pinstripe: "The Stadium - pinstripes and stitches",
 };
 
 export function isBackdrop(value: string | undefined | null): value is Backdrop {

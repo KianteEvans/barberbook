@@ -381,6 +381,120 @@ tr:last-child td {
     var(--bg);
 }
 
+/* 6. Boogie Down (The Bronx x hip-hop): vinyl grooves bleeding in from two
+   corners, a block-party EQ along the bottom, spray-can glow accents. */
+.backdrop-boogie {
+  background:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='120'><g fill='%23d9a13b' fill-opacity='0.34'><rect x='10' y='70' width='18' height='50'/><rect x='90' y='30' width='18' height='90'/><rect x='170' y='10' width='18' height='110'/><rect x='250' y='40' width='18' height='80'/><rect x='330' y='95' width='18' height='25'/><rect x='410' y='25' width='18' height='95'/><rect x='490' y='60' width='18' height='60'/><rect x='570' y='85' width='18' height='35'/><rect x='650' y='15' width='18' height='105'/><rect x='730' y='45' width='18' height='75'/><rect x='810' y='90' width='18' height='30'/><rect x='890' y='35' width='18' height='85'/><rect x='970' y='65' width='18' height='55'/><rect x='1050' y='20' width='18' height='100'/><rect x='1130' y='50' width='18' height='70'/></g><g fill='%23f3e9d2' fill-opacity='0.2'><rect x='50' y='55' width='18' height='65'/><rect x='130' y='80' width='18' height='40'/><rect x='210' y='20' width='18' height='100'/><rect x='290' y='65' width='18' height='55'/><rect x='370' y='100' width='18' height='20'/><rect x='450' y='35' width='18' height='85'/><rect x='530' y='70' width='18' height='50'/><rect x='610' y='5' width='18' height='115'/><rect x='690' y='80' width='18' height='40'/><rect x='770' y='50' width='18' height='70'/><rect x='850' y='30' width='18' height='90'/><rect x='930' y='90' width='18' height='30'/><rect x='1010' y='60' width='18' height='60'/><rect x='1090' y='75' width='18' height='45'/><rect x='1170' y='45' width='18' height='75'/></g></svg>")
+      bottom center / auto 120px repeat-x fixed,
+    repeating-radial-gradient(
+        circle,
+        transparent 0 30px,
+        color-mix(in srgb, var(--cream) 7%, transparent) 30px 33px
+      )
+      -430px -430px / 900px 900px no-repeat fixed,
+    repeating-radial-gradient(
+        circle,
+        transparent 0 24px,
+        color-mix(in srgb, var(--cream) 6%, transparent) 24px 27px
+      )
+      right -360px top 20% / 760px 760px no-repeat fixed,
+    radial-gradient(
+        ellipse 40% 32% at 22% 72%,
+        rgba(255, 45, 150, 0.09),
+        transparent 70%
+      )
+      fixed,
+    radial-gradient(
+        ellipse 36% 30% at 74% 14%,
+        rgba(0, 190, 255, 0.08),
+        transparent 70%
+      )
+      fixed,
+    var(--bg);
+}
+[data-theme="light"] .backdrop-boogie {
+  background:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='120'><g fill='%237a5407' fill-opacity='0.3'><rect x='10' y='70' width='18' height='50'/><rect x='90' y='30' width='18' height='90'/><rect x='170' y='10' width='18' height='110'/><rect x='250' y='40' width='18' height='80'/><rect x='330' y='95' width='18' height='25'/><rect x='410' y='25' width='18' height='95'/><rect x='490' y='60' width='18' height='60'/><rect x='570' y='85' width='18' height='35'/><rect x='650' y='15' width='18' height='105'/><rect x='730' y='45' width='18' height='75'/><rect x='810' y='90' width='18' height='30'/><rect x='890' y='35' width='18' height='85'/><rect x='970' y='65' width='18' height='55'/><rect x='1050' y='20' width='18' height='100'/><rect x='1130' y='50' width='18' height='70'/></g><g fill='%236e6350' fill-opacity='0.28'><rect x='50' y='55' width='18' height='65'/><rect x='130' y='80' width='18' height='40'/><rect x='210' y='20' width='18' height='100'/><rect x='290' y='65' width='18' height='55'/><rect x='370' y='100' width='18' height='20'/><rect x='450' y='35' width='18' height='85'/><rect x='530' y='70' width='18' height='50'/><rect x='610' y='5' width='18' height='115'/><rect x='690' y='80' width='18' height='40'/><rect x='770' y='50' width='18' height='70'/><rect x='850' y='30' width='18' height='90'/><rect x='930' y='90' width='18' height='30'/><rect x='1010' y='60' width='18' height='60'/><rect x='1090' y='75' width='18' height='45'/><rect x='1170' y='45' width='18' height='75'/></g></svg>")
+      bottom center / auto 120px repeat-x fixed,
+    repeating-radial-gradient(
+        circle,
+        transparent 0 30px,
+        color-mix(in srgb, var(--cream) 14%, transparent) 30px 33px
+      )
+      -430px -430px / 900px 900px no-repeat fixed,
+    repeating-radial-gradient(
+        circle,
+        transparent 0 24px,
+        color-mix(in srgb, var(--cream) 12%, transparent) 24px 27px
+      )
+      right -360px top 20% / 760px 760px no-repeat fixed,
+    radial-gradient(
+        ellipse 40% 32% at 22% 72%,
+        rgba(219, 39, 119, 0.06),
+        transparent 70%
+      )
+      fixed,
+    radial-gradient(
+        ellipse 36% 30% at 74% 14%,
+        rgba(2, 132, 199, 0.05),
+        transparent 70%
+      )
+      fixed,
+    var(--bg);
+}
+
+/* 7. Tailored Fresh (The Bronx x fashion): tweed cross-hatch field with a
+   gold rope chain draped along the top and a soft brass sheen. */
+.backdrop-fresh {
+  background:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='150'><g fill='none'><path d='M0,18 Q600,150 1200,18' stroke='%23d9a13b' stroke-width='11' stroke-dasharray='15 9' stroke-opacity='0.5'/><path d='M0,18 Q600,150 1200,18' stroke='%23f3e9d2' stroke-width='11' stroke-dasharray='9 15' stroke-dashoffset='12' stroke-opacity='0.3'/><path d='M0,4 Q600,96 1200,4' stroke='%23d9a13b' stroke-width='6' stroke-dasharray='9 6' stroke-opacity='0.34'/></g></svg>")
+      top center / 1200px 150px repeat-x fixed,
+    radial-gradient(
+        ellipse 46% 38% at 78% 82%,
+        color-mix(in srgb, var(--accent) 10%, transparent),
+        transparent 72%
+      )
+      fixed,
+    repeating-linear-gradient(
+        45deg,
+        color-mix(in srgb, var(--text) 4%, transparent) 0 1px,
+        transparent 1px 9px
+      ),
+    repeating-linear-gradient(
+        -45deg,
+        color-mix(in srgb, var(--text) 4%, transparent) 0 1px,
+        transparent 1px 9px
+      ),
+    var(--bg);
+}
+
+/* 8. The Stadium (The Bronx x sports): fine pinstripes under stadium-light
+   beams, with red baseball-seam stitching low right. */
+.backdrop-pinstripe {
+  background:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='560' height='560'><g fill='none' stroke='%23b5432f'><path d='M40,560 Q300,300 560,240' stroke-width='3' stroke-opacity='0.35'/><path d='M20,520 Q280,270 560,200' stroke-width='9' stroke-dasharray='3 17' stroke-opacity='0.45'/><path d='M62,560 Q322,332 560,282' stroke-width='9' stroke-dasharray='3 17' stroke-dashoffset='10' stroke-opacity='0.45'/></g></svg>")
+      right -70px bottom -50px / 560px 560px no-repeat fixed,
+    linear-gradient(
+        160deg,
+        color-mix(in srgb, var(--cream) 9%, transparent),
+        transparent 32%
+      )
+      fixed,
+    linear-gradient(
+        200deg,
+        color-mix(in srgb, var(--cream) 7%, transparent),
+        transparent 28%
+      )
+      fixed,
+    repeating-linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--text) 8%, transparent) 0 1px,
+        transparent 1px 9px
+      ),
+    var(--bg);
+}
+
 /* Landing hero fallback when no photo is uploaded: layered brand glow. */
 .hero-backdrop {
   background:
