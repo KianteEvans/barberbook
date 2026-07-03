@@ -469,12 +469,16 @@ tr:last-child td {
     var(--bg);
 }
 
-/* 8. The Stadium (The Bronx x sports): fine pinstripes under stadium-light
-   beams, with red baseball-seam stitching low right. */
+/* 8. The Stadium (NYC sports cathedral row): stylized silhouettes of the
+   Garden's drum, Barclays' oculus swoop, Yankee Stadium's frieze, and Citi
+   Field's rotunda along the bottom, under pinstripes, light beams, and red
+   baseball-seam stitching. Architectural forms only - no marks or logos. */
 .backdrop-pinstripe {
   background:
-    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='560' height='560'><g fill='none' stroke='%23b5432f'><path d='M40,560 Q300,300 560,240' stroke-width='3' stroke-opacity='0.35'/><path d='M20,520 Q280,270 560,200' stroke-width='9' stroke-dasharray='3 17' stroke-opacity='0.45'/><path d='M62,560 Q322,332 560,282' stroke-width='9' stroke-dasharray='3 17' stroke-dashoffset='10' stroke-opacity='0.45'/></g></svg>")
-      right -70px bottom -50px / 560px 560px no-repeat fixed,
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='560' height='560'><g fill='none' stroke='%23b5432f'><path d='M40,560 Q300,300 560,240' stroke-width='3' stroke-opacity='0.3'/><path d='M20,520 Q280,270 560,200' stroke-width='9' stroke-dasharray='3 17' stroke-opacity='0.4'/><path d='M62,560 Q322,332 560,282' stroke-width='9' stroke-dasharray='3 17' stroke-dashoffset='10' stroke-opacity='0.4'/></g></svg>")
+      right -70px top 90px / 560px 560px no-repeat fixed,
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='220'><g fill='%23151a20'><rect x='20' y='120' width='320' height='100' rx='28'/><path d='M380,220 C430,138 540,118 690,146 L720,220 Z'/><rect x='760' y='110' width='390' height='110'/><rect x='800' y='70' width='7' height='42'/><rect x='1096' y='70' width='7' height='42'/><rect x='788' y='64' width='31' height='7'/><rect x='1084' y='64' width='31' height='7'/><rect x='1190' y='125' width='330' height='95'/><rect x='1220' y='105' width='270' height='22'/></g><g fill='%230a0c10'><rect x='56' y='132' width='4' height='88'/><rect x='92' y='132' width='4' height='88'/><rect x='128' y='132' width='4' height='88'/><rect x='164' y='132' width='4' height='88'/><rect x='200' y='132' width='4' height='88'/><rect x='236' y='132' width='4' height='88'/><rect x='272' y='132' width='4' height='88'/><rect x='308' y='132' width='4' height='88'/><ellipse cx='545' cy='188' rx='88' ry='24'/><rect x='760' y='110' width='390' height='24'/><rect x='1240' y='142' width='58' height='78' rx='24'/><rect x='1330' y='142' width='58' height='78' rx='24'/><rect x='1420' y='142' width='58' height='78' rx='24'/></g><g fill='%23151a20'><circle cx='781' cy='134' r='12'/><circle cx='811' cy='134' r='12'/><circle cx='841' cy='134' r='12'/><circle cx='871' cy='134' r='12'/><circle cx='901' cy='134' r='12'/><circle cx='931' cy='134' r='12'/><circle cx='961' cy='134' r='12'/><circle cx='991' cy='134' r='12'/><circle cx='1021' cy='134' r='12'/><circle cx='1051' cy='134' r='12'/><circle cx='1081' cy='134' r='12'/><circle cx='1111' cy='134' r='12'/><circle cx='1141' cy='134' r='12'/></g></svg>")
+      bottom center / auto 220px repeat-x fixed,
     linear-gradient(
         160deg,
         color-mix(in srgb, var(--cream) 9%, transparent),
@@ -490,6 +494,31 @@ tr:last-child td {
     repeating-linear-gradient(
         90deg,
         color-mix(in srgb, var(--text) 8%, transparent) 0 1px,
+        transparent 1px 9px
+      ),
+    var(--bg);
+}
+[data-theme="light"] .backdrop-pinstripe {
+  background:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='560' height='560'><g fill='none' stroke='%23b5432f'><path d='M40,560 Q300,300 560,240' stroke-width='3' stroke-opacity='0.3'/><path d='M20,520 Q280,270 560,200' stroke-width='9' stroke-dasharray='3 17' stroke-opacity='0.4'/><path d='M62,560 Q322,332 560,282' stroke-width='9' stroke-dasharray='3 17' stroke-dashoffset='10' stroke-opacity='0.4'/></g></svg>")
+      right -70px top 90px / 560px 560px no-repeat fixed,
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='220'><g fill='%23cfc2a2'><rect x='20' y='120' width='320' height='100' rx='28'/><path d='M380,220 C430,138 540,118 690,146 L720,220 Z'/><rect x='760' y='110' width='390' height='110'/><rect x='800' y='70' width='7' height='42'/><rect x='1096' y='70' width='7' height='42'/><rect x='788' y='64' width='31' height='7'/><rect x='1084' y='64' width='31' height='7'/><rect x='1190' y='125' width='330' height='95'/><rect x='1220' y='105' width='270' height='22'/></g><g fill='%23b3a37e'><rect x='56' y='132' width='4' height='88'/><rect x='92' y='132' width='4' height='88'/><rect x='128' y='132' width='4' height='88'/><rect x='164' y='132' width='4' height='88'/><rect x='200' y='132' width='4' height='88'/><rect x='236' y='132' width='4' height='88'/><rect x='272' y='132' width='4' height='88'/><rect x='308' y='132' width='4' height='88'/><ellipse cx='545' cy='188' rx='88' ry='24'/><rect x='760' y='110' width='390' height='24'/><rect x='1240' y='142' width='58' height='78' rx='24'/><rect x='1330' y='142' width='58' height='78' rx='24'/><rect x='1420' y='142' width='58' height='78' rx='24'/></g><g fill='%23cfc2a2'><circle cx='781' cy='134' r='12'/><circle cx='811' cy='134' r='12'/><circle cx='841' cy='134' r='12'/><circle cx='871' cy='134' r='12'/><circle cx='901' cy='134' r='12'/><circle cx='931' cy='134' r='12'/><circle cx='961' cy='134' r='12'/><circle cx='991' cy='134' r='12'/><circle cx='1021' cy='134' r='12'/><circle cx='1051' cy='134' r='12'/><circle cx='1081' cy='134' r='12'/><circle cx='1111' cy='134' r='12'/><circle cx='1141' cy='134' r='12'/></g></svg>")
+      bottom center / auto 220px repeat-x fixed,
+    linear-gradient(
+        160deg,
+        color-mix(in srgb, var(--cream) 14%, transparent),
+        transparent 32%
+      )
+      fixed,
+    linear-gradient(
+        200deg,
+        color-mix(in srgb, var(--cream) 11%, transparent),
+        transparent 28%
+      )
+      fixed,
+    repeating-linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--text) 9%, transparent) 0 1px,
         transparent 1px 9px
       ),
     var(--bg);
