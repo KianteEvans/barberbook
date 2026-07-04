@@ -28,6 +28,7 @@ export interface AppointmentCardData {
   readonly tier: string | null;
   readonly graceUntilLabel: string | null;
   readonly confirmState: string | null;
+  readonly waitCount: number;
 }
 
 const statusTone: Record<string, BadgeTone> = {
@@ -77,6 +78,11 @@ export function AppointmentCard({ appt }: { appt: AppointmentCardData }): ReactN
         <span style={{ fontWeight: 700, fontSize: 12 }}>{appt.timeLabel}</span>
         <span style={{ fontSize: 12 }}>{appt.clientName}</span>
         <span style={{ fontSize: 11, color: "var(--muted)" }}>{appt.serviceName}</span>
+        {appt.waitCount > 0 && (
+          <span style={{ fontSize: 10, fontWeight: 700, color: "var(--accent)" }}>
+            {appt.waitCount} in line
+          </span>
+        )}
       </button>
 
       <Drawer open={open} onClose={() => setOpen(false)} title="Appointment">

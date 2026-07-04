@@ -280,3 +280,17 @@ export const reminderLog = pgTable("reminder_log", {
   recipientKind: text("recipient_kind", { enum: ["client", "barber"] }).notNull(),
   sentAt: timestamp("sent_at", { withTimezone: true }).notNull().defaultNow(),
 });
+
+export const waitlistEntries = pgTable("waitlist_entries", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  clientId: uuid("client_id").notNull().references(() => users.id),
+  barberId: uuid("barber_id").notNull().references(() => barbers.id),
+  serviceId: uuid("service_id").notNull().references(() => services.id),
+  desiredStartAt: timestamp("desired_start_at", { withTimezone: true }).notNull(),
+  status: text("status", {
+    enum: ["waiting", "promoted", "expired", "canceled"],
+  })
+    .notNull()
+    .default("waiting"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});

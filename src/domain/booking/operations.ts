@@ -125,6 +125,9 @@ export interface CancelOutcome {
   readonly stripePaymentIntentId: string | null;
   /** Membership credit to return, when the visit was credit-covered. */
   readonly creditId: string | null;
+  /** The freed slot, so the caller can promote a waitlisted client into it. */
+  readonly barberId: string;
+  readonly startAt: Date;
 }
 
 /**
@@ -176,5 +179,7 @@ export async function cancelAppointmentOp({
     depositCents: appt.depositCents,
     stripePaymentIntentId: appt.stripePaymentIntentId,
     creditId: appt.creditId,
+    barberId: appt.barberId,
+    startAt: appt.startAt,
   };
 }

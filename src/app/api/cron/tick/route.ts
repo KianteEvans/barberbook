@@ -8,6 +8,7 @@ import { authorizeCron } from "@/domain/cron";
 import { loadSettings } from "@/domain/booking/load";
 import { createNotification } from "@/domain/notifications/operations";
 import { dueOffsets, REMINDER_OFFSETS } from "@/domain/notifications/reminders";
+import { expireStaleWaitlist, promoteForSlot } from "@/domain/waitlist/operations";
 
 /**
  * The single time-driven worker. Runs the reminder pass (P1); later phases add
@@ -23,13 +24,14 @@ export async function POST(req: Request): Promise<NextResponse> {
   const now = new Date();
   const reminders = await runReminderPass(now);
   const released = await runReleasePass(now);
+  const expired = await expireStaleWaitlist(now);
 
-  return NextResponse.json({ ok: true, reminders, released });
+  return NextResponse.json({ ok: true, reminders, released, expired });
 }
 
 /**
- * Release non-member holds that were never confirmed by their deadline. The
- * slot opens for walk-ins (and, in P3, waitlist promotion).
+ * Release non-member holds that were never confirmed by their deadline, then
+ * auto-book the next waiter into the freed slot (else it opens for walk-ins).
  */
 async function runReleasePass(now: Date): Promise<number> {
   const stale = await db
@@ -42,7 +44,12 @@ async function runReleasePass(now: Date): Promise<number> {
         lt(appointments.confirmationDeadline, now),
       ),
     )
-    .returning({ id: appointments.id, clientId: appointments.clientId });
+    .returning({
+      id: appointments.id,
+      clientId: appointments.clientId,
+      barberId: appointments.barberId,
+      startAt: appointments.startAt,
+    });
 
   for (const appt of stale) {
     await createNotification(
@@ -52,6 +59,7 @@ async function runReleasePass(now: Date): Promise<number> {
       "You did not confirm attendance in time, so your reserved slot has been released.",
       appt.id,
     );
+    await promoteForSlot(appt.barberId, appt.startAt, now);
   }
   return stale.length;
 }

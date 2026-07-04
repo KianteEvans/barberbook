@@ -10,8 +10,10 @@ import { PageShell } from "@/components/ui/PageShell";
 import { Card, Badge, EmptyState, ButtonLink, type BadgeTone } from "@/components/ui/primitives";
 import { loadSettings } from "@/domain/booking/load";
 import { formatMoney } from "@/domain/money";
+import { loadClientWaitlist } from "@/domain/waitlist/operations";
 import { CancelButton } from "./CancelButton";
 import { ConfirmAttendanceButton } from "./ConfirmAttendanceButton";
+import { LeaveWaitlistButton } from "./LeaveWaitlistButton";
 
 export const dynamic = "force-dynamic";
 
@@ -56,6 +58,7 @@ export default async function AccountPage(): Promise<ReactNode> {
     .orderBy(desc(appointments.startAt))
     .limit(50);
 
+  const waitlist = await loadClientWaitlist(identity.userId);
   const now = Date.now();
   const upcoming = mine.filter(
     (a) =>
@@ -133,6 +136,39 @@ export default async function AccountPage(): Promise<ReactNode> {
           </div>
         )}
       </Card>
+
+      {waitlist.length > 0 && (
+        <Card title="In line">
+          <div style={{ display: "grid", gap: 12 }}>
+            {waitlist.map((w) => (
+              <div
+                key={w.id}
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 12,
+                  border: "1px solid var(--border)",
+                  borderRadius: 10,
+                  padding: "12px 16px",
+                }}
+              >
+                <div style={{ display: "grid", gap: 2 }}>
+                  <span style={{ fontWeight: 700, fontSize: 14 }}>
+                    {w.serviceName} with {w.barberName}
+                  </span>
+                  <span style={{ color: "var(--muted)", fontSize: 13 }}>
+                    {format(toZonedTime(w.desiredStartAt, settings.timezone), "EEEE, MMM d - h:mm a")}
+                    {" - we'll book you automatically if it opens"}
+                  </span>
+                </div>
+                <LeaveWaitlistButton entryId={w.id} />
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
 
       {past.length > 0 && (
         <Card title="History">

@@ -13,6 +13,7 @@ import { paymentsEnabled } from "@/env";
 import { createBookingOp, cancelAppointmentOp } from "./operations";
 import { createSeriesOp, materializeAllSeries } from "@/domain/series/operations";
 import { consumeCreditOp, refundCreditOp } from "@/domain/memberships/operations";
+import { promoteForSlot } from "@/domain/waitlist/operations";
 import { createDepositCheckout } from "@/stripe/checkout";
 import { stripe } from "@/stripe/client";
 
@@ -140,6 +141,9 @@ export async function cancelBookingAction(
     } else if (outcome.depositCents > 0 && outcome.stripePaymentIntentId) {
       detail = "Appointment canceled. The deposit is not refundable this close to the appointment.";
     }
+
+    // The slot is now free - auto-book the highest-priority waiter, if any.
+    await promoteForSlot(outcome.barberId, outcome.startAt);
 
     revalidatePath("/account");
     revalidatePath("/admin");

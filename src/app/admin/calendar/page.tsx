@@ -4,8 +4,9 @@ import { and, asc, gte, lt } from "drizzle-orm";
 import { eq } from "drizzle-orm";
 import { addDays, format } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
+import { count } from "drizzle-orm";
 import { db } from "@/db/client";
-import { appointments, barbers, services, users } from "@/db/schema";
+import { appointments, barbers, services, users, waitlistEntries } from "@/db/schema";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, EmptyState } from "@/components/ui/primitives";
 import { dayRangeUtc, loadSettings, todayInShopTz } from "@/domain/booking/load";
@@ -35,6 +36,7 @@ export default async function AdminCalendarPage({
   const rows = await db
     .select({
       id: appointments.id,
+      barberId: appointments.barberId,
       startAt: appointments.startAt,
       status: appointments.status,
       depositCents: appointments.depositCents,
@@ -55,6 +57,21 @@ export default async function AdminCalendarPage({
     .innerJoin(barbers, eq(appointments.barberId, barbers.id))
     .where(and(gte(appointments.startAt, rangeStart), lt(appointments.startAt, rangeEnd)))
     .orderBy(asc(appointments.startAt));
+
+  // Waiting counts per (barber, slot), one grouped query -> lookup map.
+  const waitRows = await db
+    .select({
+      barberId: waitlistEntries.barberId,
+      desiredStartAt: waitlistEntries.desiredStartAt,
+      n: count(),
+    })
+    .from(waitlistEntries)
+    .where(eq(waitlistEntries.status, "waiting"))
+    .groupBy(waitlistEntries.barberId, waitlistEntries.desiredStartAt);
+  const waitBySlot = new Map<string, number>();
+  for (const w of waitRows) {
+    waitBySlot.set(`${w.barberId}|${w.desiredStartAt.toISOString()}`, w.n);
+  }
 
   const byDay = new Map<string, AppointmentCardData[]>();
   for (const day of days) byDay.set(day, []);
@@ -96,6 +113,7 @@ export default async function AdminCalendarPage({
           : r.attendanceConfirmedAt
             ? "confirmed"
             : null,
+      waitCount: waitBySlot.get(`${r.barberId}|${r.startAt.toISOString()}`) ?? 0,
     });
   }
 

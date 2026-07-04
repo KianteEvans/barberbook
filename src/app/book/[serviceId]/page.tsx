@@ -3,17 +3,19 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { addDays, format } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
-import { eq } from "drizzle-orm";
+import { and, eq, gte, inArray, lt } from "drizzle-orm";
 import { db } from "@/db/client";
-import { services } from "@/db/schema";
+import { appointments, services } from "@/db/schema";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, EmptyState } from "@/components/ui/primitives";
 import { StepIndicator } from "@/components/ui/StepIndicator";
 import {
+  dayRangeUtc,
   loadSettings,
   loadSlotsForDay,
   todayInShopTz,
 } from "@/domain/booking/load";
+import { JoinLineButton } from "./JoinLineButton";
 import { loadBarbersForService } from "@/domain/barbers/operations";
 import { effectivePricing } from "@/domain/barbers/pricing";
 import { formatMoney } from "@/domain/money";
@@ -55,6 +57,24 @@ export default async function PickSlotPage({
   const { depositCents } = computeDeposit(priced, settings);
 
   const slots = await loadSlotsForDay({ barberId, serviceId, date });
+
+  // Booked slots for this barber/day - offered as "join the line".
+  const { start: dayStart, end: dayEnd } = dayRangeUtc(date, settings.timezone);
+  const nowMs = Date.now();
+  const bookedSlots = (
+    await db
+      .select({ startAt: appointments.startAt })
+      .from(appointments)
+      .where(
+        and(
+          eq(appointments.barberId, barberId),
+          inArray(appointments.status, ["pending_deposit", "confirmed", "reserved"]),
+          gte(appointments.startAt, dayStart),
+          lt(appointments.startAt, dayEnd),
+        ),
+      )
+      .orderBy(appointments.startAt)
+  ).filter((b) => b.startAt.getTime() > nowMs);
 
   // Next 14 shop-local days for the date strip.
   const days: string[] = [];
@@ -178,6 +198,44 @@ export default async function PickSlotPage({
           </div>
         )}
       </Card>
+
+      {bookedSlots.length > 0 && (
+        <Card title="Fully booked - get in line">
+          <p style={{ margin: "0 0 12px", fontSize: 13, color: "var(--muted)" }}>
+            If a spot opens (a cancellation or an unconfirmed hold), we book the
+            next person in line automatically - members first.
+          </p>
+          <div style={{ display: "grid", gap: 8 }}>
+            {bookedSlots.map((b) => (
+              <div
+                key={b.startAt.toISOString()}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 10,
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius-sm)",
+                  padding: "8px 12px",
+                }}
+              >
+                <span style={{ fontSize: 13, fontWeight: 600 }}>
+                  {format(toZonedTime(b.startAt, settings.timezone), "h:mm a")}
+                  <span style={{ marginLeft: 8, color: "var(--muted)", fontWeight: 400 }}>
+                    full
+                  </span>
+                </span>
+                <JoinLineButton
+                  barberId={barberId}
+                  serviceId={serviceId}
+                  desiredStartAt={b.startAt.toISOString()}
+                  label="Join the line"
+                />
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
     </PageShell>
   );
 }
