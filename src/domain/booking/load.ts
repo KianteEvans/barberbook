@@ -25,6 +25,9 @@ export interface ShopSettingsRow {
   readonly noShowFeeCents: number;
   readonly slotGranularityMin: number;
   readonly bufferMin: number;
+  readonly memberGraceMinutes: number;
+  readonly depositGraceMinutes: number;
+  readonly confirmationWindowMinutes: number;
 }
 
 export async function loadSettings(): Promise<ShopSettingsRow> {

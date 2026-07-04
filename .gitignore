@@ -8,3 +8,5 @@ next-env.d.ts
 .dev.log
 .dev.err.log
 uploads/
+.ticker.log
+.ticker.err.log

@@ -11,15 +11,26 @@ import { Card, Badge, EmptyState, ButtonLink, type BadgeTone } from "@/component
 import { loadSettings } from "@/domain/booking/load";
 import { formatMoney } from "@/domain/money";
 import { CancelButton } from "./CancelButton";
+import { ConfirmAttendanceButton } from "./ConfirmAttendanceButton";
 
 export const dynamic = "force-dynamic";
 
 const statusTone: Record<string, BadgeTone> = {
   pending_deposit: "warn",
   confirmed: "info",
+  reserved: "warn",
   completed: "ok",
   canceled: "neutral",
   no_show: "danger",
+};
+
+const statusLabel: Record<string, string> = {
+  pending_deposit: "awaiting deposit",
+  confirmed: "confirmed",
+  reserved: "confirm needed",
+  completed: "completed",
+  canceled: "canceled",
+  no_show: "no show",
 };
 
 export default async function AccountPage(): Promise<ReactNode> {
@@ -34,6 +45,7 @@ export default async function AccountPage(): Promise<ReactNode> {
       status: appointments.status,
       depositCents: appointments.depositCents,
       remainderCents: appointments.remainderCents,
+      confirmationDeadline: appointments.confirmationDeadline,
       serviceName: services.name,
       barberName: barbers.displayName,
     })
@@ -48,7 +60,9 @@ export default async function AccountPage(): Promise<ReactNode> {
   const upcoming = mine.filter(
     (a) =>
       a.startAt.getTime() > now &&
-      (a.status === "confirmed" || a.status === "pending_deposit"),
+      (a.status === "confirmed" ||
+        a.status === "pending_deposit" ||
+        a.status === "reserved"),
   );
   const past = mine.filter((a) => !upcoming.includes(a));
 
@@ -93,11 +107,24 @@ export default async function AccountPage(): Promise<ReactNode> {
                       {a.remainderCents > 0 &&
                         ` - ${formatMoney(a.remainderCents)} due at the shop`}
                     </span>
+                    {a.status === "reserved" && a.confirmationDeadline && (
+                      <span style={{ color: "var(--warn)", fontSize: 12, fontWeight: 600 }}>
+                        Confirm by{" "}
+                        {format(
+                          toZonedTime(a.confirmationDeadline, settings.timezone),
+                          "h:mm a",
+                        )}{" "}
+                        or your slot is released.
+                      </span>
+                    )}
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <Badge tone={statusTone[a.status] ?? "neutral"}>
-                      {a.status.replace("_", " ")}
+                      {statusLabel[a.status] ?? a.status.replace("_", " ")}
                     </Badge>
+                    {a.status === "reserved" && (
+                      <ConfirmAttendanceButton appointmentId={a.id} />
+                    )}
                     <CancelButton appointmentId={a.id} />
                   </div>
                 </div>

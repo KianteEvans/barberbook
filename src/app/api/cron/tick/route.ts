@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { and, eq, gt, inArray, lte } from "drizzle-orm";
+import { and, eq, gt, inArray, isNull, lt, lte } from "drizzle-orm";
 import { format } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { db } from "@/db/client";
@@ -22,8 +22,38 @@ export async function POST(req: Request): Promise<NextResponse> {
 
   const now = new Date();
   const reminders = await runReminderPass(now);
+  const released = await runReleasePass(now);
 
-  return NextResponse.json({ ok: true, reminders });
+  return NextResponse.json({ ok: true, reminders, released });
+}
+
+/**
+ * Release non-member holds that were never confirmed by their deadline. The
+ * slot opens for walk-ins (and, in P3, waitlist promotion).
+ */
+async function runReleasePass(now: Date): Promise<number> {
+  const stale = await db
+    .update(appointments)
+    .set({ status: "canceled", canceledAt: now, cancelReason: "unconfirmed" })
+    .where(
+      and(
+        eq(appointments.status, "reserved"),
+        isNull(appointments.attendanceConfirmedAt),
+        lt(appointments.confirmationDeadline, now),
+      ),
+    )
+    .returning({ id: appointments.id, clientId: appointments.clientId });
+
+  for (const appt of stale) {
+    await createNotification(
+      appt.clientId,
+      "released",
+      "Reservation released",
+      "You did not confirm attendance in time, so your reserved slot has been released.",
+      appt.id,
+    );
+  }
+  return stale.length;
 }
 
 const MAX_OFFSET = Math.max(...REMINDER_OFFSETS);
@@ -46,8 +76,7 @@ async function runReminderPass(now: Date): Promise<number> {
     .innerJoin(barbers, eq(appointments.barberId, barbers.id))
     .where(
       and(
-        // P2 adds "reserved" to the live set once the status enum includes it.
-        inArray(appointments.status, ["pending_deposit", "confirmed"]),
+        inArray(appointments.status, ["pending_deposit", "confirmed", "reserved"]),
         gt(appointments.startAt, now),
         lte(appointments.startAt, horizon),
       ),

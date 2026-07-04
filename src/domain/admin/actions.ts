@@ -181,6 +181,9 @@ const policySchema = z.object({
   depositValue: z.coerce.number().int().min(0),
   noShowFeeCents: z.coerce.number().int().min(0),
   backdrop: z.enum(BACKDROPS),
+  memberGraceMinutes: z.coerce.number().int().min(0).max(120),
+  depositGraceMinutes: z.coerce.number().int().min(0).max(120),
+  confirmationWindowMinutes: z.coerce.number().int().min(0).max(240),
 });
 
 export async function savePolicyAction(

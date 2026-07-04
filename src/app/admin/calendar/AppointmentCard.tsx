@@ -25,14 +25,24 @@ export interface AppointmentCardData {
   readonly remainderLabel: string;
   readonly remainderCents: number;
   readonly hasPaymentIntent: boolean;
+  readonly tier: string | null;
+  readonly graceUntilLabel: string | null;
+  readonly confirmState: string | null;
 }
 
 const statusTone: Record<string, BadgeTone> = {
   pending_deposit: "warn",
   confirmed: "info",
+  reserved: "warn",
   completed: "ok",
   canceled: "neutral",
   no_show: "danger",
+};
+
+const tierLabel: Record<string, string> = {
+  member: "Member - guaranteed",
+  deposit: "Deposit - in the chair",
+  unconfirmed: "No deposit - must confirm",
 };
 
 export function AppointmentCard({ appt }: { appt: AppointmentCardData }): ReactNode {
@@ -93,6 +103,15 @@ export function AppointmentCard({ appt }: { appt: AppointmentCardData }): ReactN
             />
             <Stat label="Deposit" value={appt.depositLabel} />
             <Stat label="Remainder" value={appt.remainderLabel} />
+            {appt.tier && (
+              <Stat label="Lock tier" value={tierLabel[appt.tier] ?? appt.tier} />
+            )}
+            {appt.graceUntilLabel && (
+              <Stat label="Grace until" value={appt.graceUntilLabel} />
+            )}
+            {appt.confirmState && (
+              <Stat label="Attendance" value={appt.confirmState} />
+            )}
           </div>
 
           <div style={{ display: "grid", gap: 10, borderTop: "1px solid var(--border)", paddingTop: 16 }}>

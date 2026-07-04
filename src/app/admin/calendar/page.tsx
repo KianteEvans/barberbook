@@ -40,6 +40,10 @@ export default async function AdminCalendarPage({
       depositCents: appointments.depositCents,
       remainderCents: appointments.remainderCents,
       stripePaymentIntentId: appointments.stripePaymentIntentId,
+      holdTier: appointments.holdTier,
+      graceMinutes: appointments.graceMinutes,
+      confirmationDeadline: appointments.confirmationDeadline,
+      attendanceConfirmedAt: appointments.attendanceConfirmedAt,
       clientName: users.name,
       clientPhone: users.phone,
       serviceName: services.name,
@@ -57,6 +61,8 @@ export default async function AdminCalendarPage({
   for (const r of rows) {
     const local = toZonedTime(r.startAt, settings.timezone);
     const day = format(local, "yyyy-MM-dd");
+    const grace = r.graceMinutes ?? 0;
+    const isLive = r.status === "confirmed" || r.status === "reserved";
     byDay.get(day)?.push({
       id: r.id,
       timeLabel: format(local, "h:mm a"),
@@ -69,6 +75,27 @@ export default async function AdminCalendarPage({
       remainderLabel: formatMoney(r.remainderCents),
       remainderCents: r.remainderCents,
       hasPaymentIntent: r.stripePaymentIntentId !== null,
+      tier: r.holdTier,
+      graceUntilLabel:
+        isLive && r.graceMinutes !== null
+          ? format(
+              toZonedTime(
+                new Date(r.startAt.getTime() + grace * 60_000),
+                settings.timezone,
+              ),
+              "h:mm a",
+            )
+          : null,
+      confirmState:
+        r.status === "reserved"
+          ? r.attendanceConfirmedAt
+            ? "confirmed"
+            : r.confirmationDeadline
+              ? `confirm by ${format(toZonedTime(r.confirmationDeadline, settings.timezone), "h:mm a")}`
+              : "unconfirmed"
+          : r.attendanceConfirmedAt
+            ? "confirmed"
+            : null,
     });
   }
 

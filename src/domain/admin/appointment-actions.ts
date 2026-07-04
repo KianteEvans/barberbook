@@ -9,7 +9,9 @@ import { appointments, payments, users } from "@/db/schema";
 import { getAdminIdentity } from "@/auth/session";
 import { parseOrThrow, formObject, type ActionState } from "@/domain/forms";
 import { toActionError, NotFoundError, ValidationError, AppError } from "@/domain/errors";
+import { formatInTimeZone } from "date-fns-tz";
 import { loadSettings } from "@/domain/booking/load";
+import { noShowAllowed } from "@/domain/booking/grace";
 import { paymentsEnabled } from "@/env";
 import { stripe } from "@/stripe/client";
 import { formatMoney } from "@/domain/money";
@@ -67,8 +69,21 @@ export async function markNoShowAction(
     await getAdminIdentity();
     const input = parseOrThrow(idSchema, formObject(formData));
     const appt = await requireAppointment(input.appointmentId);
-    if (appt.status !== "confirmed") {
-      throw new ValidationError("Only a confirmed appointment can be a no-show.");
+    if (appt.status !== "confirmed" && appt.status !== "reserved") {
+      throw new ValidationError("Only a live appointment can be a no-show.");
+    }
+    const settings = await loadSettings();
+    // Grace period must elapse before a no-show may be recorded.
+    const grace = appt.graceMinutes ?? 0;
+    if (!noShowAllowed(appt.startAt, grace, new Date())) {
+      const until = formatInTimeZone(
+        new Date(appt.startAt.getTime() + grace * 60_000),
+        settings.timezone,
+        "h:mm a",
+      );
+      throw new ValidationError(
+        `Grace period runs until ${until}. You can mark a no-show after that.`,
+      );
     }
 
     await db
@@ -76,7 +91,6 @@ export async function markNoShowAction(
       .set({ status: "no_show" })
       .where(eq(appointments.id, appt.id));
 
-    const settings = await loadSettings();
     let detail = "Marked no-show. Deposit kept.";
     if (paymentsEnabled && settings.noShowFeeCents > 0) {
       const charge = await chargeSavedCard({

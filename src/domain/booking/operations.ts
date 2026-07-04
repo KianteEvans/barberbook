@@ -6,6 +6,12 @@ import { resolveBarberService } from "@/domain/barbers/operations";
 import { loadSettings } from "./load";
 import { ConflictError, NotFoundError, ValidationError } from "@/domain/errors";
 import { paymentsEnabled } from "@/env";
+import {
+  chooseTier,
+  graceForTier,
+  statusForTier,
+  type HoldTier,
+} from "./grace";
 
 /**
  * Booking mutations. The gist exclusion constraint is the double-booking
@@ -26,7 +32,8 @@ export interface CreateBookingInput {
 
 export interface CreatedBooking {
   readonly id: string;
-  readonly status: "pending_deposit" | "confirmed";
+  readonly status: "pending_deposit" | "confirmed" | "reserved";
+  readonly tier: HoldTier;
   readonly depositCents: number;
   readonly remainderCents: number;
   readonly startAt: Date;
@@ -56,6 +63,20 @@ export async function createBookingOp(
   const endAt = new Date(input.startAt.getTime() + service.durationMin * 60_000);
   const online = !covered && paymentsEnabled && depositCents > 0;
 
+  // Lock tier drives the initial status, grace, and confirmation deadline:
+  //   member  -> confirmed, 15-min grace, no confirmation needed
+  //   deposit -> pending_deposit (Stripe), 10-min grace, "in the chair"
+  //   unconfirmed -> reserved, must confirm by start - confirmation_window
+  const tier = chooseTier(covered, online);
+  const status = statusForTier(tier);
+  const graceMinutes = graceForTier(tier, settings);
+  const confirmationDeadline =
+    tier === "unconfirmed"
+      ? new Date(
+          input.startAt.getTime() - settings.confirmationWindowMinutes * 60_000,
+        )
+      : null;
+
   try {
     const [row] = await db
       .insert(appointments)
@@ -65,19 +86,24 @@ export async function createBookingOp(
         serviceId: input.serviceId,
         startAt: input.startAt,
         endAt,
-        status: online ? "pending_deposit" : "confirmed",
-        holdExpiresAt: online
-          ? new Date(Date.now() + HOLD_MINUTES * 60_000)
-          : null,
+        status,
+        holdExpiresAt:
+          status === "pending_deposit"
+            ? new Date(Date.now() + HOLD_MINUTES * 60_000)
+            : null,
         depositCents,
         remainderCents,
         creditId: input.creditId ?? null,
+        holdTier: tier,
+        graceMinutes,
+        confirmationDeadline,
       })
       .returning();
     if (!row) throw new Error("insert failed");
     return {
       id: row.id,
-      status: online ? "pending_deposit" : "confirmed",
+      status,
+      tier,
       depositCents,
       remainderCents,
       startAt: row.startAt,
@@ -121,13 +147,21 @@ export async function cancelAppointmentOp({
     : eq(appointments.id, appointmentId);
   const [appt] = await db.select().from(appointments).where(where);
   if (!appt) throw new NotFoundError("Appointment not found.");
-  if (appt.status !== "confirmed" && appt.status !== "pending_deposit") {
+  if (
+    appt.status !== "confirmed" &&
+    appt.status !== "pending_deposit" &&
+    appt.status !== "reserved"
+  ) {
     throw new ValidationError("This appointment can no longer be canceled.");
   }
 
   await db
     .update(appointments)
-    .set({ status: "canceled", canceledAt: now })
+    .set({
+      status: "canceled",
+      canceledAt: now,
+      cancelReason: clientId ? "client" : "admin",
+    })
     .where(eq(appointments.id, appt.id));
 
   const refundDue =

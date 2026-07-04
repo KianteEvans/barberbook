@@ -40,6 +40,11 @@ export const shopSettings = pgTable("shop_settings", {
   bufferMin: integer("buffer_min").notNull().default(0),
   heroFile: text("hero_file"),
   backdrop: text("backdrop").notNull().default("skyline"),
+  memberGraceMinutes: integer("member_grace_minutes").notNull().default(15),
+  depositGraceMinutes: integer("deposit_grace_minutes").notNull().default(10),
+  confirmationWindowMinutes: integer("confirmation_window_minutes")
+    .notNull()
+    .default(15),
 });
 
 export const services = pgTable("services", {
@@ -169,7 +174,14 @@ export const appointments = pgTable("appointments", {
   startAt: timestamp("start_at", { withTimezone: true }).notNull(),
   endAt: timestamp("end_at", { withTimezone: true }).notNull(),
   status: text("status", {
-    enum: ["pending_deposit", "confirmed", "completed", "canceled", "no_show"],
+    enum: [
+      "pending_deposit",
+      "confirmed",
+      "reserved",
+      "completed",
+      "canceled",
+      "no_show",
+    ],
   })
     .notNull()
     .default("pending_deposit"),
@@ -179,6 +191,15 @@ export const appointments = pgTable("appointments", {
   stripeCheckoutSessionId: text("stripe_checkout_session_id"),
   stripePaymentIntentId: text("stripe_payment_intent_id"),
   creditId: uuid("credit_id").references(() => membershipCredits.id),
+  holdTier: text("hold_tier", {
+    enum: ["member", "deposit", "unconfirmed"],
+  }),
+  graceMinutes: integer("grace_minutes"),
+  attendanceConfirmedAt: timestamp("attendance_confirmed_at", { withTimezone: true }),
+  confirmationDeadline: timestamp("confirmation_deadline", { withTimezone: true }),
+  cancelReason: text("cancel_reason", {
+    enum: ["client", "admin", "unconfirmed", "promoted_out"],
+  }),
   canceledAt: timestamp("canceled_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });

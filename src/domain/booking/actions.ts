@@ -2,13 +2,13 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { db } from "@/db/client";
-import { payments, services } from "@/db/schema";
+import { appointments, payments, services } from "@/db/schema";
 import { getIdentity } from "@/auth/session";
 import { parseOrThrow, formObject, type ActionState } from "@/domain/forms";
-import { toActionError, NotFoundError } from "@/domain/errors";
+import { toActionError, NotFoundError, ValidationError } from "@/domain/errors";
 import { paymentsEnabled } from "@/env";
 import { createBookingOp, cancelAppointmentOp } from "./operations";
 import { createSeriesOp, materializeAllSeries } from "@/domain/series/operations";
@@ -69,9 +69,10 @@ export async function createBookingAction(
         cadenceWeeks: input.cadenceWeeks,
         anchorStartUtc: new Date(input.startAt),
       });
-      // Pay-at-shop mode books the whole horizon immediately. With Stripe the
-      // deposit checkout saves the card first; the webhook then materializes.
-      if (booking.status === "confirmed") {
+      // Any non-Stripe booking (confirmed member or reserved non-member)
+      // books the horizon immediately. The Stripe deposit path materializes
+      // from the webhook after the card is saved.
+      if (booking.status !== "pending_deposit") {
         await materializeAllSeries();
       }
     }
@@ -143,6 +144,48 @@ export async function cancelBookingAction(
     revalidatePath("/account");
     revalidatePath("/admin");
     return { ok: true, detail };
+  } catch (err) {
+    return { ok: false, error: toActionError(err) };
+  }
+}
+
+const confirmSchema = z.object({ appointmentId: z.string().uuid() });
+
+/**
+ * Client confirms they will attend a `reserved` (non-member, no-deposit) slot,
+ * locking it down. Only the owner, only before start, only while reserved.
+ */
+export async function confirmAttendanceAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    const identity = await getIdentity();
+    const input = parseOrThrow(confirmSchema, formObject(formData));
+    const [appt] = await db
+      .select()
+      .from(appointments)
+      .where(
+        and(
+          eq(appointments.id, input.appointmentId),
+          eq(appointments.clientId, identity.userId),
+        ),
+      );
+    if (!appt) throw new NotFoundError("Appointment not found.");
+    if (appt.status !== "reserved") {
+      throw new ValidationError("This appointment does not need confirmation.");
+    }
+    if (appt.startAt.getTime() <= Date.now()) {
+      throw new ValidationError("This appointment has already started.");
+    }
+    await db
+      .update(appointments)
+      .set({ status: "confirmed", attendanceConfirmedAt: new Date() })
+      .where(eq(appointments.id, appt.id));
+
+    revalidatePath("/account");
+    revalidatePath("/admin");
+    return { ok: true, detail: "Attendance confirmed - your spot is locked in." };
   } catch (err) {
     return { ok: false, error: toActionError(err) };
   }

@@ -118,6 +118,36 @@ export default async function AdminSettingsPage(): Promise<ReactNode> {
               defaultValue={String(settings.noShowFeeCents)}
             />
           </Field>
+          <Field label="Member grace period (minutes past start)">
+            <TextInput
+              name="memberGraceMinutes"
+              type="number"
+              min={0}
+              max={120}
+              required
+              defaultValue={String(settings.memberGraceMinutes)}
+            />
+          </Field>
+          <Field label="Non-member grace period (minutes past start)">
+            <TextInput
+              name="depositGraceMinutes"
+              type="number"
+              min={0}
+              max={120}
+              required
+              defaultValue={String(settings.depositGraceMinutes)}
+            />
+          </Field>
+          <Field label="Confirmation deadline (minutes before start)">
+            <TextInput
+              name="confirmationWindowMinutes"
+              type="number"
+              min={0}
+              max={240}
+              required
+              defaultValue={String(settings.confirmationWindowMinutes)}
+            />
+          </Field>
           <Field label="Landing backdrop">
             <Select name="backdrop" defaultValue={settings.backdrop}>
               {BACKDROPS.map((b) => (

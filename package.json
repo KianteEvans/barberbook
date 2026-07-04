@@ -9,8 +9,10 @@
   "scripts": {
     "dev": "next dev",
     "dev:db": "tsx scripts/dev-db.ts",
+    "dev:ticker": "tsx scripts/dev-ticker.ts",
     "db:migrate": "tsx src/db/migrate.ts",
     "seed": "tsx scripts/dev-seed.ts",
+    "seed:appointments": "tsx scripts/dev-seed-appointments.ts",
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
