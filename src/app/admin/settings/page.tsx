@@ -9,8 +9,14 @@ import {
   removeHeroAction,
   saveHeroAction,
   savePolicyAction,
+  saveShopDetailsAction,
 } from "@/domain/admin/actions";
 import { BACKDROPS, BACKDROP_LABELS } from "@/domain/backdrops";
+import {
+  SLOT_GRANULARITIES,
+  TIMEZONES,
+  TIMEZONE_LABELS,
+} from "@/domain/shop-options";
 
 export const dynamic = "force-dynamic";
 
@@ -29,7 +35,53 @@ export default async function AdminSettingsPage(): Promise<ReactNode> {
   }
 
   return (
-    <PageShell title="Settings" subtitle="Booking policy and landing page">
+    <PageShell
+      title="Settings"
+      subtitle="Shop details, booking policy, and landing page"
+    >
+      <Card title="Shop details">
+        <MutationForm action={saveShopDetailsAction} submitLabel="Save shop details">
+          <Field label="Shop name">
+            <TextInput name="shopName" required defaultValue={settings.shopName} />
+          </Field>
+          <Field label="Timezone">
+            <Select
+              name="timezone"
+              defaultValue={
+                (TIMEZONES as readonly string[]).includes(settings.timezone)
+                  ? settings.timezone
+                  : TIMEZONES[0]
+              }
+            >
+              {TIMEZONES.map((tz) => (
+                <option key={tz} value={tz}>
+                  {TIMEZONE_LABELS[tz]}
+                </option>
+              ))}
+            </Select>
+          </Field>
+          <Field label="Slot interval">
+            <Select name="slotGranularityMin" defaultValue={String(settings.slotGranularityMin)}>
+              {SLOT_GRANULARITIES.map((m) => (
+                <option key={m} value={String(m)}>
+                  {m} minutes
+                </option>
+              ))}
+            </Select>
+          </Field>
+          <Field label="Buffer between appointments (minutes)">
+            <TextInput
+              name="bufferMin"
+              type="number"
+              min={0}
+              max={60}
+              required
+              defaultValue={String(settings.bufferMin)}
+            />
+          </Field>
+        </MutationForm>
+      </Card>
+
       <Card title="Booking policy">
         <MutationForm action={savePolicyAction} submitLabel="Save policy">
           <Field label="Cancellation window (hours)">

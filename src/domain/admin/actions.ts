@@ -15,6 +15,7 @@ import { parseOrThrow, formObject, type ActionState } from "@/domain/forms";
 import { toActionError, ValidationError } from "@/domain/errors";
 import { deleteUpload, saveUpload } from "@/domain/barbers/uploads";
 import { BACKDROPS } from "@/domain/backdrops";
+import { SLOT_GRANULARITIES, TIMEZONES } from "@/domain/shop-options";
 
 /** Admin CRUD actions: services, weekly hours, time off, shop policy. */
 
@@ -139,6 +140,36 @@ export async function removeTimeOffAction(
     await db.delete(availabilityExceptions).where(eq(availabilityExceptions.id, input.id));
     revalidatePath("/admin/hours");
     return { ok: true, detail: "Time off removed." };
+  } catch (err) {
+    return { ok: false, error: toActionError(err) };
+  }
+}
+
+const shopDetailsSchema = z.object({
+  shopName: z.string().trim().min(1, "Shop name is required.").max(60),
+  timezone: z.enum(TIMEZONES),
+  slotGranularityMin: z.coerce
+    .number()
+    .int()
+    .refine((v) => (SLOT_GRANULARITIES as readonly number[]).includes(v), {
+      message: "Pick a supported slot interval.",
+    }),
+  bufferMin: z.coerce.number().int().min(0).max(60),
+});
+
+/** Shop identity + scheduling grain (name, timezone, slot size, buffer). */
+export async function saveShopDetailsAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    await getAdminIdentity();
+    const input = parseOrThrow(shopDetailsSchema, formObject(formData));
+    await db.update(shopSettings).set(input).where(eq(shopSettings.id, 1));
+    // Shop name shows in the footer/hero everywhere; slot grain affects booking.
+    revalidatePath("/", "layout");
+    revalidatePath("/admin/settings");
+    return { ok: true, detail: "Shop details saved." };
   } catch (err) {
     return { ok: false, error: toActionError(err) };
   }
