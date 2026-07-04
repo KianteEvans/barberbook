@@ -20,6 +20,9 @@ const schema = z.object({
   STRIPE_SECRET_KEY: z.string().optional(),
   STRIPE_PUBLISHABLE_KEY: z.string().optional(),
   STRIPE_WEBHOOK_SECRET: z.string().optional(),
+  // Email delivery (Resend). Optional: unset = notifications stay in-app only.
+  RESEND_API_KEY: z.string().optional(),
+  EMAIL_FROM: z.string().optional(),
 });
 
 function clean(v: string | undefined): string | undefined {
@@ -34,7 +37,13 @@ export const env = schema.parse({
   STRIPE_SECRET_KEY: clean(process.env.STRIPE_SECRET_KEY),
   STRIPE_PUBLISHABLE_KEY: clean(process.env.STRIPE_PUBLISHABLE_KEY),
   STRIPE_WEBHOOK_SECRET: clean(process.env.STRIPE_WEBHOOK_SECRET),
+  RESEND_API_KEY: clean(process.env.RESEND_API_KEY),
+  EMAIL_FROM: clean(process.env.EMAIL_FROM),
 });
 
 /** True when online payments are configured; false = "pay at shop" dev mode. */
 export const paymentsEnabled = env.STRIPE_SECRET_KEY !== undefined;
+
+/** True when outbound email is configured; false = in-app notifications only. */
+export const emailEnabled =
+  env.RESEND_API_KEY !== undefined && env.EMAIL_FROM !== undefined;

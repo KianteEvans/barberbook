@@ -7,9 +7,11 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/Toaster";
 import { Footer } from "@/components/ui/Footer";
 import { NavLinks, type NavItem } from "@/components/ui/NavLinks";
+import { NotificationBell } from "@/components/ui/NotificationBell";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { tryGetIdentity } from "@/auth/session";
 import { logoutAction } from "@/auth/actions";
+import { unreadCount } from "@/domain/notifications/operations";
 
 const body = Inter({
   subsets: ["latin"],
@@ -37,6 +39,7 @@ export default async function RootLayout({
   // Theme cookie read server-side so the first paint is already themed.
   const theme =
     (await cookies()).get("bb_theme")?.value === "light" ? "light" : "dark";
+  const unread = identity ? await unreadCount(identity.userId) : 0;
 
   const items: NavItem[] = [
     { href: "/book", label: "Book now", emphasis: true },
@@ -93,6 +96,7 @@ export default async function RootLayout({
             }}
           >
             <NavLinks items={items} />
+            {identity && <NotificationBell count={unread} />}
             <ThemeToggle initialTheme={theme} />
             {identity ? (
               <form action={logoutAction} style={{ margin: 0 }}>

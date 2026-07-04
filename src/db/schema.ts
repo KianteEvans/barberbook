@@ -237,3 +237,25 @@ export const webhookEvents = pgTable("webhook_events", {
   type: text("type").notNull(),
   processedAt: timestamp("processed_at", { withTimezone: true }).notNull().defaultNow(),
 });
+
+export const notifications = pgTable("notifications", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").notNull().references(() => users.id),
+  kind: text("kind", {
+    enum: ["reminder", "confirm_needed", "released", "promoted"],
+  }).notNull(),
+  title: text("title").notNull(),
+  body: text("body").notNull(),
+  appointmentId: uuid("appointment_id").references(() => appointments.id),
+  readAt: timestamp("read_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const reminderLog = pgTable("reminder_log", {
+  appointmentId: uuid("appointment_id")
+    .notNull()
+    .references(() => appointments.id),
+  offsetMinutes: integer("offset_minutes").notNull(),
+  recipientKind: text("recipient_kind", { enum: ["client", "barber"] }).notNull(),
+  sentAt: timestamp("sent_at", { withTimezone: true }).notNull().defaultNow(),
+});
