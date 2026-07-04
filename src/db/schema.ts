@@ -91,6 +91,19 @@ export const barberPhotos = pgTable("barber_photos", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+export const testimonials = pgTable("testimonials", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  authorName: text("author_name").notNull(),
+  quote: text("quote").notNull(),
+  rating: integer("rating"),
+  barberId: uuid("barber_id").references(() => barbers.id, {
+    onDelete: "set null",
+  }),
+  featured: boolean("featured").notNull().default(true),
+  sortOrder: integer("sort_order").notNull().default(0),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const availabilityRules = pgTable("availability_rules", {
   id: uuid("id").primaryKey().defaultRandom(),
   barberId: uuid("barber_id")

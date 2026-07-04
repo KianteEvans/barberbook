@@ -153,6 +153,80 @@ async function main(): Promise<void> {
       `;
     }
 
+    // Sample customer testimonials for the gallery page. Some attributed to a
+    // barber by name (subquery), some general.
+    const [{ count: testimonialCount }] = await sql<[{ count: string }]>`
+      SELECT count(*)::text AS count FROM testimonials
+    `;
+    if (Number(testimonialCount) === 0) {
+      const testimonials: Array<{
+        author: string;
+        quote: string;
+        rating: number;
+        barber: string | null;
+        sort: number;
+      }> = [
+        {
+          author: "Marcus T.",
+          quote:
+            "Cleanest fade I have had in years. Marco takes his time and the hot towel finish is unmatched. Booked my next three cuts before I left the chair.",
+          rating: 5,
+          barber: "Marco",
+          sort: 1,
+        },
+        {
+          author: "Dernst A.",
+          quote:
+            "Dre lined me up so sharp my barber back home asked who did it. The waves are on point too.",
+          rating: 5,
+          barber: 'Andre "Dre" Bishop',
+          sort: 2,
+        },
+        {
+          author: "Sal R.",
+          quote:
+            "Old-school scissor work like my grandfather used to get. Tony is a true craftsman - the pompadour holds all week.",
+          rating: 5,
+          barber: "Tony Ricci",
+          sort: 3,
+        },
+        {
+          author: "Yaw B.",
+          quote:
+            "Finally a barber who actually knows textured hair. Kofi set my twists right and showed me how to keep them fresh.",
+          rating: 5,
+          barber: "Kofi Mensah",
+          sort: 4,
+        },
+        {
+          author: "Priya & Sons",
+          quote:
+            "Luz was so patient with my son's first haircut. He walked out with a fresh cut and a huge smile. The whole shop has a great vibe.",
+          rating: 5,
+          barber: "Luz Ortega",
+          sort: 5,
+        },
+        {
+          author: "Andre W.",
+          quote:
+            "Booking online with the deposit made it easy and I have never waited past my time. The membership pays for itself.",
+          rating: 5,
+          barber: null,
+          sort: 6,
+        },
+      ];
+      for (const t of testimonials) {
+        await sql`
+          INSERT INTO testimonials (author_name, quote, rating, barber_id, sort_order)
+          VALUES (
+            ${t.author}, ${t.quote}, ${t.rating},
+            ${t.barber ? sql`(SELECT id FROM barbers WHERE display_name = ${t.barber})` : null},
+            ${t.sort}
+          )
+        `;
+      }
+    }
+
     console.log("[seed] done.");
     console.log("[seed] admin:  admin@barberbook.local / admin1234");
     console.log("[seed] client: client@barberbook.local / client1234");

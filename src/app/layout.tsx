@@ -41,6 +41,7 @@ export default async function RootLayout({
   const items: NavItem[] = [
     { href: "/book", label: "Book now", emphasis: true },
     { href: "/barbers", label: "Barbers" },
+    { href: "/gallery", label: "Gallery" },
     { href: "/memberships", label: "Memberships" },
     ...(identity?.role === "admin" ? [{ href: "/admin", label: "Admin" }] : []),
     ...(identity ? [{ href: "/account", label: "My account" }] : []),
