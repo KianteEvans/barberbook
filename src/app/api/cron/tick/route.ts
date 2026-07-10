@@ -9,6 +9,7 @@ import { loadSettings } from "@/domain/booking/load";
 import { createNotification } from "@/domain/notifications/operations";
 import { dueOffsets, offsetLabel, REMINDER_OFFSETS } from "@/domain/notifications/reminders";
 import { expireStaleWaitlist, promoteForSlot } from "@/domain/waitlist/operations";
+import { runNudgePass } from "@/domain/notifications/nudge-ops";
 
 /**
  * The single time-driven worker. Runs the reminder pass (P1); later phases add
@@ -25,8 +26,9 @@ export async function POST(req: Request): Promise<NextResponse> {
   const reminders = await runReminderPass(now);
   const released = await runReleasePass(now);
   const expired = await expireStaleWaitlist(now);
+  const nudges = await runNudgePass(now);
 
-  return NextResponse.json({ ok: true, reminders, released, expired });
+  return NextResponse.json({ ok: true, reminders, released, expired, nudges });
 }
 
 /**

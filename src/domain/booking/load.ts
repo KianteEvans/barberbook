@@ -30,6 +30,10 @@ export interface ShopSettingsRow {
   readonly confirmationWindowMinutes: number;
   /** Grant a free cut every Nth completed visit; 0 disables loyalty. */
   readonly loyaltyEveryN: number;
+  /** Nudge a client to rebook this many days after their last visit; 0 = off. */
+  readonly rebookAfterDays: number;
+  /** Win-back nudge after this many days lapsed; 0 = off. */
+  readonly winbackAfterDays: number;
 }
 
 export async function loadSettings(): Promise<ShopSettingsRow> {

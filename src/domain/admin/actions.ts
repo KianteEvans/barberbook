@@ -172,6 +172,8 @@ const policySchema = z.object({
   depositGraceMinutes: z.coerce.number().int().min(0).max(120),
   confirmationWindowMinutes: z.coerce.number().int().min(0).max(240),
   loyaltyEveryN: z.coerce.number().int().min(0).max(50),
+  rebookAfterDays: z.coerce.number().int().min(0).max(365),
+  winbackAfterDays: z.coerce.number().int().min(0).max(365),
 });
 
 export async function savePolicyAction(

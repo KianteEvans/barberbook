@@ -25,6 +25,8 @@ export const users = pgTable("users", {
     .notNull()
     .default("client"),
   stripeCustomerId: text("stripe_customer_id").unique(),
+  emailOptOut: boolean("email_opt_out").notNull().default(false),
+  smsOptOut: boolean("sms_opt_out").notNull().default(false),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
@@ -48,6 +50,8 @@ export const shopSettings = pgTable("shop_settings", {
     .notNull()
     .default(15),
   loyaltyEveryN: integer("loyalty_every_n").notNull().default(0),
+  rebookAfterDays: integer("rebook_after_days").notNull().default(0),
+  winbackAfterDays: integer("winback_after_days").notNull().default(0),
 });
 
 export const discountCodes = pgTable("discount_codes", {
@@ -319,6 +323,8 @@ export const notifications = pgTable("notifications", {
       "promoted",
       "review_request",
       "loyalty",
+      "rebook",
+      "winback",
     ],
   }).notNull(),
   title: text("title").notNull(),
@@ -327,6 +333,18 @@ export const notifications = pgTable("notifications", {
   readAt: timestamp("read_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
+
+export const clientNudges = pgTable(
+  "client_nudges",
+  {
+    clientId: uuid("client_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    kind: text("kind", { enum: ["rebook", "winback"] }).notNull(),
+    lastSentAt: timestamp("last_sent_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({ pk: primaryKey({ columns: [t.clientId, t.kind] }) }),
+);
 
 export const reminderLog = pgTable("reminder_log", {
   appointmentId: uuid("appointment_id")

@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { and } from "drizzle-orm";
 import { db } from "@/db/client";
-import { appointments, barbers, payments, services } from "@/db/schema";
+import { appointments, barbers, payments, services, users } from "@/db/schema";
 import { tryGetIdentity } from "@/auth/session";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, Badge, EmptyState, ButtonLink, type BadgeTone } from "@/components/ui/primitives";
@@ -17,6 +17,7 @@ import { CancelButton } from "./CancelButton";
 import { ConfirmAttendanceButton } from "./ConfirmAttendanceButton";
 import { LeaveWaitlistButton } from "./LeaveWaitlistButton";
 import { TipControl } from "./TipControl";
+import { NotificationPrefs } from "./NotificationPrefs";
 
 export const dynamic = "force-dynamic";
 
@@ -43,6 +44,14 @@ export default async function AccountPage(): Promise<ReactNode> {
   if (!identity) redirect("/login?next=/account");
 
   const settings = await loadSettings();
+  const [me] = await db
+    .select({
+      phone: users.phone,
+      emailOptOut: users.emailOptOut,
+      smsOptOut: users.smsOptOut,
+    })
+    .from(users)
+    .where(eq(users.id, identity.userId));
   const mine = await db
     .select({
       id: appointments.id,
@@ -246,6 +255,14 @@ export default async function AccountPage(): Promise<ReactNode> {
           </table>
         </Card>
       )}
+
+      <Card title="Notification preferences">
+        <NotificationPrefs
+          emailOn={!(me?.emailOptOut ?? false)}
+          smsOn={!(me?.smsOptOut ?? false)}
+          hasPhone={Boolean(me?.phone)}
+        />
+      </Card>
     </PageShell>
   );
 }

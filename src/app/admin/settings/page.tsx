@@ -158,6 +158,26 @@ export default async function AdminSettingsPage(): Promise<ReactNode> {
               defaultValue={String(settings.loyaltyEveryN)}
             />
           </Field>
+          <Field label="Rebook nudge: days after last visit (0 = off)">
+            <TextInput
+              name="rebookAfterDays"
+              type="number"
+              min={0}
+              max={365}
+              required
+              defaultValue={String(settings.rebookAfterDays)}
+            />
+          </Field>
+          <Field label="Win-back nudge: days lapsed (0 = off)">
+            <TextInput
+              name="winbackAfterDays"
+              type="number"
+              min={0}
+              max={365}
+              required
+              defaultValue={String(settings.winbackAfterDays)}
+            />
+          </Field>
           <Field label="Landing backdrop">
             <Select name="backdrop" defaultValue={settings.backdrop}>
               {BACKDROPS.map((b) => (

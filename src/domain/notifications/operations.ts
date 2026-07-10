@@ -15,7 +15,9 @@ export type NotificationKind =
   | "released"
   | "promoted"
   | "review_request"
-  | "loyalty";
+  | "loyalty"
+  | "rebook"
+  | "winback";
 
 export interface NotificationRow {
   readonly id: string;
@@ -42,11 +44,17 @@ export async function createNotification(
   await db.insert(notifications).values({ userId, kind, title, body, appointmentId });
   try {
     const [user] = await db
-      .select({ email: users.email, phone: users.phone })
+      .select({
+        email: users.email,
+        phone: users.phone,
+        emailOptOut: users.emailOptOut,
+        smsOptOut: users.smsOptOut,
+      })
       .from(users)
       .where(eq(users.id, userId));
-    if (user?.email) await sendEmail(user.email, title, body);
-    if (user?.phone) await sendSms(user.phone, `${title}\n${body}`);
+    // The in-app row always lands; external channels honor per-user opt-outs.
+    if (user?.email && !user.emailOptOut) await sendEmail(user.email, title, body);
+    if (user?.phone && !user.smsOptOut) await sendSms(user.phone, `${title}\n${body}`);
   } catch (err) {
     console.error("[notifications] dispatch failed:", err);
   }
