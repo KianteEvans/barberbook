@@ -148,6 +148,16 @@ export default async function AdminSettingsPage(): Promise<ReactNode> {
               defaultValue={String(settings.confirmationWindowMinutes)}
             />
           </Field>
+          <Field label="Loyalty: free cut every N completed visits (0 = off)">
+            <TextInput
+              name="loyaltyEveryN"
+              type="number"
+              min={0}
+              max={50}
+              required
+              defaultValue={String(settings.loyaltyEveryN)}
+            />
+          </Field>
           <Field label="Landing backdrop">
             <Select name="backdrop" defaultValue={settings.backdrop}>
               {BACKDROPS.map((b) => (

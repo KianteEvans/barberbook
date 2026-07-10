@@ -28,6 +28,11 @@ export interface CreateBookingInput {
   readonly startAt: Date;
   /** Set when a membership credit covers this visit: no deposit, no balance. */
   readonly creditId?: string;
+  /** A loyalty free cut covers this visit: no deposit, no balance. */
+  readonly freeCut?: boolean;
+  /** A validated promo code + its computed discount, applied to the price. */
+  readonly discountCode?: string;
+  readonly discountCents?: number;
 }
 
 export interface CreatedBooking {
@@ -56,10 +61,16 @@ export async function createBookingOp(
     throw new ValidationError("That time is in the past.");
   }
 
-  const covered = input.creditId !== undefined;
+  const covered = input.creditId !== undefined || input.freeCut === true;
+  // A promo code reduces the price basis; the deposit is recomputed off it.
+  const discount = covered
+    ? 0
+    : Math.min(input.discountCents ?? 0, service.priceCents);
+  const pricedService =
+    discount > 0 ? { ...service, priceCents: service.priceCents - discount } : service;
   const { depositCents, remainderCents } = covered
     ? { depositCents: 0, remainderCents: 0 }
-    : computeDeposit(service, settings);
+    : computeDeposit(pricedService, settings);
   const endAt = new Date(input.startAt.getTime() + service.durationMin * 60_000);
   const online = !covered && paymentsEnabled && depositCents > 0;
 
@@ -94,6 +105,8 @@ export async function createBookingOp(
         depositCents,
         remainderCents,
         creditId: input.creditId ?? null,
+        discountCode: discount > 0 ? input.discountCode ?? null : null,
+        discountCents: discount,
         holdTier: tier,
         graceMinutes,
         confirmationDeadline,

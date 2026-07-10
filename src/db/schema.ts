@@ -47,6 +47,25 @@ export const shopSettings = pgTable("shop_settings", {
   confirmationWindowMinutes: integer("confirmation_window_minutes")
     .notNull()
     .default(15),
+  loyaltyEveryN: integer("loyalty_every_n").notNull().default(0),
+});
+
+export const discountCodes = pgTable("discount_codes", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  code: text("code").notNull().unique(),
+  kind: text("kind", { enum: ["percent", "fixed"] }).notNull(),
+  amount: integer("amount").notNull(),
+  active: boolean("active").notNull().default(true),
+  maxUses: integer("max_uses"),
+  usedCount: integer("used_count").notNull().default(0),
+  expiresAt: timestamp("expires_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const loyalty = pgTable("loyalty", {
+  clientId: uuid("client_id").primaryKey().references(() => users.id),
+  completedCount: integer("completed_count").notNull().default(0),
+  freeCredits: integer("free_credits").notNull().default(0),
 });
 
 export const services = pgTable("services", {
@@ -209,6 +228,8 @@ export const appointments = pgTable("appointments", {
   stripeCheckoutSessionId: text("stripe_checkout_session_id"),
   stripePaymentIntentId: text("stripe_payment_intent_id"),
   creditId: uuid("credit_id").references(() => membershipCredits.id),
+  discountCode: text("discount_code"),
+  discountCents: integer("discount_cents").notNull().default(0),
   holdTier: text("hold_tier", {
     enum: ["member", "deposit", "unconfirmed"],
   }),

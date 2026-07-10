@@ -9,7 +9,7 @@ import { resolveBarberService } from "@/domain/barbers/operations";
 import { tryGetIdentity } from "@/auth/session";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, Stat } from "@/components/ui/primitives";
-import { Field, Select } from "@/components/ui/fields";
+import { Field, Select, TextInput } from "@/components/ui/fields";
 import { StepIndicator } from "@/components/ui/StepIndicator";
 import { MutationForm } from "@/components/ui/MutationForm";
 import { createBookingAction } from "@/domain/booking/actions";
@@ -17,6 +17,7 @@ import { loadSettings } from "@/domain/booking/load";
 import { computeDeposit } from "@/domain/payments/deposit";
 import { formatMoney } from "@/domain/money";
 import { loadClientMembership } from "@/domain/memberships/operations";
+import { loyaltyFreeCredits } from "@/domain/promotions/operations";
 import { paymentsEnabled } from "@/env";
 
 export const dynamic = "force-dynamic";
@@ -55,6 +56,7 @@ export default async function ConfirmBookingPage({
   const collectDeposit = paymentsEnabled && depositCents > 0;
   const membership = await loadClientMembership(identity.userId);
   const canUseCredit = (membership?.creditsAvailable ?? 0) > 0;
+  const freeCuts = await loyaltyFreeCredits(identity.userId);
 
   return (
     <PageShell title="Confirm your booking" maxWidth={560} stripe>
@@ -126,6 +128,27 @@ export default async function ConfirmBookingPage({
               left) - no deposit, nothing due at the shop
             </label>
           )}
+          {!canUseCredit && freeCuts > 0 && (
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                fontSize: 13,
+                fontWeight: 600,
+                background: "color-mix(in srgb, var(--accent) 10%, transparent)",
+                border: "1px solid color-mix(in srgb, var(--accent) 35%, transparent)",
+                borderRadius: 8,
+                padding: "10px 12px",
+              }}
+            >
+              <input type="checkbox" name="useFreeCut" defaultChecked />
+              Use a free cut ({freeCuts} earned) - this visit is on us
+            </label>
+          )}
+          <Field label="Promo code (optional)">
+            <TextInput name="discountCode" placeholder="Enter a code" />
+          </Field>
           <Field label="Repeat this appointment?">
             <Select name="cadenceWeeks" defaultValue="0">
               <option value="0">No, just this once</option>

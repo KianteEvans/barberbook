@@ -28,6 +28,8 @@ export interface ShopSettingsRow {
   readonly memberGraceMinutes: number;
   readonly depositGraceMinutes: number;
   readonly confirmationWindowMinutes: number;
+  /** Grant a free cut every Nth completed visit; 0 disables loyalty. */
+  readonly loyaltyEveryN: number;
 }
 
 export async function loadSettings(): Promise<ShopSettingsRow> {

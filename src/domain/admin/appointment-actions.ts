@@ -14,6 +14,7 @@ import { formatInTimeZone } from "date-fns-tz";
 import { loadSettings } from "@/domain/booking/load";
 import { noShowAllowed } from "@/domain/booking/grace";
 import { createNotification } from "@/domain/notifications/operations";
+import { recordLoyaltyVisit } from "@/domain/promotions/operations";
 import { paymentsEnabled } from "@/env";
 import { stripe } from "@/stripe/client";
 import { formatMoney } from "@/domain/money";
@@ -77,6 +78,9 @@ export async function markCompletedAction(
       "Leave a quick rating and review from your appointments page.",
       done.id,
     );
+    // Loyalty punch-card: count the visit; every Nth grants a free cut.
+    const settings = await loadSettings();
+    await recordLoyaltyVisit(done.clientId, settings.loyaltyEveryN);
     revalidatePath("/admin");
     revalidatePath("/admin/calendar");
     return { ok: true, detail: "Marked completed." };

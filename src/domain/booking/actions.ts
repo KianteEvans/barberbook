@@ -18,6 +18,14 @@ import {
 import { createSeriesOp, materializeAllSeries } from "@/domain/series/operations";
 import { consumeCreditOp, refundCreditOp } from "@/domain/memberships/operations";
 import { promoteForSlot } from "@/domain/waitlist/operations";
+import { resolveBarberService } from "@/domain/barbers/operations";
+import { discountCents as computeDiscountCents } from "@/domain/promotions/discount";
+import {
+  findRedeemableCode,
+  incrementCodeUse,
+  consumeFreeCredit,
+  grantFreeCredit,
+} from "@/domain/promotions/operations";
 import { createDepositCheckout } from "@/stripe/checkout";
 import { stripe } from "@/stripe/client";
 
@@ -29,6 +37,8 @@ const createBookingSchema = z.object({
   /** "0" = one-off; otherwise repeat every N weeks. */
   cadenceWeeks: z.coerce.number().int().min(0).max(12).default(0),
   useCredit: z.string().optional(),
+  useFreeCut: z.string().optional(),
+  discountCode: z.string().trim().max(40).optional(),
 });
 
 /**
@@ -52,6 +62,29 @@ export async function createBookingAction(
       creditId = await consumeCreditOp(identity.userId);
     }
 
+    // Loyalty free cut: consume up front, refund on failure (mirrors credits).
+    let freeCut = false;
+    if (!creditId && input.useFreeCut === "on") {
+      freeCut = await consumeFreeCredit(identity.userId);
+      if (!freeCut) {
+        throw new ValidationError("You don't have a free cut available.");
+      }
+    }
+
+    // Promo code: validate and compute the discount off the barber's effective
+    // price. A covered visit (credit / free cut) ignores codes.
+    let discountCode: string | undefined;
+    let discountCents = 0;
+    let codeId: string | undefined;
+    if (!creditId && !freeCut && input.discountCode) {
+      const code = await findRedeemableCode(input.discountCode);
+      if (!code) throw new ValidationError("That promo code isn't valid.");
+      const service = await resolveBarberService(input.barberId, input.serviceId);
+      discountCents = computeDiscountCents(service.priceCents, code);
+      discountCode = code.code;
+      codeId = code.id;
+    }
+
     let booking;
     try {
       booking = await createBookingOp({
@@ -60,11 +93,16 @@ export async function createBookingAction(
         serviceId: input.serviceId,
         startAt: new Date(input.startAt),
         ...(creditId ? { creditId } : {}),
+        ...(freeCut ? { freeCut } : {}),
+        ...(discountCode ? { discountCode, discountCents } : {}),
       });
     } catch (err) {
       if (creditId) await refundCreditOp(creditId);
+      if (freeCut) await grantFreeCredit(identity.userId);
       throw err;
     }
+    // Count the redemption only once the booking actually landed.
+    if (codeId) await incrementCodeUse(codeId);
 
     if (input.cadenceWeeks > 0) {
       await createSeriesOp({
