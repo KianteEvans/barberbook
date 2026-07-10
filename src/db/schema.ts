@@ -357,6 +357,23 @@ export const reminderLog = pgTable("reminder_log", {
   sentAt: timestamp("sent_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+export const walkIns = pgTable("walk_ins", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  // NULL barber = "first available chair".
+  barberId: uuid("barber_id").references(() => barbers.id),
+  name: text("name").notNull(),
+  phone: text("phone"),
+  serviceId: uuid("service_id").references(() => services.id),
+  status: text("status", {
+    enum: ["waiting", "serving", "done", "no_show", "canceled"],
+  })
+    .notNull()
+    .default("waiting"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  calledAt: timestamp("called_at", { withTimezone: true }),
+  doneAt: timestamp("done_at", { withTimezone: true }),
+});
+
 export const waitlistEntries = pgTable("waitlist_entries", {
   id: uuid("id").primaryKey().defaultRandom(),
   clientId: uuid("client_id").notNull().references(() => users.id),

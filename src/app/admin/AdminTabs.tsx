@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 const TABS = [
   { href: "/admin", label: "Today" },
   { href: "/admin/calendar", label: "Calendar" },
+  { href: "/admin/walkins", label: "Walk-ins" },
   { href: "/admin/clients", label: "Clients" },
   { href: "/admin/barbers", label: "Barbers" },
   { href: "/admin/services", label: "Services" },

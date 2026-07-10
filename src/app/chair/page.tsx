@@ -23,9 +23,14 @@ import {
   removeMyTimeOffAction,
 } from "@/domain/chair/actions";
 import { loadNotesForClients } from "@/domain/clients/operations";
+import { queueForBarber } from "@/domain/walkins/operations";
+import { addWalkinAction } from "@/domain/walkins/actions";
+import { FormDrawer } from "@/components/ui/FormDrawer";
+import { WalkinResolve } from "@/components/ui/WalkinResolve";
 import { formatMoney } from "@/domain/money";
 import { ChairActions } from "./ChairActions";
 import { ChairClientNotes } from "./ChairClientNotes";
+import { CallNextButton } from "./CallNextButton";
 
 const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const fmtMin = (min: number): string =>
@@ -72,6 +77,7 @@ export default async function ChairPage(): Promise<ReactNode> {
   const notesByClient = await loadNotesForClients([
     ...new Set(appts.map((a) => a.clientId)),
   ]);
+  const walkinQueue = await queueForBarber(barber.id);
 
   const rules = await db
     .select()
@@ -118,6 +124,77 @@ export default async function ChairPage(): Promise<ReactNode> {
           <Stat label="Completed cuts" value={String(earnings.completedCount)} />
           <Stat label="Upcoming booked" value={String(earnings.upcomingCount)} />
         </div>
+      </Card>
+
+      <Card
+        title="Walk-in queue"
+        action={
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <FormDrawer
+              trigger="Add walk-in"
+              title="Add walk-in to your chair"
+              action={addWalkinAction}
+              submitLabel="Add to line"
+              variant="secondary"
+            >
+              <Field label="Name">
+                <TextInput name="name" required placeholder="First name is fine" />
+              </Field>
+              <Field label="Phone (optional - we text them when they're up)">
+                <TextInput name="phone" placeholder="555-010-0123" />
+              </Field>
+            </FormDrawer>
+            <CallNextButton />
+          </div>
+        }
+      >
+        {walkinQueue.length === 0 ? (
+          <EmptyState
+            title="Nobody in your line"
+            hint='Walk-ins for your chair and "first available" show up here.'
+          />
+        ) : (
+          <div style={{ display: "grid", gap: 8 }}>
+            {walkinQueue.map((w) => (
+              <div
+                key={w.id}
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 10,
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius-sm)",
+                  padding: "8px 12px",
+                }}
+              >
+                <div style={{ display: "grid", gap: 2 }}>
+                  <span
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 14,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                    }}
+                  >
+                    {w.name}
+                    <Badge tone={w.status === "serving" ? "ok" : "warn"}>
+                      {w.status === "serving" ? "in the chair" : `~${w.estWaitMin} min`}
+                    </Badge>
+                  </span>
+                  <span style={{ fontSize: 12, color: "var(--muted)" }}>
+                    {w.serviceName ?? "Service TBD"}
+                    {w.barberName ? "" : " - first available"}
+                    {w.phone ? ` - ${w.phone}` : ""}
+                  </span>
+                </div>
+                <WalkinResolve id={w.id} status={w.status as "waiting" | "serving"} />
+              </div>
+            ))}
+          </div>
+        )}
       </Card>
 
       {appts.length === 0 ? (
