@@ -23,6 +23,10 @@ const schema = z.object({
   // Email delivery (Resend). Optional: unset = notifications stay in-app only.
   RESEND_API_KEY: z.string().optional(),
   EMAIL_FROM: z.string().optional(),
+  // SMS delivery (Twilio). Optional: unset = no texts sent, inbound disabled.
+  TWILIO_ACCOUNT_SID: z.string().optional(),
+  TWILIO_AUTH_TOKEN: z.string().optional(),
+  TWILIO_FROM: z.string().optional(),
 });
 
 function clean(v: string | undefined): string | undefined {
@@ -39,6 +43,9 @@ export const env = schema.parse({
   STRIPE_WEBHOOK_SECRET: clean(process.env.STRIPE_WEBHOOK_SECRET),
   RESEND_API_KEY: clean(process.env.RESEND_API_KEY),
   EMAIL_FROM: clean(process.env.EMAIL_FROM),
+  TWILIO_ACCOUNT_SID: clean(process.env.TWILIO_ACCOUNT_SID),
+  TWILIO_AUTH_TOKEN: clean(process.env.TWILIO_AUTH_TOKEN),
+  TWILIO_FROM: clean(process.env.TWILIO_FROM),
 });
 
 /** True when online payments are configured; false = "pay at shop" dev mode. */
@@ -47,3 +54,9 @@ export const paymentsEnabled = env.STRIPE_SECRET_KEY !== undefined;
 /** True when outbound email is configured; false = in-app notifications only. */
 export const emailEnabled =
   env.RESEND_API_KEY !== undefined && env.EMAIL_FROM !== undefined;
+
+/** True when Twilio SMS is configured; false = no texts, inbound disabled. */
+export const smsEnabled =
+  env.TWILIO_ACCOUNT_SID !== undefined &&
+  env.TWILIO_AUTH_TOKEN !== undefined &&
+  env.TWILIO_FROM !== undefined;

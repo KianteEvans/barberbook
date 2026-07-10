@@ -2,6 +2,7 @@ import { and, desc, eq, isNull } from "drizzle-orm";
 import { db } from "@/db/client";
 import { notifications, users } from "@/db/schema";
 import { sendEmail } from "@/notifications/delivery";
+import { sendSms } from "@/notifications/sms";
 
 /**
  * Notifications: an in-app row is the source of truth; email is best-effort on
@@ -26,7 +27,11 @@ export interface NotificationRow {
   readonly createdAt: Date;
 }
 
-/** Insert an in-app notification and fire a best-effort email to the user. */
+/**
+ * Insert an in-app notification and fire best-effort email + SMS to the user.
+ * Both channels no-op without their provider keys; failures never block the
+ * in-app row.
+ */
 export async function createNotification(
   userId: string,
   kind: NotificationKind,
@@ -37,12 +42,13 @@ export async function createNotification(
   await db.insert(notifications).values({ userId, kind, title, body, appointmentId });
   try {
     const [user] = await db
-      .select({ email: users.email })
+      .select({ email: users.email, phone: users.phone })
       .from(users)
       .where(eq(users.id, userId));
     if (user?.email) await sendEmail(user.email, title, body);
+    if (user?.phone) await sendSms(user.phone, `${title}\n${body}`);
   } catch (err) {
-    console.error("[notifications] email dispatch failed:", err);
+    console.error("[notifications] dispatch failed:", err);
   }
 }
 
