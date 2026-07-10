@@ -22,8 +22,10 @@ import {
   addMyTimeOffAction,
   removeMyTimeOffAction,
 } from "@/domain/chair/actions";
+import { loadNotesForClients } from "@/domain/clients/operations";
 import { formatMoney } from "@/domain/money";
 import { ChairActions } from "./ChairActions";
+import { ChairClientNotes } from "./ChairClientNotes";
 
 const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const fmtMin = (min: number): string =>
@@ -67,6 +69,9 @@ export default async function ChairPage(): Promise<ReactNode> {
 
   const appts = await loadChairAppointments(barber.id, rangeStart, rangeEnd);
   const earnings = await loadChairEarnings(barber.id, 30);
+  const notesByClient = await loadNotesForClients([
+    ...new Set(appts.map((a) => a.clientId)),
+  ]);
 
   const rules = await db
     .select()
@@ -151,7 +156,14 @@ export default async function ChairPage(): Promise<ReactNode> {
                       </Badge>
                     </td>
                     <td style={{ textAlign: "right" }}>
-                      <ChairActions appointmentId={a.id} status={a.status} />
+                      <div style={{ display: "flex", gap: 8, justifyContent: "flex-end", alignItems: "center" }}>
+                        <ChairClientNotes
+                          clientId={a.clientId}
+                          clientName={a.clientName}
+                          notes={notesByClient.get(a.clientId) ?? []}
+                        />
+                        <ChairActions appointmentId={a.id} status={a.status} />
+                      </div>
                     </td>
                   </tr>
                 ))}

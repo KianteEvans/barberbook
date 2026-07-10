@@ -23,6 +23,7 @@ export interface ChairAppointment {
   readonly startAt: Date;
   readonly endAt: Date;
   readonly status: string;
+  readonly clientId: string;
   readonly clientName: string;
   readonly clientPhone: string | null;
   readonly serviceName: string;
@@ -42,6 +43,7 @@ export async function loadChairAppointments(
       startAt: appointments.startAt,
       endAt: appointments.endAt,
       status: appointments.status,
+      clientId: appointments.clientId,
       clientName: users.name,
       clientPhone: users.phone,
       serviceName: services.name,

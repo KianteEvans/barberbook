@@ -68,6 +68,16 @@ export const loyalty = pgTable("loyalty", {
   freeCredits: integer("free_credits").notNull().default(0),
 });
 
+export const clientNotes = pgTable("client_notes", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  clientId: uuid("client_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  authorId: uuid("author_id").references(() => users.id),
+  body: text("body").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const services = pgTable("services", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: text("name").notNull(),
