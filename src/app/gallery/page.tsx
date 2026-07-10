@@ -6,6 +6,7 @@ import { PageShell } from "@/components/ui/PageShell";
 import { Card, EmptyState } from "@/components/ui/primitives";
 import { loadPublicTestimonials } from "@/domain/testimonials/operations";
 import { approvedReviewStats, loadApprovedReviews } from "@/domain/reviews/operations";
+import { GalleryGrid } from "./GalleryGrid";
 
 export const dynamic = "force-dynamic";
 
@@ -81,51 +82,7 @@ export default async function GalleryPage(): Promise<ReactNode> {
             hint="Work shots appear here as barbers add them to their profiles."
           />
         ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-              gap: 12,
-            }}
-          >
-            {photos.map((p) => (
-              <figure
-                key={p.id}
-                className="card-hover"
-                style={{
-                  margin: 0,
-                  display: "grid",
-                  gap: 8,
-                  background: "var(--panel)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "var(--radius-lg)",
-                  padding: 10,
-                  boxShadow: "var(--shadow-sm)",
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`/api/uploads/${p.fileName}`}
-                  alt={p.caption ?? `Work by ${p.barberName}`}
-                  style={{
-                    width: "100%",
-                    aspectRatio: "1",
-                    objectFit: "cover",
-                    borderRadius: "var(--radius)",
-                    border: "1px solid var(--border-strong)",
-                  }}
-                />
-                <figcaption style={{ display: "grid", gap: 2 }}>
-                  {p.caption && (
-                    <span style={{ fontSize: 13, fontWeight: 600 }}>{p.caption}</span>
-                  )}
-                  <span style={{ fontSize: 12, color: "var(--muted)" }}>
-                    {p.barberName}
-                  </span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+          <GalleryGrid photos={photos} />
         )}
       </section>
 

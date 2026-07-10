@@ -165,37 +165,73 @@ export default async function PickSlotPage({
             hint="Try another day or barber."
           />
         ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(76px, 1fr))",
-              gap: 8,
-            }}
-          >
-            {slots.map((s) => {
-              const local = toZonedTime(s.startUtc, settings.timezone);
-              return (
-                <Link
-                  key={s.startUtc.toISOString()}
-                  href={`/book/${serviceId}/confirm?barber=${barberId}&start=${encodeURIComponent(s.startUtc.toISOString())}`}
-                  className="chip"
-                  style={{
-                    textAlign: "center",
-                    padding: "9px 4px",
-                    borderRadius: "var(--radius-sm)",
-                    border: "1px solid var(--border)",
-                    background: "var(--panel-2)",
-                    color: "var(--text)",
-                    fontSize: 13,
-                    fontWeight: 600,
-                    textDecoration: "none",
-                  }}
-                >
-                  {format(local, "h:mm a")}
-                </Link>
+          (() => {
+            // Group slots by time of day so a long list reads at a glance.
+            const groups: { label: string; slots: typeof slots }[] = [
+              { label: "Morning", slots: [] },
+              { label: "Afternoon", slots: [] },
+              { label: "Evening", slots: [] },
+            ];
+            for (const s of slots) {
+              const hour = Number(
+                format(toZonedTime(s.startUtc, settings.timezone), "H"),
               );
-            })}
-          </div>
+              const g = hour < 12 ? 0 : hour < 17 ? 1 : 2;
+              groups[g]!.slots.push(s);
+            }
+            return (
+              <div style={{ display: "grid", gap: 16 }}>
+                {groups
+                  .filter((g) => g.slots.length > 0)
+                  .map((g) => (
+                    <div key={g.label} style={{ display: "grid", gap: 8 }}>
+                      <span
+                        style={{
+                          fontSize: 11,
+                          fontWeight: 700,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.06em",
+                          color: "var(--muted)",
+                        }}
+                      >
+                        {g.label}
+                      </span>
+                      <div
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "repeat(auto-fill, minmax(76px, 1fr))",
+                          gap: 8,
+                        }}
+                      >
+                        {g.slots.map((s) => {
+                          const local = toZonedTime(s.startUtc, settings.timezone);
+                          return (
+                            <Link
+                              key={s.startUtc.toISOString()}
+                              href={`/book/${serviceId}/confirm?barber=${barberId}&start=${encodeURIComponent(s.startUtc.toISOString())}`}
+                              className="chip"
+                              style={{
+                                textAlign: "center",
+                                padding: "9px 4px",
+                                borderRadius: "var(--radius-sm)",
+                                border: "1px solid var(--border)",
+                                background: "var(--panel-2)",
+                                color: "var(--text)",
+                                fontSize: 13,
+                                fontWeight: 600,
+                                textDecoration: "none",
+                              }}
+                            >
+                              {format(local, "h:mm a")}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            );
+          })()
         )}
       </Card>
 

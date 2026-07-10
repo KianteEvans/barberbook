@@ -7,6 +7,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/Toaster";
 import { Footer } from "@/components/ui/Footer";
 import { NavLinks, type NavItem } from "@/components/ui/NavLinks";
+import { MobileNav } from "@/components/ui/MobileNav";
 import { NotificationBell } from "@/components/ui/NotificationBell";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { tryGetIdentity } from "@/auth/session";
@@ -124,6 +125,7 @@ export default async function RootLayout({
         </nav>
         {children}
         <Footer />
+        <MobileNav signedIn={identity !== null} />
         <Toaster />
       </body>
     </html>
