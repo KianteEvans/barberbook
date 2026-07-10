@@ -1,6 +1,6 @@
 import { and, eq } from "drizzle-orm";
 import { db, isSlotTakenError } from "@/db/client";
-import { appointments } from "@/db/schema";
+import { appointments, services } from "@/db/schema";
 import { computeDeposit, refundEligibility } from "@/domain/payments/deposit";
 import { resolveBarberService } from "@/domain/barbers/operations";
 import { loadSettings } from "./load";
@@ -182,4 +182,76 @@ export async function cancelAppointmentOp({
     barberId: appt.barberId,
     startAt: appt.startAt,
   };
+}
+
+export interface RescheduleOutcome {
+  /** The vacated slot, so the caller can promote a waitlisted client into it. */
+  readonly oldBarberId: string;
+  readonly oldStartAt: Date;
+}
+
+/**
+ * Move a live appointment to a new start time with the SAME barber/service.
+ * The exclusion constraint guards the new slot (catch 23P01 -> ConflictError);
+ * moving the row never conflicts with itself. Grace/tier/deposit/credit are
+ * preserved; a reserved hold's confirmation deadline shifts with the new start.
+ * Returns the vacated slot so the caller can auto-promote a waiter into it.
+ */
+export async function rescheduleAppointmentOp({
+  appointmentId,
+  clientId,
+  newStartAt,
+  now = new Date(),
+}: {
+  appointmentId: string;
+  /** Enforce ownership for client reschedules; admin passes null. */
+  clientId: string | null;
+  newStartAt: Date;
+  now?: Date;
+}): Promise<RescheduleOutcome> {
+  if (newStartAt.getTime() <= now.getTime()) {
+    throw new ValidationError("That time is in the past.");
+  }
+  const settings = await loadSettings();
+  const where = clientId
+    ? and(eq(appointments.id, appointmentId), eq(appointments.clientId, clientId))
+    : eq(appointments.id, appointmentId);
+  const [appt] = await db.select().from(appointments).where(where);
+  if (!appt) throw new NotFoundError("Appointment not found.");
+  if (
+    appt.status !== "confirmed" &&
+    appt.status !== "pending_deposit" &&
+    appt.status !== "reserved"
+  ) {
+    throw new ValidationError("This appointment can no longer be rescheduled.");
+  }
+
+  const [service] = await db
+    .select({ durationMin: services.durationMin })
+    .from(services)
+    .where(eq(services.id, appt.serviceId));
+  if (!service) throw new NotFoundError("Service not found.");
+
+  const newEndAt = new Date(newStartAt.getTime() + service.durationMin * 60_000);
+  // A reserved hold's confirmation deadline tracks the new start time.
+  const newDeadline =
+    appt.status === "reserved"
+      ? new Date(
+          newStartAt.getTime() - settings.confirmationWindowMinutes * 60_000,
+        )
+      : appt.confirmationDeadline;
+
+  try {
+    await db
+      .update(appointments)
+      .set({ startAt: newStartAt, endAt: newEndAt, confirmationDeadline: newDeadline })
+      .where(eq(appointments.id, appt.id));
+  } catch (err) {
+    if (isSlotTakenError(err)) {
+      throw new ConflictError("That slot was just taken. Please pick another time.");
+    }
+    throw err;
+  }
+
+  return { oldBarberId: appt.barberId, oldStartAt: appt.startAt };
 }

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { desc, eq } from "drizzle-orm";
 import { format } from "date-fns";
@@ -48,6 +49,8 @@ export default async function AccountPage(): Promise<ReactNode> {
       depositCents: appointments.depositCents,
       remainderCents: appointments.remainderCents,
       confirmationDeadline: appointments.confirmationDeadline,
+      serviceId: appointments.serviceId,
+      barberId: appointments.barberId,
       serviceName: services.name,
       barberName: barbers.displayName,
     })
@@ -131,6 +134,12 @@ export default async function AccountPage(): Promise<ReactNode> {
                     >
                       + Calendar
                     </a>
+                    <Link
+                      href={`/account/reschedule/${a.id}`}
+                      style={{ fontSize: 12, fontWeight: 600, color: "var(--text)", textDecoration: "none" }}
+                    >
+                      Reschedule
+                    </Link>
                     {a.status === "reserved" && (
                       <ConfirmAttendanceButton appointmentId={a.id} />
                     )}
@@ -184,6 +193,7 @@ export default async function AccountPage(): Promise<ReactNode> {
                 <th>Date</th>
                 <th>Service</th>
                 <th>Status</th>
+                <th />
               </tr>
             </thead>
             <tbody>
@@ -195,6 +205,14 @@ export default async function AccountPage(): Promise<ReactNode> {
                     <Badge tone={statusTone[a.status] ?? "neutral"}>
                       {a.status.replace("_", " ")}
                     </Badge>
+                  </td>
+                  <td style={{ textAlign: "right" }}>
+                    <Link
+                      href={`/book/${a.serviceId}?barber=${a.barberId}`}
+                      style={{ fontSize: 12, fontWeight: 600, color: "var(--accent)", textDecoration: "none" }}
+                    >
+                      Book again
+                    </Link>
                   </td>
                 </tr>
               ))}

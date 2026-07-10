@@ -10,7 +10,11 @@ import { getIdentity } from "@/auth/session";
 import { parseOrThrow, formObject, type ActionState } from "@/domain/forms";
 import { toActionError, NotFoundError, ValidationError } from "@/domain/errors";
 import { paymentsEnabled } from "@/env";
-import { createBookingOp, cancelAppointmentOp } from "./operations";
+import {
+  createBookingOp,
+  cancelAppointmentOp,
+  rescheduleAppointmentOp,
+} from "./operations";
 import { createSeriesOp, materializeAllSeries } from "@/domain/series/operations";
 import { consumeCreditOp, refundCreditOp } from "@/domain/memberships/operations";
 import { promoteForSlot } from "@/domain/waitlist/operations";
@@ -148,6 +152,34 @@ export async function cancelBookingAction(
     revalidatePath("/account");
     revalidatePath("/admin");
     return { ok: true, detail };
+  } catch (err) {
+    return { ok: false, error: toActionError(err) };
+  }
+}
+
+const rescheduleSchema = z.object({
+  appointmentId: z.string().uuid(),
+  startAt: z.string().datetime({ offset: true }).or(z.string().datetime()),
+});
+
+/** Client moves an appointment to a new time; the old slot auto-promotes. */
+export async function rescheduleBookingAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    const identity = await getIdentity();
+    const input = parseOrThrow(rescheduleSchema, formObject(formData));
+    const outcome = await rescheduleAppointmentOp({
+      appointmentId: input.appointmentId,
+      clientId: identity.role === "admin" ? null : identity.userId,
+      newStartAt: new Date(input.startAt),
+    });
+    // The vacated slot is now free - auto-book the next waiter.
+    await promoteForSlot(outcome.oldBarberId, outcome.oldStartAt);
+    revalidatePath("/account");
+    revalidatePath("/admin");
+    return { ok: true, detail: "Appointment rescheduled." };
   } catch (err) {
     return { ok: false, error: toActionError(err) };
   }
