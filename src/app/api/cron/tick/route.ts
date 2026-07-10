@@ -7,7 +7,7 @@ import { appointments, barbers, reminderLog, services, users } from "@/db/schema
 import { authorizeCron } from "@/domain/cron";
 import { loadSettings } from "@/domain/booking/load";
 import { createNotification } from "@/domain/notifications/operations";
-import { dueOffsets, REMINDER_OFFSETS } from "@/domain/notifications/reminders";
+import { dueOffsets, offsetLabel, REMINDER_OFFSETS } from "@/domain/notifications/reminders";
 import { expireStaleWaitlist, promoteForSlot } from "@/domain/waitlist/operations";
 
 /**
@@ -107,13 +107,14 @@ async function runReminderPass(now: Date): Promise<number> {
   for (const appt of upcoming) {
     const localTime = format(toZonedTime(appt.startAt, settings.timezone), "h:mm a");
     for (const offset of dueOffsets(appt.startAt, now)) {
+      const label = offsetLabel(offset);
       // The client reminder.
       if (await claimReminder(appt.id, offset, "client")) {
         await createNotification(
           appt.clientId,
           "reminder",
-          `Appointment in ${offset} minutes`,
-          `Your ${appt.serviceName} with ${appt.barberName} starts at ${localTime} (in ${offset} minutes).`,
+          `Appointment in ${label}`,
+          `Your ${appt.serviceName} with ${appt.barberName} starts at ${localTime} (in ${label}).`,
           appt.id,
         );
         sent += 1;
@@ -125,8 +126,8 @@ async function runReminderPass(now: Date): Promise<number> {
           await createNotification(
             uid,
             "reminder",
-            `${appt.barberName}: chair in ${offset} minutes`,
-            `${appt.serviceName} at ${localTime} (in ${offset} minutes).`,
+            `${appt.barberName}: chair in ${label}`,
+            `${appt.serviceName} at ${localTime} (in ${label}).`,
             appt.id,
           );
         }

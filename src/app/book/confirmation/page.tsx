@@ -75,11 +75,19 @@ export default async function ConfirmationPage({
               <Stat label="Due at the shop" value={formatMoney(appt.remainderCents)} />
             )}
           </div>
-          <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
-            <ButtonLink href="/account" variant="secondary">
-              My appointments
-            </ButtonLink>
-            <ButtonLink href="/book">Book another</ButtonLink>
+          <div style={{ display: "grid", gap: 10, justifyItems: "center" }}>
+            <a
+              href={`/api/appointments/${appt.id}/calendar`}
+              style={{ fontSize: 13, fontWeight: 600, color: "var(--accent)", textDecoration: "none" }}
+            >
+              + Add to calendar
+            </a>
+            <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+              <ButtonLink href="/account" variant="secondary">
+                My appointments
+              </ButtonLink>
+              <ButtonLink href="/book">Book another</ButtonLink>
+            </div>
           </div>
         </div>
       </Card>

@@ -125,6 +125,12 @@ export default async function AccountPage(): Promise<ReactNode> {
                     <Badge tone={statusTone[a.status] ?? "neutral"}>
                       {statusLabel[a.status] ?? a.status.replace("_", " ")}
                     </Badge>
+                    <a
+                      href={`/api/appointments/${a.id}/calendar`}
+                      style={{ fontSize: 12, fontWeight: 600, color: "var(--accent)", textDecoration: "none" }}
+                    >
+                      + Calendar
+                    </a>
                     {a.status === "reserved" && (
                       <ConfirmAttendanceButton appointmentId={a.id} />
                     )}

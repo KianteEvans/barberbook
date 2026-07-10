@@ -6,7 +6,16 @@
  * this stays a pure, cadence-independent decision.
  */
 
-export const REMINDER_OFFSETS = [30, 15] as const;
+export const REMINDER_OFFSETS = [1440, 30, 15] as const;
+
+/** Human label for a reminder offset: 1440 -> "24 hours", 30 -> "30 minutes". */
+export function offsetLabel(offsetMinutes: number): string {
+  if (offsetMinutes >= 60 && offsetMinutes % 60 === 0) {
+    const hours = offsetMinutes / 60;
+    return `${hours} hour${hours === 1 ? "" : "s"}`;
+  }
+  return `${offsetMinutes} minute${offsetMinutes === 1 ? "" : "s"}`;
+}
 
 export interface UpcomingAppointment {
   readonly id: string;
