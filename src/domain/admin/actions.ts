@@ -15,6 +15,7 @@ import { parseOrThrow, formObject, type ActionState } from "@/domain/forms";
 import { toActionError, ValidationError } from "@/domain/errors";
 import { deleteUpload, saveUpload } from "@/domain/barbers/uploads";
 import { BACKDROPS } from "@/domain/backdrops";
+import { parseWeeklyHours } from "@/domain/availability/hours";
 import { SLOT_GRANULARITIES, TIMEZONES } from "@/domain/shop-options";
 
 /** Admin CRUD actions: services, weekly hours, time off, shop policy. */
@@ -72,24 +73,10 @@ export async function saveWeeklyHoursAction(
     const raw = formObject(formData);
     const input = parseOrThrow(weeklyHoursSchema, raw);
 
-    const rows: Array<{ barberId: string; weekday: number; startMin: number; endMin: number }> =
-      [];
-    const dayFields = input.hours.split("|");
-    if (dayFields.length !== 7) throw new ValidationError("Malformed hours payload.");
-    dayFields.forEach((field, weekday) => {
-      const trimmed = field.trim();
-      if (!trimmed) return;
-      const m = /^(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})$/.exec(trimmed);
-      if (!m) {
-        throw new ValidationError(
-          "Hours must look like 9:00-18:00 (or be blank for closed).",
-        );
-      }
-      const startMin = Number(m[1]) * 60 + Number(m[2]);
-      const endMin = Number(m[3]) * 60 + Number(m[4]);
-      if (endMin <= startMin) throw new ValidationError("End must be after start.");
-      rows.push({ barberId: input.barberId, weekday, startMin, endMin });
-    });
+    const rows = parseWeeklyHours(input.hours).map((r) => ({
+      barberId: input.barberId,
+      ...r,
+    }));
 
     await db.transaction(async (tx) => {
       await tx
