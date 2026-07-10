@@ -57,9 +57,6 @@ async function main(): Promise<void> {
       SELECT count(*)::text AS count FROM barbers
     `;
     if (Number(barberCount) === 0) {
-      const [admin] = await sql<[{ id: string }]>`
-        SELECT id FROM users WHERE email = 'admin@barberbook.local'
-      `;
       const roster: Array<{
         name: string;
         tagline: string;
@@ -75,7 +72,7 @@ async function main(): Promise<void> {
           tagline: "Fades, tapers, and razor work since 2012",
           bio: "Marco has been behind the chair for over a decade, specializing in skin fades, beard sculpting, and classic scissor work. Every cut ends with a hot towel and a straight-razor neck shave.",
           specialties: "Skin fade, Beard sculpt, Hot towel shave",
-          userId: admin!.id,
+          userId: null,
           weekdays: [2, 3, 4, 5, 6],
           hours: [540, 1080], // 9:00-18:00
           overrides: { "Classic Cut": null, "Cut + Beard": 5500, "The Works": null },
@@ -122,10 +119,21 @@ async function main(): Promise<void> {
         },
       ];
 
+      const barberHash = await bcrypt.hash("barber1234", 10);
+      let barberSeq = 0;
       for (const b of roster) {
+        // Each barber gets a staff login (barberN@barberbook.local / barber1234).
+        barberSeq += 1;
+        const email = `barber${barberSeq}@barberbook.local`;
+        await sql`
+          INSERT INTO users (email, password_hash, name, role)
+          VALUES (${email}, ${barberHash}, ${b.name}, 'barber')
+          ON CONFLICT (email) DO NOTHING
+        `;
+        const [bu] = await sql<[{ id: string }]>`SELECT id FROM users WHERE email = ${email}`;
         const [row] = await sql<[{ id: string }]>`
           INSERT INTO barbers (user_id, display_name, tagline, bio, specialties)
-          VALUES (${b.userId}, ${b.name}, ${b.tagline}, ${b.bio}, ${b.specialties})
+          VALUES (${bu!.id}, ${b.name}, ${b.tagline}, ${b.bio}, ${b.specialties})
           RETURNING id
         `;
         for (const weekday of b.weekdays) {

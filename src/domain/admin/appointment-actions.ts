@@ -6,9 +6,10 @@ import { z } from "zod";
 import Stripe from "stripe";
 import { db } from "@/db/client";
 import { appointments, payments, users } from "@/db/schema";
-import { getAdminIdentity } from "@/auth/session";
+import { getAdminIdentity, getIdentity } from "@/auth/session";
 import { parseOrThrow, formObject, type ActionState } from "@/domain/forms";
-import { toActionError, NotFoundError, ValidationError, AppError } from "@/domain/errors";
+import { toActionError, NotFoundError, ValidationError, AppError, ForbiddenError } from "@/domain/errors";
+import { resolveBarberForUser } from "@/domain/chair/operations";
 import { formatInTimeZone } from "date-fns-tz";
 import { loadSettings } from "@/domain/booking/load";
 import { noShowAllowed } from "@/domain/booking/grace";
@@ -30,12 +31,29 @@ async function requireAppointment(appointmentId: string) {
   return appt;
 }
 
+/**
+ * Authorize an admin OR the barber who owns the appointment (their own chair).
+ * Used for complete / no-show; money actions stay admin-only.
+ */
+async function authorizeAppointmentStaff(appointmentId: string): Promise<void> {
+  const identity = await getIdentity();
+  if (identity.role === "admin") return;
+  if (identity.role === "barber") {
+    const barber = await resolveBarberForUser(identity.userId);
+    const appt = await requireAppointment(appointmentId);
+    if (barber && appt.barberId === barber.id) return;
+  }
+  throw new ForbiddenError();
+}
+
 export async function markCompletedAction(
   _prev: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
   try {
-    await getAdminIdentity();
+    await authorizeAppointmentStaff(
+      parseOrThrow(idSchema, formObject(formData)).appointmentId,
+    );
     const input = parseOrThrow(idSchema, formObject(formData));
     const updated = await db
       .update(appointments)
@@ -76,7 +94,9 @@ export async function markNoShowAction(
   formData: FormData,
 ): Promise<ActionState> {
   try {
-    await getAdminIdentity();
+    await authorizeAppointmentStaff(
+      parseOrThrow(idSchema, formObject(formData)).appointmentId,
+    );
     const input = parseOrThrow(idSchema, formObject(formData));
     const appt = await requireAppointment(input.appointmentId);
     if (appt.status !== "confirmed" && appt.status !== "reserved") {

@@ -21,7 +21,9 @@ export const users = pgTable("users", {
   passwordHash: text("password_hash").notNull(),
   name: text("name").notNull(),
   phone: text("phone"),
-  role: text("role", { enum: ["admin", "client"] }).notNull().default("client"),
+  role: text("role", { enum: ["admin", "client", "barber"] })
+    .notNull()
+    .default("client"),
   stripeCustomerId: text("stripe_customer_id").unique(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });

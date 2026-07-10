@@ -47,6 +47,7 @@ export default async function RootLayout({
     { href: "/gallery", label: "Gallery" },
     { href: "/memberships", label: "Memberships" },
     ...(identity?.role === "admin" ? [{ href: "/admin", label: "Admin" }] : []),
+    ...(identity?.role === "barber" ? [{ href: "/chair", label: "My chair" }] : []),
     ...(identity ? [{ href: "/account", label: "My account" }] : []),
   ];
 

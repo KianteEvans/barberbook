@@ -21,15 +21,17 @@ const secretKey = new TextEncoder().encode(env.SESSION_SECRET);
 const sessionClaims = z.object({
   uid: z.string().uuid(),
   email: z.string().email(),
-  role: z.enum(["admin", "client"]),
+  role: z.enum(["admin", "client", "barber"]),
 });
 
 export type SessionClaims = z.infer<typeof sessionClaims>;
 
+export type Role = "admin" | "client" | "barber";
+
 export interface Identity {
   readonly userId: string;
   readonly email: string;
-  readonly role: "admin" | "client";
+  readonly role: Role;
 }
 
 export async function signSession(claims: SessionClaims): Promise<string> {
@@ -95,5 +97,12 @@ export async function getIdentity(): Promise<Identity> {
 export async function getAdminIdentity(): Promise<Identity> {
   const identity = await getIdentity();
   if (identity.role !== "admin") throw new ForbiddenError();
+  return identity;
+}
+
+/** Identity with the barber role, or throw. */
+export async function getBarberIdentity(): Promise<Identity> {
+  const identity = await getIdentity();
+  if (identity.role !== "barber") throw new ForbiddenError();
   return identity;
 }
