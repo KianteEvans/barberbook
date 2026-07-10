@@ -207,12 +207,22 @@ export default async function AccountPage(): Promise<ReactNode> {
                     </Badge>
                   </td>
                   <td style={{ textAlign: "right" }}>
-                    <Link
-                      href={`/book/${a.serviceId}?barber=${a.barberId}`}
-                      style={{ fontSize: 12, fontWeight: 600, color: "var(--accent)", textDecoration: "none" }}
-                    >
-                      Book again
-                    </Link>
+                    <div style={{ display: "flex", gap: 12, justifyContent: "flex-end" }}>
+                      {a.status === "completed" && (
+                        <Link
+                          href={`/account/review/${a.id}`}
+                          style={{ fontSize: 12, fontWeight: 600, color: "var(--text)", textDecoration: "none" }}
+                        >
+                          Review
+                        </Link>
+                      )}
+                      <Link
+                        href={`/book/${a.serviceId}?barber=${a.barberId}`}
+                        style={{ fontSize: 12, fontWeight: 600, color: "var(--accent)", textDecoration: "none" }}
+                      >
+                        Book again
+                      </Link>
+                    </div>
                   </td>
                 </tr>
               ))}

@@ -12,6 +12,7 @@ import { toActionError, NotFoundError, ValidationError, AppError } from "@/domai
 import { formatInTimeZone } from "date-fns-tz";
 import { loadSettings } from "@/domain/booking/load";
 import { noShowAllowed } from "@/domain/booking/grace";
+import { createNotification } from "@/domain/notifications/operations";
 import { paymentsEnabled } from "@/env";
 import { stripe } from "@/stripe/client";
 import { formatMoney } from "@/domain/money";
@@ -45,10 +46,19 @@ export async function markCompletedAction(
           inArray(appointments.status, ["confirmed", "pending_deposit"]),
         ),
       )
-      .returning({ id: appointments.id });
-    if (updated.length === 0) {
+      .returning({ id: appointments.id, clientId: appointments.clientId });
+    const done = updated[0];
+    if (!done) {
       throw new ValidationError("Only a confirmed appointment can be completed.");
     }
+    // Invite the client to review the visit (feeds the gallery once approved).
+    await createNotification(
+      done.clientId,
+      "review_request",
+      "How was your cut?",
+      "Leave a quick rating and review from your appointments page.",
+      done.id,
+    );
     revalidatePath("/admin");
     revalidatePath("/admin/calendar");
     return { ok: true, detail: "Marked completed." };

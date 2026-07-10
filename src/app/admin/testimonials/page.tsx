@@ -8,7 +8,10 @@ import { Field, TextInput, TextArea, Select } from "@/components/ui/fields";
 import { FormDrawer } from "@/components/ui/FormDrawer";
 import { upsertTestimonialAction } from "@/domain/testimonials/actions";
 import { loadAllTestimonials, type TestimonialRow } from "@/domain/testimonials/operations";
+import { loadPendingReviews } from "@/domain/reviews/operations";
+import { format } from "date-fns";
 import { DeleteTestimonialButton } from "./DeleteTestimonialButton";
+import { ReviewModeration } from "./ReviewModeration";
 
 export const dynamic = "force-dynamic";
 
@@ -70,6 +73,7 @@ function TestimonialFields({
 
 export default async function AdminTestimonialsPage(): Promise<ReactNode> {
   const all = await loadAllTestimonials();
+  const pending = await loadPendingReviews();
   const barberOptions = await db
     .select({ id: barbers.id, displayName: barbers.displayName })
     .from(barbers)
@@ -79,7 +83,7 @@ export default async function AdminTestimonialsPage(): Promise<ReactNode> {
   return (
     <PageShell
       title="Testimonials"
-      subtitle="Customer quotes shown on the public gallery"
+      subtitle="Customer quotes and post-visit reviews shown on the gallery"
       action={
         <FormDrawer
           trigger="Add testimonial"
@@ -91,6 +95,46 @@ export default async function AdminTestimonialsPage(): Promise<ReactNode> {
         </FormDrawer>
       }
     >
+      <Card title={`Pending reviews (${pending.length})`}>
+        {pending.length === 0 ? (
+          <EmptyState
+            title="No reviews awaiting approval"
+            hint="Reviews from completed visits land here for moderation."
+          />
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Rating</th>
+                <th>Comment</th>
+                <th>Barber</th>
+                <th>When</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {pending.map((r) => (
+                <tr key={r.id}>
+                  <td style={{ fontWeight: 600, whiteSpace: "nowrap" }}>{r.authorName}</td>
+                  <td style={{ color: "var(--accent)", whiteSpace: "nowrap" }}>
+                    {"★".repeat(r.rating)}
+                  </td>
+                  <td style={{ color: "var(--muted)", maxWidth: 300 }}>{r.comment ?? "-"}</td>
+                  <td style={{ color: "var(--muted)" }}>{r.barberName}</td>
+                  <td style={{ color: "var(--muted)", whiteSpace: "nowrap" }}>
+                    {format(r.createdAt, "MMM d")}
+                  </td>
+                  <td style={{ textAlign: "right" }}>
+                    <ReviewModeration reviewId={r.id} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </Card>
+
       <Card>
         {all.length === 0 ? (
           <EmptyState

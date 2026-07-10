@@ -109,6 +109,22 @@ export const testimonials = pgTable("testimonials", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+export const reviews = pgTable("reviews", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  appointmentId: uuid("appointment_id")
+    .notNull()
+    .unique()
+    .references(() => appointments.id, { onDelete: "cascade" }),
+  clientId: uuid("client_id").notNull().references(() => users.id),
+  barberId: uuid("barber_id").notNull().references(() => barbers.id),
+  rating: integer("rating").notNull(),
+  comment: text("comment"),
+  status: text("status", { enum: ["pending", "approved", "rejected"] })
+    .notNull()
+    .default("pending"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const availabilityRules = pgTable("availability_rules", {
   id: uuid("id").primaryKey().defaultRandom(),
   barberId: uuid("barber_id")
@@ -263,7 +279,14 @@ export const notifications = pgTable("notifications", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id").notNull().references(() => users.id),
   kind: text("kind", {
-    enum: ["reminder", "confirm_needed", "released", "promoted"],
+    enum: [
+      "reminder",
+      "confirm_needed",
+      "released",
+      "promoted",
+      "review_request",
+      "loyalty",
+    ],
   }).notNull(),
   title: text("title").notNull(),
   body: text("body").notNull(),

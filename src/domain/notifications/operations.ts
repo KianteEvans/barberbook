@@ -12,7 +12,9 @@ export type NotificationKind =
   | "reminder"
   | "confirm_needed"
   | "released"
-  | "promoted";
+  | "promoted"
+  | "review_request"
+  | "loyalty";
 
 export interface NotificationRow {
   readonly id: string;

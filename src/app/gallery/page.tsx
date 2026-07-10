@@ -5,6 +5,7 @@ import { barberPhotos, barbers } from "@/db/schema";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, EmptyState } from "@/components/ui/primitives";
 import { loadPublicTestimonials } from "@/domain/testimonials/operations";
+import { approvedReviewStats, loadApprovedReviews } from "@/domain/reviews/operations";
 
 export const dynamic = "force-dynamic";
 
@@ -33,6 +34,26 @@ export default async function GalleryPage(): Promise<ReactNode> {
     .limit(60);
 
   const testimonials = await loadPublicTestimonials();
+  const reviews = await loadApprovedReviews();
+  const stats = await approvedReviewStats();
+
+  // Unified "what clients say" feed: hand-picked testimonials + approved reviews.
+  const voices = [
+    ...testimonials.map((t) => ({
+      key: `t-${t.id}`,
+      quote: t.quote as string | null,
+      rating: t.rating,
+      authorName: t.authorName,
+      barberName: t.barberName,
+    })),
+    ...reviews.map((r) => ({
+      key: `r-${r.id}`,
+      quote: r.comment,
+      rating: r.rating,
+      authorName: r.authorName,
+      barberName: r.barberName,
+    })),
+  ];
 
   return (
     <PageShell
@@ -121,7 +142,18 @@ export default async function GalleryPage(): Promise<ReactNode> {
         >
           What clients say
         </h2>
-        {testimonials.length === 0 ? (
+        {stats.count > 0 && (
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span className="display" style={{ fontSize: 28, fontWeight: 700 }}>
+              {stats.average.toFixed(1)}
+            </span>
+            <Stars rating={Math.round(stats.average)} />
+            <span style={{ fontSize: 13, color: "var(--muted)" }}>
+              from {stats.count} review{stats.count === 1 ? "" : "s"}
+            </span>
+          </div>
+        )}
+        {voices.length === 0 ? (
           <EmptyState title="No testimonials yet" hint="Check back soon." />
         ) : (
           <div
@@ -131,22 +163,24 @@ export default async function GalleryPage(): Promise<ReactNode> {
               gap: 12,
             }}
           >
-            {testimonials.map((t) => (
-              <Card key={t.id} hover>
+            {voices.map((t) => (
+              <Card key={t.key} hover>
                 <div style={{ display: "grid", gap: 10 }}>
                   {t.rating !== null && <Stars rating={t.rating} />}
-                  <p
-                    style={{
-                      margin: 0,
-                      fontSize: 14,
-                      lineHeight: 1.6,
-                      color: "var(--text)",
-                    }}
-                  >
-                    {"“"}
-                    {t.quote}
-                    {"”"}
-                  </p>
+                  {t.quote && (
+                    <p
+                      style={{
+                        margin: 0,
+                        fontSize: 14,
+                        lineHeight: 1.6,
+                        color: "var(--text)",
+                      }}
+                    >
+                      {"“"}
+                      {t.quote}
+                      {"”"}
+                    </p>
+                  )}
                   <div style={{ display: "grid", gap: 1 }}>
                     <span style={{ fontSize: 13, fontWeight: 700 }}>{t.authorName}</span>
                     {t.barberName && (
