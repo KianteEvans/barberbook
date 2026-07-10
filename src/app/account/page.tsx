@@ -4,8 +4,9 @@ import { redirect } from "next/navigation";
 import { desc, eq } from "drizzle-orm";
 import { format } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
+import { and } from "drizzle-orm";
 import { db } from "@/db/client";
-import { appointments, barbers, services } from "@/db/schema";
+import { appointments, barbers, payments, services } from "@/db/schema";
 import { tryGetIdentity } from "@/auth/session";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, Badge, EmptyState, ButtonLink, type BadgeTone } from "@/components/ui/primitives";
@@ -15,6 +16,7 @@ import { loadClientWaitlist } from "@/domain/waitlist/operations";
 import { CancelButton } from "./CancelButton";
 import { ConfirmAttendanceButton } from "./ConfirmAttendanceButton";
 import { LeaveWaitlistButton } from "./LeaveWaitlistButton";
+import { TipControl } from "./TipControl";
 
 export const dynamic = "force-dynamic";
 
@@ -62,6 +64,11 @@ export default async function AccountPage(): Promise<ReactNode> {
     .limit(50);
 
   const waitlist = await loadClientWaitlist(identity.userId);
+  const tipRows = await db
+    .select({ appointmentId: payments.appointmentId })
+    .from(payments)
+    .where(and(eq(payments.clientId, identity.userId), eq(payments.type, "tip")));
+  const tipped = new Set(tipRows.map((t) => t.appointmentId));
   const now = Date.now();
   const upcoming = mine.filter(
     (a) =>
@@ -207,7 +214,16 @@ export default async function AccountPage(): Promise<ReactNode> {
                     </Badge>
                   </td>
                   <td style={{ textAlign: "right" }}>
-                    <div style={{ display: "flex", gap: 12, justifyContent: "flex-end" }}>
+                    <div style={{ display: "flex", gap: 12, justifyContent: "flex-end", alignItems: "center" }}>
+                      {a.status === "completed" &&
+                        (tipped.has(a.id) ? (
+                          <span style={{ fontSize: 12, color: "var(--muted)" }}>Tipped</span>
+                        ) : (
+                          <TipControl
+                            appointmentId={a.id}
+                            totalCents={a.depositCents + a.remainderCents}
+                          />
+                        ))}
                       {a.status === "completed" && (
                         <Link
                           href={`/account/review/${a.id}`}

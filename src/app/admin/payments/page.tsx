@@ -41,13 +41,19 @@ export default async function AdminPaymentsPage(): Promise<ReactNode> {
   const refunded = rows
     .filter((r) => r.type === "refund" && r.status === "succeeded")
     .reduce((s, r) => s + Math.abs(r.amountCents), 0);
-  const failed = rows.filter((r) => r.status === "failed").length;
+    const failed = rows.filter((r) => r.status === "failed").length;
+  const tips = rows
+    .filter((r) => r.type === "tip" && r.status === "succeeded")
+    .reduce((s, r) => s + r.amountCents, 0);
 
   return (
-    <PageShell title="Payments" subtitle="Deposits, remainders, fees, refunds, and subscriptions">
+    <PageShell title="Payments" subtitle="Deposits, remainders, fees, refunds, tips, and subscriptions">
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12 }}>
         <Card style={{ background: "linear-gradient(color-mix(in srgb, var(--ok) 6%, var(--panel)), var(--panel))" }}>
           <Stat label="Collected" value={formatMoney(collected)} />
+        </Card>
+        <Card style={{ background: "linear-gradient(color-mix(in srgb, var(--accent) 6%, var(--panel)), var(--panel))" }}>
+          <Stat label="Tips" value={formatMoney(tips)} />
         </Card>
         <Card style={{ background: "linear-gradient(color-mix(in srgb, var(--info) 6%, var(--panel)), var(--panel))" }}>
           <Stat label="Refunded" value={formatMoney(refunded)} />

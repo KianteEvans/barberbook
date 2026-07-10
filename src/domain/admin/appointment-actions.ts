@@ -212,7 +212,7 @@ export async function refundDepositAction(
  * Off-session charge against the customer's saved card. Failures are expected
  * (authentication_required, expired cards): record them and report cleanly.
  */
-async function chargeSavedCard({
+export async function chargeSavedCard({
   clientId,
   appointmentId,
   amountCents,
@@ -222,7 +222,7 @@ async function chargeSavedCard({
   clientId: string;
   appointmentId: string;
   amountCents: number;
-  type: "remainder" | "no_show_fee";
+  type: "remainder" | "no_show_fee" | "tip";
   description: string;
 }): Promise<{ ok: boolean; message: string }> {
   const [client] = await db.select().from(users).where(eq(users.id, clientId));

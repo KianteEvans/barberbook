@@ -257,7 +257,7 @@ export const payments = pgTable("payments", {
   membershipId: uuid("membership_id").references(() => memberships.id),
   clientId: uuid("client_id").references(() => users.id),
   type: text("type", {
-    enum: ["deposit", "remainder", "refund", "no_show_fee", "subscription"],
+    enum: ["deposit", "remainder", "refund", "no_show_fee", "subscription", "tip"],
   }).notNull(),
   amountCents: integer("amount_cents").notNull(),
   status: text("status", { enum: ["pending", "succeeded", "failed", "refunded"] })
