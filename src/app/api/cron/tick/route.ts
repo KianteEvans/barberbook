@@ -8,7 +8,11 @@ import { authorizeCron } from "@/domain/cron";
 import { loadSettings } from "@/domain/booking/load";
 import { createNotification } from "@/domain/notifications/operations";
 import { dueOffsets, offsetLabel, REMINDER_OFFSETS } from "@/domain/notifications/reminders";
-import { expireStaleWaitlist, promoteForSlot } from "@/domain/waitlist/operations";
+import {
+  expireStaleWaitlist,
+  openSlotsWithWaiters,
+  promoteForSlot,
+} from "@/domain/waitlist/operations";
 import { runNudgePass } from "@/domain/notifications/nudge-ops";
 
 /**
@@ -25,10 +29,54 @@ export async function POST(req: Request): Promise<NextResponse> {
   const now = new Date();
   const reminders = await runReminderPass(now);
   const released = await runReleasePass(now);
-  const expired = await expireStaleWaitlist(now);
+  const expired = await runExpiryPass(now);
+  const retried = await runWaitlistRetryPass(now);
   const nudges = await runNudgePass(now);
 
-  return NextResponse.json({ ok: true, reminders, released, expired, nudges });
+  return NextResponse.json({ ok: true, reminders, released, expired, retried, nudges });
+}
+
+/** Expire passed waitlist entries and let each waiter know the line closed. */
+async function runExpiryPass(now: Date): Promise<number> {
+  const expired = await expireStaleWaitlist(now);
+  for (const e of expired) {
+    await createNotification(
+      e.clientId,
+      "waitlist_expired",
+      e.flexible ? "That day came and went" : "That time passed",
+      e.flexible
+        ? "The day you were waiting on ended without an opening. Want to pick another day?"
+        : "The slot you were in line for passed without an opening. Want to book another time?",
+    );
+  }
+  return expired.length;
+}
+
+/**
+ * Retry promotions for exact slots that still have waiters but no live
+ * appointment - catches promotions missed to transient failures. Occupied
+ * slots are skipped, so a normally-promoted line costs one indexed query.
+ */
+async function runWaitlistRetryPass(now: Date): Promise<number> {
+  const wanted = await openSlotsWithWaiters();
+  let promoted = 0;
+  for (const slot of wanted) {
+    if (slot.desiredStartAt.getTime() <= now.getTime()) continue;
+    const [occupied] = await db
+      .select({ id: appointments.id })
+      .from(appointments)
+      .where(
+        and(
+          eq(appointments.barberId, slot.barberId),
+          eq(appointments.startAt, slot.desiredStartAt),
+          inArray(appointments.status, ["pending_deposit", "confirmed", "reserved"]),
+        ),
+      );
+    if (occupied) continue;
+    const booked = await promoteForSlot(slot.barberId, slot.desiredStartAt, now);
+    if (booked) promoted += 1;
+  }
+  return promoted;
 }
 
 /**

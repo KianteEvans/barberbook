@@ -325,6 +325,8 @@ export const notifications = pgTable("notifications", {
       "loyalty",
       "rebook",
       "winback",
+      "open_slot",
+      "waitlist_expired",
     ],
   }).notNull(),
   title: text("title").notNull(),
@@ -366,5 +368,10 @@ export const waitlistEntries = pgTable("waitlist_entries", {
   })
     .notNull()
     .default("waiting"),
+  // Flexible = "any time that day": desired_start_at holds the END of the
+  // shop-local day (expiry sweep unchanged); desired_date carries the day.
+  flexible: boolean("flexible").notNull().default(false),
+  desiredDate: date("desired_date"),
+  lastNotifiedAt: timestamp("last_notified_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });

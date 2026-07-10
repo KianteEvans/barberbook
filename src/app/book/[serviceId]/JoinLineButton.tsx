@@ -9,11 +9,15 @@ export function JoinLineButton({
   barberId,
   serviceId,
   desiredStartAt,
+  date,
   label,
 }: {
   barberId: string;
   serviceId: string;
-  desiredStartAt: string;
+  /** Exact-slot join: the slot instant (ISO). */
+  desiredStartAt?: string;
+  /** Flexible join: a shop-local day (YYYY-MM-DD), any opening that day. */
+  date?: string;
   label: string;
 }): ReactNode {
   const router = useRouter();
@@ -22,8 +26,13 @@ export function JoinLineButton({
       action={joinWaitlistAction}
       submitLabel={label}
       variant="secondary"
-      successMessage="You're in line."
-      hidden={{ barberId, serviceId, desiredStartAt }}
+      successMessage={date ? "You're on the list for that day." : "You're in line."}
+      hidden={{
+        barberId,
+        serviceId,
+        ...(desiredStartAt ? { desiredStartAt } : {}),
+        ...(date ? { date } : {}),
+      }}
       onSuccess={() => router.refresh()}
     />
   );

@@ -1,7 +1,10 @@
 import { and, asc, eq, lt } from "drizzle-orm";
+import { format } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 import { db } from "@/db/client";
 import { appointments, barbers, services, waitlistEntries } from "@/db/schema";
 import { createBookingOp } from "@/domain/booking/operations";
+import { dayRangeUtc, loadSettings } from "@/domain/booking/load";
 import {
   consumeCreditOp,
   loadClientMembership,
@@ -10,6 +13,7 @@ import {
 import { createNotification } from "@/domain/notifications/operations";
 import { ConflictError, ValidationError } from "@/domain/errors";
 import { orderWaitlist } from "./priority";
+import { shouldNotifyFlexible } from "./flexible";
 
 /** Waitlist reads, join/leave, and the auto-book promotion engine. */
 
@@ -18,6 +22,11 @@ export interface WaitlistView {
   readonly barberName: string;
   readonly serviceName: string;
   readonly desiredStartAt: Date;
+  /** True for "any time that day" entries. */
+  readonly flexible: boolean;
+  readonly desiredDate: string | null;
+  /** 1-based spot in the member-first line; null for flexible entries. */
+  readonly position: number | null;
 }
 
 /** Add a client to the line for a specific barber + slot (idempotent). */
@@ -50,6 +59,46 @@ export async function joinWaitlistOp(input: {
   });
 }
 
+/**
+ * Add a client to the "any time that day" line for a barber (idempotent).
+ * desired_start_at stores the END of the shop-local day so the expiry sweep
+ * treats the entry as live until the whole day has passed.
+ */
+export async function joinFlexibleWaitlistOp(input: {
+  clientId: string;
+  barberId: string;
+  serviceId: string;
+  /** Shop-local day, YYYY-MM-DD. */
+  date: string;
+}): Promise<void> {
+  const settings = await loadSettings();
+  const { end } = dayRangeUtc(input.date, settings.timezone);
+  if (end.getTime() <= Date.now()) {
+    throw new ValidationError("That day has already passed.");
+  }
+  const [existing] = await db
+    .select({ id: waitlistEntries.id })
+    .from(waitlistEntries)
+    .where(
+      and(
+        eq(waitlistEntries.clientId, input.clientId),
+        eq(waitlistEntries.barberId, input.barberId),
+        eq(waitlistEntries.flexible, true),
+        eq(waitlistEntries.desiredDate, input.date),
+        eq(waitlistEntries.status, "waiting"),
+      ),
+    );
+  if (existing) return;
+  await db.insert(waitlistEntries).values({
+    clientId: input.clientId,
+    barberId: input.barberId,
+    serviceId: input.serviceId,
+    desiredStartAt: end,
+    flexible: true,
+    desiredDate: input.date,
+  });
+}
+
 export async function leaveWaitlistOp(entryId: string, clientId: string): Promise<void> {
   await db
     .update(waitlistEntries)
@@ -63,14 +112,17 @@ export async function leaveWaitlistOp(entryId: string, clientId: string): Promis
     );
 }
 
-/** A client's active (waiting) line entries, for the account page. */
+/** A client's active (waiting) line entries with queue position. */
 export async function loadClientWaitlist(clientId: string): Promise<WaitlistView[]> {
-  return db
+  const rows = await db
     .select({
       id: waitlistEntries.id,
+      barberId: waitlistEntries.barberId,
       barberName: barbers.displayName,
       serviceName: services.name,
       desiredStartAt: waitlistEntries.desiredStartAt,
+      flexible: waitlistEntries.flexible,
+      desiredDate: waitlistEntries.desiredDate,
     })
     .from(waitlistEntries)
     .innerJoin(barbers, eq(waitlistEntries.barberId, barbers.id))
@@ -82,6 +134,46 @@ export async function loadClientWaitlist(clientId: string): Promise<WaitlistView
       ),
     )
     .orderBy(asc(waitlistEntries.desiredStartAt));
+
+  // Position = rank in the member-first line for that exact slot. A client
+  // holds few entries, so the per-entry lookups stay cheap.
+  const out: WaitlistView[] = [];
+  for (const row of rows) {
+    let position: number | null = null;
+    if (!row.flexible) {
+      const peers = await db
+        .select({
+          id: waitlistEntries.id,
+          clientId: waitlistEntries.clientId,
+          createdAt: waitlistEntries.createdAt,
+        })
+        .from(waitlistEntries)
+        .where(
+          and(
+            eq(waitlistEntries.barberId, row.barberId),
+            eq(waitlistEntries.desiredStartAt, row.desiredStartAt),
+            eq(waitlistEntries.status, "waiting"),
+          ),
+        );
+      const members = new Set<string>();
+      for (const cid of new Set(peers.map((p) => p.clientId))) {
+        if (await loadClientMembership(cid)) members.add(cid);
+      }
+      const ordered = orderWaitlist(peers, members);
+      const idx = ordered.findIndex((p) => p.id === row.id);
+      position = idx >= 0 ? idx + 1 : null;
+    }
+    out.push({
+      id: row.id,
+      barberName: row.barberName,
+      serviceName: row.serviceName,
+      desiredStartAt: row.desiredStartAt,
+      flexible: row.flexible,
+      desiredDate: row.desiredDate,
+      position,
+    });
+  }
+  return out;
 }
 
 /** How many are waiting for a given barber + slot (admin signal). */
@@ -129,10 +221,16 @@ export async function promoteForSlot(
         and(
           eq(waitlistEntries.barberId, barberId),
           eq(waitlistEntries.desiredStartAt, desiredStartAt),
+          eq(waitlistEntries.flexible, false),
           eq(waitlistEntries.status, "waiting"),
         ),
       );
-    if (entries.length === 0) return null;
+    if (entries.length === 0) {
+      // Nobody wanted this exact slot - tell "any time that day" waiters it
+      // opened so they can grab it themselves.
+      await notifyFlexibleWaiters(barberId, desiredStartAt, now);
+      return null;
+    }
 
     // Which waiting clients are active members (priority + credit-eligible)?
     const memberships = new Map<string, number>();
@@ -215,9 +313,78 @@ async function bookPromotion(
   }
 }
 
-/** Sweep waiting entries whose slot time has passed. Called from the tick. */
-export async function expireStaleWaitlist(now = new Date()): Promise<number> {
-  const expired = await db
+/**
+ * A slot freed with no exact waiter: alert flexible ("any time that day")
+ * waiters for this barber, throttled per entry via last_notified_at. Alerts
+ * only - flexible waiters book themselves, they are never auto-booked.
+ */
+async function notifyFlexibleWaiters(
+  barberId: string,
+  freedAt: Date,
+  now: Date,
+): Promise<void> {
+  const settings = await loadSettings();
+  const dateStr = format(toZonedTime(freedAt, settings.timezone), "yyyy-MM-dd");
+  const waiters = await db
+    .select({
+      id: waitlistEntries.id,
+      clientId: waitlistEntries.clientId,
+      lastNotifiedAt: waitlistEntries.lastNotifiedAt,
+    })
+    .from(waitlistEntries)
+    .where(
+      and(
+        eq(waitlistEntries.barberId, barberId),
+        eq(waitlistEntries.flexible, true),
+        eq(waitlistEntries.desiredDate, dateStr),
+        eq(waitlistEntries.status, "waiting"),
+      ),
+    );
+  if (waiters.length === 0) return;
+
+  const { start, end } = dayRangeUtc(dateStr, settings.timezone);
+  const [barber] = await db
+    .select({ name: barbers.displayName })
+    .from(barbers)
+    .where(eq(barbers.id, barberId));
+  const local = toZonedTime(freedAt, settings.timezone);
+  const timeLabel = format(local, "h:mm a");
+  const dayLabel = format(local, "EEE, MMM d");
+
+  for (const w of waiters) {
+    const notify = shouldNotifyFlexible({
+      freedAt,
+      dayStart: start,
+      dayEnd: end,
+      lastNotifiedAt: w.lastNotifiedAt,
+      now,
+    });
+    if (!notify) continue;
+    await createNotification(
+      w.clientId,
+      "open_slot",
+      "A spot just opened",
+      `${barber?.name ?? "Your barber"} has an opening at ${timeLabel} on ${dayLabel} - book it from the Book page before it goes.`,
+    );
+    await db
+      .update(waitlistEntries)
+      .set({ lastNotifiedAt: now })
+      .where(eq(waitlistEntries.id, w.id));
+  }
+}
+
+export interface ExpiredWaitlistEntry {
+  readonly clientId: string;
+  readonly desiredStartAt: Date;
+  readonly flexible: boolean;
+}
+
+/** Sweep waiting entries whose slot time has passed. Called from the tick,
+ *  which notifies each expired waiter. */
+export async function expireStaleWaitlist(
+  now = new Date(),
+): Promise<ExpiredWaitlistEntry[]> {
+  return db
     .update(waitlistEntries)
     .set({ status: "expired" })
     .where(
@@ -226,12 +393,15 @@ export async function expireStaleWaitlist(now = new Date()): Promise<number> {
         lt(waitlistEntries.desiredStartAt, now),
       ),
     )
-    .returning({ id: waitlistEntries.id });
-  return expired.length;
+    .returning({
+      clientId: waitlistEntries.clientId,
+      desiredStartAt: waitlistEntries.desiredStartAt,
+      flexible: waitlistEntries.flexible,
+    });
 }
 
-/** Distinct freed (barber, slot) pairs still wanted by waiters - for the tick
- *  to retry promotion after unconfirmed releases. */
+/** Distinct exact (barber, slot) pairs still wanted by waiters - for the tick
+ *  to retry promotions missed to transient failures. */
 export async function openSlotsWithWaiters(): Promise<
   Array<{ barberId: string; desiredStartAt: Date }>
 > {
@@ -241,6 +411,11 @@ export async function openSlotsWithWaiters(): Promise<
       desiredStartAt: waitlistEntries.desiredStartAt,
     })
     .from(waitlistEntries)
-    .where(eq(waitlistEntries.status, "waiting"));
+    .where(
+      and(
+        eq(waitlistEntries.status, "waiting"),
+        eq(waitlistEntries.flexible, false),
+      ),
+    );
   return rows;
 }

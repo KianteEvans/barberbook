@@ -17,7 +17,9 @@ export type NotificationKind =
   | "review_request"
   | "loyalty"
   | "rebook"
-  | "winback";
+  | "winback"
+  | "open_slot"
+  | "waitlist_expired";
 
 export interface NotificationRow {
   readonly id: string;

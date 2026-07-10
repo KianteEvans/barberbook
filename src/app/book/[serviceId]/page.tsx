@@ -162,7 +162,15 @@ export default async function PickSlotPage({
         {slots.length === 0 ? (
           <EmptyState
             title="No openings this day"
-            hint="Try another day or barber."
+            hint="Try another day or barber - or get pinged if a time frees up."
+            action={
+              <JoinLineButton
+                barberId={barberId}
+                serviceId={serviceId}
+                date={date}
+                label="Notify me if this day opens up"
+              />
+            }
           />
         ) : (
           (() => {
@@ -229,6 +237,27 @@ export default async function PickSlotPage({
                       </div>
                     </div>
                   ))}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 12,
+                    flexWrap: "wrap",
+                    borderTop: "1px dashed var(--border)",
+                    paddingTop: 12,
+                  }}
+                >
+                  <span style={{ fontSize: 13, color: "var(--muted)" }}>
+                    None of these work? We can ping you if another time opens up.
+                  </span>
+                  <JoinLineButton
+                    barberId={barberId}
+                    serviceId={serviceId}
+                    date={date}
+                    label="Watch this day"
+                  />
+                </div>
               </div>
             );
           })()

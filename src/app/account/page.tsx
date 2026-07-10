@@ -188,10 +188,23 @@ export default async function AccountPage(): Promise<ReactNode> {
                 <div style={{ display: "grid", gap: 2 }}>
                   <span style={{ fontWeight: 700, fontSize: 14 }}>
                     {w.serviceName} with {w.barberName}
+                    {w.position !== null && (
+                      <span
+                        style={{
+                          marginLeft: 8,
+                          fontSize: 12,
+                          fontWeight: 700,
+                          color: "var(--accent)",
+                        }}
+                      >
+                        #{w.position} in line
+                      </span>
+                    )}
                   </span>
                   <span style={{ color: "var(--muted)", fontSize: 13 }}>
-                    {format(toZonedTime(w.desiredStartAt, settings.timezone), "EEEE, MMM d - h:mm a")}
-                    {" - we'll book you automatically if it opens"}
+                    {w.flexible
+                      ? `Any time on ${format(new Date(`${w.desiredDate}T12:00:00Z`), "EEEE, MMM d")} - we'll ping you when a slot opens`
+                      : `${format(toZonedTime(w.desiredStartAt, settings.timezone), "EEEE, MMM d - h:mm a")} - we'll book you automatically if it opens`}
                   </span>
                 </div>
                 <LeaveWaitlistButton entryId={w.id} />
