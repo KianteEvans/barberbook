@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { addDays, format } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
@@ -190,7 +191,26 @@ export default async function ChairPage(): Promise<ReactNode> {
                     {w.phone ? ` - ${w.phone}` : ""}
                   </span>
                 </div>
-                <WalkinResolve id={w.id} status={w.status as "waiting" | "serving"} />
+                <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+                  {w.status === "waiting" && (
+                    <Link
+                      href={`/chair/book/${w.id}`}
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 600,
+                        color: "var(--accent)",
+                        textDecoration: "none",
+                        border: "1px solid var(--border)",
+                        borderRadius: "var(--radius-sm)",
+                        padding: "5px 10px",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      Book a slot
+                    </Link>
+                  )}
+                  <WalkinResolve id={w.id} status={w.status as "waiting" | "serving"} />
+                </div>
               </div>
             ))}
           </div>

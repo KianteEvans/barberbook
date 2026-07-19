@@ -8,6 +8,7 @@ import { toActionError, ForbiddenError } from "@/domain/errors";
 import { resolveBarberForUser } from "@/domain/chair/operations";
 import {
   addWalkinOp,
+  bookWalkinSlotOp,
   callNextWalkinOp,
   resolveWalkinOp,
   startWalkinOp,
@@ -84,6 +85,36 @@ export async function callNextWalkinAction(
     return claimed
       ? { ok: true, detail: `${claimed.name} is up - they've been texted if they left a number.` }
       : { ok: true, detail: "Nobody is waiting right now." };
+  } catch (err) {
+    return { ok: false, error: toActionError(err) };
+  }
+}
+
+const bookSlotSchema = z.object({
+  walkinId: z.string().uuid(),
+  serviceId: z.string().uuid(),
+  startAt: z.string().datetime({ offset: true }).or(z.string().datetime()),
+});
+
+/** Barber-only: book a waiting walk-in into a slot on their own calendar. */
+export async function bookWalkinSlotAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    const identity = await requireStaff();
+    const ownChair = await actingChair(identity);
+    if (!ownChair) throw new ForbiddenError();
+    const input = parseOrThrow(bookSlotSchema, formObject(formData));
+    await bookWalkinSlotOp({
+      walkinId: input.walkinId,
+      barberId: ownChair,
+      serviceId: input.serviceId,
+      startAt: new Date(input.startAt),
+    });
+    refresh();
+    revalidatePath("/admin/calendar");
+    return { ok: true, detail: "Booked - they're on your calendar now." };
   } catch (err) {
     return { ok: false, error: toActionError(err) };
   }

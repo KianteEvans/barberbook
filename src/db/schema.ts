@@ -365,13 +365,15 @@ export const walkIns = pgTable("walk_ins", {
   phone: text("phone"),
   serviceId: uuid("service_id").references(() => services.id),
   status: text("status", {
-    enum: ["waiting", "serving", "done", "no_show", "canceled"],
+    enum: ["waiting", "serving", "done", "no_show", "canceled", "booked"],
   })
     .notNull()
     .default("waiting"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   calledAt: timestamp("called_at", { withTimezone: true }),
   doneAt: timestamp("done_at", { withTimezone: true }),
+  // Set when the walk-in was booked into a calendar slot instead.
+  appointmentId: uuid("appointment_id").references(() => appointments.id),
 });
 
 export const waitlistEntries = pgTable("waitlist_entries", {

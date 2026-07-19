@@ -1,9 +1,15 @@
+import { randomUUID } from "crypto";
 import { and, asc, avg, count, eq, inArray, isNull, or, type SQL } from "drizzle-orm";
-import { db } from "@/db/client";
-import { barbers, services, walkIns } from "@/db/schema";
+import { format } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
+import { db, isSlotTakenError } from "@/db/client";
+import { appointments, barbers, services, users, walkIns } from "@/db/schema";
 import { loadSettings } from "@/domain/booking/load";
+import { resolveBarberService } from "@/domain/barbers/operations";
+import { createNotification } from "@/domain/notifications/operations";
+import { hashPassword } from "@/auth/password";
 import { sendSms } from "@/notifications/sms";
-import { NotFoundError, ValidationError } from "@/domain/errors";
+import { ConflictError, NotFoundError, ValidationError } from "@/domain/errors";
 import { estimateWaitMin } from "./estimate";
 
 /** In-shop walk-in queue: FIFO with "first available" (NULL barber) entries. */
@@ -15,7 +21,7 @@ export interface WalkinRow {
   readonly barberId: string | null;
   readonly barberName: string | null;
   readonly serviceName: string | null;
-  readonly status: "waiting" | "serving" | "done" | "no_show" | "canceled";
+  readonly status: "waiting" | "serving" | "done" | "no_show" | "canceled" | "booked";
   readonly createdAt: Date;
   readonly calledAt: Date | null;
   /** Rough minutes until called; 0 when next or already serving. */
@@ -169,6 +175,149 @@ export async function resolveWalkinOp(
     .update(walkIns)
     .set({ status: outcome, doneAt: now })
     .where(eq(walkIns.id, id));
+}
+
+const GUEST_EMAIL_DOMAIN = "guest.local";
+
+/**
+ * Resolve the client account for a walk-in: an existing user matched by phone
+ * (their visit lands on their real history), else a fresh guest account that
+ * cannot log in (random password, email suppressed). Returns whether the user
+ * was created by THIS call so a failed booking can clean it up.
+ */
+async function resolveWalkinClient(walkin: {
+  id: string;
+  name: string;
+  phone: string | null;
+}): Promise<{ clientId: string; isGuest: boolean; created: boolean }> {
+  if (walkin.phone) {
+    const [existing] = await db
+      .select({ id: users.id, email: users.email })
+      .from(users)
+      .where(and(eq(users.phone, walkin.phone), eq(users.role, "client")));
+    if (existing) {
+      return {
+        clientId: existing.id,
+        isGuest: existing.email.endsWith(`@${GUEST_EMAIL_DOMAIN}`),
+        created: false,
+      };
+    }
+  }
+  const [guest] = await db
+    .insert(users)
+    .values({
+      email: `walkin-${walkin.id.slice(0, 8)}@${GUEST_EMAIL_DOMAIN}`,
+      passwordHash: await hashPassword(randomUUID()),
+      name: walkin.name,
+      phone: walkin.phone,
+      role: "client",
+      emailOptOut: true,
+    })
+    .returning({ id: users.id });
+  if (!guest) throw new Error("guest insert failed");
+  return { clientId: guest.id, isGuest: true, created: true };
+}
+
+/**
+ * Book a waiting walk-in into a real slot on this barber's calendar. The
+ * appointment lands confirmed with no deposit (they pay at the shop); the
+ * gist exclusion constraint stays the double-booking arbiter (23P01 ->
+ * ConflictError). The walk-in leaves the queue as status 'booked'.
+ */
+export async function bookWalkinSlotOp(input: {
+  walkinId: string;
+  barberId: string;
+  serviceId: string;
+  startAt: Date;
+  now?: Date;
+}): Promise<string> {
+  const now = input.now ?? new Date();
+  if (input.startAt.getTime() <= now.getTime()) {
+    throw new ValidationError("That time is in the past.");
+  }
+
+  const [walkin] = await db
+    .select({
+      id: walkIns.id,
+      name: walkIns.name,
+      phone: walkIns.phone,
+      status: walkIns.status,
+      barberId: walkIns.barberId,
+    })
+    .from(walkIns)
+    .where(eq(walkIns.id, input.walkinId));
+  if (!walkin) throw new NotFoundError("Walk-in not found.");
+  if (walkin.status !== "waiting") {
+    throw new ValidationError("Only a waiting walk-in can be booked a slot.");
+  }
+  if (walkin.barberId !== null && walkin.barberId !== input.barberId) {
+    throw new ValidationError("That walk-in belongs to another chair.");
+  }
+
+  const settings = await loadSettings();
+  // Effective price + duration; rejects services this barber does not offer.
+  const service = await resolveBarberService(input.barberId, input.serviceId);
+  const endAt = new Date(input.startAt.getTime() + service.durationMin * 60_000);
+  const client = await resolveWalkinClient(walkin);
+
+  let apptId: string;
+  try {
+    const [row] = await db
+      .insert(appointments)
+      .values({
+        clientId: client.clientId,
+        barberId: input.barberId,
+        serviceId: input.serviceId,
+        startAt: input.startAt,
+        endAt,
+        status: "confirmed",
+        depositCents: 0,
+        remainderCents: service.priceCents,
+        holdTier: "member",
+        graceMinutes: settings.memberGraceMinutes,
+        attendanceConfirmedAt: now,
+      })
+      .returning({ id: appointments.id });
+    if (!row) throw new Error("insert failed");
+    apptId = row.id;
+  } catch (err) {
+    // Don't leave an orphan guest behind a lost slot race.
+    if (client.created) await db.delete(users).where(eq(users.id, client.clientId));
+    if (isSlotTakenError(err)) {
+      throw new ConflictError("That slot was just taken. Pick another time.");
+    }
+    throw err;
+  }
+
+  await db
+    .update(walkIns)
+    .set({ status: "booked", appointmentId: apptId, barberId: input.barberId })
+    .where(eq(walkIns.id, walkin.id));
+
+  const [barber] = await db
+    .select({ name: barbers.displayName })
+    .from(barbers)
+    .where(eq(barbers.id, input.barberId));
+  const local = toZonedTime(input.startAt, settings.timezone);
+  const whenLabel = `${format(local, "h:mm a")} on ${format(local, "EEE, MMM d")}`;
+  if (walkin.phone) {
+    await sendSms(
+      walkin.phone,
+      `You're booked at ${settings.shopName}: ${service.name} with ${barber?.name ?? "your barber"} at ${whenLabel}.`,
+    );
+  }
+  // A matched real account also gets the in-app notification (guests can't
+  // log in, and their reminder emails are already suppressed).
+  if (!client.isGuest) {
+    await createNotification(
+      client.clientId,
+      "promoted",
+      "You're booked",
+      `${service.name} with ${barber?.name ?? "your barber"} at ${whenLabel}. See your appointments.`,
+      apptId,
+    );
+  }
+  return apptId;
 }
 
 /** Assign + start a specific waiting entry (admin flow). */
