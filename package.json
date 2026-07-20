@@ -13,6 +13,7 @@
     "db:migrate": "tsx src/db/migrate.ts",
     "seed": "tsx scripts/dev-seed.ts",
     "seed:appointments": "tsx scripts/dev-seed-appointments.ts",
+    "seed:demo": "tsx scripts/dev-seed-demo.ts",
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
