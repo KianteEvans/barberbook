@@ -19,6 +19,7 @@ import { formatMoney } from "@/domain/money";
 import { loadClientMembership } from "@/domain/memberships/operations";
 import { loyaltyFreeCredits } from "@/domain/promotions/operations";
 import { paymentsEnabled } from "@/env";
+import { DepositChoice } from "./DepositChoice";
 
 export const dynamic = "force-dynamic";
 
@@ -86,13 +87,7 @@ export default async function ConfirmBookingPage({
         </div>
         <div style={{ padding: 20 }}>
 
-        {collectDeposit ? (
-          <p style={{ color: "var(--muted)", fontSize: 13, margin: "0 0 14px" }}>
-            You will be taken to our secure payment page to pay the deposit and
-            lock in this slot. Cancel at least {settings.cancellationWindowHours}{" "}
-            hours ahead for a full deposit refund.
-          </p>
-        ) : (
+        {!collectDeposit && (
           <p style={{ color: "var(--muted)", fontSize: 13, margin: "0 0 14px" }}>
             Pay at the shop. Cancel at least {settings.cancellationWindowHours}{" "}
             hours ahead if you cannot make it.
@@ -101,7 +96,7 @@ export default async function ConfirmBookingPage({
 
         <MutationForm
           action={createBookingAction}
-          submitLabel={collectDeposit ? `Pay ${formatMoney(depositCents)} deposit` : "Book it"}
+          submitLabel="Book it"
           successMessage="Booked!"
           hidden={{
             barberId: barber.id,
@@ -109,6 +104,12 @@ export default async function ConfirmBookingPage({
             startAt: startAt.toISOString(),
           }}
         >
+          {collectDeposit && (
+            <DepositChoice
+              depositLabel={formatMoney(depositCents)}
+              cancellationWindowHours={settings.cancellationWindowHours}
+            />
+          )}
           {canUseCredit && (
             <label
               style={{

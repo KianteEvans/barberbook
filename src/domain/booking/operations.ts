@@ -33,6 +33,12 @@ export interface CreateBookingInput {
   /** A validated promo code + its computed discount, applied to the price. */
   readonly discountCode?: string;
   readonly discountCents?: number;
+  /**
+   * Client chose to reserve WITHOUT the online deposit (must confirm
+   * attendance instead). Only meaningful when payments are enabled; the
+   * default (undefined/false) keeps the deposit path.
+   */
+  readonly skipDeposit?: boolean;
 }
 
 export interface CreatedBooking {
@@ -68,11 +74,25 @@ export async function createBookingOp(
     : Math.min(input.discountCents ?? 0, service.priceCents);
   const pricedService =
     discount > 0 ? { ...service, priceCents: service.priceCents - discount } : service;
-  const { depositCents, remainderCents } = covered
+  const split = covered
     ? { depositCents: 0, remainderCents: 0 }
     : computeDeposit(pricedService, settings);
   const endAt = new Date(input.startAt.getTime() + service.durationMin * 60_000);
-  const online = !covered && paymentsEnabled && depositCents > 0;
+  // Online deposit is the DEFAULT when payments are configured, but the
+  // client may opt out and hold the slot as a confirm-required reservation.
+  const online =
+    !covered &&
+    paymentsEnabled &&
+    split.depositCents > 0 &&
+    input.skipDeposit !== true;
+  // Store what will actually be collected: a no-deposit hold owes the full
+  // (discounted) price at the shop and carries no deposit.
+  const depositCents = online ? split.depositCents : 0;
+  const remainderCents = covered
+    ? 0
+    : online
+      ? split.remainderCents
+      : pricedService.priceCents;
 
   // Lock tier drives the initial status, grace, and confirmation deadline:
   //   member  -> confirmed, 15-min grace, no confirmation needed

@@ -39,6 +39,8 @@ const createBookingSchema = z.object({
   useCredit: z.string().optional(),
   useFreeCut: z.string().optional(),
   discountCode: z.string().trim().max(40).optional(),
+  /** "deposit" (default) locks the slot via Stripe; "reserve" skips it. */
+  depositChoice: z.enum(["deposit", "reserve"]).optional(),
 });
 
 /**
@@ -95,6 +97,7 @@ export async function createBookingAction(
         ...(creditId ? { creditId } : {}),
         ...(freeCut ? { freeCut } : {}),
         ...(discountCode ? { discountCode, discountCents } : {}),
+        ...(input.depositChoice === "reserve" ? { skipDeposit: true } : {}),
       });
     } catch (err) {
       if (creditId) await refundCreditOp(creditId);

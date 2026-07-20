@@ -73,6 +73,48 @@ export function StatusPoller({
     );
   }
 
+  if (status === "reserved") {
+    return (
+      <div
+        role="status"
+        style={{ display: "grid", gap: 10, textAlign: "center", justifyItems: "center" }}
+      >
+        <span
+          className="check-pop"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 64,
+            height: 64,
+            borderRadius: "var(--radius-full)",
+            background: "color-mix(in srgb, var(--warn) 15%, transparent)",
+            border: "2px solid var(--warn)",
+            color: "var(--warn)",
+          }}
+        >
+          <CheckIcon size={32} />
+        </span>
+        <p
+          className="display"
+          style={{
+            margin: 0,
+            fontWeight: 600,
+            fontSize: 22,
+            textTransform: "uppercase",
+            letterSpacing: "0.04em",
+          }}
+        >
+          Slot reserved
+        </p>
+        <p style={{ margin: 0, color: "var(--muted)", fontSize: 13 }}>
+          No deposit needed - just confirm you&apos;re coming from My account
+          before your cut, or the slot is released to the line.
+        </p>
+      </div>
+    );
+  }
+
   if (status === "canceled") {
     return (
       <div role="status" style={{ display: "grid", gap: 6, textAlign: "center" }}>
