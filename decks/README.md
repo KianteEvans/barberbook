@@ -1,6 +1,6 @@
 # Archera for Automatum — AWS Alliance Advisory brief
 
-`Archera-for-Automatum.pptx` — a 20-slide partner brief on putting Archera to work for
+`Archera-for-Automatum.pptx` — a 21-slide partner brief on putting Archera to work for
 Automatum, a cloud-marketplace management platform for ISVs with 80+ customers on AWS.
 
 Written for an AWS-fluent reader: the commitment mechanic is one dense reference slide
@@ -8,7 +8,7 @@ Written for an AWS-fluent reader: the commitment mechanic is one dense reference
 the deck spends its space on the decisions Automatum actually has to make — the business
 case (3–5), the opportunity sized against the base (6–7), the five motions with two slides
 on presales insertion and base sequencing (8–15), how the money moves through CPPO (16),
-and proof, activation and the honest caveats (17–20). Every slide carries speaker notes;
+and proof, activation, the honest caveats, and a forwardable one-frame summary (17–21). Every slide carries speaker notes;
 the notes hold the plain-language framing for a less technical audience the deck may be
 forwarded to.
 

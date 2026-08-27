@@ -229,8 +229,8 @@ function chip(s, text, x, y, w, h, o) {
   });
   s.addText([
     { text: "The first one is the point. ", options: { bold: true, color: P.white } },
-    { text: "The other three compound on top of it — and part four runs them as five motions, starting with the attach, which works on day one.", options: { color: P.t2 } },
-  ], { x: M, y: 5.84, w: CW, h: 0.40, isTextBox: true, margin: 0, fontFace: F, fontSize: 13, valign: "middle" });
+    { text: "The other three compound on top of it — and part four runs them as five motions, starting with the attach, which works on day one. One clock to respect: rev-share counts only entities net-new to Archera.", options: { color: P.t2 } },
+  ], { x: M, y: 5.84, w: CW, h: 0.62, isTextBox: true, margin: 0, fontFace: F, fontSize: 13, valign: "top", lineSpacing: 19 });
   foot(s, N);
   s.addNotes("Lead with attach and stay there — everything else is upside. The reason attach is credible here and not for a typical partner: Automatum already holds the billing relationship, already connects to customer accounts as part of listing work, and already reconciles the marketplace rails the premium bills over.");
 }
@@ -364,7 +364,7 @@ function chip(s, text, x, y, w, h, o) {
       });
     });
   });
-  caption(s, "Illustrative. Reservable share and the blended Archera rate are assumptions; the 45% coverage gap follows the measured 55% median AWS commitment coverage (ProsperOps). The 22% premium is the gap between the 57% a three-year creates and the 35% blended net the customer keeps. Rev-share tiers per Archera's distributor agreement: Bronze 20% (under $100K GRI/GSP MRR), Silver 25% (under $500K), Gold 30% ($1M+) — the base case's ~$119K premium MRR lands in Silver.", 6.30);
+  caption(s, "Illustrative. Reservable share and the blended Archera rate are assumptions; the 45% coverage gap follows the measured 55% median AWS commitment coverage (ProsperOps). The 22% premium is the gap between the 57% a three-year creates and the 35% blended net the customer keeps. Rev-share tiers per Archera's distributor agreement: Bronze 20% (under $100K commitment MRR), Silver 25% (under $500K), Gold 30% ($1M+) — the base case's ~$119K premium MRR lands in Silver.", 6.30);
   foot(s, N);
   s.addNotes("Do not defend the inputs — invite the audience to replace them. The point of the slide is that even the conservative column, at $10K a month of average AWS spend, produces a high-six-figure savings pool for the base (seven figures in the base case) and a six-figure revenue line for Automatum at the agreement's 20-30% tiers. If Automatum can pull actual spend data for even ten accounts, the base case tightens immediately.");
 }
@@ -660,30 +660,44 @@ function chip(s, text, x, y, w, h, o) {
   h1(s, "Open a recurring revenue line.");
   sub(s, "The distributor agreement offers two postures — and the recurring revenue line this deck argues for requires the second.", { y: 1.46, w: 9.8 });
 
-  const models = [
-    ["REFERRAL TIER", "A one-time bonus, not a revenue line", [
-      "Automatum registers the lead; Archera runs the sale, onboarding and support.",
-      "Pays a one-off bonus of the first month's MRR — nothing recurring.",
-      "Fine for the odd out-of-scope account. It is not the line this deck argues for.",
-    ], P.teal, P.card],
-    ["CO-SELLER TIER", "20–30% recurring, rising with the book", [
-      "Bronze 20% under $100K GRI/GSP MRR, Silver 25% under $500K, Gold 30% at $1M+.",
-      "Automatum runs the motion with joint GTM support; Archera provides Tier-2 support.",
-      "The rails — CPPO, metering, the Partner Portal — are on the next slide.",
-    ], P.indigoL, P.card2],
-  ];
-  models.forEach((m, i) => {
-    const w = CW / 2 - 0.12, x = M + i * (CW / 2 + 0.12), y = 2.10;
-    card(s, x, y, w, 3.20, { fill: m[4], line: i === 1 ? P.indigo : P.rule, lw: i === 1 ? 1.25 : 0.75 });
-    label(s, m[0], x + 0.34, y + 0.24, w - 0.68, m[3], 9.5);
-    s.addText(m[1], { x: x + 0.34, y: y + 0.52, w: w - 0.68, h: 0.54, isTextBox: true, margin: 0, fontFace: F, fontSize: 15, bold: true, color: P.white, valign: "top", lineSpacing: 20 });
-    m[2].forEach((li, j) => {
+  // left: referral card
+  {
+    const w = CW / 2 - 0.12, x = M, y = 2.10;
+    card(s, x, y, w, 3.20, { fill: P.card, line: P.rule });
+    label(s, "REFERRAL TIER", x + 0.34, y + 0.24, w - 0.68, P.teal, 9.5);
+    s.addText("A one-time bonus, not a revenue line", { x: x + 0.34, y: y + 0.52, w: w - 0.68, h: 0.34, isTextBox: true, margin: 0, fontFace: F, fontSize: 15, bold: true, color: P.white, valign: "top", lineSpacing: 20 });
+    ["Automatum registers the lead; Archera runs the sale, onboarding and support.",
+     "Pays a one-off bonus of the first month's MRR — nothing recurring.",
+     "Fine for the odd out-of-scope account. It is not the line this deck argues for."].forEach((li, j) => {
       const ly = y + 1.16 + j * 0.66;
-      s.addShape(pres.ShapeType.ellipse, { x: x + 0.36, y: ly + 0.16, w: 0.15, h: 0.15, fill: { color: m[3] }, line: { color: m[3], width: 0.25 } });
+      s.addShape(pres.ShapeType.ellipse, { x: x + 0.36, y: ly + 0.16, w: 0.15, h: 0.15, fill: { color: P.teal }, line: { color: P.teal, width: 0.25 } });
       s.addText(li, { x: x + 0.68, y: ly, w: w - 1.02, h: 0.56, isTextBox: true, margin: 0, fontFace: F, fontSize: 11.5, color: P.t2, valign: "middle", lineSpacing: 15.5 });
     });
-  });
+  }
+  // right: co-seller tier ladder
+  {
+    const w = CW / 2 - 0.12, x = M + CW / 2 + 0.12, y = 2.10;
+    card(s, x, y, w, 3.20, { fill: P.card2, line: P.indigo, lw: 1.25 });
+    label(s, "CO-SELLER TIER", x + 0.34, y + 0.24, w - 0.68, P.indigoL, 9.5);
+    s.addText("20–30% recurring, rising with the book", { x: x + 0.34, y: y + 0.52, w: w - 0.68, h: 0.34, isTextBox: true, margin: 0, fontFace: F, fontSize: 15, bold: true, color: P.white, valign: "top", lineSpacing: 20 });
+    const tiers = [
+      ["BRONZE", "20%", "under $100K MRR", "conservative ~$48K MRR"],
+      ["SILVER", "25%", "under $500K", "base ~$119K · optimistic ~$238K"],
+      ["GOLD", "30%", "$1M+ MRR", "a multi-year ambition"],
+    ];
+    tiers.forEach((t, j) => {
+      const ty = y + 1.02 + j * 0.60;
+      s.addShape(pres.ShapeType.roundRect, { x: x + 0.34, y: ty, w: w - 0.68, h: 0.50, rectRadius: 0.06, fill: { color: j === 1 ? P.indigo : P.bg2 }, line: { color: j === 1 ? P.indigoL : P.rule, width: j === 1 ? 1.0 : 0.75 } });
+      s.addText([
+        { text: t[0] + "  " + t[1], options: { bold: true, fontSize: 11.5, color: P.white } },
+        { text: "   " + t[2], options: { fontSize: 9.5, color: j === 1 ? P.t1 : P.t3 } },
+      ], { x: x + 0.52, y: ty, w: w - 1.04, h: 0.50, isTextBox: true, margin: 0, fontFace: F, valign: "middle" });
+      s.addText(t[3], { x: x + 0.52, y: ty, w: w - 1.22, h: 0.50, isTextBox: true, margin: 0, fontFace: F, fontSize: 8.5, italic: true, color: j === 1 ? P.t1 : P.muted, align: "right", valign: "middle" });
+    });
+    s.addText("Automatum runs the motion with joint GTM support; Archera provides Tier-2 support.", { x: x + 0.34, y: y + 2.86, w: w - 0.68, h: 0.28, isTextBox: true, margin: 0, fontFace: F, fontSize: 10, color: P.t2, valign: "middle" });
+  }
 
+  caption(s, "Tier bands measured on commitment MRR — Archera's GRI/GSP (Guaranteed RI and Savings Plan) revenue across the partner's book. Scenario placements per the slide 6 model (premium pool ÷ 12).", 6.66);
   card(s, M, 5.48, CW, 1.06, { fill: P.bg2, line: P.amber, lw: 1.0 });
   s.addText([
     { text: "Timely angle. ", options: { bold: true, color: P.amber } },
@@ -728,11 +742,11 @@ function chip(s, text, x, y, w, h, o) {
     x: px + 0.26, y: 4.52, w: pw - 0.52, h: 1.04, isTextBox: true, margin: 0, fontFace: F, fontSize: 9.5, color: P.t2, valign: "top", lineSpacing: 13.5,
   });
 
-  card(s, M, 5.80, CW, 0.66, { fill: P.bg2, line: P.rule });
+  card(s, M, 5.80, CW, 0.66, { fill: P.bg2, line: P.amber, lw: 1.0 });
   s.addText([
-    { text: "For the ISV, the charge is marketplace spend. ", options: { bold: true, color: P.white } },
-    { text: "It consolidates onto the AWS invoice and draws down committed spend they were going to burn anyway.", options: { color: P.t2 } },
-  ], { x: M + 0.34, y: 5.80, w: CW - 0.68, h: 0.66, isTextBox: true, margin: 0, fontFace: F, fontSize: 12, valign: "middle" });
+    { text: "Rev-share counts net-new Archera customers only. ", options: { bold: true, color: P.amber } },
+    { text: "Every ISV Archera signs directly first is permanently off Automatum's rev-share — the strongest argument for moving first. For the ISV, the charge is simply marketplace spend on the AWS invoice.", options: { color: P.t2 } },
+  ], { x: M + 0.34, y: 5.80, w: CW - 0.68, h: 0.66, isTextBox: true, margin: 0, fontFace: F, fontSize: 12, valign: "middle", lineSpacing: 17 });
   caption(s, "Terms per Archera's Distributor Partner Agreement template (Appendix A) — unsigned, so everything here is subject to execution. Azure and GCP channel private offers are approved routes under the same agreement.", 6.56);
   foot(s, N);
   s.addNotes("The point of this slide is that the plumbing is Automatum's home turf — CPPO, private offers, metering, disbursement reconciliation are the product they already operate. The terms panel now reflects the distributor agreement template: 20/25/30 tiers on marketplace net revenue, monthly, via the Partner Portal — and rev-share applies to net-new Archera customers only, which makes moving before Archera sells into the base directly worth real money. Still open: execution, starting tier, joint GTM plan.");
@@ -861,6 +875,7 @@ function chip(s, text, x, y, w, h, o) {
     { text: "One disclosure. ", options: { bold: true, color: P.amber } },
     { text: "Anyone recommending this is paid on it — Archera, us, and once the rev-share is live, Automatum too. We will still tell you when the right answer is the native three-year. And the guarantees themselves are contractual under Archera's terms, backed by third-party reinsurance — not regulated insurance.", options: { color: P.t2 } },
   ], { x: M + 0.34, y: 5.66, w: CW - 0.68, h: 1.04, isTextBox: true, margin: 0, fontFace: F, fontSize: 12.5, valign: "middle", lineSpacing: 18 });
+  caption(s, "Also review the agreement's term before signing: it auto-renews in 18-month cycles unless terminated with at least six months' written notice, under Delaware law.", 6.76);
   foot(s, N);
   s.addNotes("Do not skip this slide to save time. It is the one that makes the other eighteen credible, and the two operational gotchas — rebate cover being off by default, and buybacks needing a filed request — are exactly the kind of thing a partner is well placed to own on the customer's behalf.");
 }
@@ -896,6 +911,88 @@ function chip(s, text, x, y, w, h, o) {
   s.addNotes("Close on the two-pilot ask, not on the rev-share. The rev-share is worth more over time, but the pilot is what turns every assumption in this deck into Automatum's own data — and it costs them an install and a report.");
 }
 
+
+/* ═══════════════ 21 · SEND THIS ON ═══════════════ */
+{
+  const s = sl(P.deep);
+  eyebrow(s, "SEND THIS ON", P.tealBr);
+  h1(s, "Archera × Automatum, in one frame.", { size: 26, h: 0.5 });
+  sub(s, "The whole argument, for whoever was not in the room.", { y: 1.24, w: 8, size: 12 });
+
+  const colW = (CW - 0.44) / 3;
+  const colY = 1.78, colH = 4.56;
+
+  // col 1 · the structure
+  {
+    const x = M;
+    card(s, x, colY, colW, colH, { fill: P.bg2, line: P.rule });
+    label(s, "THE STRUCTURE", x + 0.28, colY + 0.20, colW - 0.56, P.indigoL, 9);
+    const pts = [
+      "A native 3-year RI or Savings Plan, bought into the customer's own payer account.",
+      "Their obligation: 30 days or 12 months. Archera carries the balance; AWS bills them directly.",
+      "Fee: 50% of the created saving on the 30-day term, 25% on the 1-year. No savings, no fee.",
+    ];
+    pts.forEach((t, j) => {
+      s.addText(t, { x: x + 0.28, y: colY + 0.50 + j * 0.66, w: colW - 0.56, h: 0.62, isTextBox: true, margin: 0, fontFace: F, fontSize: 10, color: P.t2, valign: "top", lineSpacing: 13.5 });
+    });
+    const lad = [["Pay as you go", "0%", P.dim, false], ["Archera 30-day", "28.5%", P.teal, true], ["Native 1-year", "36%", P.dim, false], ["Archera 1-year", "42.75%", P.indigoL, true], ["Native 3-year", "57%", P.muted, false]];
+    lad.forEach((r, j) => {
+      const ry = colY + 2.62 + j * 0.37;
+      s.addText(r[0], { x: x + 0.28, y: ry, w: 1.45, h: 0.32, isTextBox: true, margin: 0, fontFace: F, fontSize: 9.5, bold: r[3], color: r[3] ? P.white : P.t3, valign: "middle" });
+      s.addShape(pres.ShapeType.rect, { x: x + 1.78, y: ry + 0.11, w: 1.10, h: 0.10, fill: { color: P.card2 }, line: { color: P.card2, width: 0.25 } });
+      const pct = parseFloat(r[1]);
+      if (pct > 0) s.addShape(pres.ShapeType.rect, { x: x + 1.78, y: ry + 0.11, w: 1.10 * (pct / 57), h: 0.10, fill: { color: r[2] }, line: { color: r[2], width: 0.25 } });
+      s.addText(r[1] + (r[3] ? "  · exit" : ""), { x: x + 2.96, y: ry, w: colW - 3.10, h: 0.32, isTextBox: true, margin: 0, fontFace: F, fontSize: 9.5, bold: true, color: r[3] ? r[2] : P.t3, valign: "middle" });
+    });
+  }
+
+  // col 2 · when not to
+  {
+    const x = M + colW + 0.22;
+    card(s, x, colY, colW, colH, { fill: P.bg2, line: P.rule });
+    label(s, "WHEN NOT TO — AND THE FINE PRINT", x + 0.28, colY + 0.20, colW - 0.56, P.amber, 9);
+    const pts = [
+      ["Stable three-year workloads", "Buy the native 3-year and keep all 57%. Archera is only for the spend that cannot honestly be committed."],
+      ["Rebate cover is off by default", "It must be switched on with Archera — release-only cover is not rebate cover."],
+      ["Buybacks are filed, not automatic", "Somebody requests the release, and EC2 buybacks need the RI Marketplace enabled first."],
+      ["The guarantees are contractual", "Backed by third-party reinsurance — not a regulated insurance policy."],
+    ];
+    pts.forEach((t, j) => {
+      const py = colY + 0.52 + j * 0.98;
+      s.addText(t[0], { x: x + 0.28, y: py, w: colW - 0.56, h: 0.26, isTextBox: true, margin: 0, fontFace: F, fontSize: 10.5, bold: true, color: P.white, valign: "middle" });
+      s.addText(t[1], { x: x + 0.28, y: py + 0.27, w: colW - 0.56, h: 0.62, isTextBox: true, margin: 0, fontFace: F, fontSize: 9.5, color: P.t2, valign: "top", lineSpacing: 13 });
+    });
+  }
+
+  // col 3 · the partnership
+  {
+    const x = M + 2 * (colW + 0.22);
+    card(s, x, colY, colW, colH, { fill: P.card2, line: P.indigo, lw: 1.1 });
+    label(s, "THE PARTNERSHIP", x + 0.28, colY + 0.20, colW - 0.56, P.tealBr, 9);
+    const pts = [
+      "The platform is free; the premium meters monthly on savings realised, billed through AWS Marketplace CPPO.",
+      "Co-Seller rev-share: 20% / 25% / 30% by commitment MRR — on entities net-new to Archera only.",
+    ];
+    pts.forEach((t, j) => {
+      s.addText(t, { x: x + 0.28, y: colY + 0.50 + j * 0.76, w: colW - 0.56, h: 0.72, isTextBox: true, margin: 0, fontFace: F, fontSize: 10, color: P.t2, valign: "top", lineSpacing: 13.5 });
+    });
+    label(s, "THE THREE ASKS", x + 0.28, colY + 2.14, colW - 0.56, P.muted, 8.5);
+    const asks = ["Pick two pilot ISVs", "Run the free savings analysis", "Sign the distributor agreement"];
+    asks.forEach((t, j) => {
+      const ay = colY + 2.42 + j * 0.62;
+      s.addShape(pres.ShapeType.ellipse, { x: x + 0.30, y: ay + 0.11, w: 0.30, h: 0.30, fill: { color: P.indigo }, line: { color: P.indigoL, width: 0.75 } });
+      s.addText(String(j + 1), { x: x + 0.30, y: ay + 0.11, w: 0.30, h: 0.30, isTextBox: true, margin: 0, fontFace: F, fontSize: 10, bold: true, color: P.white, align: "center", valign: "middle" });
+      s.addText(t, { x: x + 0.72, y: ay, w: colW - 1.02, h: 0.52, isTextBox: true, margin: 0, fontFace: F, fontSize: 11, bold: true, color: P.white, valign: "middle" });
+    });
+  }
+
+  caption(s, "Figures per this deck: savings vs on-demand from Archera's AWS pricing; tiers per the distributor agreement template (unsigned). Full sources on the slides behind each claim.", 6.50);
+  s.addText("Prepared by Only Best Practices  ·  AWS Alliance Advisory", {
+    x: M, y: 6.90, w: 8, h: 0.3, isTextBox: true, margin: 0, fontFace: F, fontSize: 10, color: P.dim, charSpacing: 0.8, valign: "middle",
+  });
+  s.addText("21", { x: 13.333 - M - 1.2, y: 6.90, w: 1.2, h: 0.3, isTextBox: true, margin: 0, fontFace: F, fontSize: 9, color: P.dim, align: "right", valign: "middle" });
+  s.addNotes("The forwardable slide: everything load-bearing in one frame, for the CEO to send to their team without the deck. If only one slide survives the meeting, this is the one it should be.");
+}
 
 const out = process.argv[2] || "Archera-for-Automatum.pptx";
 pres.writeFile({ fileName: out }).then(() => console.log("wrote", out, "· slides:", N));
