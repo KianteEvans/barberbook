@@ -218,7 +218,7 @@ function chip(s, text, x, y, w, h, o) {
     ["01", "Attach through presales, to the base you already have", "The free savings analysis rides discovery, coverage lands at go-live, and the QBR gets a value agenda. No new pipeline to build."],
     ["02", "Make the subscription self-funding", "The customer's AWS saving can cover what they pay Automatum — turning a cost line into one that argues for itself."],
     ["03", "Clear the FTR gate faster", "Automated Well-Architected Reviews, Lenses and the Foundational Technical Review, written back to the AWS Well-Architected Tool."],
-    ["04", "Open a recurring revenue line", "Revenue share on Guaranteed Commitment premiums, billed through the CPPO channel Automatum already runs."],
+    ["04", "Open a recurring revenue line", "A 20–30% tiered revenue share on premiums, through the CPPO channel Automatum already runs."],
   ];
   wins.forEach((w, i) => {
     const cwid = (CW - 0.54) / 4, x = M + i * (cwid + 0.18), y = 2.66;
@@ -349,7 +349,7 @@ function chip(s, text, x, y, w, h, o) {
     ["×  45% not yet covered by any commitment", "$2.6M", "$6.5M", "$13.0M", true],
     ["Net savings to the ISVs  ·  35% blended net rate", "$0.91M", "$2.27M", "$4.54M", true],
     ["Archera premium pool  ·  22% of addressable spend", "$0.57M", "$1.43M", "$2.85M", false],
-    ["Recurring revenue to Automatum  ·  10–20% rev-share", "$57–114K", "$143–285K", "$285–570K", true],
+    ["Recurring revenue to Automatum  ·  20–30% tiered rev-share", "$114–171K", "$285–428K", "$570–855K", true],
   ];
   model.forEach((r, i) => {
     const y = 2.48 + i * 0.45;
@@ -364,9 +364,9 @@ function chip(s, text, x, y, w, h, o) {
       });
     });
   });
-  caption(s, "Illustrative. Reservable share and the blended Archera rate are assumptions; the 45% coverage gap follows the measured 55% median AWS commitment coverage (ProsperOps). The 22% premium is the gap between the 57% a three-year creates and the 35% blended net the customer keeps. The 10–20% rev-share band is a placeholder pending terms with Archera.", 6.30);
+  caption(s, "Illustrative. Reservable share and the blended Archera rate are assumptions; the 45% coverage gap follows the measured 55% median AWS commitment coverage (ProsperOps). The 22% premium is the gap between the 57% a three-year creates and the 35% blended net the customer keeps. Rev-share tiers per Archera's distributor agreement: Bronze 20% (under $100K GRI/GSP MRR), Silver 25% (under $500K), Gold 30% ($1M+) — the base case's ~$119K premium MRR lands in Silver.", 6.30);
   foot(s, N);
-  s.addNotes("Do not defend the inputs — invite the audience to replace them. The point of the slide is that even the conservative column, at $10K a month of average AWS spend, produces a high-six-figure savings pool for the base (seven figures in the base case) and a five-figure revenue line for Automatum. If Automatum can pull actual spend data for even ten accounts, the base case tightens immediately.");
+  s.addNotes("Do not defend the inputs — invite the audience to replace them. The point of the slide is that even the conservative column, at $10K a month of average AWS spend, produces a high-six-figure savings pool for the base (seven figures in the base case) and a six-figure revenue line for Automatum at the agreement's 20-30% tiers. If Automatum can pull actual spend data for even ten accounts, the base case tightens immediately.");
 }
 
 /* ═══════════════ 10 · ONE CUSTOMER, WORKED ═══════════════ */
@@ -428,7 +428,7 @@ function chip(s, text, x, y, w, h, o) {
     ["02", "Make the subscription self-funding", "The customer's AWS bill starts paying for the programme."],
     ["03", "Clear the FTR gate faster", "Automated WAFR, Lenses and FTR at no tooling cost."],
     ["04", "Cover the spend nobody can forecast", "AI, bursty and migrating workloads — covered, not locked."],
-    ["05", "Open a recurring revenue line", "Rev-share on premiums, billed via AWS Marketplace CPPO."],
+    ["05", "Open a recurring revenue line", "20–30% tiered rev-share on premiums, billed via AWS Marketplace CPPO."],
   ];
   five.forEach((f, i) => {
     const x = 6.90, y = 0.88 + i * 1.18, w = 13.333 - M - 6.90;
@@ -658,18 +658,18 @@ function chip(s, text, x, y, w, h, o) {
   const s = sl(P.bg);
   eyebrow(s, "USE CASE 05  ·  REVENUE", P.indigoL);
   h1(s, "Open a recurring revenue line.");
-  sub(s, "Two models, depending on how much of the customer relationship Automatum wants to carry.", { y: 1.46, w: 9.4 });
+  sub(s, "The distributor agreement offers two postures — and the recurring revenue line this deck argues for requires the second.", { y: 1.46, w: 9.8 });
 
   const models = [
-    ["REFER & CO-SELL", "Participation without delivery obligation", [
-      "Automatum registers and introduces; Archera runs the sale and the support relationship.",
-      "Fastest to stand up — no channel registration, no offer template, no reconciliation.",
-      "The right default while the pilot accounts prove the motion.",
+    ["REFERRAL TIER", "A one-time bonus, not a revenue line", [
+      "Automatum registers the lead; Archera runs the sale, onboarding and support.",
+      "Pays a one-off bonus of the first month's MRR — nothing recurring.",
+      "Fine for the odd out-of-scope account. It is not the line this deck argues for.",
     ], P.teal, P.card],
-    ["RESELL & MANAGE", "Structural margin as channel partner of record", [
-      "Automatum holds the private offer; the margin is contractual, not referral.",
-      "De-risks RI and Savings Plan management across any consolidated-billing or managed book.",
-      "The rails — CPPO, metering, EDP drawdown — are on the next slide.",
+    ["CO-SELLER TIER", "20–30% recurring, rising with the book", [
+      "Bronze 20% under $100K GRI/GSP MRR, Silver 25% under $500K, Gold 30% at $1M+.",
+      "Automatum runs the motion with joint GTM support; Archera provides Tier-2 support.",
+      "The rails — CPPO, metering, the Partner Portal — are on the next slide.",
     ], P.indigoL, P.card2],
   ];
   models.forEach((m, i) => {
@@ -703,7 +703,7 @@ function chip(s, text, x, y, w, h, o) {
   const steps = [
     ["1", "Archera's Marketplace listing", "The SaaS listing the private offer is issued against."],
     ["2", "CPPO, Automatum as channel partner", "The offer carries Automatum's margin as the channel partner of record."],
-    ["3", "ISV accepts on their own account", "One click on the private offer. No new contract paper beyond it."],
+    ["3", "ISV accepts on their own account", "One click on the private offer; onboarded via the Archera Partner Portal."],
     ["4", "Premium meters monthly on savings realised", "Variable, not a flat subscription — the no-savings-no-fee mechanic, metered."],
     ["5", "Billed on the AWS invoice · draws down EDP", "AWS disburses; Automatum's share arrives through its existing disbursement channel."],
   ];
@@ -723,9 +723,9 @@ function chip(s, text, x, y, w, h, o) {
     x: px + 0.26, y: 2.68, w: pw - 0.52, h: 1.16, isTextBox: true, margin: 0, fontFace: F, fontSize: 10.5, color: P.t2, valign: "top", lineSpacing: 15,
   });
   card(s, px, 4.10, pw, 1.52, { fill: P.card, line: P.rule });
-  label(s, "STILL TO AGREE WITH ARCHERA", px + 0.26, 4.28, pw - 0.52, P.amber, 8.5);
-  s.addText("The rev-share rate, and whether it is struck on premium or on net savings. Who owns first-line support. Refer vs. resell, decided per account.", {
-    x: px + 0.26, y: 4.52, w: pw - 0.52, h: 1.04, isTextBox: true, margin: 0, fontFace: F, fontSize: 10.5, color: P.t2, valign: "top", lineSpacing: 15,
+  label(s, "THE TERMS, PER THE AGREEMENT", px + 0.26, 4.28, pw - 0.52, P.amber, 8.5);
+  s.addText("20–30% tiered rev-share on marketplace net revenue, paid monthly and reported in the Partner Portal. Rev-share applies to net-new entities only — Archera checks each against its existing book. Still open: execution, the starting tier, and the joint GTM plan.", {
+    x: px + 0.26, y: 4.52, w: pw - 0.52, h: 1.04, isTextBox: true, margin: 0, fontFace: F, fontSize: 9.5, color: P.t2, valign: "top", lineSpacing: 13.5,
   });
 
   card(s, M, 5.80, CW, 0.66, { fill: P.bg2, line: P.rule });
@@ -733,9 +733,9 @@ function chip(s, text, x, y, w, h, o) {
     { text: "For the ISV, the charge is marketplace spend. ", options: { bold: true, color: P.white } },
     { text: "It consolidates onto the AWS invoice and draws down committed spend they were going to burn anyway.", options: { color: P.t2 } },
   ], { x: M + 0.34, y: 5.80, w: CW - 0.68, h: 0.66, isTextBox: true, margin: 0, fontFace: F, fontSize: 12, valign: "middle" });
-  caption(s, "Flow shape per the CPPO private-offer model; the rev-share rate and terms are not quoted in any source behind this deck — confirm with Archera. A structure to negotiate against, not an offer.", 6.56);
+  caption(s, "Terms per Archera's Distributor Partner Agreement template (Appendix A) — unsigned, so everything here is subject to execution. Azure and GCP channel private offers are approved routes under the same agreement.", 6.56);
   foot(s, N);
-  s.addNotes("The point of this slide is that the plumbing is Automatum's home turf — CPPO, private offers, metering, disbursement reconciliation are the product they already operate. The two open items on the right are the actual negotiation with Archera; everything on the left is stock work. Do not let the flow read as a quoted deal: the on-slide caveat matters.");
+  s.addNotes("The point of this slide is that the plumbing is Automatum's home turf — CPPO, private offers, metering, disbursement reconciliation are the product they already operate. The terms panel now reflects the distributor agreement template: 20/25/30 tiers on marketplace net revenue, monthly, via the Partner Portal — and rev-share applies to net-new Archera customers only, which makes moving before Archera sells into the base directly worth real money. Still open: execution, starting tier, joint GTM plan.");
 }
 /* ═══════════════ 17 · PROOF ═══════════════ */
 {
@@ -812,7 +812,7 @@ function chip(s, text, x, y, w, h, o) {
 
   const phases = [
     ["01", "DAYS 0–30", "Stand up and pilot", ["Install Archera from AWS Marketplace on two friendly ISV accounts.", "Run the free savings analysis and baseline current commitment coverage.", "Run one automated Well-Architected Review end to end."]],
-    ["02", "DAYS 30–60", "Productise", ["Package the attach offer, with the savings number as the opening line.", "Confirm the rev-share model with Archera and align it to the CPPO channel.", "Brief the account team on the talk track and the qualifying question."]],
+    ["02", "DAYS 30–60", "Productise", ["Package the attach offer, with the savings number as the opening line.", "Execute the distributor agreement and clear its free enablement bar.", "Brief the account team on the talk track and the qualifying question."]],
     ["03", "DAYS 60–90", "Roll out and co-sell", ["Work the base mid-band first, largest accounts last — the slide 11 order.", "Co-sell with AWS and Archera on qualified accounts.", "Report savings delivered, AWS funding unlocked, and new margin."]],
   ];
   phases.forEach((p, i) => {
@@ -828,7 +828,7 @@ function chip(s, text, x, y, w, h, o) {
     });
   });
   foot(s, N);
-  s.addNotes("Keep the pilot to two accounts. The single most useful output of days 0 to 30 is a real coverage baseline across those accounts, because it replaces every assumption on the sizing slide with a measured number.");
+  s.addNotes("The enablement bar in the agreement: three people through Archera Sales Enablement and one through Technical Sales Enablement, both free, plus a twice-monthly pipeline cadence with Archera. Keep the pilot to two accounts. The single most useful output of days 0 to 30 is a real coverage baseline across those accounts, because it replaces every assumption on the sizing slide with a measured number.");
 }
 
 /* ═══════════════ 19 · THE HONEST PART ═══════════════ */
@@ -879,7 +879,7 @@ function chip(s, text, x, y, w, h, o) {
   const next = [
     ["Pick two pilot ISVs", "Steady-state or AI-heavy AWS spend, and a relationship that will tolerate a first run."],
     ["Run the free savings analysis", "A measured coverage baseline, at no cost and no commitment."],
-    ["Agree the rev-share", "Confirm terms with Archera and route the premium through the CPPO channel."],
+    ["Sign the distributor agreement", "20–30% tiered rev-share, paid monthly through the marketplace channel."],
   ];
   next.forEach((n, i) => {
     const w = (CW - 0.36) / 3, x = M + i * (w + 0.18), y = 4.22;

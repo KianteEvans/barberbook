@@ -31,10 +31,12 @@ Three things need a human decision:
 2. **The Automatum figures on slide 5** (80+ ISVs, $120M+ marketplace revenue, operating
    since 2021, four marketplaces, ~14 days to first listing) come from Automatum's
    published positioning and should be verified against what the company says today.
-3. **Slides 10 and 16 map against published material.** The presales stages on slide 10
-   follow Automatum's published motion — swap in the real internal stage names. The CPPO
-   flow on slide 16 follows Archera's partner positioning — the rev-share rate and terms
-   are not quoted in any source behind this deck and must be confirmed with Archera.
+3. **Slide 10's presales stages follow Automatum's published motion** — swap in the real
+   internal stage names. The commercial terms on slides 6, 15 and 16 now come from
+   Archera's Distributor Partner Agreement template (Appendix A: Referral tier pays a
+   one-time first-month-MRR bonus; Co-Seller tiers pay 20% / 25% / 30% recurring by
+   GRI/GSP MRR band, monthly on marketplace net revenue, net-new entities only). The
+   template is unsigned — execution, starting tier and the joint GTM plan remain open.
 
 The deck standardises on Archera's own product name, **Guaranteed Commitments**
 (defined on slide 2), and states on slide 19 that the guarantees are contractual and
