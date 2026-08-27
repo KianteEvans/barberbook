@@ -245,7 +245,7 @@ function chip(s, text, x, y, w, h, o) {
   const caps = [
     ["Commitment & FinOps management", "Automate RI and Savings Plan purchasing, and maximise private-pricing coverage."],
     ["Guaranteed Commitments", "Contractual, reinsurance-backed alternatives to native terms — commit without over-commitment risk."],
-    ["Automated assessments", "WAFR, industry and technology Lenses, and the FTR."],
+    ["Automated assessments", "WAFR, Lenses and the FTR."],
     ["Visibility & custom BI", "Blend business and cloud-cost data into drill-down dashboards and forecasts."],
   ];
   caps.forEach((c, i) => {
@@ -295,32 +295,23 @@ function chip(s, text, x, y, w, h, o) {
   const fits = [
     ["You already hold the relationship", "No new logo and no new contract vehicle. This is an offer to customers Automatum already bills every month, through a conversation that is already scheduled.", P.indigo],
     ["You already run the plumbing", "Archera's premium bills through AWS Marketplace and draws down the customer's EDP commit. Private offers, metering and CPPO resale are Automatum's core competency, not a new build.", P.teal],
-    ["Your customers are the under-covered band", "Startups and scaleups sit where measured savings capture is lowest — a skew to confirm from account data. The bands below are the sales map for the base.", P.amber],
+    ["Your customers are the under-covered band", "Startups and scaleups sit where measured savings capture is lowest — a skew to confirm from account data. The sequencing slide turns those bands into the sales map.", P.amber],
   ];
   fits.forEach((f, i) => {
-    const w = (CW - 0.36) / 3, x = M + i * (w + 0.18), y = 2.68;
-    card(s, x, y, w, 2.42, { fill: P.card, line: P.rule });
+    const w = (CW - 0.36) / 3, x = M + i * (w + 0.18), y = 2.72;
+    card(s, x, y, w, 2.64, { fill: P.card, line: P.rule });
     s.addShape(pres.ShapeType.rect, { x: x + 0.30, y: y + 0.30, w: 0.42, h: 0.05, fill: { color: f[2] } });
     s.addText(f[0], { x: x + 0.30, y: y + 0.50, w: w - 0.60, h: 0.78, isTextBox: true, margin: 0, fontFace: F, fontSize: 15, bold: true, color: P.white, valign: "top", lineSpacing: 19 });
-    s.addText(f[1], { x: x + 0.30, y: y + 1.30, w: w - 0.60, h: 1.06, isTextBox: true, margin: 0, fontFace: F, fontSize: 10.5, color: P.t2, valign: "top", lineSpacing: 14.5 });
+    s.addText(f[1], { x: x + 0.30, y: y + 1.34, w: w - 0.60, h: 1.20, isTextBox: true, margin: 0, fontFace: F, fontSize: 11, color: P.t2, valign: "top", lineSpacing: 15.5 });
   });
 
-  label(s, "MEDIAN SAVING ALREADY CAPTURED, BY ANNUAL AWS COMPUTE USAGE", M, 5.24, 7.5, P.muted, 8.5);
-  const esr = [["UNDER $500K", "0%", P.amber], ["$500K–$10M", "23%", P.teal], ["OVER $10M", "38%", P.indigoL]];
-  esr.forEach((b, i) => {
-    const w = (CW - 0.36) / 3, x = M + i * (w + 0.18), y = 5.50;
-    card(s, x, y, w, 0.62, { fill: P.bg2, line: P.rule });
-    label(s, b[0], x + 0.26, y + 0.08, w - 1.3, b[2], 8.5);
-    s.addText(b[1], { x: x + 0.26, y: y + 0.24, w: 1.2, h: 0.34, isTextBox: true, margin: 0, fontFace: F, fontSize: 17, bold: true, color: P.white, valign: "middle" });
-    s.addText("captured", { x: x + 1.20, y: y + 0.24, w: w - 1.46, h: 0.34, isTextBox: true, margin: 0, fontFace: F, fontSize: 9.5, color: P.t3, valign: "middle" });
-  });
   s.addText([
     { text: "The multicloud shape matches too — ", options: { bold: true, color: P.white } },
     { text: "the same guarantee structure covers AWS, Azure and Google Cloud from one control plane.", options: { color: P.t2 } },
-  ], { x: M, y: 6.26, w: CW, h: 0.26, isTextBox: true, margin: 0, fontFace: F, fontSize: 11, valign: "middle" });
-  caption(s, "Automatum figures per the company's published positioning (automatum.io) — confirm before circulation. Bands: ProsperOps median Effective Savings Rate by annual AWS compute usage, read from billing data.", 6.56);
+  ], { x: M, y: 5.56, w: CW, h: 0.26, isTextBox: true, margin: 0, fontFace: F, fontSize: 11.5, valign: "middle" });
+  caption(s, "Automatum figures per the company's published positioning (automatum.io) — confirm before circulation.", 6.10);
   foot(s, N);
-  s.addNotes("This is the slide that separates Automatum from a generic partner pitch: the rev-share plumbing most partners would have to build is the product Automatum already sells. The ESR bands are the evidence line — the median company under $500K of annual compute has captured nothing, and that is most of an ISV base. The sequencing slide later in the deck turns these same bands into a sales order.");
+  s.addNotes("This is the slide that separates Automatum from a generic partner pitch: the rev-share plumbing most partners would have to build is the product Automatum already sells. The evidence line to speak to: ProsperOps measures the median company under $500K of annual compute as having captured nothing — and that is most of an ISV base. The sequencing slide carries the full bands.");
 }
 
 /* ═══════════════ 09 · THE OPPORTUNITY, SIZED ═══════════════ */
@@ -364,7 +355,7 @@ function chip(s, text, x, y, w, h, o) {
       });
     });
   });
-  caption(s, "Illustrative. Reservable share and the blended Archera rate are assumptions; the 45% coverage gap follows the measured 55% median AWS commitment coverage (ProsperOps). The 22% premium is the gap between the 57% a three-year creates and the 35% blended net the customer keeps. Rev-share tiers per Archera's distributor agreement: Bronze 20% (under $100K commitment MRR), Silver 25% (under $500K), Gold 30% ($1M+) — the base case's ~$119K premium MRR lands in Silver.", 6.30);
+  caption(s, "Illustrative. Reservable share and the blended Archera rate are assumptions; the 45% coverage gap follows the measured 55% median AWS commitment coverage (ProsperOps). The 22% premium is the gap between the 57% a three-year creates and the 35% blended net the customer keeps. Rev-share 20–30% per the distributor agreement's Co-Seller tiers, laddered on the revenue-line slide — the base case's ~$119K premium MRR lands in Silver (25%).", 6.30);
   foot(s, N);
   s.addNotes("Do not defend the inputs — invite the audience to replace them. The point of the slide is that even the conservative column, at $10K a month of average AWS spend, produces a high-six-figure savings pool for the base (seven figures in the base case) and a six-figure revenue line for Automatum at the agreement's 20-30% tiers. If Automatum can pull actual spend data for even ten accounts, the base case tightens immediately.");
 }
@@ -438,52 +429,7 @@ function chip(s, text, x, y, w, h, o) {
     s.addText(f[2], { x: x + 0.88, y: y + 0.54, w: w - 1.14, h: 0.34, isTextBox: true, margin: 0, fontFace: F, fontSize: 10.5, color: P.t3, valign: "middle" });
   });
   foot(s, N);
-  s.addNotes("Signpost slide. If time is short, cover 01 and 02 properly and leave 03 to 05 as a read-ahead.");
-}
-
-/* ═══════════════ 12 · UC01 ═══════════════ */
-{
-  const s = sl(P.bg);
-  eyebrow(s, "USE CASE 01  ·  THE PRIMARY MOTION", P.indigoL);
-  h1(s, "Attach savings to every ISV you already serve.");
-  sub(s, "Nothing to build, nothing to staff, and no new commercial relationship to open. The base already exists.", { y: 1.46, w: 9.0 });
-
-  const pts = [
-    "Connect a customer's payer account in minutes, with minimal privileges — installed from AWS Marketplace.",
-    "A free savings analysis shows the coverage gap in hard numbers before anyone commits to anything.",
-    "Rate optimisation only: no re-architecting, no workload migration, no change to how the ISV runs.",
-    "Live in days — inside Automatum's standard onboarding window, on the same access the listing build requires.",
-    "The platform is free. The customer pays a premium only on savings actually created.",
-  ];
-  pts.forEach((p, i) => {
-    const y = 2.24 + i * 0.68;
-    s.addShape(pres.ShapeType.ellipse, { x: M + 0.02, y: y + 0.16, w: 0.17, h: 0.17, fill: { color: P.tealBr }, line: { color: P.tealBr, width: 0.25 } });
-    s.addText(p, { x: M + 0.38, y, w: 7.30, h: 0.60, isTextBox: true, margin: 0, fontFace: F, fontSize: 12.5, color: P.t2, valign: "middle", lineSpacing: 17 });
-  });
-
-  const px = 8.40, pw = 13.333 - M - 8.40;
-  card(s, px, 2.14, pw, 3.62, { fill: P.card, line: P.rule });
-  label(s, "WHY IT MATTERS TO AUTOMATUM", px + 0.30, 2.38, pw - 0.6, P.tealBr, 9);
-  const why = [
-    "A value-add that can be offered to the whole base at once, not sold account by account.",
-    "Every conversation opens with a number from the customer's own bill, not a pitch.",
-    "Archera's reference book runs 93–100% commitment utilisation — savings get used, not idled.",
-    "It gives the quarterly check-in a reason to exist beyond listing maintenance.",
-  ];
-  why.forEach((w, i) => {
-    const y = 2.74 + i * 0.80;
-    s.addText(w, { x: px + 0.30, y, w: pw - 0.60, h: 0.74, isTextBox: true, margin: 0, fontFace: F, fontSize: 11.5, color: P.t2, valign: "top", lineSpacing: 16 });
-  });
-
-  const steps = [["Connect billing", "Minimal-privilege install"], ["See the gap", "Free savings analysis"], ["Cover it", "30-day or 1-year terms"]];
-  steps.forEach((st, i) => {
-    const w = (7.68 - 0.36) / 3, x = M + i * (w + 0.18), y = 5.72;
-    card(s, x, y, w, 0.78, { fill: P.bg2, line: P.rule });
-    s.addText(st[0], { x: x + 0.22, y: y + 0.10, w: w - 0.44, h: 0.32, isTextBox: true, margin: 0, fontFace: F, fontSize: 12, bold: true, color: P.white, valign: "middle" });
-    s.addText(st[1], { x: x + 0.22, y: y + 0.42, w: w - 0.44, h: 0.28, isTextBox: true, margin: 0, fontFace: F, fontSize: 10, color: P.t3, valign: "middle" });
-  });
-  foot(s, N);
-  s.addNotes("The operational ask on Automatum is small: an install and a report. That is the argument for starting with attach rather than with rev-share — it proves value before anyone negotiates terms. The next two slides make this concrete: where it enters presales, and in what order to work the base.");
+  s.addNotes("Signpost slide. Motion 01 has no separate header — the two slides immediately after this one are its run: presales insertion, then base sequencing. If time is short, cover 01 and 02 properly and leave 03 to 05 as a read-ahead.");
 }
 
 /* ═══════════════ NEW · PRESALES MOTION ═══════════════ */
@@ -827,7 +773,7 @@ function chip(s, text, x, y, w, h, o) {
   const phases = [
     ["01", "DAYS 0–30", "Stand up and pilot", ["Install Archera from AWS Marketplace on two friendly ISV accounts.", "Run the free savings analysis and baseline current commitment coverage.", "Run one automated Well-Architected Review end to end."]],
     ["02", "DAYS 30–60", "Productise", ["Package the attach offer, with the savings number as the opening line.", "Execute the distributor agreement and clear its free enablement bar.", "Brief the account team on the talk track and the qualifying question."]],
-    ["03", "DAYS 60–90", "Roll out and co-sell", ["Work the base mid-band first, largest accounts last — the slide 11 order.", "Co-sell with AWS and Archera on qualified accounts.", "Report savings delivered, AWS funding unlocked, and new margin."]],
+    ["03", "DAYS 60–90", "Roll out and co-sell", ["Work the base mid-band first, largest accounts last — the slide 10 order.", "Co-sell with AWS and Archera on qualified accounts.", "Report savings delivered, AWS funding unlocked, and new margin."]],
   ];
   phases.forEach((p, i) => {
     const w = (CW - 0.36) / 3, x = M + i * (w + 0.18), y = 3.28;
