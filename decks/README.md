@@ -36,6 +36,12 @@ Three things need a human decision:
    flow on slide 16 follows Archera's partner positioning — the rev-share rate and terms
    are not quoted in any source behind this deck and must be confirmed with Archera.
 
+The deck standardises on Archera's own product name, **Guaranteed Commitments**
+(defined on slide 2), and states on slide 19 that the guarantees are contractual and
+reinsurance-backed rather than regulated insurance. A full visual and copy audit
+(per-slide review, whole-deck consistency pass, fact audit against the source materials,
+adversarial verification) was applied in v3 — findings and fixes are in the git history.
+
 The sizing model on slide 6 is illustrative by design. Every assumption is printed on the
 slide; replacing the average-spend anchor with real billing data from even ten accounts
 tightens the whole model.
