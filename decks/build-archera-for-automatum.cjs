@@ -135,7 +135,7 @@ function chip(s, text, x, y, w, h, o) {
     x: M, y: 6.72, w: 8, h: 0.3, isTextBox: true, margin: 0,
     fontFace: F, fontSize: 10, color: P.dim, charSpacing: 0.8, valign: "middle",
   });
-  s.addNotes("Positioning brief: how Automatum — a cloud-marketplace management platform serving 80+ ISVs on AWS, Azure, GCP and Red Hat — can put Archera to work. The lead motion is attach: Archera is free, it installs in minutes, and it produces savings on the AWS bills most of Automatum's customers already pay. Secondary motions are a self-funding subscription, FTR acceleration, cover for unforecastable AI spend, and rev-share on premiums through CPPO. Prepared as an alliance-advisory artifact.");
+  s.addNotes("Positioning brief: how Automatum — a cloud-marketplace management platform serving 80+ ISVs on AWS, Azure, GCP and Red Hat — can put Archera to work. The lead motion is attach: Archera is free, it installs in minutes, and it produces savings on the AWS bills most of Automatum's customers already pay. Secondary motions are a self-funding subscription, cover for unforecastable AI spend, and rev-share on premiums through CPPO. Prepared as an alliance-advisory artifact.");
 }
 
 /* ═══════════════ 02 · ARCHERA IN ONE SLIDE ═══════════════ */
@@ -210,18 +210,17 @@ function chip(s, text, x, y, w, h, o) {
 {
   const s = sl(P.bg2);
   eyebrow(s, "PART TWO  ·  THE CASE", P.amber);
-  h1(s, "One free platform, four ways to win.");
+  h1(s, "One free platform, three ways to win.");
   sub(s, "Archera is a free, multicloud commitment-management platform. For Automatum it attaches to a base that already exists: 80+ ISVs, most with AWS estates — and at the measured 55% median commitment coverage, most of that spend sits uncovered (AWS share of the base to confirm). The premium bills through the AWS Marketplace channel Automatum already operates.",
     { y: 1.46, w: 11.6, ls: 20 });
 
   const wins = [
     ["01", "Attach through presales, to the base you already have", "The free savings analysis rides discovery, coverage lands at go-live, and the QBR gets a value agenda. No new pipeline to build."],
     ["02", "Make the subscription self-funding", "The customer's AWS saving can cover what they pay Automatum — turning a cost line into one that argues for itself."],
-    ["03", "Clear the FTR gate faster", "Automated Well-Architected Reviews, Lenses and the Foundational Technical Review, written back to the AWS Well-Architected Tool."],
-    ["04", "Open a recurring revenue line", "A 20–30% tiered revenue share on premiums, through the CPPO channel Automatum already runs."],
+    ["03", "Open a recurring revenue line", "A 20–30% tiered revenue share on premiums, through the CPPO channel Automatum already runs."],
   ];
   wins.forEach((w, i) => {
-    const cwid = (CW - 0.54) / 4, x = M + i * (cwid + 0.18), y = 2.66;
+    const cwid = (CW - 0.36) / 3, x = M + i * (cwid + 0.18), y = 2.66;
     card(s, x, y, cwid, 2.98, { fill: P.card, line: i === 0 ? P.indigo : P.rule, lw: i === 0 ? 1.25 : 0.75 });
     s.addText(w[0], { x: x + 0.28, y: y + 0.24, w: 1.0, h: 0.36, isTextBox: true, margin: 0, fontFace: F, fontSize: 15, bold: true, color: i === 0 ? P.indigoL : P.muted, valign: "middle", charSpacing: 1 });
     s.addText(w[1], { x: x + 0.28, y: y + 0.68, w: cwid - 0.56, h: 0.98, isTextBox: true, margin: 0, fontFace: F, fontSize: 14, bold: true, color: P.white, valign: "top", lineSpacing: 18 });
@@ -229,7 +228,7 @@ function chip(s, text, x, y, w, h, o) {
   });
   s.addText([
     { text: "The first one is the point. ", options: { bold: true, color: P.white } },
-    { text: "The other three compound on top of it — and part four runs them as five motions, starting with the attach, which works on day one. One clock to respect: rev-share counts only entities net-new to Archera.", options: { color: P.t2 } },
+    { text: "The other two compound on top of it — the motions that follow run the attach through presales and across the base. One clock to respect: rev-share counts only entities net-new to Archera.", options: { color: P.t2 } },
   ], { x: M, y: 5.84, w: CW, h: 0.62, isTextBox: true, margin: 0, fontFace: F, fontSize: 13, valign: "top", lineSpacing: 19 });
   foot(s, N);
   s.addNotes("Lead with attach and stay there — everything else is upside. The reason attach is credible here and not for a typical partner: Automatum already holds the billing relationship, already connects to customer accounts as part of listing work, and already reconciles the marketplace rails the premium bills over.");
@@ -245,14 +244,13 @@ function chip(s, text, x, y, w, h, o) {
   const caps = [
     ["Commitment & FinOps management", "Automate RI and Savings Plan purchasing, and maximise private-pricing coverage."],
     ["Guaranteed Commitments", "Contractual, reinsurance-backed alternatives to native terms — commit without over-commitment risk."],
-    ["Automated assessments", "WAFR, Lenses and the FTR."],
     ["Visibility & custom BI", "Blend business and cloud-cost data into drill-down dashboards and forecasts."],
   ];
   caps.forEach((c, i) => {
-    const w = (8.3 - 0.18) / 2, x = M + (i % 2) * (w + 0.18), y = 2.28 + Math.floor(i / 2) * 1.62;
-    card(s, x, y, w, 1.44, { fill: P.card, line: P.rule });
-    s.addText(c[0], { x: x + 0.28, y: y + 0.20, w: w - 0.56, h: 0.56, isTextBox: true, margin: 0, fontFace: F, fontSize: 13, bold: true, color: P.white, valign: "top", lineSpacing: 17 });
-    s.addText(c[1], { x: x + 0.28, y: y + 0.78, w: w - 0.56, h: 0.56, isTextBox: true, margin: 0, fontFace: F, fontSize: 11, color: P.t2, valign: "top", lineSpacing: 15 });
+    const w = 8.3, x = M, y = 2.28 + i * 1.10;
+    card(s, x, y, w, 0.96, { fill: P.card, line: P.rule });
+    s.addText(c[0], { x: x + 0.30, y, w: 2.85, h: 0.96, isTextBox: true, margin: 0, fontFace: F, fontSize: 13, bold: true, color: P.white, valign: "middle", lineSpacing: 17 });
+    s.addText(c[1], { x: x + 3.30, y, w: w - 3.60, h: 0.96, isTextBox: true, margin: 0, fontFace: F, fontSize: 11, color: P.t2, valign: "middle", lineSpacing: 15 });
   });
 
   const px = 9.20, pw = 13.333 - M - 9.20;
@@ -394,42 +392,14 @@ function chip(s, text, x, y, w, h, o) {
     s.addText(o[4], { x: x + 0.28, y: y + 0.90, w: w - 0.56, h: 0.36, isTextBox: true, margin: 0, fontFace: F, fontSize: 10.5, color: P.t2, valign: "top", lineSpacing: 14 });
   });
 
-  card(s, M, 5.76, CW, 0.72, { fill: P.bg2, line: P.indigo, lw: 1.1 });
+  card(s, M, 5.72, CW, 0.94, { fill: P.bg2, line: P.indigo, lw: 1.1 });
   s.addText([
-    { text: "$28.4K a year back, on one mid-sized customer. ", options: { bold: true, color: P.white } },
-    { text: "Whatever that ISV pays Automatum, this is the number that now sits next to it on the renewal.", options: { color: P.t2 } },
-  ], { x: M + 0.34, y: 5.76, w: CW - 0.68, h: 0.72, isTextBox: true, margin: 0, fontFace: F, fontSize: 13.5, valign: "middle" });
-  caption(s, "Illustrative, at the base-case assumptions from the previous slide. Net of Archera's premium. Drop Automatum's own list price into the final box to close the argument in front of a customer.", 6.62);
+    { text: "$28.4K a year back — for many ISVs, more than the Automatum subscription. ", options: { bold: true, color: P.white } },
+    { text: "The pitch flips from “marketplace management at a fraction of the incumbents' price” to “marketplace management the AWS bill pays for” — and a subscription that visibly returns more than it costs is not a line anyone hunts in a cost-cutting review.", options: { color: P.t2 } },
+  ], { x: M + 0.34, y: 5.72, w: CW - 0.68, h: 0.94, isTextBox: true, margin: 0, fontFace: F, fontSize: 12.5, valign: "middle", lineSpacing: 18 });
+  caption(s, "Illustrative, at the base-case assumptions from the previous slide. Net of Archera's premium. Drop Automatum's own list price into the takeaway to close the argument in front of a customer.", 6.74);
   foot(s, N);
-  s.addNotes("Deliberately left open: we do not put Automatum's price on the slide, because we do not have it and guessing it would undermine everything else. Ask them to fill it in live. If a mid-tier subscription is anywhere below roughly $28K a year, the self-funding claim on the next section is arithmetic rather than marketing.");
-}
-
-/* ═══════════════ 11 · DIVIDER ═══════════════ */
-{
-  const s = sl(P.deep);
-  eyebrow(s, "PART FOUR  ·  THE MOTIONS", P.amber);
-  s.addText("Five motions to put\nArchera to work.", {
-    x: M, y: 1.16, w: 5.9, h: 2.0, isTextBox: true, margin: 0,
-    fontFace: F, fontSize: 35, bold: true, color: P.white, lineSpacing: 41, valign: "top",
-  });
-  sub(s, "Each stands on its own and they compound together. The first is the one that works on day one — the two slides after it show how it runs through presales and across the base.", { y: 2.92, w: 5.5, size: 13.5 });
-
-  const five = [
-    ["01", "Attach savings to the installed base", "Free install, minimal privileges, live in days."],
-    ["02", "Make the subscription self-funding", "The customer's AWS bill starts paying for the programme."],
-    ["03", "Clear the FTR gate faster", "Automated WAFR, Lenses and FTR at no tooling cost."],
-    ["04", "Cover the spend nobody can forecast", "AI, bursty and migrating workloads — covered, not locked."],
-    ["05", "Open a recurring revenue line", "20–30% tiered rev-share on premiums, billed via AWS Marketplace CPPO."],
-  ];
-  five.forEach((f, i) => {
-    const x = 6.90, y = 0.88 + i * 1.18, w = 13.333 - M - 6.90;
-    card(s, x, y, w, 1.06, { fill: i === 0 ? P.card2 : P.bg2, line: i === 0 ? P.indigo : P.rule, lw: i === 0 ? 1.1 : 0.75 });
-    s.addText(f[0], { x: x + 0.26, y, w: 0.5, h: 1.06, isTextBox: true, margin: 0, fontFace: F, fontSize: 13, bold: true, color: i === 0 ? P.indigoL : P.muted, valign: "middle" });
-    s.addText(f[1], { x: x + 0.88, y: y + 0.20, w: w - 1.14, h: 0.32, isTextBox: true, margin: 0, fontFace: F, fontSize: 13.5, bold: true, color: P.white, valign: "middle" });
-    s.addText(f[2], { x: x + 0.88, y: y + 0.54, w: w - 1.14, h: 0.34, isTextBox: true, margin: 0, fontFace: F, fontSize: 10.5, color: P.t3, valign: "middle" });
-  });
-  foot(s, N);
-  s.addNotes("Signpost slide. Motion 01 has no separate header — the two slides immediately after this one are its run: presales insertion, then base sequencing. If time is short, cover 01 and 02 properly and leave 03 to 05 as a read-ahead.");
+  s.addNotes("Deliberately left open: we do not put Automatum's price on the slide, because we do not have it and guessing it would undermine everything else. Ask them to fill it in live — if a mid-tier subscription sits anywhere below roughly $28K a year, self-funding is arithmetic rather than marketing. This is also the retention argument: ask directly what a renewal conversation looks like when the customer sees a larger number coming back off their AWS bill than they pay Automatum.");
 }
 
 /* ═══════════════ NEW · PRESALES MOTION ═══════════════ */
@@ -441,7 +411,7 @@ function chip(s, text, x, y, w, h, o) {
 
   const stages = [
     ["DISCOVERY", "A discovery artefact, not a pitch", "Ask for read-only billing access in the scoping conversation that already happens. Coverage and Effective Savings Rate numbers come back inside the week — and earn a seat with the ISV's finance owner, not just product."],
-    ["LISTING BUILD", "One connected account, two outputs", "The same minimal-privilege install that runs the savings analysis also feeds the Well-Architected and FTR auto-population — no second ask of the customer (assessment scope to confirm with Archera)."],
+    ["LISTING BUILD", "Coverage designed while the listing is built", "The savings analysis becomes a term plan — 30-day or 1-year, workload by workload — while Automatum builds the listing, ready to execute at go-live. No second ask of the customer."],
     ["GO-LIVE", "Coverage lands before marketplace revenue ramps", "The saving shows up on the ISV's AWS bill from the first covered month — offsetting the Automatum fee while the listing is still ramping."],
     ["OFFERS & CO-SELL", "A number the AWS seller can act on", "A savings number from the customer's own bill gives the AWS account team a concrete reason to engage — and strengthens the co-sell narrative on the listing side too."],
     ["QBR", "From maintenance check-in to value review", "Coverage drift, utilisation and savings-to-date give the quarterly conversation an agenda beyond listing upkeep — and set up the renewal."],
@@ -498,81 +468,10 @@ function chip(s, text, x, y, w, h, o) {
   foot(s, N);
   s.addNotes("The argument for starting mid-band: the sub-$500K band is bigger but each win is small, and the $10M+ band is where a botched first conversation is most expensive. Two mid-band pilots produce the numbers that make both other bands easier. The three plays keep the motion from being one-size-fits-all without turning it into bespoke consulting.");
 }
-/* ═══════════════ 13 · UC02 ═══════════════ */
-{
-  const s = sl(P.bg);
-  eyebrow(s, "USE CASE 02  ·  THE COMPETITIVE WEDGE", P.indigoL);
-  h1(s, "Make the Automatum subscription self-funding.");
-  sub(s, "Automatum already competes on price — roughly a fifth of what legacy marketplace platforms charge. Archera changes the comparison entirely: the customer's own AWS bill starts paying for the marketplace programme.", { y: 1.46, w: 11.4 });
-
-  const pitches = [
-    ["THE PITCH TODAY", "Marketplace management at a fraction of the incumbents' price.", "It is a good pitch, and it is still a cost line. A finance team has to approve it against everything else competing for the same budget.", P.dim, P.card],
-    ["THE PITCH WITH ARCHERA", "Marketplace management that returns tens of thousands a year.", "The same subscription, argued from the customer's own billing data. The question moves from “can we afford this?” to “why haven’t we done this already?”", P.indigoL, P.card2],
-  ];
-  pitches.forEach((p, i) => {
-    const w = CW / 2 - 0.12, x = M + i * (CW / 2 + 0.12), y = 2.52;
-    card(s, x, y, w, 2.52, { fill: p[4], line: i === 1 ? P.indigo : P.rule, lw: i === 1 ? 1.25 : 0.75 });
-    label(s, p[0], x + 0.34, y + 0.24, w - 0.68, p[3], 9);
-    s.addText(p[1], { x: x + 0.34, y: y + 0.56, w: w - 0.68, h: 0.94, isTextBox: true, margin: 0, fontFace: F, fontSize: 17, bold: true, color: P.white, valign: "top", lineSpacing: 23 });
-    s.addText(p[2], { x: x + 0.34, y: y + 1.56, w: w - 0.68, h: 0.82, isTextBox: true, margin: 0, fontFace: F, fontSize: 12, color: P.t2, valign: "top", lineSpacing: 17 });
-  });
-
-  card(s, M, 5.24, CW, 1.10, { fill: P.bg2, line: P.rule });
-  s.addText([
-    { text: "It also changes what churn looks like. ", options: { bold: true, color: P.white } },
-    { text: "A subscription that visibly returns more than it costs is not a line item anyone hunts for in a cost-cutting review — and the coverage stops renewing the moment the platform disconnects.", options: { color: P.t2 } },
-  ], { x: M + 0.34, y: 5.40, w: CW - 0.68, h: 0.78, isTextBox: true, margin: 0, fontFace: F, fontSize: 13, valign: "middle", lineSpacing: 19 });
-  caption(s, "Pricing comparison per Automatum's published positioning against legacy marketplace platforms. Savings figures per the worked example on slide 7.");
-  foot(s, N);
-  s.addNotes("This is the retention argument as much as the sales one. Ask them directly: what does a renewal conversation look like when the customer can see a larger number coming back off their AWS bill than they pay you?");
-}
-
-/* ═══════════════ 14 · UC03 ═══════════════ */
-{
-  const s = sl(P.bg);
-  eyebrow(s, "USE CASE 03  ·  ASSESSMENTS", P.indigoL);
-  h1(s, "Clear the FTR gate faster.");
-  sub(s, "The Foundational Technical Review gates ISV Accelerate and co-sell. Archera auto-populates it from the live environment and writes the results back into the native AWS Well-Architected Tool.", { y: 1.46, w: 10.6 });
-
-  const pts = [
-    ["Auto-populate the review", "Connect the account and the framework fills itself in. No manual data gathering, no questionnaire chase."],
-    ["Cover the whole framework", "WAFR, industry and technology Lenses, and the FTR itself."],
-    ["Write back to the AWS tooling", "Results land in the native AWS Well-Architected Tool, where AWS expects to find them."],
-    ["Keep it current", "Track best-practice adoption, flag regressions, assign remediation, and keep an audit history."],
-  ];
-  pts.forEach((p, i) => {
-    const w = (8.10 - 0.18) / 2, x = M + (i % 2) * (w + 0.18), y = 2.34 + Math.floor(i / 2) * 1.70;
-    card(s, x, y, w, 1.52, { fill: P.card, line: P.rule });
-    s.addText(p[0], { x: x + 0.28, y: y + 0.18, w: w - 0.56, h: 0.30, isTextBox: true, margin: 0, fontFace: F, fontSize: 13, bold: true, color: P.white, valign: "top", lineSpacing: 17 });
-    s.addText(p[1], { x: x + 0.28, y: y + 0.52, w: w - 0.56, h: 0.88, isTextBox: true, margin: 0, fontFace: F, fontSize: 11, color: P.t2, valign: "top", lineSpacing: 15 });
-  });
-
-  const px = 9.00, pw = 13.333 - M - 9.00;
-  card(s, px, 2.34, pw, 3.22, { fill: P.card2, line: P.indigo, lw: 1.1 });
-  label(s, "WHY IT MATTERS", px + 0.30, 2.58, pw - 0.6, P.tealBr, 9);
-  const why = [
-    "It fits inside the ~14-day go-live rather than extending it.",
-    "Completed reviews help unlock AWS credits, assessment-driven discounts and funding programmes for the ISV.",
-    "One more gate Automatum clears for the customer instead of handing back with instructions.",
-  ];
-  why.forEach((w, i) => {
-    s.addText(w, { x: px + 0.30, y: 2.96 + i * 0.82, w: pw - 0.60, h: 0.76, isTextBox: true, margin: 0, fontFace: F, fontSize: 11.5, color: P.t2, valign: "top", lineSpacing: 16 });
-  });
-
-  card(s, M, 5.72, CW, 0.92, { fill: P.bg2, line: P.rule });
-  s.addText([
-    { text: "Worth checking. ", options: { bold: true, color: P.amber } },
-    { text: "How many of Automatum's 80+ ISVs have a current FTR, and how many stalled on it. That number is the size of this use case, and Automatum is one of the few parties who can actually find out.", options: { color: P.t2 } },
-  ], { x: M + 0.34, y: 5.72, w: CW - 0.68, h: 0.92, isTextBox: true, margin: 0, fontFace: F, fontSize: 12.5, valign: "middle", lineSpacing: 18 });
-  caption(s, "Assessment capabilities per Archera partner materials — confirm current scope, including the credits and funding claims, with Archera.", 6.74);
-  foot(s, N);
-  s.addNotes("Do not oversell this one. Archera automates the assessment, not the remediation — the ISV still has to fix what the review finds. The value is in removing the data-gathering slog and keeping the review current, which is where most FTRs actually stall.");
-}
-
 /* ═══════════════ 15 · UC04 ═══════════════ */
 {
   const s = sl(P.bg);
-  eyebrow(s, "USE CASE 04  ·  UNFORECASTABLE SPEND", P.indigoL);
+  eyebrow(s, "USE CASE 02  ·  UNFORECASTABLE SPEND", P.indigoL);
   h1(s, "Cover the spend nobody can forecast.");
   sub(s, "Automatum's base skews startup and scaleup SaaS — the segment carrying GPU, training and inference spend with month-to-month variance no one- or three-year term can absorb. Committing it natively means betting a fixed term against a forecast nobody stands behind.", { y: 1.46, w: 11.2 });
 
@@ -596,13 +495,13 @@ function chip(s, text, x, y, w, h, o) {
   ], { x: M + 0.34, y: 4.82, w: CW - 0.68, h: 1.16, isTextBox: true, margin: 0, fontFace: F, fontSize: 13, valign: "middle", lineSpacing: 20 });
   caption(s, "Waste rose to 29% of cloud infrastructure spend in Flexera's 2026 State of the Cloud survey — the first increase in five years, attributed to AI workloads. Base-composition skew is a working assumption; confirm from account data.", 6.20);
   foot(s, N);
-  s.addNotes("For an AI-heavy ISV this is usually the opening use case rather than the fourth. If the room is full of AI-native customers, promote this slide ahead of use case 03.");
+  s.addNotes("For an AI-heavy ISV this is usually the opening use case rather than the second — if the room is full of AI-native customers, lead with it.");
 }
 
 /* ═══════════════ 16 · UC05 ═══════════════ */
 {
   const s = sl(P.bg);
-  eyebrow(s, "USE CASE 05  ·  REVENUE", P.indigoL);
+  eyebrow(s, "USE CASE 03  ·  REVENUE", P.indigoL);
   h1(s, "Open a recurring revenue line.");
   sub(s, "The distributor agreement offers two postures — and the recurring revenue line this deck argues for requires the second.", { y: 1.46, w: 9.8 });
 
@@ -656,7 +555,7 @@ function chip(s, text, x, y, w, h, o) {
 /* ═══════════════ NEW · HOW THE MONEY MOVES ═══════════════ */
 {
   const s = sl(P.bg);
-  eyebrow(s, "USE CASE 05  ·  THE RAILS", P.indigoL);
+  eyebrow(s, "USE CASE 03  ·  THE RAILS", P.indigoL);
   h1(s, "How the money moves.");
   sub(s, "The premium is metered, marketplace-billed, and channel-shared — the same rails Automatum already reconciles.", { y: 1.46, w: 9.6 });
 
@@ -700,7 +599,7 @@ function chip(s, text, x, y, w, h, o) {
 /* ═══════════════ 17 · PROOF ═══════════════ */
 {
   const s = sl(P.bg2);
-  eyebrow(s, "PART FIVE  ·  THE RECKONING", P.amber);
+  eyebrow(s, "PART FOUR  ·  THE RECKONING", P.amber);
   h1(s, "It already works at this scale.");
   sub(s, "Net realised savings — actual bill reduction after Archera's premium — measured over a recent full month from live platform data, across five enterprises on three clouds.", { y: 1.42, w: 10.6, size: 12.5 });
 
@@ -751,11 +650,11 @@ function chip(s, text, x, y, w, h, o) {
 /* ═══════════════ 18 · WHERE IT PLUGS IN + 90 DAYS ═══════════════ */
 {
   const s = sl(P.bg);
-  eyebrow(s, "PART FIVE  ·  THE RECKONING", P.amber);
+  eyebrow(s, "PART FOUR  ·  THE RECKONING", P.amber);
   h1(s, "Where it plugs in, and a 90-day plan.");
 
   const stages = [
-    ["LIST", "Automated FTR / Well-Architected in the go-live window — scope to confirm."],
+    ["LIST", "The savings analysis runs during the listing build — coverage ready at go-live."],
     ["TRANSACT", "Premiums billed through the same CPPO channel as the listing."],
     ["CO-SELL", "Savings data gives AWS sellers a reason to engage the account."],
     ["SCALE", "Ongoing visibility, regression alerts and recurring premium revenue."],
@@ -771,9 +670,9 @@ function chip(s, text, x, y, w, h, o) {
   });
 
   const phases = [
-    ["01", "DAYS 0–30", "Stand up and pilot", ["Install Archera from AWS Marketplace on two friendly ISV accounts.", "Run the free savings analysis and baseline current commitment coverage.", "Run one automated Well-Architected Review end to end."]],
+    ["01", "DAYS 0–30", "Stand up and pilot", ["Install Archera from AWS Marketplace on two friendly ISV accounts.", "Run the free savings analysis and baseline coverage.", "Turn each pilot's analysis into a term plan — 30-day vs 1-year, workload by workload."]],
     ["02", "DAYS 30–60", "Productise", ["Package the attach offer, with the savings number as the opening line.", "Execute the distributor agreement and clear its free enablement bar.", "Brief the account team on the talk track and the qualifying question."]],
-    ["03", "DAYS 60–90", "Roll out and co-sell", ["Work the base mid-band first, largest accounts last — the slide 10 order.", "Co-sell with AWS and Archera on qualified accounts.", "Report savings delivered, AWS funding unlocked, and new margin."]],
+    ["03", "DAYS 60–90", "Roll out and co-sell", ["Work the base mid-band first, largest accounts last — the slide 9 order.", "Co-sell with AWS and Archera on qualified accounts.", "Report savings delivered, premium billed and new margin."]],
   ];
   phases.forEach((p, i) => {
     const w = (CW - 0.36) / 3, x = M + i * (w + 0.18), y = 3.28;
@@ -794,7 +693,7 @@ function chip(s, text, x, y, w, h, o) {
 /* ═══════════════ 19 · THE HONEST PART ═══════════════ */
 {
   const s = sl(P.bg);
-  eyebrow(s, "PART FIVE  ·  THE RECKONING", P.amber);
+  eyebrow(s, "PART FOUR  ·  THE RECKONING", P.amber);
   h1(s, "When not to use this, and what to validate.");
 
   card(s, M, 1.62, CW, 1.32, { fill: P.card2, line: P.amber, lw: 1.1 });
@@ -826,44 +725,12 @@ function chip(s, text, x, y, w, h, o) {
   s.addNotes("Do not skip this slide to save time. It is the one that makes the other eighteen credible, and the two operational gotchas — rebate cover being off by default, and buybacks needing a filed request — are exactly the kind of thing a partner is well placed to own on the customer's behalf.");
 }
 
-/* ═══════════════ 20 · TAKEAWAY ═══════════════ */
-{
-  const s = sl(P.deep);
-  eyebrow(s, "THE TAKEAWAY", P.tealBr);
-  s.addText([
-    { text: "Turn your customers’ AWS bills\n", options: { color: P.white } },
-    { text: "into a reason to stay.", options: { color: P.indigoL } },
-  ], { x: M, y: 1.00, w: 11.4, h: 1.7, isTextBox: true, margin: 0, fontFace: F, fontSize: 40, bold: true, lineSpacing: 47, valign: "top" });
-  sub(s, "One free platform, attached to a base that already exists. It auto-populates the Well-Architected reviews Automatum's ISVs need, produces savings on bills they already pay, and opens a recurring revenue line through the marketplace channel Automatum already runs — with almost no cost to introduce.",
-    { y: 2.86, w: 11.0, size: 14.5, ls: 22 });
-
-  const next = [
-    ["Pick two pilot ISVs", "Steady-state or AI-heavy AWS spend, and a relationship that will tolerate a first run."],
-    ["Run the free savings analysis", "A measured coverage baseline, at no cost and no commitment."],
-    ["Sign the distributor agreement", "20–30% tiered rev-share, paid monthly through the marketplace channel."],
-  ];
-  next.forEach((n, i) => {
-    const w = (CW - 0.36) / 3, x = M + i * (w + 0.18), y = 4.22;
-    card(s, x, y, w, 1.88, { fill: P.bg2, line: i === 0 ? P.indigo : P.rule, lw: i === 0 ? 1.25 : 0.75 });
-    s.addText(String(i + 1).padStart(2, "0"), { x: x + 0.30, y: y + 0.22, w: 0.7, h: 0.30, isTextBox: true, margin: 0, fontFace: F, fontSize: 12, bold: true, color: i === 0 ? P.indigoL : P.muted, charSpacing: 1, valign: "middle" });
-    s.addText(n[0], { x: x + 0.30, y: y + 0.56, w: w - 0.60, h: 0.54, isTextBox: true, margin: 0, fontFace: F, fontSize: 15, bold: true, color: P.white, valign: "top", lineSpacing: 20 });
-    s.addText(n[1], { x: x + 0.30, y: y + 1.16, w: w - 0.60, h: 0.60, isTextBox: true, margin: 0, fontFace: F, fontSize: 11, color: P.t2, valign: "top", lineSpacing: 15 });
-  });
-
-  s.addText("Prepared by Only Best Practices  ·  AWS Alliance Advisory", {
-    x: M, y: 6.62, w: 8, h: 0.3, isTextBox: true, margin: 0, fontFace: F, fontSize: 10, color: P.dim, charSpacing: 0.8, valign: "middle",
-  });
-  s.addText("20", { x: 13.333 - M - 1.2, y: 6.62, w: 1.2, h: 0.3, isTextBox: true, margin: 0, fontFace: F, fontSize: 9, color: P.dim, align: "right", valign: "middle" });
-  s.addNotes("Close on the two-pilot ask, not on the rev-share. The rev-share is worth more over time, but the pilot is what turns every assumption in this deck into Automatum's own data — and it costs them an install and a report.");
-}
-
-
 /* ═══════════════ 21 · SEND THIS ON ═══════════════ */
 {
   const s = sl(P.deep);
   eyebrow(s, "SEND THIS ON", P.tealBr);
   h1(s, "Archera × Automatum, in one frame.", { size: 26, h: 0.5 });
-  sub(s, "The whole argument, for whoever was not in the room.", { y: 1.24, w: 8, size: 12 });
+  sub(s, "Turn your customers’ AWS bills into a reason to stay — the whole argument, for whoever was not in the room.", { y: 1.24, w: 10.5, size: 12 });
 
   const colW = (CW - 0.44) / 3;
   const colY = 1.78, colH = 4.56;
@@ -936,8 +803,8 @@ function chip(s, text, x, y, w, h, o) {
   s.addText("Prepared by Only Best Practices  ·  AWS Alliance Advisory", {
     x: M, y: 6.90, w: 8, h: 0.3, isTextBox: true, margin: 0, fontFace: F, fontSize: 10, color: P.dim, charSpacing: 0.8, valign: "middle",
   });
-  s.addText("21", { x: 13.333 - M - 1.2, y: 6.90, w: 1.2, h: 0.3, isTextBox: true, margin: 0, fontFace: F, fontSize: 9, color: P.dim, align: "right", valign: "middle" });
-  s.addNotes("The forwardable slide: everything load-bearing in one frame, for the CEO to send to their team without the deck. If only one slide survives the meeting, this is the one it should be.");
+  s.addText(String(N), { x: 13.333 - M - 1.2, y: 6.90, w: 1.2, h: 0.3, isTextBox: true, margin: 0, fontFace: F, fontSize: 9, color: P.dim, align: "right", valign: "middle" });
+  s.addNotes("The forwardable slide and the close: everything load-bearing in one frame, for the CEO to send to their team without the deck. Close on the two-pilot ask, not on the rev-share — the pilot turns every assumption in this deck into Automatum's own data, and it costs them an install and a report. If only one slide survives the meeting, this is the one it should be.");
 }
 
 const out = process.argv[2] || "Archera-for-Automatum.pptx";
