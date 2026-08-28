@@ -29,9 +29,11 @@ Three things need a human decision:
    confidential and do-not-distribute.** Only the anonymised, vertical-level rows are
    used, and the named enterprise reference in that pack has been deliberately left out.
    Confirm clearance with Archera — and ask whether the named reference can be added.
-2. **The Automatum figures on slide 5**  (80+ ISVs, $120M+ marketplace revenue, operating
-   since 2021, four marketplaces, ~14 days to first listing) come from Automatum's
-   published positioning and should be verified against what the company says today.
+2. **Automatum's own materials (automatumdeck2) now source the 80+ count, the 5–7 day
+   average listing time, and the plan pricing** ($1,199 / $3,999 / $9,999 annually) used
+   in the self-funding arithmetic on slides 3, 7 and 9 — list prices; negotiated or
+   legacy pricing may differ. The $120M+ GMV, since-2021 and four-marketplace figures on
+   slide 5 still come from published positioning and should be verified.
 3. **Slide 8's presales stages follow Automatum's published motion** — swap in the real
    internal stage names. The commercial terms on slides 6, 11 and 12 now come from
    Archera's Distributor Partner Agreement template (Appendix A: Referral tier pays a

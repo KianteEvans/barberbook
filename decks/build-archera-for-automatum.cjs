@@ -216,7 +216,7 @@ function chip(s, text, x, y, w, h, o) {
 
   const wins = [
     ["01", "Attach through presales, to the base you already have", "The free savings analysis rides discovery, coverage lands at go-live, and the QBR gets a value agenda. No new pipeline to build."],
-    ["02", "Make the subscription self-funding", "The customer's AWS saving can cover what they pay Automatum — turning a cost line into one that argues for itself."],
+    ["02", "Make the subscription self-funding", "Base-case savings run ~3× the $9,999 Enterprise plan — turning a cost line into one that argues for itself."],
     ["03", "Open a recurring revenue line", "A 20–30% tiered revenue share on premiums, through the CPPO channel Automatum already runs."],
   ];
   wins.forEach((w, i) => {
@@ -282,7 +282,7 @@ function chip(s, text, x, y, w, h, o) {
   eyebrow(s, "PART TWO  ·  THE CASE", P.amber);
   h1(s, "Why it fits Automatum.");
 
-  const bar = [["80+", "ISVs live"], ["$120M+", "marketplace GMV"], ["2021", "operating since"], ["4", "marketplaces"], ["~14 days", "to first listing"], ["CPPO", "channel in place"]];
+  const bar = [["80+", "ISVs live"], ["$120M+", "marketplace GMV"], ["2021", "operating since"], ["4", "marketplaces"], ["5–7 days", "average listing"], ["CPPO", "channel in place"]];
   bar.forEach((b, i) => {
     const w = (CW - 0.5) / 6, x = M + i * (w + 0.10), y = 1.50;
     card(s, x, y, w, 0.98, { fill: P.card2, line: P.rule });
@@ -307,9 +307,9 @@ function chip(s, text, x, y, w, h, o) {
     { text: "The multicloud shape matches too — ", options: { bold: true, color: P.white } },
     { text: "the same guarantee structure covers AWS, Azure and Google Cloud from one control plane.", options: { color: P.t2 } },
   ], { x: M, y: 5.56, w: CW, h: 0.26, isTextBox: true, margin: 0, fontFace: F, fontSize: 11.5, valign: "middle" });
-  caption(s, "Automatum figures per the company's published positioning (automatum.io) — confirm before circulation.", 6.10);
+  caption(s, "Listing stats and plan pricing per Automatum's own materials; $120M+ GMV, 2021 and the four-marketplace count per published positioning — confirm those before circulation.", 6.10);
   foot(s, N);
-  s.addNotes("This is the slide that separates Automatum from a generic partner pitch: the rev-share plumbing most partners would have to build is the product Automatum already sells. The evidence line to speak to: ProsperOps measures the median company under $500K of annual compute as having captured nothing — and that is most of an ISV base. The sequencing slide carries the full bands.");
+  s.addNotes("This is the slide that separates Automatum from a generic partner pitch: the rev-share plumbing most partners would have to build is the product Automatum already sells. The base includes enterprise names — CBRE, Knight Frank, Deel, ELMO, Subex, Tanda, Energy Exemplar, SettleMint — not just startups, which strengthens the mid- and upper-band sizing. The evidence line to speak to: ProsperOps measures the median company under $500K of annual compute as having captured nothing — and that is most of an ISV base. The sequencing slide carries the full bands.");
 }
 
 /* ═══════════════ 09 · THE OPPORTUNITY, SIZED ═══════════════ */
@@ -392,14 +392,14 @@ function chip(s, text, x, y, w, h, o) {
     s.addText(o[4], { x: x + 0.28, y: y + 0.90, w: w - 0.56, h: 0.36, isTextBox: true, margin: 0, fontFace: F, fontSize: 10.5, color: P.t2, valign: "top", lineSpacing: 14 });
   });
 
-  card(s, M, 5.72, CW, 0.94, { fill: P.bg2, line: P.indigo, lw: 1.1 });
+  card(s, M, 5.66, CW, 0.92, { fill: P.bg2, line: P.indigo, lw: 1.1 });
   s.addText([
-    { text: "$28.4K a year back — for many ISVs, more than the Automatum subscription. ", options: { bold: true, color: P.white } },
+    { text: "$28.4K a year back — nearly three times the $9,999 Enterprise plan. ", options: { bold: true, color: P.white } },
     { text: "The pitch flips from “marketplace management at a fraction of the incumbents' price” to “marketplace management the AWS bill pays for” — and a subscription that visibly returns more than it costs is not a line anyone hunts in a cost-cutting review.", options: { color: P.t2 } },
-  ], { x: M + 0.34, y: 5.72, w: CW - 0.68, h: 0.94, isTextBox: true, margin: 0, fontFace: F, fontSize: 12.5, valign: "middle", lineSpacing: 18 });
-  caption(s, "Illustrative, at the base-case assumptions from the previous slide. Net of Archera's premium. Drop Automatum's own list price into the takeaway to close the argument in front of a customer.", 6.74);
+  ], { x: M + 0.34, y: 5.66, w: CW - 0.68, h: 0.92, isTextBox: true, margin: 0, fontFace: F, fontSize: 12.5, valign: "middle", lineSpacing: 18 });
+  caption(s, "Illustrative, at the base-case assumptions from the previous slide, net of Archera's premium. At the 35% blended net rate, savings cover the $1,199 Startup plan from ~$1.1K a month of AWS spend, the $3,999 Scale-up from ~$3.5K, and the $9,999 Enterprise from ~$9K. Plan prices per Automatum's published list.", 6.64);
   foot(s, N);
-  s.addNotes("Deliberately left open: we do not put Automatum's price on the slide, because we do not have it and guessing it would undermine everything else. Ask them to fill it in live — if a mid-tier subscription sits anywhere below roughly $28K a year, self-funding is arithmetic rather than marketing. This is also the retention argument: ask directly what a renewal conversation looks like when the customer sees a larger number coming back off their AWS bill than they pay Automatum.");
+  s.addNotes("The self-funding claim is now arithmetic against Automatum's own list prices ($1,199 / $3,999 / $9,999 a year): the base-case ISV's savings run 2.8x the Enterprise plan, and the thresholds in the caption show even Startup-plan customers self-fund from about $1.1K a month of AWS spend. Caveat to say out loud: list prices — negotiated or legacy pricing may differ. This is also the retention argument: ask what a renewal conversation looks like when the customer sees a larger number coming back off their AWS bill than they pay Automatum.");
 }
 
 /* ═══════════════ NEW · PRESALES MOTION ═══════════════ */
@@ -464,7 +464,7 @@ function chip(s, text, x, y, w, h, o) {
     s.addText(p[0], { x: x + 0.26, y: y + 0.12, w: w - 0.52, h: 0.28, isTextBox: true, margin: 0, fontFace: F, fontSize: 12, bold: true, color: P.white, valign: "middle" });
     s.addText(p[1], { x: x + 0.26, y: y + 0.40, w: w - 0.52, h: 0.62, isTextBox: true, margin: 0, fontFace: F, fontSize: 10.5, color: P.t2, valign: "top", lineSpacing: 14 });
   });
-  caption(s, "Instrument the motion like marketplace revenue: accounts connected, coverage baseline, savings realised, premium billed, rev-share accrued. The constraint is calendar time and analysis throughput, not lead generation — every account is already a customer. Bands: ProsperOps median Effective Savings Rate by annual AWS compute usage.", 6.36);
+  caption(s, "Instrument the motion like marketplace revenue: accounts connected, coverage baseline, savings realised, premium billed, rev-share accrued. The constraint is calendar time, not lead generation — every account is already a customer, and at list prices any ISV spending ~$9K+ a month on AWS covers the Enterprise plan from savings alone. Bands: ProsperOps median ESR by annual AWS compute usage.", 6.36);
   foot(s, N);
   s.addNotes("The argument for starting mid-band: the sub-$500K band is bigger but each win is small, and the $10M+ band is where a botched first conversation is most expensive. Two mid-band pilots produce the numbers that make both other bands easier. The three plays keep the motion from being one-size-fits-all without turning it into bespoke consulting.");
 }
