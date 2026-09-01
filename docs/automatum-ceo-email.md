@@ -21,7 +21,7 @@ Here is a quick outline of the four solutions in the BOX portfolio, each coverin
 
 Each solution stands alone in front of a customer, and together they cover the whole chain — get listed, run the partnership, operate the Marketplace, build the channel — through one agreement, transacting on AWS Marketplace.
 
-Happy to walk through any of them in more detail.
+The full deck is attached for your review — happy to walk through any of the solutions in more detail.
 
 Best regards,
 Kiante Evans
