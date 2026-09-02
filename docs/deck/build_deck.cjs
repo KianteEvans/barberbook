@@ -225,9 +225,9 @@ s.addText([
   });
 txt(s, 'One pricing ladder — a convention, not a product.', { x:P(430), y:P(478), w:P(330), h:P(14),
   fontSize:9.5, color:C.dkMuted });
-txt(s, 'Bracketed figures are unset. No bracket reaches a customer artifact.',
+txt(s, 'Bracketed items are open for decision. None reaches a customer artifact.',
   { x:P(430), y:P(494), w:P(330), h:P(14), fontSize:8.5, color:C.dkDim });
-txt(s, 'BOX Solutions   ·   revised', { x:P(700), y:P(509), w:P(207), h:P(14),
+txt(s, 'BOX Solutions   ·   revised 2026-09-02', { x:P(700), y:P(509), w:P(207), h:P(14),
   fontFace:F.reg, fontSize:9, color:C.dkMuted, align:'right' });
 
 /* 2 — Agenda ------------------------------------------------------------- */
@@ -275,7 +275,7 @@ matrix(s,
     ['[CTO / VP Engineering]','[CEO or CRO]','[RevOps / deal desk or COO]','[CRO / VP Channel]'],
     ['[N] engineer-weeks on Well-Architected, FTR and seller registration','A Director of Alliances hire','A Marketplace ops / offer-desk hire plus compliance engineering hours','A channel manager plus a PRM subscription'],
     ['The fixed-fee route to a published listing in 14 to 18 business days, with nothing ongoing','The AWS partnership programme and the ISV’s own BOX Program listings — not the Marketplace listing work','Builds the listing AND operates it for twelve months — Launch includes WAFR, FTR and publication','Third-party sellers — not the customer’s own listing'],
-    ['ASecureCloud','[none named in the deck — confirm]','[none named in the deck — confirm]','Kiflo, resold inside the fee'],
+    ['ASecureCloud','[none named — to confirm]','[none named — to confirm]','Kiflo, resold inside the fee'],
     ['Its own, with its own milestone submission','Its own','Its own','Its own'],
   ],
   { top:180, rowH:[30,50,60,40,30] });
@@ -563,7 +563,7 @@ table(s, [
 s.addText([{ text:'Targets. Not guaranteed. Set from the customer’s baseline at onboarding, shown against actuals from month one.  ', options:{ color:C.subtle } },
            { text:'[Remedy] applies to commitments only.', options:{ color:C.orange } }],
   { isTextBox:true, margin:0, x:P(59), y:P(412), w:P(850), h:P(16), fontFace:F.light, fontSize:9 });
-band(s, 'ON EVERY ARTIFACT', 'Both lines above appear on every customer overview and deck, or the commit column silently acquires a number nobody set.');
+band(s, 'ON EVERY ARTIFACT', 'Both lines above appear on every customer overview and deck, so no target is ever mistaken for a commitment.');
 
 /* 15 — Part Three divider ------------------------------------------------ */
 s = pptx.addSlide();
@@ -616,12 +616,12 @@ table(s, [
   ['Milestone cash and credits','Figures are established; the division is not. Credits are worth face value only to the party with spend to offset','Both · to agree'],
   ['Milestone 3 — the 55 leads','Confirm the direction before agreeing who owns them','Both · to confirm'],
   ['Component cost recovery','ASecureCloud and Kiflo, stress-tested against the $2,500 rung','OBP · to model'],
-  ['Back-to-back internal SLAs','Offer issue, listing configuration, selling authorizations, ACE instance, reporting feed','Automatum · BLOCKING'],
+  ['Back-to-back internal SLAs','Offer issue, listing configuration, selling authorizations, ACE instance, reporting feed','Automatum · needed first'],
   ['Renewal, churn and exit','Ownership of partner agreements and Kiflo channel data at end of term','Both · to agree'],
   ['Exclusivity and reporting access','Scope boundary, and OBP’s access to Marketplace seller reporting','Both · to agree'],
 ], { top:180, labelX:59, labelW:190, valueX:262, valueW:415, pitch:22, size:8.5, x3:700,
      header:['Term','What has to be settled','Owner and status', 700] });
-band(s, 'NOT CUSTOMER-FACING', 'The $10,000 fee and the ladder cannot be validated until OBP knows its share. A split below OBP’s walk-away means the prices are wrong, not the split.');
+band(s, 'NOT CUSTOMER-FACING', 'The fee and the ladder are only validated once the split is known — so these terms come before any repricing.');
 
 /* 19 — The exchange ------------------------------------------------------ */
 s = pptx.addSlide();
@@ -672,7 +672,7 @@ txt(s, 'TWO CONDITIONS PRINTED ON THIS SLIDE', { x:P(80.6), y:P(408), w:P(400), 
   fontSize:8, fontFace:F.bold, bold:true, color:C.orange, charSpacing:1 });
 block(s, [
   'Wave one assumes capacity to run two feasibility studies and two milestone plans concurrently. [Capacity to confirm — if it is genuinely one at a time, wave one splits.]',
-  'The whole recommendation is contingent on the 12-month listing clock running per Solution ID from entry. If it runs programme-level, sequencing burns the clock rather than staggering it, and this slide is wrong.',
+  'The whole recommendation is contingent on the 12-month listing clock running per Solution ID from entry. If it runs programme-level, sequencing burns the clock rather than staggering it, and the sequence changes.',
 ], { x:P(80.6), y:P(424), w:P(830), h:P(40), fontSize:8.5, color:C.subtle });
 
 /* 21 — The decision ------------------------------------------------------ */
@@ -682,20 +682,21 @@ chrome(s, { eyebrow:'THE DECISION', eyebrowIcon:'eyebrow_p13.png',
   subtitle:'Approve the sequence, confirm the lead partner of record, name the dates.',
   page:21 });
 table(s, [
-  ['Validated or Differentiated held by the lead partner','Automatum','Stated by Automatum (Aein, email) — evidence to attach'],
+  ['Validated or Differentiated held by the lead partner','Automatum','Stated by Automatum — Partner Central evidence to attach'],
   ['Automatum is lead partner of record on all four Solution IDs','Automatum','To confirm'],
   ['Solution listed within 12 months','Automatum + OBP','[Per-wave deadlines once the clock basis is confirmed]'],
   ['Five ACE opportunity submissions per solution','OBP','Built into each solution’s plan'],
   ['Milestone 1 Feasibility Study per solution','OBP','Drafted from the overviews'],
-  ['Commit / target set per retainer rung','OBP','In draft — placeholders to close by [date]'],
-  ['Included band and overflow rate per rung','OBP commercial','To decide'],
-  ['Automatum back-to-back turnarounds','Automatum','To agree on the call'],
+  ['Retainer outcomes per rung','OBP','Set — all three retainers'],
+  ['Staffing, bands and overflow rates behind every rung','OBP','To capacity-test and price before any customer artifact'],
+  ['Automatum back-to-back turnarounds','Automatum','Needed before any turnaround is published'],
+  ['CPPO boundary — Operations vs Partner Development','OBP + Automatum','To confirm'],
   ['Commercial terms between OBP and Automatum','OBP + Automatum','On the agenda for [call date]'],
-], { top:180, labelX:59, labelW:330, valueX:405, valueW:150, pitch:23, size:9.5, x3:580,
+], { top:176, labelX:59, labelW:330, valueX:405, valueW:150, pitch:21, size:9, x3:580,
      header:['Entry condition or item','Owner','Standing', 580] });
 txt(s, 'Stage and partner tier are separate axes. The gate the deck names is Validated or Differentiated, which Differentiated satisfies on its own — attach the stage and tier as shown on Partner Central, the Partner ID, the date checked, and any expiry.',
-  { x:P(59), y:P(420), w:P(850), h:P(28), fontSize:8.5, color:C.subtle });
-band(s, 'THE ASK', 'Approve the two-wave sequence, confirm the lead partner of record, agree the back-to-back turnarounds, and calendar wave one’s Milestone 1 for [date].');
+  { x:P(59), y:P(418), w:P(850), h:P(28), fontSize:8.5, color:C.subtle });
+band(s, 'THE ASK', 'Approve the two-wave sequence, confirm the lead partner of record, agree the back-to-back turnarounds and the CPPO boundary, and calendar wave one’s Milestone 1 for [date].');
 
 /* 22 — Where everything lives -------------------------------------------- */
 s = pptx.addSlide();
@@ -708,7 +709,7 @@ columns(s, [
   { head:'Internal', text:'The catalog page and this deck: the side-by-side view, the four-buyers page, the commit / target sets, the components register, partner economics, the sequence and the BOX figures.' },
   { head:'The mirror', text:'The two partner sets match exactly, name aside, and the sweep asserts it on every run.' },
 ], { top:200, panels:true, headSize:15, bodySize:9.5, height:150 });
-txt(s, 'THE RENAME CASCADE — NOBODY HAS PRICED THIS', { x:P(51.8), y:P(392), w:P(500), h:P(14),
+txt(s, 'THE RENAME CASCADE — PRICE IT BEFORE APPROVING', { x:P(51.8), y:P(392), w:P(500), h:P(14),
   fontSize:8, fontFace:F.bold, bold:true, color:C.orange, charSpacing:1 });
 txt(s, 'The mirror rule means any rung rename — Expand to Activate, say — re-cuts up to four overviews and four decks per partner: sixteen artifacts, plus anything already drafted for a Solution ID or milestone submission. Weigh that before approving the renames, not after.',
   { x:P(51.8), y:P(408), w:P(856), h:P(34), fontSize:9 });

@@ -314,14 +314,15 @@ Keep every established figure. Three fixes:
 
 | Entry condition or item | Owner | Standing |
 |---|---|---|
-| Validated or Differentiated held by the lead partner | Automatum | **Stated by Automatum (Aein, email) — evidence to attach:** stage and tier exactly as shown on Partner Central, Partner ID, date checked, any expiry or re-validation date |
+| Validated or Differentiated held by the lead partner | Automatum | Stated by Automatum — Partner Central evidence to attach: stage and tier exactly as shown, Partner ID, date checked, any expiry |
 | **Automatum is lead partner of record on all four Solution IDs** | Automatum | To confirm |
 | Solution listed within 12 months | Automatum + OBP | `[per-wave deadlines once the clock basis is confirmed]` |
 | Five ACE opportunity submissions per solution | OBP | Built into each solution's plan |
 | Milestone 1 Feasibility Study per solution | OBP | Drafted from the overviews |
-| **Commit / target set per retainer rung** | OBP | In draft — placeholders to close by `[date]` |
-| **Included band and overflow rate per rung** | OBP commercial | To decide |
-| **Automatum back-to-back turnarounds** | Automatum | To agree on the call |
+| **Retainer outcomes per rung** | OBP | Set — all three retainers |
+| **Staffing, bands and overflow rates behind every rung** | OBP | To capacity-test and price before any customer artifact |
+| **Automatum back-to-back turnarounds** | Automatum | Needed before any turnaround is published |
+| **CPPO boundary — Operations vs Partner Development** | OBP + Automatum | To confirm |
 | **Commercial terms between OBP and Automatum** | OBP + Automatum | On the agenda for `[call date]` |
 
 > **Do not print "Differentiated (Software Path), Advanced Tier" as a confirmed credential.** Aein
@@ -330,9 +331,8 @@ Keep every established figure. Three fixes:
 > said, attach the evidence, and move on. The new second row is what actually makes Automatum's
 > stage the qualifying credential for each entry; the deck implies it and never states it.
 
-**Footer — THE ASK:** "Approve the two-wave sequence, confirm Automatum as lead partner of record on
-all four Solution IDs, agree the back-to-back turnarounds, and put wave one's Milestone 1 Feasibility
-Study on the calendar for `[date]`."
+**Footer — THE ASK:** "Approve the two-wave sequence, confirm the lead partner of record, agree the
+back-to-back turnarounds and the CPPO boundary, and calendar wave one's Milestone 1 for `[date]`."
 
 ### Slide 22 (was p14) — Where everything lives
 
