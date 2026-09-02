@@ -30,7 +30,7 @@ the twelve-month risk, share a single slide where each rung is three words in a 
 | Managed Marketplace Operations | ⅓ of p8 | No | 3-word label |
 | Managed Partner Development | ⅓ of p8 | No | 3-word label |
 
-One retainer at the middle rung is $60,000 over twelve months — six times the Accelerator's fee.
+Alliances at its middle rung is $60,000 over twelve months — six times the Accelerator's fee.
 The deck's information architecture tells the reader the project is a product and the retainers are
 a price list.
 
@@ -93,7 +93,7 @@ Use this as the completion checklist — nothing may be left unmapped.
 | 7 | — | **What you can hold us to** | ● NEW |
 | 8 | p6 | Part Two divider | ● Add the fourth label |
 | 9 | p7 | Marketplace Compliance Accelerator | ● Three new rows |
-| 10 | p8 | Three retainers, one ladder | ● Ladder only; re-gloss nine rungs |
+| 10 | p8 | Three retainers, two pricing logics | ● Prices moved into the cells; nine rungs re-glossed |
 | 11 | — | **Managed AWS Alliances** | ● NEW |
 | 12 | — | **Managed Marketplace Operations** | ● NEW |
 | 13 | — | **Managed Partner Development** | ● NEW |
@@ -217,13 +217,13 @@ The 14–18 days is *business days of delivery*, not elapsed time, and nothing i
 starts the clock. **Delete the note that this is the only solution with its own slide** — that
 asymmetry is the defect being removed.
 
-### Slide 10 (was p8) — Three retainers, one ladder
+### Slide 10 (was p8) — Three retainers, two pricing logics
 
 Keep as the ladder slide only; the substance moves to slides 11–13.
 
 **Re-gloss all nine rungs onto machinery OBP runs, not results it cannot honour:**
 
-| Solution | $2,500 | $5,000 | $7,500 |
+| Solution | Entry rung | Middle rung | Top rung |
 |---|---|---|---|
 | Managed AWS Alliances | Essentials — stand the partnership up | Growth — run the co-sell desk | Professional — run the deal desk |
 | Managed Marketplace Operations | Launch — get it transacting | Operate — run it on a tighter cadence | Scale — run it at volume |
@@ -233,7 +233,7 @@ Wording notes, each a real defect in the current slide:
 
 - **"Operate — run the channel"** uses Partner Development's vocabulary for a solution that runs a
   *listing*. (The stair and the 3×3 grid do agree on the rung *names*; the defect is the gloss.)
-- **"Launch — get listed and transacting"** advertises the Accelerator's own outcome at $2,500/month.
+- **"Launch — get listed and transacting"** advertises the Accelerator's own outcome at $1,500/month.
   See §4.
 - **"Professional — close deals"** and **"Accelerate — run a producing channel"** name results the
   customer's sales team produces. Do not reuse "producing"; do not give Partner Development's top
@@ -247,14 +247,14 @@ Wording notes, each a real defect in the current slide:
 | | |
 |---|---|
 | **Now** | "The same three rungs price every retainer; what a rung means is each solution's own." |
-| **New** | "One ladder is a pricing convention, not a product. Every rung carries what we commit, what we target, an included band and an overflow rate." |
+| **New** | "Alliances and Partner Development price on seniority — the person on the account. Operations prices on throughput — the same rate per included offer at every rung." |
 
 **Footer:**
 
 | | |
 |---|---|
 | **Now** | "…the ladder is the one thing they share." |
-| **New** | "…the price ladder is the one **number** they share." |
+| **New** | "Two of the three share a ladder; Operations prices to its own band." |
 
 p1, p5 and p10 all assert a shared platform, agreement and seller of record — "the one thing" is
 false on the deck's own terms.
@@ -429,13 +429,19 @@ slides 5 and 16 depend on not confusing the two. The deck defines neither — co
 **Outcomes are settled** from `Managed_Services_Outcomes.docx`.
 
 **Launch absorbs the listing work** — WAFR, FTR and publication — which is the Accelerator's entire
-scope, at $2,500/month against its $10,000 fixed fee. Decided deliberately: Operations builds the
+scope, at $1,500/month against its $10,000 fixed fee. Decided deliberately: Operations builds the
 listing *and* operates it for twelve months; the Accelerator remains the standalone fixed-fee route
 to the same listing in 14 to 18 business days for a customer who wants nothing ongoing. Slide 9
 carries a "Why buy it standalone" row saying exactly that. The pricing supports it — Launch is
-$30,000 over the term against the project's $10,000, so the retainer is not the cheap way in.
+$18,000 over the term against the project's $10,000, so the retainer is not the cheap way in.
 
 **Entry condition:** none. This is the one retainer that starts from nothing.
+
+**Priced on throughput, not seniority.** Operations reprices to **$1,500 / $3,000 / $6,000**, off the
+ladder the other two share. The rungs then track the included offer band exactly — 50 / 100 / 200
+offers a year against $18,000 / $36,000 / $72,000 is the same rate per included offer at every rung,
+where the old ladder gave an inconsistent $600 / $600 / $450. Alliances and Partner Development price
+on the seniority of the person on the account; this one prices on the throughput of the desk.
 
 **The axis holds.** The document delivers all nine services at every rung, differing only by volume,
 turnaround and review cadence — so deck p4's "depth the only axis" claim is now sourced rather than
@@ -503,12 +509,12 @@ Three columns — **Term / Owner / Status**. **No percentages anywhere.**
 | AWS Marketplace listing fee treatment | Automatum | `[rates and mechanics — confirm from Automatum's seller account]` |
 | Milestone 1 and 2 cash and credits apportionment — figures established, division is not | Both | To agree |
 | Milestone 3 — confirm the **direction** of the 55 confirmed project leads before agreeing who owns them | Both | To confirm |
-| ASecureCloud and Kiflo licence cost recovery — **stress-test against the $2,500 rung** | OBP | To model |
+| ASecureCloud and Kiflo licence cost recovery — **stress-test against the $1,500 rung** | OBP | To model |
 | **Back-to-back internal SLAs from Automatum** — offer issue, listing configuration submission, selling authorizations, ACE filing instance, reporting data feed | Automatum | **Blocking** |
 | Renewal, churn, exit; ownership of partner agreements and Kiflo channel data | Both | To agree |
 | Exclusivity, scope boundary, OBP's access to Marketplace seller reporting | Both | To agree |
 
-**Closing line on the slide:** the $10,000 fee and the $2,500 / $5,000 / $7,500 ladder cannot be
+**Closing line on the slide:** the $10,000 fee and both rung ladders cannot be
 validated until OBP knows its share. *A split below OBP's walk-away means the prices are wrong, not
 the split.*
 
@@ -555,7 +561,7 @@ argument is used, bracket the conversion assumption.
 
 **Getting listed appears in three of the four solutions** — the Accelerator ($10,000 fixed,
 14–18 business days), Alliances *Essentials*, and Operations *Launch*, which now explicitly includes
-WAFR, FTR and publication at $2,500/month. This is the version of *"are these genuinely four
+WAFR, FTR and publication at $1,500/month. This is the version of *"are these genuinely four
 solutions?"* a customer or an AWS reviewer will actually ask, and it is sharper than the
 shared-ladder version Aein raised.
 
@@ -565,7 +571,7 @@ purchases of overlapping scope, and the deck says so rather than pretending the 
 | | What it is | Twelve-month cost |
 |---|---|---|
 | **Accelerator** | The fixed-fee route to a published listing in 14 to 18 business days, nothing ongoing | $10,000 |
-| **Operations Launch** | The same listing work, then twelve months operating the listing | $30,000 |
+| **Operations Launch** | The same listing work, then twelve months operating the listing | $18,000 |
 
 The retainer is not the cheap way in, which is what makes the pair coherent. Slide 9 carries a
 **"Why buy it standalone"** row; slides 5 and 16 carry the boundary; Alliances is scoped to the AWS
@@ -584,7 +590,8 @@ Nothing below can be resolved from the deck. Each needs an owner and a date.
   yes, stated on both.)
 - **Packaging** — confirm standalone sale, four buyers, four Solution IDs, no bundle SKU; decide
   multi-solution discount policy and the stacking rule.
-- **The ladder** — confirm the identical $2,500 / $5,000 / $7,500 ladder survives. (Recommended: yes,
+- ~~Confirm the identical ladder survives~~ — **settled**: Operations reprices to $1,500 / $3,000 /
+  $6,000 against its own offer band, so two of the three share a ladder and Operations does not. (Was:
   defended as a convention.) If leadership judges the optics unsurvivable, settle it **before**
   commit/target work is drafted against these price points.
 - **Rename cost** — is renaming rungs worth re-cutting up to sixteen customer artifacts under p14's
@@ -673,7 +680,8 @@ Every bracket in this spec, by owner. Nothing ships to a customer with a bracket
 | **Joint** | The nine services and three groups · partner types and which sit at which rung · target values and whether they are printed or set per customer · all revenue-split terms on slide 18 |
 
 **Established figures — the only numbers permitted unbracketed anywhere in the deck:**
-$2,500 / $5,000 / $7,500 ladder · $10,000 Accelerator fee · 50% on signature, 50% on completion ·
+$2,500 / $5,000 / $7,500 (Alliances, Partner Development) and $1,500 / $3,000 / $6,000 (Operations) ·
+$10,000 Accelerator fee · 50% on signature, 50% on completion ·
 14 to 18 business days · 20 remediation hours, further blocks of 10 at $1,000 · 5 ACE submissions per
 solution · 55 confirmed project leads · Milestone 1 $10,000 + $10,000 · Milestone 2 $25,000 + $25,000.
 

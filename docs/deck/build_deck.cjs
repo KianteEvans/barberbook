@@ -230,7 +230,7 @@ s.addText([
     txt(s, a + '\n' + b, { x:P(44.6 + i*98), y:P(468), w:P(90), h:P(28), fontSize:10,
       color:C.iconLbl, lineSpacingMultiple:1.05 });
   });
-txt(s, 'One pricing ladder — a convention, not a product.', { x:P(430), y:P(478), w:P(330), h:P(14),
+txt(s, 'Two pricing logics — seniority, and throughput.', { x:P(430), y:P(478), w:P(330), h:P(14),
   fontSize:9.5, color:C.dkMuted });
 txt(s, 'Bracketed items are open for decision. None reaches a customer artifact.',
   { x:P(430), y:P(494), w:P(330), h:P(14), fontSize:8.5, color:C.dkMuted });
@@ -267,7 +267,7 @@ columns(s, [
   { head:'Build and run a reseller channel.',
     text:'Partners recruited and managed to a committed roster — up to (6), up to (12), or uncapped. Partners issuing offers is the number we report; roster under management is the number we commit.' },
 ], { top:196, panels:true, icons:['icon_a','icon_b','icon_c','icon_d'], headSize:12, bodySize:9, height:246 });
-band(s, 'ONE LADDER', 'The three retainers price on the same $2,500 / $5,000 / $7,500 ladder — a pricing convention, not a product.');
+band(s, 'TWO PRICING LOGICS', 'Alliances and Partner Development price on seniority: $2,500 / $5,000 / $7,500. Operations prices on throughput: $1,500 / $3,000 / $6,000.');
 
 /* 5 — Four buyers, four boundaries (NEW) --------------------------------- */
 s = pptx.addSlide();
@@ -349,26 +349,28 @@ table(s, [
 /* 10 — The ladder -------------------------------------------------------- */
 s = pptx.addSlide();
 chrome(s, { eyebrow:'THE RETAINERS', eyebrowIcon:'eyebrow_p8.png', eyebrowColor:C.blueEye,
-  title:'Three retainers, one ladder.',
-  subtitle:'One ladder is a pricing convention, not a product. Every rung carries what we commit, what we target, an included band and an overflow rate.',
+  title:'Three retainers, two pricing logics.',
+  subtitle:'Alliances and Partner Development price on seniority — the person on the account. Operations prices on throughput — the same rate per included offer at every rung.',
   page:10 });
-['$2,500','$5,000','$7,500'].forEach((p, i) =>
-  txt(s, p + ' / month', { x:P(318.3 + i*203.8), y:P(196), w:P(190), h:P(18),
-    fontFace:F.bold, bold:true, fontSize:13, color:C.orange }));
+['ENTRY RUNG','MIDDLE RUNG','TOP RUNG'].forEach((h, i) =>
+  txt(s, h, { x:P(318.3 + i*203.8), y:P(200), w:P(190), h:P(14), fontFace:F.bold, bold:true,
+    fontSize:8.5, color:C.orange, charSpacing:1.1 }));
 [
-  ['Managed AWS Alliances', ['Essentials','stand the partnership up'], ['Growth','scale the programs'], ['Professional','open the AWS field'], '[CEO or CRO] · no component named'],
-  ['Managed Marketplace Operations', ['Launch','build, publish and transact'], ['Operate','same nine services, deeper band'], ['Scale','same nine services, top band'], '[RevOps / deal desk] · no component named'],
-  ['Managed Partner Development', ['Establish','up to (6) partners managed'], ['Expand','up to (12) partners managed'], ['Accelerate','roster uncapped'], '[CRO / VP Channel] · Kiflo Core, inside the fee'],
+  ['Managed AWS Alliances', ['$2,500 / mo','Essentials','stand the partnership up'], ['$5,000 / mo','Growth','scale the programs'], ['$7,500 / mo','Professional','open the AWS field'], '[CEO or CRO] · priced on seniority'],
+  ['Managed Marketplace Operations', ['$1,500 / mo','Launch','build, publish and transact'], ['$3,000 / mo','Operate','same nine services, deeper band'], ['$6,000 / mo','Scale','same nine services, top band'], '[RevOps / deal desk] · priced on throughput'],
+  ['Managed Partner Development', ['$2,500 / mo','Establish','up to (6) partners managed'], ['$5,000 / mo','Expand','up to (12) partners managed'], ['$7,500 / mo','Accelerate','roster uncapped'], '[CRO / VP Channel] · priced on seniority'],
 ].forEach((row, r) => {
-  const y = 232 + r * 74;
+  const y = 228 + r * 76;
   txt(s, row[0], { x:P(59), y:P(y), w:P(250), h:P(18), fontFace:F.bold, bold:true, fontSize:11.5, color:C.ink });
   txt(s, row[4], { x:P(59), y:P(y+21), w:P(250), h:P(26), fontSize:8, color:C.subtle });
   for (let i = 1; i <= 3; i++) {
-    txt(s, row[i][0], { x:P(318.3 + (i-1)*203.8), y:P(y), w:P(190), h:P(16), fontFace:F.bold, bold:true, fontSize:11, color:C.blueEye });
-    txt(s, row[i][1], { x:P(318.3 + (i-1)*203.8), y:P(y+17), w:P(190), h:P(28), fontSize:8.5 });
+    const x = 318.3 + (i-1)*203.8;
+    txt(s, row[i][0], { x:P(x), y:P(y), w:P(190), h:P(15), fontFace:F.bold, bold:true, fontSize:11.5, color:C.ink });
+    txt(s, row[i][1], { x:P(x), y:P(y+16), w:P(190), h:P(14), fontFace:F.bold, bold:true, fontSize:10, color:C.blueEye });
+    txt(s, row[i][2], { x:P(x), y:P(y+31), w:P(190), h:P(26), fontSize:8.5 });
   }
 });
-band(s, 'STANDS ALONE', 'Each solution keeps its own overview, deck, Solution ID and milestone submission. The price ladder is the one number they share.');
+band(s, 'STANDS ALONE', 'Each solution keeps its own overview, deck, Solution ID and milestone submission. Two of the three share a ladder; Operations prices to its own band.');
 
 /* --- helper for the three retainer pages -------------------------------- */
 function retainerPage({ page, eyebrow, icon, title, subtitle, entry, commitLine, targetLine, note, rungList }) {
@@ -450,13 +452,13 @@ retainerPage({
 retainerPage({
   page:12, eyebrow:'RETAINER · TWELVE MONTHS', icon:'eyebrow_p10.png',
   title:'Managed Marketplace Operations',
-  subtitle:'Get a listing live and operate it at volume. All nine services at every rung — volume, turnaround and review cadence set the rung.',
+  subtitle:'Get a listing live and operate it at volume. All nine services at every rung, priced to the included offer band — the same rate per offer at each.',
   entry:'ENTRY CONDITION — none. Launch includes the listing work; the Accelerator remains the fixed-fee route to the same listing in 14 to 18 business days.',
   commitLine:'A named operations owner who takes the product through Well-Architected review, FTR and publication, then runs the offer desk to the band bought, with listing changes inside the rung’s turnaround and a monthly report on offers, Marketplace revenue and listing health.',
   targetLine:'FTR acceptance, the publication date, offers accepted and Marketplace revenue — AWS’s review queue and the customer’s deal flow govern every one.',
   note:'Nine services in three groups: compliance engineering · listing engineering · the offer desk and reporting. [Grouping proposed — confirm. CPPO also appears in Partner Development: originated there, executed here.]',
   rungList:[
-    { name:'Launch', price:'$2,500 / mo', head:'Get it built, published and transacting.',
+    { name:'Launch', price:'$1,500 / mo', head:'Get it built, published and transacting.',
       commit:[
         '(1) WAFR conducted, findings remediated — the FTR takes a completed WAFR as its input',
         'FTR prepared and submitted; listing built, configured and taken through publication, with AMMP diagrams maintained',
@@ -468,7 +470,7 @@ retainerPage({
         'Publication date — AWS’s review queue governs it',
         'Offers accepted and Marketplace revenue transacted',
       ] },
-    { name:'Operate', price:'$5,000 / mo', head:'Same nine services, deeper band.',
+    { name:'Operate', price:'$3,000 / mo', head:'Same nine services, deeper band.',
       commit:[
         '(2) Well-Architected Framework Reviews conducted, findings remediated',
         'Private offer desk — up to (100) offers a year',
@@ -480,7 +482,7 @@ retainerPage({
         'Offers accepted and Marketplace revenue transacted',
         'Demand at the band bought — offers issued follows the customer’s deal flow',
       ] },
-    { name:'Scale', price:'$7,500 / mo', head:'Same nine services, top band.',
+    { name:'Scale', price:'$6,000 / mo', head:'Same nine services, top band.',
       commit:[
         '(4) Well-Architected Framework Reviews conducted, findings remediated',
         'Private offer desk — up to (200) offers a year',
@@ -622,7 +624,7 @@ table(s, [
   ['Marketplace listing fee','Rates, mechanics and how it is netted','Automatum · to confirm'],
   ['Milestone cash and credits','Figures are established; the division is not. Credits are worth face value only to the party with spend to offset','Both · to agree'],
   ['Milestone 3 — the 55 leads','Confirm the direction before agreeing who owns them','Both · to confirm'],
-  ['Component cost recovery','ASecureCloud and Kiflo, stress-tested against the $2,500 rung','OBP · to model'],
+  ['Component cost recovery','ASecureCloud and Kiflo, stress-tested against the $1,500 rung','OBP · to model'],
   ['Back-to-back internal SLAs','Offer issue, listing configuration, selling authorizations, ACE instance, reporting feed','Automatum · needed first'],
   ['Renewal, churn and exit','Ownership of partner agreements and Kiflo channel data at end of term','Both · to agree'],
   ['Exclusivity and reporting access','Scope boundary, and OBP’s access to Marketplace seller reporting','Both · to agree'],

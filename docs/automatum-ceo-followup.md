@@ -24,8 +24,10 @@ the two.
 published listing a prerequisite for Alliances Essentials and Operations Launch. Your Operations
 outcomes include WAFR, FTR and publication at every rung, so we've gone the other way: Launch builds
 the listing and then operates it for twelve months, and the Accelerator stays as the fixed-fee route
-to the same listing in 14 to 18 business days for a customer who wants nothing ongoing. At $30,000
-over the term against $10,000, the retainer isn't the cheap way in, which is what makes the pair
+to the same listing in 14 to 18 business days for a customer who wants nothing ongoing. Operations
+has also repriced to $1,500 / $3,000 / $6,000 — off the ladder the other two share, because its rungs
+track the included offer band rather than the seniority of the person on the account. At $18,000 over
+the term against $10,000, the retainer still isn't the cheap way in, which is what makes the pair
 coherent. The Accelerator page now says why it exists alongside.
 
 **Expand stays, and Partner Development keeps both numbers.** I said the middle rung's name would
