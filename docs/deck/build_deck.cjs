@@ -96,17 +96,18 @@ function columns(s, items, { top=195, x0=80.6, pitch, colW, headSize=13, bodySiz
                              panels=false, icons=null, height=250 } = {}) {
   const n = items.length;
   pitch = pitch || (n === 4 ? 221 : n === 3 ? 294.6 : (856 / n));
-  colW  = colW  || pitch - 26;
+  colW  = colW  || (n === 4 ? 150 : n === 3 ? 215 : pitch - 26);
   items.forEach((it, i) => {
     const x = x0 + i * pitch;
     if (panels)
-      s.addImage({ path:A('panel.png'), x:P(x - 47.5), y:P(top - 1.3), w:P(231), h:P(229) });
+      s.addImage({ path:A('panel.png'), x:P(x - 40), y:P(top - 1.3), w:P(colW + 72), h:P(Math.min(229, height + 34)) });
     let y = top;
     if (icons && icons[i]) { s.addImage({ path:A(icons[i]), x:P(x - 7), y:P(y+19), w:P(21.6), h:P(21.6) }); y += 52; }
+    else if (panels) y += 20;
     if (it.head) {
       txt(s, it.head, { x:P(x), y:P(y), w:P(colW), h:P(46), fontFace:F.bold, bold:true,
         fontSize:headSize, color:C.ink });
-      y += it.head.length > 34 ? 44 : 30;
+      y += it.head.length > (colW < 170 ? 20 : 34) ? 44 : 30;
     }
     if (it.sub) { txt(s, it.sub, { x:P(x), y:P(y), w:P(colW), h:P(16), fontSize:8.5,
       color:C.blueEye, fontFace:F.bold, bold:true, charSpacing:0.8 }); y += 17; }
@@ -127,14 +128,16 @@ function table(s, rows, { top=180, labelX=59, valueX=217.5, labelW=150, valueW=6
     if (header[2]) txt(s, header[2], { x:P(header[3] || x3), y:P(y), w:P(col3W), h:P(16), fontFace:F.bold, bold:true, fontSize:size, color:C.white });
     y += pitch + 4;
   }
+  const yStart = y;
+  // paint every row bar first, so a wrapped line is never sliced by the next row's stripe
+  rows.forEach((r, i) => { if (i % 2 === 1) bar(yStart + i*pitch - 5.5, pitch, C.zebra); });
   rows.forEach((r, i) => {
-    const h = pitch;
-    if (i % 2 === 1) bar(y - 5.5, h, C.zebra);
-    txt(s, r[0], { x:P(labelX), y:P(y), w:P(labelW), h:P(h), fontSize:size, color:C.ink, fontFace:F.bold, bold:true });
-    txt(s, r[1], { x:P(valueX), y:P(y), w:P(valueW), h:P(h), fontSize:size, color:C.body });
-    if (r[2] !== undefined) txt(s, r[2], { x:P(x3), y:P(y), w:P(col3W), h:P(h), fontSize:size, color:C.body });
-    y += h;
+    const yy = yStart + i * pitch;
+    txt(s, r[0], { x:P(labelX), y:P(yy), w:P(labelW), h:P(pitch), fontSize:size, color:C.ink, fontFace:F.bold, bold:true });
+    txt(s, r[1], { x:P(valueX), y:P(yy), w:P(valueW), h:P(pitch), fontSize:size, color:C.body });
+    if (r[2] !== undefined) txt(s, r[2], { x:P(x3), y:P(yy), w:P(col3W), h:P(pitch), fontSize:size, color:C.body });
   });
+  y = yStart + rows.length * pitch;
   return y;
 }
 // matrix: row labels + N columns
@@ -163,10 +166,10 @@ function rungs(s, rungList, { top=228, x0=51.8, pitch=294, colW=274 } = {}) {
     txt(s, r.head, { x:P(x), y:P(top+19), w:P(colW), h:P(26), fontSize:8.5, color:C.blueEye });
     txt(s, 'WE COMMIT', { x:P(x), y:P(top+36), w:P(colW), h:P(12), fontSize:8,
       fontFace:F.bold, bold:true, color:C.orange, charSpacing:1.1 });
-    block(s, r.commit, { x:P(x), y:P(top+50), w:P(colW), h:P(106), fontSize:7.8 });
-    txt(s, 'WE TARGET', { x:P(x), y:P(top+160), w:P(colW), h:P(12), fontSize:8,
+    block(s, r.commit, { x:P(x), y:P(top+50), w:P(colW), h:P(100), fontSize:7.8 });
+    txt(s, 'WE TARGET', { x:P(x), y:P(top+154), w:P(colW), h:P(12), fontSize:8,
       fontFace:F.bold, bold:true, color:C.subtle, charSpacing:1.1 });
-    block(s, r.target, { x:P(x), y:P(top+174), w:P(colW), h:P(50), fontSize:7.8, color:C.subtle });
+    block(s, r.target, { x:P(x), y:P(top+168), w:P(colW), h:P(46), fontSize:7.8, color:C.subtle });
   });
 }
 function divider(s, part, title, sub, labels, bg, tiles, page) {
@@ -180,7 +183,7 @@ function divider(s, part, title, sub, labels, bg, tiles, page) {
     if (tiles && tiles[i]) s.addImage({ path:A(tiles[i]), x:P(51.8 + i*122), y:P(300), w:P(34), h:P(34) });
     txt(s, l, { x:P(51.8 + i*122), y:P(344), w:P(112), h:P(16), fontSize:10, color:C.iconLbl });
   });
-  footer(s, page);
+  footer(s, page, true);
 }
 
 /* ======================================================================
@@ -275,9 +278,9 @@ matrix(s,
     ['ASecureCloud','[none named in the deck — confirm]','[none named in the deck — confirm]','Kiflo, resold inside the fee'],
     ['Its own, with its own milestone submission','Its own','Its own','Its own'],
   ],
-  { top:180, rowH:[34,56,66,44,34] });
+  { top:180, rowH:[30,50,60,40,30] });
 txt(s, 'Buyer profiles to be validated against OBP’s closed and in-flight deals.',
-  { x:P(51.8), y:P(432), w:P(500), h:P(14), fontSize:8.5, color:C.subtle });
+  { x:P(51.8), y:P(428), w:P(500), h:P(14), fontSize:8.5, color:C.subtle });
 band(s, 'NOT CUSTOMER-FACING', 'Each customer overview and deck names its own solution only.');
 
 /* 6 — How the BOX framing works ------------------------------------------ */
@@ -318,10 +321,10 @@ chrome(s, { eyebrow:'FIXED-FEE PROJECT', eyebrowIcon:'eyebrow_p7.png',
   title:'Marketplace Compliance Accelerator',
   subtitle:'Get a product qualified and listed on AWS Marketplace.',
   page:9 });
-txt(s, 'The engagement', { x:P(80.6), y:P(176), w:P(300), h:P(16), fontFace:F.bold, bold:true, fontSize:12, color:C.white });
+txt(s, 'The engagement', { x:P(80.6), y:P(176), w:P(300), h:P(16), fontFace:F.bold, bold:true, fontSize:12, color:C.ink });
 txt(s, 'From unassessed to a published, transacting listing in 14 to 18 business days of delivery.',
   { x:P(80.6), y:P(196), w:P(360), h:P(30), fontSize:9.5 });
-txt(s, 'Stands alone', { x:P(522.5), y:P(176), w:P(300), h:P(16), fontFace:F.bold, bold:true, fontSize:12, color:C.white });
+txt(s, 'Stands alone', { x:P(522.5), y:P(176), w:P(300), h:P(16), fontFace:F.bold, bold:true, fontSize:12, color:C.ink });
 txt(s, 'Its own overview, its own deck, its own Solution ID and milestone submission.',
   { x:P(522.5), y:P(196), w:P(360), h:P(30), fontSize:9.5 });
 table(s, [
@@ -332,7 +335,7 @@ table(s, [
   ['Customer supplies / clock start','[What starts the clock]; engineering availability for remediation, tax, bank and legal data for seller registration'],
   ['We target, not commit','Publication date — AWS’s review queue and the customer’s product govern it'],
   ['Not included','Ongoing operation of the listing — that is Managed Marketplace Operations'],
-], { top:250, labelX:59, labelW:152, valueX:225, valueW:670, pitch:25, size:10.5,
+], { top:246, labelX:59, labelW:152, valueX:225, valueW:670, pitch:28, size:10,
      header:['Term','What it covers'] });
 
 /* 10 — The ladder -------------------------------------------------------- */
@@ -350,7 +353,7 @@ chrome(s, { eyebrow:'THE RETAINERS', eyebrowIcon:'eyebrow_p8.png', eyebrowColor:
   ['Managed Partner Development', ['Establish','stand the channel up'], ['[Expand or Activate]','widen the transacting roster'], ['Accelerate','operate the channel end to end'], '[CRO / VP Channel] · Kiflo, resold inside the fee'],
 ].forEach((row, r) => {
   const y = 232 + r * 74;
-  txt(s, row[0], { x:P(59), y:P(y), w:P(250), h:P(18), fontFace:F.bold, bold:true, fontSize:11.5, color:C.white });
+  txt(s, row[0], { x:P(59), y:P(y), w:P(250), h:P(18), fontFace:F.bold, bold:true, fontSize:11.5, color:C.ink });
   txt(s, row[4], { x:P(59), y:P(y+21), w:P(250), h:P(26), fontSize:8, color:C.subtle });
   for (let i = 1; i <= 3; i++) {
     txt(s, row[i][0], { x:P(318.3 + (i-1)*203.8), y:P(y), w:P(190), h:P(16), fontFace:F.bold, bold:true, fontSize:11, color:C.blueEye });
@@ -542,7 +545,7 @@ table(s, [
      header:['The metric','The source, and who draws it','Cadence', 690] });
 s.addText([{ text:'Targets. Not guaranteed. Set from the customer’s baseline at onboarding, shown against actuals from month one.  ', options:{ color:C.subtle } },
            { text:'[Remedy] applies to commitments only.', options:{ color:C.orange } }],
-  { isTextBox:true, margin:0, x:P(59), y:P(400), w:P(850), h:P(16), fontFace:F.light, fontSize:9 });
+  { isTextBox:true, margin:0, x:P(59), y:P(412), w:P(850), h:P(16), fontFace:F.light, fontSize:9 });
 band(s, 'ON EVERY ARTIFACT', 'Both lines above appear on every customer overview and deck, or the commit column silently acquires a number nobody set.');
 
 /* 15 — Part Three divider ------------------------------------------------ */
@@ -579,10 +582,8 @@ table(s, [
   ['ASecureCloud','Automates data collection for a Well-Architected review, suggests answers, and generates CloudFormation and AWS CLI templates that resolve findings.','Licensed and operated by OBP. Premium required for Well-Architected reviews; licences reassign between accounts and are held as a pool.'],
   ['Kiflo','Partner system of record: portal, onboarding, deal registration, commission tracking. Core carries HubSpot and Salesforce sync.','Resold by OBP inside Managed Partner Development, at every tier. System of record behind the partners-issuing-offers count. [Pricing basis, seats per rung, edition per rung — to confirm.]'],
   ['Archera','Commitment management for AWS spend — insured reservations and savings plans.','Carried under OBP’s own agreement and sold on its own motion. It appears in no artifact of these four solutions, and must not leak into the revenue share.'],
-], { top:196, labelX:59, labelW:110, valueX:180, valueW:300, pitch:82, size:9, x3:510 });
-s.addText([{ text:'Not yet named:  ', options:{ bold:true, color:C.orange, fontFace:F.bold } },
-  { text:'the deck names no component for Managed AWS Alliances or Managed Marketplace Operations, and no Automatum software on the software line of any of the four listings. Name them or mark them confirmed-empty.', options:{ color:C.body } }],
-  { isTextBox:true, margin:0, x:P(59), y:P(432), w:P(850), h:P(16), fontFace:F.light, fontSize:9 });
+], { top:192, labelX:59, labelW:110, valueX:180, valueW:300, pitch:74, size:9, x3:510 });
+band(s, 'NOT YET NAMED', 'No component is named for Alliances or Operations, and no Automatum software for the software line of any of the four listings. Name them, or mark them confirmed-empty.');
 
 /* 18 — Partner economics (NEW) ------------------------------------------- */
 s = pptx.addSlide();
@@ -601,7 +602,7 @@ table(s, [
   ['Back-to-back internal SLAs','Offer issue, listing configuration, selling authorizations, ACE instance, reporting feed','Automatum · BLOCKING'],
   ['Renewal, churn and exit','Ownership of partner agreements and Kiflo channel data at end of term','Both · to agree'],
   ['Exclusivity and reporting access','Scope boundary, and OBP’s access to Marketplace seller reporting','Both · to agree'],
-], { top:186, labelX:59, labelW:190, valueX:262, valueW:415, pitch:24.5, size:9, x3:700,
+], { top:180, labelX:59, labelW:190, valueX:262, valueW:415, pitch:22, size:8.5, x3:700,
      header:['Term','What has to be settled','Owner and status', 700] });
 band(s, 'NOT CUSTOMER-FACING', 'The $10,000 fee and the ladder cannot be validated until OBP knows its share. A split below OBP’s walk-away means the prices are wrong, not the split.');
 
@@ -615,7 +616,7 @@ chrome(s, { eyebrow:'THE EXCHANGE', eyebrowIcon:'eyebrow_p12.png',
  ['55','Confirmed project leads — Milestone 3, AWS-funded.\n[Direction to confirm: owed by the partners, or flowing to them?]'],
  ['5 per solution','ACE opportunity submissions — the programme’s obligation to AWS']].forEach(([big, lbl], i) => {
   const x = 73.4 + i*221;
-  txt(s, big, { x:P(x), y:P(186), w:P(200), h:P(26), fontFace:F.bold, bold:true, fontSize:16, color:C.white });
+  txt(s, big, { x:P(x), y:P(186), w:P(200), h:P(26), fontFace:F.bold, bold:true, fontSize:16, color:C.ink });
   txt(s, lbl, { x:P(x), y:P(215), w:P(200), h:P(50), fontSize:8.5 });
 });
 columns(s, [
@@ -643,7 +644,7 @@ chrome(s, { eyebrow:'THE SEQUENCE', eyebrowIcon:'eyebrow_p13.png',
 ].forEach((w, i) => {
   const x = 80.6 + i*430;
   txt(s, w.t, { x:P(x), y:P(190), w:P(390), h:P(16), fontFace:F.bold, bold:true, fontSize:11, color:C.orange, charSpacing:1.4 });
-  txt(s, w.sol, { x:P(x), y:P(210), w:P(390), h:P(34), fontFace:F.bold, bold:true, fontSize:13, color:C.white });
+  txt(s, w.sol, { x:P(x), y:P(210), w:P(390), h:P(34), fontFace:F.bold, bold:true, fontSize:13, color:C.ink });
   txt(s, w.stage, { x:P(x), y:P(250), w:P(390), h:P(16), fontSize:9.5, color:C.blueEye });
   block(s, w.rows, { x:P(x), y:P(274), w:P(390), h:P(50), fontSize:9 });
   txt(s, w.why, { x:P(x), y:P(332), w:P(390), h:P(70), fontSize:9 });
@@ -671,10 +672,10 @@ table(s, [
   ['Included band and overflow rate per rung','OBP commercial','To decide'],
   ['Automatum back-to-back turnarounds','Automatum','To agree on the call'],
   ['Commercial terms between OBP and Automatum','OBP + Automatum','On the agenda for [call date]'],
-], { top:186, labelX:59, labelW:330, valueX:405, valueW:150, pitch:25, size:10, x3:580,
+], { top:180, labelX:59, labelW:330, valueX:405, valueW:150, pitch:23, size:9.5, x3:580,
      header:['Entry condition or item','Owner','Standing', 580] });
 txt(s, 'Stage and partner tier are separate axes. The gate the deck names is Validated or Differentiated, which Differentiated satisfies on its own — attach the stage and tier as shown on Partner Central, the Partner ID, the date checked, and any expiry.',
-  { x:P(59), y:P(424), w:P(850), h:P(28), fontSize:8.5, color:C.subtle });
+  { x:P(59), y:P(420), w:P(850), h:P(28), fontSize:8.5, color:C.subtle });
 band(s, 'THE ASK', 'Approve the two-wave sequence, confirm the lead partner of record, agree the back-to-back turnarounds, and calendar wave one’s Milestone 1 for [date].');
 
 /* 22 — Where everything lives -------------------------------------------- */
@@ -688,10 +689,10 @@ columns(s, [
   { head:'Internal', text:'The catalog page and this deck: the side-by-side view, the four-buyers page, the commit / target sets, the components register, partner economics, the sequence and the BOX figures.' },
   { head:'The mirror', text:'The two partner sets match exactly, name aside, and the sweep asserts it on every run.' },
 ], { top:200, panels:true, headSize:15, bodySize:9.5, height:150 });
-txt(s, 'THE RENAME CASCADE — NOBODY HAS PRICED THIS', { x:P(51.8), y:P(378), w:P(500), h:P(14),
+txt(s, 'THE RENAME CASCADE — NOBODY HAS PRICED THIS', { x:P(51.8), y:P(392), w:P(500), h:P(14),
   fontSize:8, fontFace:F.bold, bold:true, color:C.orange, charSpacing:1 });
 txt(s, 'The mirror rule means any rung rename — Expand to Activate, say — re-cuts up to four overviews and four decks per partner: sixteen artifacts, plus anything already drafted for a Solution ID or milestone submission. Weigh that before approving the renames, not after.',
-  { x:P(51.8), y:P(394), w:P(856), h:P(32), fontSize:9 });
+  { x:P(51.8), y:P(408), w:P(856), h:P(34), fontSize:9 });
 band(s, 'PUBLISHING RULE', 'Bracketed placeholders live in the internal deck and never appear in a customer overview or deck.');
 
 /* ---------------------------------------------------------------- write */
