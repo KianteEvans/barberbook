@@ -29,7 +29,9 @@ node build_deck.cjs            # writes BOX_Solutions_Revised.pptx
 and the script is CommonJS.
 
 `assets/` holds backgrounds, logos and icons extracted from the original PDF, so the build is
-reproducible without the source file.
+reproducible without the source file. It carries the deck's whole icon set, including nine icons the
+current slides do not use (`icon_e`–`icon_l`, `tile_e`) — kept deliberately, so new slides can be
+drawn from the same set rather than introducing foreign artwork.
 
 ## Design system, measured from the original
 
