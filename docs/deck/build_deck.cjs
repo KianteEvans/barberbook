@@ -256,9 +256,9 @@ columns(s, [
   { head:'Put a named owner on the AWS partnership.',
     text:'OBP as the ISV’s Director of Alliances for twelve months — a named owner at [N] hours a month, [N] partnership reviews and [N] quarterly AWS plans across the term — across three strictly additive tiers.' },
   { head:'Operate a live listing at volume.',
-    text:'Nine services in three groups — [listing engineering / the offer desk / reporting and integrations — proposed, confirm with Automatum] — at every tier. Volume, response time and reporting cadence set the rung.' },
+    text:'Nine services in three groups — compliance engineering, listing engineering, the offer desk and reporting — at every tier. Volume, turnaround and review cadence set the rung. Launch includes the listing work itself.' },
   { head:'Build and run a reseller channel.',
-    text:'Partners recruited, enabled and operated — measured by partners issuing offers, not roster size; no cap on roster size. Partner types set the tiers.' },
+    text:'Partners recruited and managed to a committed roster — up to (6), up to (12), or uncapped. Partners issuing offers is the number we report; roster under management is the number we commit.' },
 ], { top:196, panels:true, icons:['icon_a','icon_b','icon_c','icon_d'], headSize:12, bodySize:9, height:246 });
 band(s, 'ONE LADDER', 'The three retainers price on the same $2,500 / $5,000 / $7,500 ladder — a pricing convention, not a product.');
 
@@ -274,7 +274,7 @@ matrix(s,
   [
     ['[CTO / VP Engineering]','[CEO or CRO]','[RevOps / deal desk or COO]','[CRO / VP Channel]'],
     ['[N] engineer-weeks on Well-Architected, FTR and seller registration','A Director of Alliances hire','A Marketplace ops / offer-desk hire plus compliance engineering hours','A channel manager plus a PRM subscription'],
-    ['The one-time path to a published, transacting listing','The AWS partnership programme around a listing — not the listing work','Running a listing that already exists','Third-party sellers — not the customer’s own listing'],
+    ['The fixed-fee route to a published listing in 14 to 18 business days, with nothing ongoing','The AWS partnership programme and the ISV’s own BOX Program listings — not the Marketplace listing work','Builds the listing AND operates it for twelve months — Launch includes WAFR, FTR and publication','Third-party sellers — not the customer’s own listing'],
     ['ASecureCloud','[none named in the deck — confirm]','[none named in the deck — confirm]','Kiflo, resold inside the fee'],
     ['Its own, with its own milestone submission','Its own','Its own','Its own'],
   ],
@@ -335,7 +335,8 @@ table(s, [
   ['Customer supplies / clock start','[What starts the clock]; engineering availability for remediation, tax, bank and legal data for seller registration'],
   ['We target, not commit','Publication date — AWS’s review queue and the customer’s product govern it'],
   ['Not included','Ongoing operation of the listing — that is Managed Marketplace Operations'],
-], { top:246, labelX:59, labelW:152, valueX:225, valueW:670, pitch:28, size:10,
+  ['Why buy it standalone','Managed Marketplace Operations Launch covers the same listing work inside a twelve-month retainer. This is the route to a published listing in 14 to 18 business days with no ongoing commitment.'],
+], { top:238, labelX:59, labelW:152, valueX:225, valueW:670, pitch:26, size:9.5,
      header:['Term','What it covers'] });
 
 /* 10 — The ladder -------------------------------------------------------- */
@@ -348,9 +349,9 @@ chrome(s, { eyebrow:'THE RETAINERS', eyebrowIcon:'eyebrow_p8.png', eyebrowColor:
   txt(s, p + ' / month', { x:P(318.3 + i*203.8), y:P(196), w:P(190), h:P(18),
     fontFace:F.bold, bold:true, fontSize:13, color:C.orange }));
 [
-  ['Managed AWS Alliances', ['Essentials','stand the partnership up'], ['Growth','run the co-sell desk'], ['Professional','run the deal desk'], '[CEO or CRO] · no component named'],
-  ['Managed Marketplace Operations', ['Launch','get it transacting'], ['Operate','run it on a tighter cadence'], ['Scale','run it at volume'], '[RevOps / deal desk] · no component named'],
-  ['Managed Partner Development', ['Establish','stand the channel up'], ['[Expand or Activate]','widen the transacting roster'], ['Accelerate','operate the channel end to end'], '[CRO / VP Channel] · Kiflo, resold inside the fee'],
+  ['Managed AWS Alliances', ['Essentials','stand the partnership up'], ['Growth','scale the programs'], ['Professional','open the AWS field'], '[CEO or CRO] · no component named'],
+  ['Managed Marketplace Operations', ['Launch','build, publish and transact'], ['Operate','same nine services, deeper band'], ['Scale','same nine services, top band'], '[RevOps / deal desk] · no component named'],
+  ['Managed Partner Development', ['Establish','up to (6) partners managed'], ['Expand','up to (12) partners managed'], ['Accelerate','roster uncapped'], '[CRO / VP Channel] · Kiflo Core, inside the fee'],
 ].forEach((row, r) => {
   const y = 232 + r * 74;
   txt(s, row[0], { x:P(59), y:P(y), w:P(250), h:P(18), fontFace:F.bold, bold:true, fontSize:11.5, color:C.ink });
@@ -434,100 +435,111 @@ retainerPage({
   ],
 });
 
-/* 12 — Managed Marketplace Operations (NEW) ------------------------------ */
+/* 12 — Managed Marketplace Operations ----------------------------------
+ * Outcomes from Managed_Services_Outcomes.docx. Launch absorbs the listing
+ * work (WAFR, FTR, publication); the Accelerator remains the standalone
+ * fixed-fee route to the same listing. AWS decisions sit in target.
+ * ---------------------------------------------------------------------- */
 retainerPage({
   page:12, eyebrow:'RETAINER · TWELVE MONTHS', icon:'eyebrow_p10.png',
   title:'Managed Marketplace Operations',
-  subtitle:'Operate a live listing at volume. All nine services at every rung — volume, response time and reporting cadence set the rung.',
-  entry:'ENTRY CONDITION — requires a published AWS Marketplace listing, delivered by the Accelerator or already in place.',
-  commitLine:'A named operations owner running the listing to a written service level issued at onboarding, twelve monthly operating packs, and an annual state-of-the-listing review.',
-  targetLine:'Transacting subscriptions, renewal rate, and Marketplace-transacted revenue.',
-  note:'Offer issue turnaround is committed only where Automatum’s matching internal turnaround is in place. Selling authorizations and partner-issued offers sit in Managed Partner Development.',
+  subtitle:'Get a listing live and operate it at volume. All nine services at every rung — volume, turnaround and review cadence set the rung.',
+  entry:'ENTRY CONDITION — none. Launch includes the listing work; the Accelerator remains the fixed-fee route to the same listing in 14 to 18 business days.',
+  commitLine:'A named operations owner who takes the product through Well-Architected review, FTR and publication, then runs the offer desk to the band bought, with listing changes inside the rung’s turnaround and a monthly report on offers, Marketplace revenue and listing health.',
+  targetLine:'FTR acceptance, the publication date, offers accepted and Marketplace revenue — AWS’s review queue and the customer’s deal flow govern every one.',
+  note:'Nine services in three groups: compliance engineering · listing engineering · the offer desk and reporting. [Grouping proposed — confirm. CPPO also appears in Partner Development: originated there, executed here.]',
   rungList:[
-    { name:'Launch', price:'$2,500 / mo', head:'Get it transacting.',
+    { name:'Launch', price:'$2,500 / mo', head:'Get it built, published and transacting.',
       commit:[
-        'Named operations owner with a named backup; desk open [coverage hours, time zone]',
-        'Offers drafted and submitted to Automatum for issue within [N] business days of a complete request; up to [N] a month, further at [$X]',
-        'Listing configuration changes submitted to AWS within [N] business days',
-        'Monthly operating report on a fixed date, reconciled against AWS statements as published',
+        '(1) WAFR conducted, findings remediated — the FTR takes a completed WAFR as its input',
+        'FTR prepared and submitted; listing built, configured and taken through publication, with AMMP diagrams maintained',
+        'CRM integration configured; private offer desk — up to (50) offers a year, direct and CPPO',
+        'Listing changes in 5 business days; monthly reporting on offers, revenue and listing health',
       ],
       target:[
-        'First offer issued and accepted within [N] days of onboarding',
-        '[N] transacting subscriptions by month twelve',
-        'Reconciliation complete with no open exception',
+        'FTR acceptance — AWS decides; it grants AWS Qualified Software status and Solutions Finder placement, valid 2 years',
+        'Publication date — AWS’s review queue governs it',
+        'Offers accepted and Marketplace revenue transacted',
       ] },
-    { name:'Operate', price:'$5,000 / mo', head:'Adds depth — run it on a tighter cadence.',
+    { name:'Operate', price:'$5,000 / mo', head:'Same nine services, deeper band.',
       commit:[
-        'Higher band: up to [N] offers a month; integration exceptions listed monthly and cleared within [N] business days',
-        'Weekly offer-desk stand-up with the customer’s named sales lead, with written actions',
-        'Expiry watch: every agreement flagged [N] days out with a renewal offer drafted',
-        'AWS-mandated changes assessed within [N] business days of notice, with an implementation plan issued',
+        '(2) Well-Architected Framework Reviews conducted, findings remediated',
+        'Private offer desk — up to (100) offers a year',
+        'Listing configuration changes in 3 business days',
+        'FTR, listing publication, AMMP diagrams, CRM integration and monthly reporting as at Launch',
       ],
       target:[
-        '[N] offers issued per quarter',
-        '[X]% of expiring agreements renewed',
-        'Changes landed before AWS’s stated deadline',
+        'FTR acceptance and Qualified Software status — AWS decides',
+        'Offers accepted and Marketplace revenue transacted',
+        'Demand at the band bought — offers issued follows the customer’s deal flow',
       ] },
-    { name:'Scale', price:'$7,500 / mo', head:'Adds depth — run it at volume.',
+    { name:'Scale', price:'$7,500 / mo', head:'Same nine services, top band.',
       commit:[
-        'Top band: up to [N] offers a month; same-day drafting and submission for standard offers received before [cut-off time]',
-        'Coverage extended to [window, time zone] — this rung’s increment is coverage and response band',
-        'Weekly reporting; monthly reconciliation with every variance explained in writing',
-        'Quarterly listing engineering review delivered as a written change plan',
+        '(4) Well-Architected Framework Reviews conducted, findings remediated',
+        'Private offer desk — up to (200) offers a year',
+        'Listing configuration changes in 1 business day',
+        'FTR, listing publication, AMMP diagrams, CRM integration and monthly reporting as at Launch',
       ],
       target:[
-        'A desk running at [N]+ offers a month',
-        '[$X] Marketplace-transacted revenue over the term',
-        '[X]% of revenue reconciled with no open exception',
+        'FTR acceptance and Qualified Software status — AWS decides',
+        'Offers accepted and Marketplace revenue transacted',
+        'Demand at the band bought — offers issued follows the customer’s deal flow',
       ] },
   ],
 });
 
-/* 13 — Managed Partner Development (NEW) --------------------------------- */
+/* 13 — Managed Partner Development --------------------------------------
+ * Recruitment and management is OBP's own act, so it is committed at
+ * 6 / 12 / uncapped. Partners issuing offers stays the headline reported
+ * number, in target, per Aein's steer.
+ * ---------------------------------------------------------------------- */
 retainerPage({
   page:13, eyebrow:'RETAINER · TWELVE MONTHS', icon:'eyebrow_p12.png',
   title:'Managed Partner Development',
-  subtitle:'Build and run a reseller channel. The headline number is partners issuing offers — not roster size.',
-  entry:'[CONFIRM WITH AUTOMATUM — can a third-party reseller issue offers against Automatum’s listing under its seller-of-record position, and by what mechanism? The scoreboard below rests on it.]',
-  commitLine:'A named channel manager, an agreement pack issued for signature, a live Kiflo portal, recruitment and enablement on a named cadence, and a monthly report whose headline number is partners issuing offers.',
-  targetLine:'[X] partners issuing offers and [$Y] partner-sourced Marketplace revenue by month twelve.',
-  note:'Execution of an agreement needs the customer’s legal function and the partner’s countersignature — a target, not a commit. Rung names and partner types [P] / [P+1] / [P+2] to confirm.',
+  subtitle:'Build and run a reseller channel. Roster under management is what we commit; partners issuing offers is what we report.',
+  entry:'WHY TWELVE MONTHS — ramp from first outreach to first partner transaction models at 8 months, which is what sets the term.',
+  commitLine:'A named channel manager recruiting and managing the roster at the rung’s cap, a CPPO deal desk at the rung’s turnaround with selling authorizations drafted, issued and tracked, training on cadence, channel reviews with sourced-pipeline and attribution reporting, and Kiflo Core operated inside the fee.',
+  targetLine:'Partners issuing offers — the headline number — plus partner-sourced pipeline and revenue. Each partner clears its own AWS gate, which is the partner’s act, not OBP’s.',
+  note:'AWS permits only one partner identifier per resource, so partner attribution runs on user agent string rather than competing tags. [CPPO boundary with Managed Marketplace Operations — originated here, executed on the listing there — to confirm.]',
   rungList:[
     { name:'Establish', price:'$2,500 / mo', head:'Stand the channel up.',
       commit:[
-        'Named channel manager at [N] hours, with a named backup',
-        'Agreement pack — partner agreement, margin schedule, registration rules — drafted and issued for signature within [N] business days of kickoff',
-        'Kiflo portal live within [N] business days of [named customer inputs]; resold by OBP inside the fee, [N] seats included, further at [$Z]',
-        'Registration recommendation within [N] business days, plus the customer’s decision logged',
+        'Up to (6) net new partners recruited and under management',
+        'Twice-yearly partner training and enablement sessions held',
+        'CPPO deal desk — 1 business day turnaround; recurring selling authorizations drafted, issued and tracked in AWS Marketplace',
+        'Quarterly channel reviews with sourced-pipeline and attribution reporting',
+        'Kiflo Core stood up and operated inside the fee; PRM attribution configured for the channel',
       ],
       target:[
-        '[N] partners signed by month [6]',
-        'First partner-issued offer by month [N]',
-        '[N] partners issuing offers by month twelve',
+        'Partners issuing offers — reported monthly, the number to hold us to',
+        'Each partner clears its own AWS gate: seller registration, tax interview, disbursement, service-linked role',
+        'Partner-sourced pipeline and revenue',
       ] },
-    { name:'[Expand or Activate]', price:'$5,000 / mo', head:'Adds to Establish — widen the transacting roster.',
+    { name:'Expand', price:'$5,000 / mo', head:'Widen the roster under management.',
       commit:[
-        'A second partner type in scope; [N] targeted approaches a month across both',
-        'Enablement built and run — [N] sessions scheduled and held; attendance not guaranteed',
-        'Written activation plan for up to [N] partners, reviewed monthly until first offer',
-        'Selling authorization and offer requests submitted to Automatum within [N] business days',
+        'Up to (12) net new partners recruited and under management',
+        'Quarterly partner training and enablement sessions',
+        'CPPO deal desk — 8 business hour turnaround',
+        'Monthly channel reviews with sourced-pipeline and attribution reporting',
+        'Kiflo Core operated inside the fee; PRM attribution maintained across the roster',
       ],
       target:[
-        '[N] partners issuing offers by month twelve',
-        '[N] partner-registered deals a quarter',
-        '[$X] partner-sourced pipeline standing in Kiflo',
+        'Partners issuing offers — reported monthly',
+        'Each partner clears its own AWS gate — the partner’s act, not OBP’s',
+        'Partner-sourced pipeline and revenue',
       ] },
-    { name:'Accelerate', price:'$7,500 / mo', head:'Adds to the middle rung — operate the channel end to end.',
+    { name:'Accelerate', price:'$7,500 / mo', head:'Operate the channel end to end.',
       commit:[
-        'Named deal-desk owner with a stated coverage window',
-        'Performance reviews offered monthly to up to [N] issuing partners, with written recovery plans',
-        'Every eligible partner-sourced deal filed within [N] business days of registration',
-        'Quarterly channel pack reporting margin paid, commission accrued and revenue attributed',
+        'No cap on net new partners recruited and under management',
+        'Monthly partner training and enablement sessions',
+        'CPPO deal desk — 4 business hour turnaround',
+        'Fortnightly channel reviews with sourced-pipeline and attribution reporting',
+        'Kiflo Core operated inside the fee; PRM attribution maintained across the roster',
       ],
       target:[
-        '[N] partners issuing offers, sustained per quarter',
-        '[$Y] partner-sourced revenue; conversion and attribution rates',
-        'Partner-sourced ACE count — separate from the programme’s five per Solution ID',
+        'Partners issuing offers — reported monthly',
+        'Each partner clears its own AWS gate — the partner’s act, not OBP’s',
+        'Partner-sourced pipeline and revenue',
       ] },
   ],
 });
@@ -572,7 +584,7 @@ matrix(s,
     ['The listing the product publishes to','The Marketplace platform compliance and co-sell work transacts on','The listing, the private offers, and the CRM and Partner Central integrations','The selling authorizations, the private offers and the AWS attribution'],
     ['Seller of record on every transaction','Seller of record','Issues every private offer','Issues partner offers and selling authorizations'],
     ['The review, the remediation, the FTR and the seller registration','Program management, compliance, marketing, events, ACE and co-sell','Compliance engineering, the offer desk, reporting and listing configuration','Recruitment, agreements, enablement, training, the desk and the reviews'],
-    ['One-time production of the AWS Marketplace listing','The AWS partnership programme, and the ISV’s own BOX Program listings — not the Marketplace listing','The customer’s own Marketplace listing, offers and reconciliation','Third-party sellers and partner-issued offers'],
+    ['Listing production as a fixed-fee project, nothing ongoing','The AWS partnership programme, and the ISV’s own BOX Program listings','Listing production AND twelve months of operation; CPPO executed on the listing','Partner recruitment and management; CPPO originated with partners'],
   ],
   { top:180, labelX:51.8, labelW:88, x0:150, pitch:196, colW:182, size:8, rowH:[62,40,66,52], headSize:10.5 });
 band(s, 'STACKING RULE', 'Where a customer buys two, the higher solution’s commit column governs the overlap, and the same work is not billed twice.');
@@ -585,7 +597,7 @@ chrome(s, { eyebrow:'COMPONENTS BEHIND THE LISTING', eyebrowIcon:'eyebrow_p8.png
   page:17 });
 table(s, [
   ['ASecureCloud','Automates data collection for a Well-Architected review, suggests answers, and generates CloudFormation and AWS CLI templates that resolve findings.','Licensed and operated by OBP. Premium required for Well-Architected reviews; licences reassign between accounts and are held as a pool.'],
-  ['Kiflo','Partner system of record: portal, onboarding, deal registration, commission tracking. Core carries HubSpot and Salesforce sync.','Resold by OBP inside Managed Partner Development, at every tier. System of record behind the partners-issuing-offers count. [Pricing basis, seats per rung, edition per rung — to confirm.]'],
+  ['Kiflo','Partner system of record: portal, onboarding, deal registration, commission tracking. Core carries HubSpot and Salesforce sync.','Kiflo Core stood up and operated by OBP inside Managed Partner Development at every tier, included in the engagement fee. System of record behind the partners-issuing-offers count, and carries PRM attribution across the roster. [Seats per rung — to confirm.]'],
   ['Archera','Commitment management for AWS spend — insured reservations and savings plans.','Carried under OBP’s own agreement and sold on its own motion. It appears in no artifact of these four solutions, and must not leak into the revenue share.'],
 ], { top:192, labelX:59, labelW:110, valueX:180, valueW:300, pitch:74, size:9, x3:510 });
 band(s, 'NOT YET NAMED', 'No component is named for Alliances or Operations, and no Automatum software for the software line of any of the four listings. Name them, or mark them confirmed-empty.');

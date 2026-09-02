@@ -426,102 +426,53 @@ slides 5 and 16 depend on not confusing the two. The deck defines neither — co
 
 ### Slide 12 — Managed Marketplace Operations
 
-**Entry condition:** requires a published AWS Marketplace listing — delivered by the Accelerator or
-already in place.
+**Outcomes are settled** from `Managed_Services_Outcomes.docx`.
 
-**Resolve the axis before drawing the rungs.** Slide 4 says nine services at every tier with depth
-the only axis, so every service appears at all three rungs with a per-tier depth value — e.g.
-integration exceptions listed quarterly / monthly / weekly; expiry watch reported / with a drafted
-renewal / with a drafted renewal and a call; listing engineering review annually / semi-annually /
-quarterly. **If OBP will not deliver all nine at Launch, say so here *and* change slide 4.**
+**Launch absorbs the listing work** — WAFR, FTR and publication — which is the Accelerator's entire
+scope, at $2,500/month against its $10,000 fixed fee. Decided deliberately: Operations builds the
+listing *and* operates it for twelve months; the Accelerator remains the standalone fixed-fee route
+to the same listing in 14 to 18 business days for a customer who wants nothing ongoing. Slide 9
+carries a "Why buy it standalone" row saying exactly that. The pricing supports it — Launch is
+$30,000 over the term against the project's $10,000, so the retainer is not the cheap way in.
 
-**Twelve-month statement must be a twelve-month statement,** not one month repeated twelve times: a
-written service level issued at onboarding, twelve monthly packs, and an annual state-of-the-listing
-review. Do not write "to a published service level" as though one already exists.
+**Entry condition:** none. This is the one retainer that starts from nothing.
 
-**Every offer commitment stops at OBP's boundary:**
+**The axis holds.** The document delivers all nine services at every rung, differing only by volume,
+turnaround and review cadence — so deck p4's "depth the only axis" claim is now sourced rather than
+asserted. The nine, grouped as proposed on the slide: compliance engineering (WAFR, FTR) · listing
+engineering (build and publication, AMMP diagrams, CRM integration) · the offer desk and reporting
+(direct offers, CPPO, configuration changes, monthly reporting). **Grouping is ours — confirm.**
 
-> Offer drafted and submitted to Automatum for issue within `[N]` business days of a complete request.
-> Issue turnaround of `[N]` business days committed **only where Automatum's matching internal
-> turnaround is in place.**
-
-Same-day **issue** at Scale is not OBP's to promise — same-day **drafting and submission** is.
-
-**Bands per rung:** up to `[N]` offers a month, further at `[$X]`.
-
-**Reconciliation:** performed against AWS statements as published, with every variance explained in
-writing. *Completeness is a target at every rung*, not a commit at Launch.
-
-**AWS-mandated changes:** assessed within `[N]` business days of notice with an implementation plan
-issued; OBP-owned changes implemented within `[N]` business days. **Landing before AWS's deadline is
-a target** — it may need the customer's engineering.
-
-Two corrections carried from the review:
-
-- **Remove CPPO from this solution** or get the boundary ruled in writing — p10 puts selling
-  authorizations and private offers under *Build the channel*.
-- **Remove the HubSpot/Salesforce claim.** The deck attaches those to **Kiflo**, inside Partner
-  Development — not to Automatum's integration. Write `[CRM platforms Automatum's integration
-  supports — to confirm]`.
-- **Fix the staffing ladder:** if Launch already includes a named backup, a two-person desk cannot be
-  Scale's differentiator. Make Scale's increment the **coverage window and the response band**.
+| Rung | We commit | We target |
+|---|---|---|
+| **Launch** | (1) WAFR conducted, findings remediated — the FTR takes a completed WAFR as its input · FTR prepared and submitted; listing built, configured and taken through publication, AMMP diagrams maintained · CRM integration configured · private offer desk up to **(50) offers a year**, direct and CPPO · listing changes in **5 business days**; monthly reporting | FTR **acceptance** — AWS decides; grants AWS Qualified Software status and Solutions Finder placement, valid 2 years · publication **date** · offers accepted and Marketplace revenue |
+| **Operate** | (2) WAFRs · up to **(100) offers a year** · listing changes in **3 business days** · everything else as at Launch | As Launch, plus demand at the band bought |
+| **Scale** | (4) WAFRs · up to **(200) offers a year** · listing changes in **1 business day** · everything else as at Launch | As Launch, plus demand at the band bought |
 
 ### Slide 13 — Managed Partner Development
 
-**Open the slide with the unverified mechanism, marked as such:**
+**Outcomes are settled** from `Managed_Services_Outcomes.docx`.
 
-> `[Confirm with Automatum: can a third-party reseller issue offers against Automatum's listing under
-> its seller-of-record position, and by what mechanism — selling authorization plus resale offer?]`
+**Both metrics, split — this is what the commit/target rule is for.** The document measures *net new
+partners recruited and under management* (6 / 12 / uncapped); Aein asked for *partners transacting*.
+Recruiting and managing is OBP's own act, so the roster counts are **committed**. Partners issuing
+offers stays the **headline reported number**, in target, because it depends on the partners. Neither
+steer overrides the other.
 
-Aein's entire scoreboard rests on this and the deck does not establish it.
+**Why the term is twelve months, now answerable:** ramp from first outreach to first partner
+transaction models at **8 months**. That sets the term, and it belongs on the slide — it is the
+closest thing the portfolio has to a stated reason a customer should sign for a year.
 
-**Headline number: partners issuing offers.** Name it what it is. If "transacting" is used it must
-mean an *accepted* offer — and then issuance and acceptance are reported as two lines.
+The rung name **Expand** is settled by the document; the earlier bracketed alternative is retired.
 
-Rungs run across `[P]` / `[P+1]` / `[P+2]` partner types — **bracket all three; the deck names no
-partner type anywhere** — with a stated fallback if the customer's market supports only one type.
+| Rung | We commit | We target |
+|---|---|---|
+| **Establish** | Up to **(6)** net new partners recruited and under management · **twice-yearly** training and enablement sessions held · CPPO deal desk at **1 business day**, recurring selling authorizations drafted, issued and tracked · **quarterly** channel reviews with sourced-pipeline and attribution reporting · Kiflo Core stood up and operated inside the fee; PRM attribution configured | Partners **issuing offers** — reported monthly · each partner clears **its own** AWS gate (paid seller registration, tax interview, USD disbursement, service-linked role) — the partner's act · partner-sourced pipeline and revenue |
+| **Expand** | Up to **(12)** partners · **quarterly** training · CPPO desk at **8 business hours** · **monthly** channel reviews · Kiflo Core operated inside the fee; PRM maintained across the roster | As Establish |
+| **Accelerate** | **No cap** on partners recruited and under management · **monthly** training · CPPO desk at **4 business hours** · **fortnightly** channel reviews · Kiflo Core operated; PRM maintained | As Establish |
 
-**ESTABLISH · $2,500**
-
-- *Commit:* named channel manager at `[N]` hours with a named backup · agreement pack (partner
-  agreement, margin schedule, deal-registration rules) drafted and **issued for signature** within
-  `[N]` business days of kickoff · Kiflo record and portal live within `[N]` business days of receipt
-  of `[named customer inputs]`, **resold by OBP inside the fee**, `[N]` partner seats included,
-  further at `[$Z]` · `[N]` defined targeted approaches a month, logged in Kiflo · registration
-  **recommendation** within `[N]` business days plus the customer's decision logged · monthly report
-  showing every target against actuals from month one.
-- *Target:* `[N]` partners signed by month `[6]` · first partner-issued offer by month `[N]` ·
-  `[N]` partners issuing offers by month twelve.
-
-> **Execution** of an agreement requires the customer's legal function and the partner's
-> countersignature — it is a target, not a commit. **Registration decisions** are the customer's
-> unless authority is delegated in writing; OBP commits to the recommendation.
-
-**ACTIVATE · $5,000** — everything in Establish, plus:
-
-- *Commit:* a second partner type in scope, `[N]` targeted approaches a month across both ·
-  enablement built and run — `[N]` sessions **scheduled and held**, attendance not guaranteed ·
-  written activation plan for up to `[N]` active partners, reviewed monthly for up to `[N]` months
-  or until first offer · selling authorization and offer requests submitted to Automatum within
-  `[N]` business days.
-- *Target:* `[N]` partners issuing offers by month twelve · `[N]` partner-registered deals a quarter ·
-  `[$X]` partner-sourced pipeline standing in Kiflo.
-
-**ACCELERATE · $7,500** — everything in Activate, plus:
-
-- *Commit:* named deal-desk owner with a stated coverage window · performance reviews **offered**
-  monthly to up to `[N]` issuing partners, with written recovery plans · every eligible
-  partner-sourced deal filed within `[N]` business days of registration · quarterly channel pack **reporting**
-  margin paid, commission accrued and revenue attributed — the pack is the commitment, the figures are whatever the actuals are.
-- *Target:* `[N]` partners issuing offers sustained per quarter · `[$Y]` partner-sourced revenue ·
-  registered-deal-to-issued-offer conversion · AWS attribution rate.
-
-> The **count** of partner-sourced ACE submissions is a target, and must be kept separate from the
-> programme's five per Solution ID (slide 19).
-
-**Flag plainly on the slide:** if service scope as well as partner types differentiates the rungs,
-slide 4's *"partner types setting the tiers"* is being changed — say so rather than letting the two
-disagree.
+**Attribution constraint, on the slide:** AWS permits only one partner identifier per resource, so
+partner attribution runs on user agent string rather than competing tags.
 
 ### Slide 14 — How every number is settled
 
@@ -602,25 +553,23 @@ argument is used, bracket the conversion assumption.
 
 ## 5. The strongest objection, and where it gets answered
 
-**Getting listed appears in three of the four solutions:**
+**Getting listed appears in three of the four solutions** — the Accelerator ($10,000 fixed,
+14–18 business days), Alliances *Essentials*, and Operations *Launch*, which now explicitly includes
+WAFR, FTR and publication at $2,500/month. This is the version of *"are these genuinely four
+solutions?"* a customer or an AWS reviewer will actually ask, and it is sharper than the
+shared-ladder version Aein raised.
 
-| | Promise | Price |
+**Decided: Operations absorbs the listing work, and the Accelerator stays.** The two are different
+purchases of overlapping scope, and the deck says so rather than pretending the overlap away:
+
+| | What it is | Twelve-month cost |
 |---|---|---|
-| Marketplace Compliance Accelerator | "a published, transacting listing" | $10,000 fixed, 14–18 business days |
-| Alliances **Essentials** | "get compliant and listed" | $2,500 / month |
-| Operations **Launch** | "get listed and transacting" | $2,500 / month |
+| **Accelerator** | The fixed-fee route to a published listing in 14 to 18 business days, nothing ongoing | $10,000 |
+| **Operations Launch** | The same listing work, then twelve months operating the listing | $30,000 |
 
-**Four months of either retainer costs the same as the Accelerator and advertises its outcome.**
-This is the version of *"are these genuinely four solutions?"* that a customer — or an AWS reviewer —
-will actually ask, and it is sharper than the one Aein raised about the shared ladder.
-
-Answered in three places: slide 5's boundary row, the re-glossed rungs on slide 10 ("Essentials —
-stand the partnership up", "Launch — get it transacting"), and slide 16's boundary row.
-
-**Recommendation: make a published listing a stated entry condition on both retainer entry rungs.**
-This is listed as an open decision because it changes what the two $2,500 rungs can be sold to.
-
----
+The retainer is not the cheap way in, which is what makes the pair coherent. Slide 9 carries a
+**"Why buy it standalone"** row; slides 5 and 16 carry the boundary; Alliances is scoped to the AWS
+partnership programme and the ISV's own BOX Program listings, not Marketplace listing work.
 
 ## 6. Open decisions
 
@@ -678,8 +627,8 @@ assumes two. If the real answer is one, wave 1 splits and slide 20 changes.
   Aein's complaint is not answered.
 - Whether partner types remain the tier axis (slide 4 says they do), which types sit at which rung,
   and what the upper rungs buy if the customer's market supports only one type.
-- Confirm or retire *"nine services in three groups at every tier, with depth the only axis"* — and
-  **name the nine services and three groups.** The deck asserts them and never names them.
+- ~~Confirm the nine services and the depth axis~~ — **settled** by the outcomes document; the nine
+  are named on slide 12 and the depth axis is sourced. The three-group *grouping* is still ours to confirm.
 
 **Governance**
 
@@ -706,6 +655,8 @@ of first use.
 8. **Milestone 1 and 2 funding** — per Solution ID or portfolio-level?
 9. **Marketplace fee** mechanics and rates, and how it is netted.
 10. **"BOX Program listing"** — confirm the definition, and that it is distinct from an AWS Marketplace listing.
+11. **CPPO boundary** — the offer desk executes CPPOs on the listing (Operations) while the deal desk originates them with partners (Partner Development). Both documents claim CPPO; confirm the split.
+12. **The three service groups** for Operations — the nine services are named, the grouping is our proposal.
 
 ---
 
@@ -715,7 +666,7 @@ Every bracket in this spec, by owner. Nothing ships to a customer with a bracket
 
 | Owner | Brackets to close |
 |---|---|
-| **OBP delivery** | *(Alliances outcomes are now closed; its commit column is not.)* Named-owner hours per rung · named backup at each rung · desk coverage window and time zone · accounts per owner · all cadence counts (reviews, plans, enablement sessions, activation-plan reviews) · all SLA response times, each with a stated clock start tied to a customer-supplied input · concurrent feasibility-study capacity |
+| **OBP delivery** | *(All three retainers' outcomes are now closed, and Operations and Partner Development carry real turnarounds, bands and cadences. What remains open is staffing.)* Named-owner hours per rung · named backup at each rung · desk coverage window and time zone · accounts per owner · all cadence counts (reviews, plans, enablement sessions, activation-plan reviews) · all SLA response times, each with a stated clock start tied to a customer-supplied input · concurrent feasibility-study capacity |
 | **OBP commercial** | Included band per rung · overflow rate per rung · remedy on missed commit · retainer payment terms · Kiflo pricing basis, seats and edition per rung · multi-solution discount policy · opening split and walk-away |
 | **OBP marketing / sales** | Buyer profile per solution, validated against closed and in-flight deals · engineer-weeks an Accelerator replaces, from actual delivery hours |
 | **Automatum** | All ten items in §7 |
