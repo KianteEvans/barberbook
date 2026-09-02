@@ -99,8 +99,12 @@ function columns(s, items, { top=195, x0=80.6, pitch, colW, headSize=13, bodySiz
   colW  = colW  || (n === 4 ? 150 : n === 3 ? 215 : pitch - 26);
   items.forEach((it, i) => {
     const x = x0 + i * pitch;
-    if (panels)
-      s.addImage({ path:A('panel.png'), x:P(x - 40), y:P(top - 1.3), w:P(colW + 72), h:P(Math.min(229, height + 34)) });
+    if (panels) {
+      const cw = pitch - 13, cx = x - 36, ct = top - 1.3, ch = Math.min(208.8, height + 14);
+      s.addImage({ path:A('panel.png'), x:P(cx - 11.5), y:P(ct - 3.6), w:P(cw + 23), h:P(ch + 20.2) });
+      s.addShape(pptx.ShapeType.roundRect, { x:P(cx), y:P(ct), w:P(cw), h:P(ch),
+        fill:{ color:C.white }, rectRadius:0.05, line:{ type:'none' } });
+    }
     let y = top;
     if (icons && icons[i]) { s.addImage({ path:A(icons[i]), x:P(x - 7), y:P(y+19), w:P(21.6), h:P(21.6) }); y += 52; }
     else if (panels) y += 20;
@@ -180,7 +184,10 @@ function divider(s, part, title, sub, labels, bg, tiles, page) {
     fontSize:34, color:C.white });
   if (sub) txt(s, sub, { x:P(51.8), y:P(245), w:P(640), h:P(24), fontSize:13, color:C.dkBody });
   labels.forEach((l, i) => {
-    if (tiles && tiles[i]) s.addImage({ path:A(tiles[i]), x:P(51.8 + i*122), y:P(300), w:P(34), h:P(34) });
+    if (tiles && tiles[i]) {
+      s.addImage({ path:A(tiles[i][0]), x:P(51.8 + i*122), y:P(300), w:P(34), h:P(34) });
+      s.addImage({ path:A(tiles[i][1]), x:P(60 + i*122), y:P(308.2), w:P(17.7), h:P(17.7) });
+    }
     txt(s, l, { x:P(51.8 + i*122), y:P(344), w:P(112), h:P(16), fontSize:10, color:C.iconLbl });
   });
   footer(s, page, true);
@@ -226,7 +233,7 @@ s.addText([
 txt(s, 'One pricing ladder — a convention, not a product.', { x:P(430), y:P(478), w:P(330), h:P(14),
   fontSize:9.5, color:C.dkMuted });
 txt(s, 'Bracketed items are open for decision. None reaches a customer artifact.',
-  { x:P(430), y:P(494), w:P(330), h:P(14), fontSize:8.5, color:C.dkDim });
+  { x:P(430), y:P(494), w:P(330), h:P(14), fontSize:8.5, color:C.dkMuted });
 txt(s, 'BOX Solutions   ·   revised 2026-09-02', { x:P(700), y:P(509), w:P(207), h:P(14),
   fontFace:F.reg, fontSize:9, color:C.dkMuted, align:'right' });
 
@@ -242,7 +249,7 @@ columns(s, [
 /* 3 — Part One divider --------------------------------------------------- */
 s = pptx.addSlide();
 divider(s, 'PART ONE', 'The portfolio', 'Four jobs an ISV’s AWS business needs staffed.',
-  ['Portfolio','Buyers','Ladder'], 'bg_divider1.jpg', ['tile_a','tile_b','tile_d'], 3);
+  ['Portfolio','Buyers','Ladder'], 'bg_divider1.jpg', [['tile_a','tile_b'],['tile_c','tile_b'],['tile_d','tile_e']], 3);
 
 /* 4 — The thesis --------------------------------------------------------- */
 s = pptx.addSlide();
@@ -313,7 +320,7 @@ band(s, 'THE LINE', 'A commitment OBP cannot honour alone is worse than none.');
 /* 8 — Part Two divider --------------------------------------------------- */
 s = pptx.addSlide();
 divider(s, 'PART TWO', 'The four solutions', 'Each stands alone in front of a customer.',
-  ['List','Partner','Operate','Build'], 'bg_divider2.jpg', ['tile_a','tile_c','tile_f','tile_g'], 8);
+  ['List','Partner','Operate','Build'], 'bg_divider2.jpg', [['tile_a','tile_e'],['tile_c','tile_f'],['tile_d','tile_g'],['tile_a','tile_b']], 8);
 
 /* 9 — Marketplace Compliance Accelerator --------------------------------- */
 s = pptx.addSlide();
@@ -375,7 +382,7 @@ function retainerPage({ page, eyebrow, icon, title, subtitle, entry, commitLine,
   sl.addText([
     { text:'WE TARGET   ', options:{ bold:true, color:C.subtle, fontFace:F.bold, charSpacing:1.1 } },
     { text:targetLine, options:{ color:C.subtle, fontFace:F.light } },
-  ], { isTextBox:true, margin:0, x:P(51.8), y:P(205), w:P(856), h:P(16), fontSize:9.5 });
+  ], { isTextBox:true, margin:0, x:P(51.8), y:P(207), w:P(856), h:P(16), fontSize:9.5 });
   rungs(sl, rungList);
   band(sl, 'NOTE', note);
   return sl;
@@ -392,7 +399,7 @@ retainerPage({
   subtitle:'Put a named owner on the AWS partnership, and drive the ISV’s own AWS program progression. Three strictly additive tiers.',
   entry:'ENTRY CONDITION — the ISV holds the partner stage each program requires. [Marketplace listing as a prerequisite — to confirm.]',
   commitLine:'A named Director of Alliances at [N] hours a month with a named backup, [N] partnership reviews and [N] quarterly AWS plans delivered, and every application, event, check and artifact below prepared, filed or run.',
-  targetLine:'Acceptance into ISV Accelerate and the Competency programs, MDF availability, BOX Program listings approved, and AWS-sourced leads — every one of these is AWS’s decision, not OBP’s.',
+  targetLine:'ISV Accelerate and Competency acceptance, MDF availability, BOX Program listings approved, and AWS-sourced leads — all AWS’s decisions.',
   note:'The ISV’s OWN BOX Program benefits, which this retainer drives them toward — separate from the four Automatum × OBP solutions and their milestones. [“BOX Program listing” to be defined; it is not the Accelerator’s Marketplace listing.]',
   rungList:[
     { name:'Essentials', price:'$2,500 / mo', head:'Stand the partnership up.',
@@ -499,7 +506,7 @@ retainerPage({
   subtitle:'Build and run a reseller channel. Roster under management is what we commit; partners issuing offers is what we report.',
   entry:'WHY TWELVE MONTHS — ramp from first outreach to first partner transaction models at 8 months, which is what sets the term.',
   commitLine:'A named channel manager recruiting and managing the roster at the rung’s cap, a CPPO deal desk at the rung’s turnaround with selling authorizations drafted, issued and tracked, training on cadence, channel reviews with sourced-pipeline and attribution reporting, and Kiflo Core operated inside the fee.',
-  targetLine:'Partners issuing offers — the headline number — plus partner-sourced pipeline and revenue. Each partner clears its own AWS gate, which is the partner’s act, not OBP’s.',
+  targetLine:'Partners issuing offers — the headline number — plus partner-sourced pipeline and revenue. Each partner clears its own AWS gate.',
   note:'AWS permits only one partner identifier per resource, so partner attribution runs on user agent string rather than competing tags. [CPPO boundary with Managed Marketplace Operations — originated here, executed on the listing there — to confirm.]',
   rungList:[
     { name:'Establish', price:'$2,500 / mo', head:'Stand the channel up.',
@@ -511,7 +518,7 @@ retainerPage({
         'Kiflo Core stood up and operated inside the fee; PRM attribution configured for the channel',
       ],
       target:[
-        'Partners issuing offers — reported monthly, the number to hold us to',
+        'Partners issuing offers — reported monthly',
         'Each partner clears its own AWS gate: seller registration, tax interview, disbursement, service-linked role',
         'Partner-sourced pipeline and revenue',
       ] },
@@ -569,7 +576,7 @@ band(s, 'ON EVERY ARTIFACT', 'Both lines above appear on every customer overview
 s = pptx.addSlide();
 divider(s, 'PART THREE', 'The machinery', 'What sits behind the four, for us and for AWS.',
   ['Value chain','Components','Economics','The decision'], 'bg_divider3.jpg',
-  ['tile_a','tile_c','tile_h','tile_i'], 15);
+  [['tile_a','tile_b'],['tile_c','tile_h'],['tile_d','tile_i'],['tile_a','tile_e']], 15);
 
 /* 16 — Value chain ------------------------------------------------------- */
 s = pptx.addSlide();
@@ -586,7 +593,7 @@ matrix(s,
     ['The review, the remediation, the FTR and the seller registration','Program management, compliance, marketing, events, ACE and co-sell','Compliance engineering, the offer desk, reporting and listing configuration','Recruitment, agreements, enablement, training, the desk and the reviews'],
     ['Listing production as a fixed-fee project, nothing ongoing','The AWS partnership programme, and the ISV’s own BOX Program listings','Listing production AND twelve months of operation; CPPO executed on the listing','Partner recruitment and management; CPPO originated with partners'],
   ],
-  { top:180, labelX:51.8, labelW:88, x0:150, pitch:196, colW:182, size:8, rowH:[62,40,66,52], headSize:10.5 });
+  { top:180, labelX:51.8, labelW:88, x0:150, pitch:196, colW:176, size:8, rowH:[62,40,66,52], headSize:10.5 });
 band(s, 'STACKING RULE', 'Where a customer buys two, the higher solution’s commit column governs the overlap, and the same work is not billed twice.');
 
 /* 17 — Components -------------------------------------------------------- */
@@ -637,12 +644,12 @@ chrome(s, { eyebrow:'THE EXCHANGE', eyebrowIcon:'eyebrow_p12.png',
   txt(s, lbl, { x:P(x), y:P(215), w:P(200), h:P(50), fontSize:8.5 });
 });
 txt(s, 'THE RULE — each solution carries its own Solution ID and its own five ACE submissions; an opportunity belongs to one solution. Milestone apportionment between OBP and Automatum is open — see partner economics.',
-  { x:P(51.8), y:P(274), w:P(856), h:P(16), fontSize:8.5, color:C.subtle });
+  { x:P(51.8), y:P(274), w:P(856), h:P(16), fontSize:8.5, color:C.body });
 columns(s, [
   { head:'Four transacting listings', text:'Four solutions listed and transacting through AWS Marketplace on Automatum’s listing.' },
   { head:'Twenty ACE submissions', text:'Five per solution across the set. A customer’s own submissions follow their opportunity flow and are not an entitlement of five.' },
   { head:'A named alliance owner', text:'Co-sell and program progression run through a named owner on every engagement.' },
-], { top:296, headSize:13, bodySize:9, height:150 });
+], { top:304, headSize:13, bodySize:9, height:142 });
 band(s, 'TWO PARTICIPATIONS, ONE SCHEDULE', 'These are OUR four solutions’ milestones. An ISV pursuing its own BOX Program listings earns the same schedule separately — see Managed AWS Alliances. Same figures, different participant, not the same money.');
 
 /* 20 — The sequence (NEW) ------------------------------------------------ */
