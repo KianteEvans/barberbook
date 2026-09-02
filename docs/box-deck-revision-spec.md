@@ -88,22 +88,22 @@ Use this as the completion checklist — nothing may be left unmapped.
 | 2 | p2 | Agenda | ● Re-cut |
 | 3 | p3 | Part One divider | — |
 | 4 | p4 | The thesis | ● Kill "unlimited roster"; checkable line per column |
-| 5 | — | **Four buyers, four boundaries** | ● NEW |
+| 5 | — | **Four buyers. Four budgets. Four Solution IDs.** | ● NEW |
 | 6 | p5 | How the BOX framing works | ● Three fixes |
-| 7 | — | **What a rung is** | ● NEW |
+| 7 | — | **What you can hold us to** | ● NEW |
 | 8 | p6 | Part Two divider | ● Add the fourth label |
 | 9 | p7 | Marketplace Compliance Accelerator | ● Three new rows |
 | 10 | p8 | Three retainers, one ladder | ● Ladder only; re-gloss nine rungs |
 | 11 | — | **Managed AWS Alliances** | ● NEW |
 | 12 | — | **Managed Marketplace Operations** | ● NEW |
 | 13 | — | **Managed Partner Development** | ● NEW |
-| 14 | — | **How every number is settled** | ● NEW |
+| 14 | — | **No number without a source** | ● NEW |
 | 15 | p9 | Part Three divider | — |
 | 16 | p10 | Value chain | ● Add THE BOUNDARY row |
 | 17 | p11 | Components | ● Three corrections |
 | 18 | — | **Partner economics** | ● NEW — not customer-facing |
 | 19 | p12 | The exchange | ● Three fixes |
-| 20 | — | **The sequence — two waves** | ● NEW |
+| 20 | — | **Evidence first, then scale** | ● NEW |
 | 21 | p13 | The decision | ● Rewritten |
 | 22 | p14 | Where everything lives | ● Publishing rule + rename cost |
 
@@ -351,7 +351,7 @@ artifacts, plus any Solution ID artifact or milestone submission already drafted
 
 ## 4. New slides, drafted
 
-### Slide 5 — Four buyers, four boundaries
+### Slide 5 — Four buyers. Four budgets. Four Solution IDs.
 
 Four columns, one per solution, five rows. **Mark NOT CUSTOMER-FACING** — p14's mirror rule says each
 customer artifact names its own solution only.
@@ -371,7 +371,7 @@ Do not claim Kiflo exclusivity — p11 does not assert it.
 
 **Row 3 is the row that answers Aein.** See §5.
 
-### Slide 7 — What a rung is
+### Slide 7 — What you can hold us to
 
 The single slide that installs the fix as a portfolio rule, so the three retainer pages do not each
 re-litigate it. Five slots:
@@ -474,7 +474,7 @@ The rung name **Expand** is settled by the document; the earlier bracketed alter
 **Attribution constraint, on the slide:** AWS permits only one partner identifier per resource, so
 partner attribution runs on user agent string rather than competing tags.
 
-### Slide 14 — How every number is settled
+### Slide 14 — No number without a source
 
 One slide serving all three retainers, because all three have the same problem: every target is
 settled from data p10 puts on **Automatum's** side — the listing, the private offers, the AWS
@@ -515,7 +515,7 @@ the split.*
 > Without the back-to-back turnarounds, **OBP cannot publish a single response-time commit** on the
 > Operations or Alliances pages. This is the hard blocker in the whole revision.
 
-### Slide 20 — The sequence: two waves
+### Slide 20 — Evidence first, then scale
 
 **Stated as a position, not a menu.**
 

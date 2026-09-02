@@ -212,9 +212,9 @@ txt(s, 'INTERNAL  ·  OBP AND AUTOMATUM ONLY', { x:P(636), y:P(62), w:P(279.3), 
   fontFace:F.bold, bold:true, fontSize:9, color:C.white, align:'center', charSpacing:0.9 });
 txt(s, 'INTERNAL  ·  AUTOMATUM X OBP', { x:P(51.8), y:P(178), w:P(400), h:P(18),
   fontFace:F.bold, bold:true, fontSize:12.5, color:C.orange, charSpacing:3.4 });
-txt(s, 'Four jobs an ISV’s AWS\nbusiness needs staffed.', { x:P(51.8), y:P(218), w:P(700), h:P(105),
+txt(s, 'An AWS listing is not\nan AWS business.', { x:P(51.8), y:P(218), w:P(700), h:P(105),
   fontFace:F.bold, bold:true, fontSize:44, color:C.white, lineSpacing:50 });
-txt(s, 'One fixed-fee project and three twelve-month retainers. This is the internal side-by-side view,\nfor OBP and Automatum.',
+txt(s, 'Four jobs stand between the two. One fixed-fee project and three twelve-month retainers —\nthe internal side-by-side view, for OBP and Automatum.',
   { x:P(51.8), y:P(326), w:P(800), h:P(40), fontSize:15, color:C.dkBody });
 s.addText([
   { text:'Automatum leads the solution and owns the listed software', options:{ color:C.dkAccent } },
@@ -248,14 +248,14 @@ columns(s, [
 
 /* 3 — Part One divider --------------------------------------------------- */
 s = pptx.addSlide();
-divider(s, 'PART ONE', 'The portfolio', 'Four jobs an ISV’s AWS business needs staffed.',
+divider(s, 'PART ONE', 'The portfolio', 'An AWS listing is not an AWS business. Four jobs stand between the two.',
   ['Portfolio','Buyers','Ladder'], 'bg_divider1.jpg', [['tile_a','tile_b'],['tile_c','tile_b'],['tile_d','tile_e']], 3);
 
 /* 4 — The thesis --------------------------------------------------------- */
 s = pptx.addSlide();
 chrome(s, { eyebrow:'THE THESIS', eyebrowIcon:'eyebrow_p4.png',
-  title:'Four jobs an ISV’s AWS business needs staffed.',
-  subtitle:'Getting the product listed, running the AWS partnership, operating the Marketplace, and building the reseller channel — covered between the four.',
+  title:'Four places AWS revenue stalls.',
+  subtitle:'Getting listed, running the partnership, operating the Marketplace, building the channel. One operator for all four.',
   page:4 });
 columns(s, [
   { head:'Get a product qualified and listed on AWS Marketplace.',
@@ -272,8 +272,8 @@ band(s, 'ONE LADDER', 'The three retainers price on the same $2,500 / $5,000 / $
 /* 5 — Four buyers, four boundaries (NEW) --------------------------------- */
 s = pptx.addSlide();
 chrome(s, { eyebrow:'WHY FOUR, NOT ONE', eyebrowIcon:'eyebrow_p5.png',
-  title:'Four buyers, four boundaries.',
-  subtitle:'Same ladder, different job, different buyer, different cost base, different Solution ID.',
+  title:'Four buyers. Four budgets. Four Solution IDs.',
+  subtitle:'Same ladder — different job, different buyer, different cost base. AWS treats them as four.',
   page:5 });
 matrix(s,
   ['WHO SIGNS','WHAT IT REPLACES','THE LISTING BOUNDARY','COMPONENT','SOLUTION ID'],
@@ -305,7 +305,7 @@ columns(s, [
 /* 7 — What a rung is (NEW) ----------------------------------------------- */
 s = pptx.addSlide();
 chrome(s, { eyebrow:'THE RULE', eyebrowIcon:'eyebrow_p8.png', eyebrowColor:C.blueEye,
-  title:'What a rung is.',
+  title:'What you can hold us to.',
   subtitle:'One structure for every rung of every retainer, so the three solutions do not each argue it.',
   page:7 });
 columns(s, [
@@ -554,7 +554,7 @@ retainerPage({
 /* 14 — How every number is settled (NEW) --------------------------------- */
 s = pptx.addSlide();
 chrome(s, { eyebrow:'THE SCOREBOARD', eyebrowIcon:'eyebrow_p14.png',
-  title:'How every number is settled.',
+  title:'No number without a source.',
   subtitle:'Every target is settled from data that sits on Automatum’s side of the chain. Agree the source before the first report, not after.',
   page:14 });
 table(s, [
@@ -612,7 +612,7 @@ band(s, 'NOT YET NAMED', 'No component is named for Alliances or Operations, and
 /* 18 — Partner economics (NEW) ------------------------------------------- */
 s = pptx.addSlide();
 chrome(s, { eyebrow:'PARTNER ECONOMICS', eyebrowIcon:'eyebrow_p12.png',
-  title:'The terms to agree between us.',
+  title:'What we owe each other.',
   subtitle:'Automatum is seller of record and owns the listed software in all four. No numbers here before the call — this is the agenda for it.',
   page:18 });
 table(s, [
@@ -655,8 +655,8 @@ band(s, 'TWO PARTICIPATIONS, ONE SCHEDULE', 'These are OUR four solutions’ mil
 /* 20 — The sequence (NEW) ------------------------------------------------ */
 s = pptx.addSlide();
 chrome(s, { eyebrow:'THE SEQUENCE', eyebrowIcon:'eyebrow_p13.png',
-  title:'Two waves, along the value chain.',
-  subtitle:'Sequence, rather than four at once. The split is p10’s chain down the middle, and it pairs each retainer with the work that precedes it.',
+  title:'Evidence first, then scale.',
+  subtitle:'Sequence, rather than four at once. The split is the value chain down the middle, and it pairs each retainer with the work that precedes it.',
   page:20 });
 [
   { t:'WAVE ONE', sol:'Marketplace Compliance Accelerator  +  Managed AWS Alliances',
@@ -685,8 +685,8 @@ block(s, [
 /* 21 — The decision ------------------------------------------------------ */
 s = pptx.addSlide();
 chrome(s, { eyebrow:'THE DECISION', eyebrowIcon:'eyebrow_p13.png',
-  title:'What we are asking today.',
-  subtitle:'Approve the sequence, confirm the lead partner of record, name the dates.',
+  title:'Five decisions, today.',
+  subtitle:'The sequence, the lead partner of record, the back-to-back turnarounds, the CPPO boundary, and wave one’s date.',
   page:21 });
 table(s, [
   ['Validated or Differentiated held by the lead partner','Automatum','Stated by Automatum — Partner Central evidence to attach'],
