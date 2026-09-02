@@ -47,6 +47,20 @@ Two aggravators sit underneath it:
 **The fix is parity of artifact.** Every solution gets the same five slots — commit, target, band,
 customer inputs and clock start, evidence — with the retainers' slots filled per rung.
 
+### Two BOX participations, one AWS schedule — settled
+
+The Alliances outcomes carry 35k in AWS credits + 35k in cash and 55 leads. Those are *exactly*
+Milestone 1 ($10k+$10k) plus Milestone 2 ($25k+$25k) and the 55 leads on the exchange slide. **They
+are not the same money.** There are two separate participations running the same AWS programme
+schedule:
+
+- **Ours** — the four Automatum × OBP solutions, their Solution IDs, their milestones (slide 19).
+- **The ISV customer's** — their own BOX Program listings, which the Alliances retainer drives them
+  toward (slide 11).
+
+Confirmed by OBP. Both slides must name which participation they describe; identical figures with no
+explanation reads as double-counting, and would be picked apart on the call.
+
 ### Every ask, and where it is answered
 
 Use this as the completion checklist — nothing may be left unmapped.
@@ -381,58 +395,34 @@ re-litigate it. Five slots:
 
 ### Slide 11 — Managed AWS Alliances
 
-**Entry condition:** a published listing, delivered by the Accelerator or already in place. Alliances
-runs the partnership *around* a listing; it does not produce one. FTR actions and seller registration
-therefore stay out of the commit column — p10 assigns them to the Accelerator.
+**Outcomes are settled.** `Managed_AWS_Alliances_Outcomes_1.docx` supplies the real content; this
+is the only retainer no longer running on placeholder outcomes.
 
-**Twelve-month statement, in two labelled sentences:**
+**Entry condition:** the ISV holds the partner stage each program requires.
+`[Marketplace listing as a prerequisite — to confirm.]` The earlier "requires a published listing"
+was drafted, not sourced — these outcomes are AWS *programme* progression, which may not need a live
+Marketplace listing, though deck p5 requires the solution to list within 12 months either way.
 
-> **We commit:** a named Director of Alliances at `[N]` hours a month with a named backup, `[N]`
-> partnership reviews and `[N]` quarterly AWS plans delivered, each with a written action log issued
-> within `[N]` business days.
->
-> **We target, and do not guarantee:** partner-tier progress, AWS-attributed pipeline, and accepted
-> co-sell opportunities.
+**Twelve-month statement.** Commit: a named Director of Alliances at `[N]` hours a month with a
+named backup, `[N]` partnership reviews and `[N]` quarterly AWS plans, and every application, event,
+check and artifact below prepared, filed or run. Target: acceptance into ISV Accelerate and the
+Competency programs, MDF availability, BOX Program listings approved, and AWS-sourced leads.
 
-Do not fold the ACE SLA into the solution-level promise — it exists from Growth.
+**The sorting rule that matters here.** Nearly every line in the source document is an **AWS
+decision** — acceptance, MDF availability, listings approved, leads generated. Those are targets.
+OBP commits to the work that pursues them. Introductions are the subtle case: OBP controls *making*
+the introduction, not whether the AE engages — so *introduction made and logged* is a commit, and
+*meeting held, opportunity sourced* is a target.
 
-**ESSENTIALS · $2,500**
+| Rung | We commit | We target |
+|---|---|---|
+| **Essentials** · stand the partnership up | Named alliance lead at `[N]` hours with a named backup · monthly review held and minuted, action log within `[N]` business days, quarterly AWS plan · ISV Accelerate, Competency and MDF **applications prepared and filed** · one BOX Program listing **submission** prepared and filed · AWS-facing 1-pagers and solution decks produced | ISV-A acceptance — unlocking up to 25k MDF · (1) Competency acceptance — unlocking up to 50k MDF · (1) BOX Program listing — unlocking 35k AWS credits, 35k cash and 55 leads via a sponsored AWS marketing campaign |
+| **Growth** · scale the programs | Quarterly events organised and run (Lunch & Learn, Immersion Day, Meet-Up) · weekly ACE hygiene checks with exceptions written back · funding applications prepared and filed · up to (3) Competency and (3) BOX Program listing submissions filed | ISV-A acceptance and up to (3) Competency acceptances · up to (3) BOX Program listings approved · 55+ leads via sponsored AWS marketing campaigns |
+| **Professional** · open the AWS field | Applications filed across all applicable Competency programs · BOX Program listing submissions filed with no cap · (4) Account Executive and (2) Partner Sales Manager introductions made and logged · (1) Segment Leader introduction made and logged | Acceptance across all applicable Competency programs · listings uncapped, subject to AWS approval · meetings held and opportunities sourced from the introductions |
 
-- *Commit:* named alliance lead at `[N]` hours a month with a named backup, introduced by name to
-  the ISV and its AWS account team · monthly partnership review scheduled, held and minuted, issued
-  in writing where the customer cannot attend, action log within `[N]` business days · quarterly AWS
-  partnership plan with dated actions and named owners · one partnership register maintained
-  `[system to name, reconcile with slide 17]` · listing and compliance items **tracked, chased and
-  reported with status at each review** · written month-twelve report against every commitment.
-- *Target:* listing published and transacting inside the term · partner-tier progress accepted by
-  AWS at `[target tier]` · `[N]` named AWS field contacts engaged.
-
-> "Tracked **to closure**" is not committable — closure depends on the customer's engineers.
-
-**GROWTH · $5,000** — everything in Essentials, plus:
-
-- *Commit:* a **mid-month pipeline review added** to the monthly (not "cadence moves to fortnightly"
-  — additivity is a deck promise) · co-sell submission package prepared and filed within `[N]`
-  business days of a **complete opportunity record**, up to `[N]` a month, further at `[$X]` ·
-  rejection reason written back within `[N]` business days, and one rework prepared **where the
-  reason is curable from customer-supplied information** · monthly written update to the ISV's AWS
-  PDM and account team · `[N]` co-sell assets a quarter and `[N]` AWS-facing campaigns or events a year.
-- *Target:* `[N]` ACE opportunities accepted — acceptance is AWS's decision · `[$X]` AWS-attributed
-  pipeline · `[N]` first meetings sourced through AWS.
-
-**PROFESSIONAL · $7,500** — everything in Growth, plus:
-
-- *Commit:* private offer terms drafted within `[N]` business days of a complete, priced request
-  approved by the customer, **and submitted to Automatum for issue** — up to `[N]` a month · weekly
-  deal review with the ISV's sales lead, written next action against every open opportunity · ACE
-  records updated within `[N]` business days **of notification** · `[N]` business-hour response on
-  deal-blocking requests within `[coverage window, time zone]` · `[N]` funding applications prepared
-  per quarter where AWS deems the deal eligible, filed by `[OBP or Automatum — confirm]`.
-- *Target:* `[N]` private offers issued · `[$X]` transacted · `[N]` opportunities Closed Won —
-  **the close sits with the ISV's sales team** · `[N]` AWS funding requests approved.
-
-**Carve out on the slide:** whose Partner Central instance ACE is filed into, and that **Automatum
-issues the offer**.
+**Vocabulary flag, on the slide:** "BOX Program listing" is the ISV's own programme participation.
+It is **not** the AWS Marketplace product listing the Accelerator produces, and the boundary rows on
+slides 5 and 16 depend on not confusing the two. The deck defines neither — confirm with Automatum.
 
 ### Slide 12 — Managed Marketplace Operations
 
@@ -714,8 +704,8 @@ of first use.
 6. **Is Automatum lead partner of record** on all four Solution IDs?
 7. **The 12-month listing clock** — per Solution ID from entry, or programme-level?
 8. **Milestone 1 and 2 funding** — per Solution ID or portfolio-level?
-9. **Direction of the 55 confirmed project leads** — owed by the partners, or flowing to them?
-10. **Marketplace fee** mechanics and rates, and how it is netted.
+9. **Marketplace fee** mechanics and rates, and how it is netted.
+10. **"BOX Program listing"** — confirm the definition, and that it is distinct from an AWS Marketplace listing.
 
 ---
 
@@ -725,7 +715,7 @@ Every bracket in this spec, by owner. Nothing ships to a customer with a bracket
 
 | Owner | Brackets to close |
 |---|---|
-| **OBP delivery** | Named-owner hours per rung · named backup at each rung · desk coverage window and time zone · accounts per owner · all cadence counts (reviews, plans, enablement sessions, activation-plan reviews) · all SLA response times, each with a stated clock start tied to a customer-supplied input · concurrent feasibility-study capacity |
+| **OBP delivery** | *(Alliances outcomes are now closed; its commit column is not.)* Named-owner hours per rung · named backup at each rung · desk coverage window and time zone · accounts per owner · all cadence counts (reviews, plans, enablement sessions, activation-plan reviews) · all SLA response times, each with a stated clock start tied to a customer-supplied input · concurrent feasibility-study capacity |
 | **OBP commercial** | Included band per rung · overflow rate per rung · remedy on missed commit · retainer payment terms · Kiflo pricing basis, seats and edition per rung · multi-solution discount policy · opening split and walk-away |
 | **OBP marketing / sales** | Buyer profile per solution, validated against closed and in-flight deals · engineer-weeks an Accelerator replaces, from actual delivery hours |
 | **Automatum** | All ten items in §7 |

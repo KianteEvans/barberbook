@@ -166,7 +166,7 @@ function rungs(s, rungList, { top=228, x0=51.8, pitch=294, colW=274 } = {}) {
     txt(s, r.head, { x:P(x), y:P(top+19), w:P(colW), h:P(26), fontSize:8.5, color:C.blueEye });
     txt(s, 'WE COMMIT', { x:P(x), y:P(top+36), w:P(colW), h:P(12), fontSize:8,
       fontFace:F.bold, bold:true, color:C.orange, charSpacing:1.1 });
-    block(s, r.commit, { x:P(x), y:P(top+50), w:P(colW), h:P(100), fontSize:7.8 });
+    block(s, r.commit, { x:P(x), y:P(top+50), w:P(colW), h:P(100), fontSize:7.5 });
     txt(s, 'WE TARGET', { x:P(x), y:P(top+154), w:P(colW), h:P(12), fontSize:8,
       fontFace:F.bold, bold:true, color:C.subtle, charSpacing:1.1 });
     block(s, r.target, { x:P(x), y:P(top+168), w:P(colW), h:P(46), fontSize:7.8, color:C.subtle });
@@ -380,51 +380,56 @@ function retainerPage({ page, eyebrow, icon, title, subtitle, entry, commitLine,
   return sl;
 }
 
-/* 11 — Managed AWS Alliances (NEW) --------------------------------------- */
+/* 11 — Managed AWS Alliances -------------------------------------------
+ * Outcomes from Managed_AWS_Alliances_Outcomes_1.docx. Every AWS decision
+ * (acceptance, MDF, approved listings, leads) sits in the target column;
+ * OBP commits only to the work that pursues them.
+ * ---------------------------------------------------------------------- */
 retainerPage({
   page:11, eyebrow:'RETAINER · TWELVE MONTHS', icon:'eyebrow_p8.png',
   title:'Managed AWS Alliances',
-  subtitle:'Put a named owner on the AWS partnership. Three strictly additive tiers.',
-  entry:'ENTRY CONDITION — requires a published listing, delivered by the Accelerator or already in place. Alliances runs the partnership around a listing; it does not produce one.',
-  commitLine:'A named Director of Alliances at [N] hours a month with a named backup, [N] partnership reviews and [N] quarterly AWS plans delivered, each with a written action log issued within [N] business days.',
-  targetLine:'Partner-tier progress, AWS-attributed pipeline, and accepted co-sell opportunities.',
-  note:'Automatum issues every offer. [Partner Central instance for ACE filing — to confirm.] All bracketed figures gate on the staffing model.',
+  subtitle:'Put a named owner on the AWS partnership, and drive the ISV’s own AWS program progression. Three strictly additive tiers.',
+  entry:'ENTRY CONDITION — the ISV holds the partner stage each program requires. [Marketplace listing as a prerequisite — to confirm.]',
+  commitLine:'A named Director of Alliances at [N] hours a month with a named backup, [N] partnership reviews and [N] quarterly AWS plans delivered, and every application, event, check and artifact below prepared, filed or run.',
+  targetLine:'Acceptance into ISV Accelerate and the Competency programs, MDF availability, BOX Program listings approved, and AWS-sourced leads — every one of these is AWS’s decision, not OBP’s.',
+  note:'The ISV’s OWN BOX Program benefits, which this retainer drives them toward — separate from the four Automatum × OBP solutions and their milestones. [“BOX Program listing” to be defined; it is not the Accelerator’s Marketplace listing.]',
   rungList:[
     { name:'Essentials', price:'$2,500 / mo', head:'Stand the partnership up.',
       commit:[
         'Named alliance lead at [N] hours a month, with a named backup',
-        'Monthly partnership review scheduled, held and minuted; action log within [N] business days',
-        'Quarterly AWS partnership plan with dated actions and named owners',
-        'Listing and compliance items tracked, chased and reported with status at each review',
+        'Monthly partnership review held and minuted; action log within [N] business days, and a quarterly AWS partnership plan',
+        'ISV Accelerate, Competency and MDF applications prepared and filed',
+        'One BOX Program listing submission prepared and filed',
+        'AWS-facing marketing support produced: 1-pagers, solution decks',
       ],
       target:[
-        'Listing published and transacting inside the term',
-        'Partner-tier progress accepted by AWS at [target tier]',
-        '[N] named AWS field contacts engaged',
+        'ISV-A acceptance — unlocking up to 25k in MDF',
+        '(1) Competency acceptance — unlocking up to 50k in MDF',
+        '(1) BOX Program listing — unlocking 35k in AWS credits, 35k in cash and 55 leads via a sponsored AWS marketing campaign',
       ] },
-    { name:'Growth', price:'$5,000 / mo', head:'Adds to Essentials — run the co-sell desk.',
+    { name:'Growth', price:'$5,000 / mo', head:'Adds to Essentials — scale the programs.',
       commit:[
-        'Mid-month pipeline review added to the monthly',
-        'Co-sell package filed within [N] business days of a complete opportunity record; up to [N] a month, further at [$X]',
-        'Rejection reason written back within [N] business days; one rework where curable from customer information',
-        'Monthly written update to the ISV’s AWS PDM and account team',
+        'Quarterly events organised and run: Lunch & Learn, Immersion Day, Meet-Up',
+        'Weekly ACE hygiene checks, with exceptions written back',
+        'Funding applications prepared and filed',
+        'Up to (3) Competency and (3) BOX Program listing submissions prepared and filed',
       ],
       target:[
-        '[N] ACE opportunities accepted — acceptance is AWS’s decision',
-        '[$X] AWS-attributed pipeline created',
-        '[N] first meetings sourced through AWS',
+        'ISV-A acceptance, and up to (3) Competency acceptances',
+        'Up to (3) BOX Program listings approved',
+        '55+ leads via sponsored AWS marketing campaigns',
       ] },
-    { name:'Professional', price:'$7,500 / mo', head:'Adds to Growth — run the deal desk.',
+    { name:'Professional', price:'$7,500 / mo', head:'Adds to Growth — open the AWS field.',
       commit:[
-        'Private offer terms drafted within [N] business days of a complete, priced, customer-approved request, and submitted to Automatum for issue; up to [N] a month',
-        'Weekly deal review with the ISV’s sales lead; written next action on every open opportunity',
-        'ACE records updated within [N] business days of notification',
-        '[N] business-hour response on deal-blocking requests within [coverage window, time zone]',
+        'Applications prepared and filed across all applicable Competency programs',
+        'BOX Program listing submissions filed with no cap',
+        '(4) Account Executive and (2) Partner Sales Manager introductions made and logged',
+        '(1) Segment Leader introduction made and logged',
       ],
       target:[
-        '[N] private offers issued; [$X] transacted',
-        '[N] opportunities Closed Won — the close sits with the ISV’s sales team',
-        '[N] AWS funding requests approved — AWS decides',
+        'Acceptance across all applicable Competency programs',
+        'Listings uncapped, subject to AWS approval',
+        'Meetings held and opportunities sourced from the introductions',
       ] },
   ],
 });
@@ -567,7 +572,7 @@ matrix(s,
     ['The listing the product publishes to','The Marketplace platform compliance and co-sell work transacts on','The listing, the private offers, and the CRM and Partner Central integrations','The selling authorizations, the private offers and the AWS attribution'],
     ['Seller of record on every transaction','Seller of record','Issues every private offer','Issues partner offers and selling authorizations'],
     ['The review, the remediation, the FTR and the seller registration','Program management, compliance, marketing, events, ACE and co-sell','Compliance engineering, the offer desk, reporting and listing configuration','Recruitment, agreements, enablement, training, the desk and the reviews'],
-    ['One-time listing production','Co-sell opportunities and AWS funding','The customer’s own listing, offers and reconciliation','Third-party sellers and partner-issued offers'],
+    ['One-time production of the AWS Marketplace listing','The AWS partnership programme, and the ISV’s own BOX Program listings — not the Marketplace listing','The customer’s own Marketplace listing, offers and reconciliation','Third-party sellers and partner-issued offers'],
   ],
   { top:180, labelX:51.8, labelW:88, x0:150, pitch:196, colW:182, size:8, rowH:[62,40,66,52], headSize:10.5 });
 band(s, 'STACKING RULE', 'Where a customer buys two, the higher solution’s commit column governs the overlap, and the same work is not billed twice.');
@@ -610,21 +615,23 @@ band(s, 'NOT CUSTOMER-FACING', 'The $10,000 fee and the ladder cannot be validat
 s = pptx.addSlide();
 chrome(s, { eyebrow:'THE EXCHANGE', eyebrowIcon:'eyebrow_p12.png',
   title:'What the program funds, and what AWS gets back.',
-  subtitle:'Cash and credits are separate instruments, up to the amounts shown.',
+  subtitle:'The four Automatum × OBP solutions’ own milestones. Cash and credits are separate instruments, up to the amounts shown.',
   page:19 });
 [['$10,000 + $10,000','Milestone 1, cash + credits'],['$25,000 + $25,000','Milestone 2, cash + credits'],
- ['55','Confirmed project leads — Milestone 3, AWS-funded.\n[Direction to confirm: owed by the partners, or flowing to them?]'],
+ ['55','Project leads generated for the participant via a sponsored AWS marketing campaign — Milestone 3, AWS-funded.'],
  ['5 per solution','ACE opportunity submissions — the programme’s obligation to AWS']].forEach(([big, lbl], i) => {
   const x = 73.4 + i*221;
   txt(s, big, { x:P(x), y:P(186), w:P(200), h:P(26), fontFace:F.bold, bold:true, fontSize:16, color:C.ink });
   txt(s, lbl, { x:P(x), y:P(215), w:P(200), h:P(50), fontSize:8.5 });
 });
+txt(s, 'THE RULE — each solution carries its own Solution ID and its own five ACE submissions; an opportunity belongs to one solution. Milestone apportionment between OBP and Automatum is open — see partner economics.',
+  { x:P(51.8), y:P(274), w:P(856), h:P(16), fontSize:8.5, color:C.subtle });
 columns(s, [
   { head:'Four transacting listings', text:'Four solutions listed and transacting through AWS Marketplace on Automatum’s listing.' },
   { head:'Twenty ACE submissions', text:'Five per solution across the set. A customer’s own submissions follow their opportunity flow and are not an entitlement of five.' },
   { head:'A named alliance owner', text:'Co-sell and program progression run through a named owner on every engagement.' },
 ], { top:296, headSize:13, bodySize:9, height:150 });
-band(s, 'THE RULE', 'Each solution carries its own Solution ID and its own five ACE submissions; an opportunity belongs to one solution. Milestone apportionment is open — see partner economics.');
+band(s, 'TWO PARTICIPATIONS, ONE SCHEDULE', 'These are OUR four solutions’ milestones. An ISV pursuing its own BOX Program listings earns the same schedule separately — see Managed AWS Alliances. Same figures, different participant, not the same money.');
 
 /* 20 — The sequence (NEW) ------------------------------------------------ */
 s = pptx.addSlide();
