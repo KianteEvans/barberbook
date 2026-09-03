@@ -279,8 +279,8 @@ matrix(s,
   ['WHO SIGNS','WHAT IT REPLACES','THE LISTING BOUNDARY','COMPONENT','SOLUTION ID'],
   ['Marketplace Compliance Accelerator','Managed AWS Alliances','Managed Marketplace Operations','Managed Partner Development'],
   [
-    ['[CTO / VP Engineering]','[CEO or CRO]','[RevOps / deal desk or COO]','[CRO / VP Channel]'],
-    ['[N] engineer-weeks on Well-Architected, FTR and seller registration','A Director of Alliances hire','A Marketplace ops / offer-desk hire plus compliance engineering hours','A channel manager plus a PRM subscription'],
+    ['[CRO] · [CISO] co-sponsor','[CEO or CRO]','[CRO] · [COO] co-sponsor','[CRO] · [VP Channel] co-sponsor'],
+    ['Enterprise deals lost to Marketplace procurement, plus [N] engineer-weeks of compliance work','A Director of Alliances hire','A Marketplace ops / offer-desk hire plus compliance engineering hours','A channel manager plus a PRM subscription'],
     ['The fixed-fee route to a published listing in 14 to 18 business days, with nothing ongoing','The AWS partnership programme and the ISV’s own BOX Program listings — not the Marketplace listing work','Builds the listing AND operates it for twelve months — Launch includes WAFR, FTR and publication','Third-party sellers — not the customer’s own listing'],
     ['ASecureCloud','[none named — to confirm]','[none named — to confirm]','Kiflo, resold inside the fee'],
     ['Its own, with its own milestone submission','Its own','Its own','Its own'],
@@ -357,8 +357,8 @@ chrome(s, { eyebrow:'THE RETAINERS', eyebrowIcon:'eyebrow_p8.png', eyebrowColor:
     fontSize:8.5, color:C.orange, charSpacing:1.1 }));
 [
   ['Managed AWS Alliances', ['$2,500 / mo','Essentials','stand the partnership up'], ['$5,000 / mo','Growth','scale the programs'], ['$7,500 / mo','Professional','open the AWS field'], '[CEO or CRO] · priced on seniority'],
-  ['Managed Marketplace Operations', ['$1,500 / mo','Launch','build, publish and transact'], ['$3,000 / mo','Operate','same nine services, deeper band'], ['$6,000 / mo','Scale','same nine services, top band'], '[RevOps / deal desk] · priced on throughput'],
-  ['Managed Partner Development', ['$2,500 / mo','Establish','up to (6) partners managed'], ['$5,000 / mo','Expand','up to (12) partners managed'], ['$7,500 / mo','Accelerate','roster uncapped'], '[CRO / VP Channel] · priced on seniority'],
+  ['Managed Marketplace Operations', ['$1,500 / mo','Launch','build, publish and transact'], ['$3,000 / mo','Operate','same nine services, deeper band'], ['$6,000 / mo','Scale','same nine services, top band'], '[CRO] · [COO] co-sponsor · priced on throughput'],
+  ['Managed Partner Development', ['$2,500 / mo','Establish','up to (6) partners managed'], ['$5,000 / mo','Expand','up to (12) partners managed'], ['$7,500 / mo','Accelerate','roster uncapped'], '[CRO] · [VP Channel] co-sponsor · priced on seniority'],
 ].forEach((row, r) => {
   const y = 228 + r * 76;
   txt(s, row[0], { x:P(59), y:P(y), w:P(250), h:P(18), fontFace:F.bold, bold:true, fontSize:11.5, color:C.ink });

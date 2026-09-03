@@ -34,12 +34,11 @@ Also still to supply in every study: **Draft Reference Architecture** (a diagram
 
 ## Two things worth deciding before you submit
 
-**The Accelerator's fit is the weak one.** AWS defines a Business Outcomes Solution as impacting a
-customer's top or bottom line, tied to how they make money, and sold to a line-of-business buyer
-rather than the IT buyer. The three retainers fit that cleanly. The Accelerator is a fixed-fee
-compliance and listing project bought by a CTO or VP Engineering. Study 01 answers "qualified yes"
-and asks AWS to assess it as the portfolio's on-ramp. If you would rather not raise it, that answer
-is the paragraph to change.
+**All four are framed for a line-of-business buyer.** BOX requires solutions aimed at LOB personas
+rather than IT points of contact. The Accelerator leads on the CRO, with the CISO co-sponsoring
+where the Well-Architected and FTR evidence is what the enterprise buyer is asking for. Alliances
+leads on the CEO or CRO, Operations on the CRO with the COO, and Partner Development on the CRO
+with the VP Channel. The deck's four-buyers page names the same personas.
 
 **The Accelerator and Operations Launch overlap.** Operations Launch includes the same WAFR, FTR
 and listing publication the Accelerator delivers. Both studies state the pairing: $10,000 for a

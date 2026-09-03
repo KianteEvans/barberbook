@@ -30,22 +30,22 @@ SOLUTIONS = [
  "file":"01_Marketplace-Compliance-Accelerator",
  "name":"Marketplace Compliance Accelerator",
  "summary":{
-  "Customer Use Case":"An ISV with a shippable product but no AWS Marketplace presence needs to become transactable on AWS — Well-Architected review, remediation, Foundational Technical Review and a published, transacting listing.",
+  "Customer Use Case":"An ISV is losing or unable to reach enterprise deals that require procurement through AWS Marketplace. The engagement makes the product transactable on AWS — Well-Architected review, remediation, Foundational Technical Review and a published listing.",
   "AWS Services":"AWS Marketplace; AWS Marketplace Management Portal (AMMP); AWS Well-Architected Framework Review; AWS Foundational Technical Review (FTR); AWS Partner Central / ACE.",
   "Expected Launch Date":"[Launch date — to confirm against the wave one submission schedule]",
   "Is this a Public Sector solution?":"No.",
-  "Is this a Business Outcomes Solution?":"Qualified yes. The immediate buyer is technical ([CTO / VP Engineering]) rather than a line-of-business persona, and the business outcome is indirect: the engagement is the precondition for the ISV transacting on AWS at all, and the entry point to three twelve-month retainers carrying direct top-line outcomes. We ask that AWS assess it as the on-ramp component of the portfolio rather than as a standalone business outcome solution.",
+  "Is this a Business Outcomes Solution?":"Yes. The buyer is the CRO, co-sponsored by the CISO, and the outcome is top-line: enterprise buyers increasingly procure software through AWS Marketplace, and an ISV without a listing cannot close those deals at all. The engagement converts blocked pipeline into transactable revenue. It combines AWS components (Marketplace, the Well-Architected Framework Review, the Foundational Technical Review), Automatum's listing and seller-of-record position, and OBP's delivery.",
   "Target Industry for solution?":"Independent software vendors, horizontal across industries. [Priority verticals — to confirm.]",
-  "Target Customer Persona for solution?":"[CTO / VP Engineering] — to be validated against OBP's closed and in-flight deals. Economic buyer is frequently the CEO in ISVs below [N] employees.",
+  "Target Customer Persona for solution?":"[CRO] — the revenue owner whose enterprise deals are blocked without a Marketplace listing. [CISO] co-sponsors where the Well-Architected and FTR evidence is what the enterprise buyer is asking for. Both to be validated against OBP's closed and in-flight deals.",
  },
  "overview":{
   "Executive summary":[
-   "Automatum and OBP propose the Marketplace Compliance Accelerator: a fixed-fee project that takes an ISV from unassessed to a published, transacting AWS Marketplace listing in 14 to 18 business days of delivery, for $10,000.",
+   "Automatum and OBP propose the Marketplace Compliance Accelerator: a fixed-fee project that opens AWS Marketplace as a route to market for an ISV that cannot currently transact there, in 14 to 18 business days of delivery, for $10,000.",
    "Automatum leads the solution, owns the listed software and is seller of record; OBP delivers the engagement. The customer signs one agreement and transacts through AWS Marketplace on Automatum's listing, with software on one line and professional services on the other.",
-   "The work is repeatable and the delivery window is provable. Well-Architected data collection and remediation, which carries most of the effort, is automated by a licensed tool OBP operates. The solution is proposed for wave one.",
+   "For the CRO the outcome is deals that can be closed on AWS rather than lost to procurement friction. For the CISO it is Well-Architected and FTR evidence an enterprise buyer will accept. The work is repeatable, the delivery window is provable, and Well-Architected data collection and remediation is automated by a licensed tool OBP operates. Proposed for wave one.",
   ],
   "Description of Solution":[
-   "Final delivery is a published, transacting AWS Marketplace listing, with the compliance evidence behind it.",
+   "Final delivery is a published, transacting AWS Marketplace listing, with the compliance evidence an enterprise buyer and AWS both require.",
    "The engagement covers: a Well-Architected Framework Review conducted and its findings remediated in the product; the AWS Foundational Technical Review prepared and submitted; the Marketplace listing built, configured and taken through publication; architecture diagrams maintained in AMMP to evidence the \"Deployed on AWS\" badge; and seller registration completed.",
    "Marketplace access is a precondition for a growing share of enterprise software procurement, and FTR acceptance grants AWS Qualified Software status and Solutions Finder placement, valid two years. Demand is evidenced by [pipeline figure — to supply from OBP's closed and in-flight deals].",
   ],
@@ -55,8 +55,8 @@ SOLUTIONS = [
    "Labour: OBP compliance engineering, plus [N] hours of the customer's own engineering availability for remediation. The customer supplies tax, bank and legal data for seller registration. " + COMMON_TECH_TAIL,
   ],
   "Market Fit":[
-   "Target market: ISVs that need to transact on AWS Marketplace and have no listing, or a listing that has not passed FTR.",
-   "Demand: driven by enterprise buyers increasingly requiring Marketplace transactability, and by ISVs pursuing AWS co-sell, which depends on it.",
+   "Target market: ISVs losing enterprise deals to Marketplace procurement requirements, with no listing or a listing that has not passed FTR. A second segment buys on trust evidence: AWS Qualified Software status and Solutions Finder placement are what the enterprise security review asks for, and the CISO sponsors the work.",
+   "Demand: driven by enterprise buyers requiring Marketplace transactability, and by ISVs pursuing AWS co-sell, which depends on it.",
    "Competitors: AWS systems integrators offering listing services, ISVs attempting it in-house, and AWS's own self-service path. The differentiator is a fixed fee, a stated delivery window, and an automated Well-Architected component.",
   ],
   "Marketing strategy":[
@@ -82,7 +82,7 @@ SOLUTIONS = [
   "First Customer Targets":["[Initial customers involved in solution design, with ACE opportunity links where entered — to supply.]"],
   "Findings and recommendations":[
    "Both partners recommend proceeding, in wave one.",
-   "Findings: the work is repeatable, the delivery window is provable, the effort is largely automated and the commercial structure is simple. The open risk is classification rather than delivery — see the Business Outcomes Solution response in the Submission Summary.",
+   "Findings: the work is repeatable, the delivery window is provable, the effort is largely automated and the commercial structure is simple. The open items are commercial rather than technical.",
    "Open before build: the commercial terms between Automatum and OBP; the clock-start definition; and confirmation that Automatum is lead partner of record on this Solution ID.",
   ],
  },
@@ -169,14 +169,14 @@ SOLUTIONS += [
   "AWS Services":"AWS Marketplace; AWS Marketplace Management Portal (AMMP); AWS Well-Architected Framework Review; AWS Foundational Technical Review (FTR); Channel Partner Private Offers (CPPO); AWS Partner Central / ACE.",
   "Expected Launch Date":"[Launch date — to confirm against the wave two submission schedule]",
   "Is this a Public Sector solution?":"No.",
-  "Is this a Business Outcomes Solution?":"Yes. The buyer is a line-of-business persona (RevOps, deal desk or COO) and the outcome is directly top-line: the listing is the mechanism through which the ISV transacts on AWS, and the offer desk is what converts demand into issued offers and Marketplace revenue. It combines AWS components (Marketplace, AMMP, FTR, CPPO), Automatum's listing and seller-of-record position, and OBP's operations function. It replaces a Marketplace operations hire plus compliance engineering hours rather than supplying software.",
+  "Is this a Business Outcomes Solution?":"Yes. The buyer is the CRO, co-sponsored by the COO, and the outcome is directly top-line: the listing is the mechanism through which the ISV transacts on AWS, and the offer desk converts demand into issued offers and Marketplace revenue. It combines AWS components (Marketplace, AMMP, FTR, CPPO), Automatum's listing and seller-of-record position, and OBP's operations function. It replaces a Marketplace operations hire plus compliance engineering hours rather than supplying software.",
   "Target Industry for solution?":"Independent software vendors, horizontal across industries. [Priority verticals — to confirm.]",
-  "Target Customer Persona for solution?":"[RevOps / deal desk or COO] — to be validated against OBP's closed and in-flight deals.",
+  "Target Customer Persona for solution?":"[CRO] — the revenue owner whose private offers and Marketplace revenue run through the listing. [COO] co-sponsors where the listing is carried as an operational function. Both to be validated against OBP's closed and in-flight deals.",
  },
  "overview":{
   "Executive summary":[
    "Automatum and OBP propose Managed Marketplace Operations: a twelve-month retainer that gets a listing live and then operates it at volume, priced $1,500 / $3,000 / $6,000 a month.",
-   "All nine services are delivered at every rung — compliance engineering, listing engineering, and the offer desk and reporting. Volume, turnaround and review cadence set the rung rather than scope. Pricing is on throughput: the rungs track the included offer band, at the same rate per included offer at each.",
+   "For the CRO the outcome is offers issued and revenue transacted at the volume the rung provides for. All nine services are delivered at every rung — compliance engineering, listing engineering, and the offer desk and reporting. Volume, turnaround and review cadence set the rung rather than scope. Pricing is on throughput: the rungs track the included offer band, at the same rate per included offer at each.",
    "The solution is proposed for wave two, following evidence from a completed Milestone 1.",
   ],
   "Description of Solution":[
@@ -191,7 +191,7 @@ SOLUTIONS += [
    "OBP drafts and submits offers; Automatum issues them. Every issue turnaround here is committed only where Automatum's matching internal turnaround is in place. [CRM platforms Automatum's integration supports — to confirm.] " + COMMON_TECH_TAIL,
   ],
   "Market Fit":[
-   "Target market: ISVs transacting on AWS Marketplace at volume, or intending to, without dedicated Marketplace operations staff.",
+   "Target market: ISVs transacting on AWS Marketplace at volume, or intending to, where the revenue owner has no desk behind the listing.",
    "Demand: driven by private offer volume. An ISV issuing offers at any material rate needs a desk.",
    "Competitors: a Marketplace operations hire, AWS consulting partners offering listing management, and ISVs operating the desk in-house. The differentiator is a stated offer band with a stated turnaround, priced linearly against the band.",
   ],
@@ -236,9 +236,9 @@ SOLUTIONS += [
   "AWS Services":"AWS Marketplace; Channel Partner Private Offers (CPPO); selling authorizations; AWS Partner Central / ACE; AWS Marketplace seller reporting.",
   "Expected Launch Date":"[Launch date — to confirm against the wave two submission schedule]",
   "Is this a Public Sector solution?":"No.",
-  "Is this a Business Outcomes Solution?":"Yes. The buyer is a line-of-business executive (CRO or VP Channel), the outcome is directly top-line — partner-sourced Marketplace revenue the ISV does not have today — and the solution combines AWS components (Marketplace, CPPO, selling authorizations, attribution), Automatum's listing and seller-of-record position, and OBP's channel function, with Kiflo Core as the partner system of record included in the fee. It replaces a channel manager plus a PRM subscription rather than supplying software.",
+  "Is this a Business Outcomes Solution?":"Yes. The buyer is the CRO, co-sponsored by the VP Channel where that role exists, and the outcome is directly top-line — partner-sourced Marketplace revenue the ISV does not have today — and the solution combines AWS components (Marketplace, CPPO, selling authorizations, attribution), Automatum's listing and seller-of-record position, and OBP's channel function, with Kiflo Core as the partner system of record included in the fee. It replaces a channel manager plus a PRM subscription rather than supplying software.",
   "Target Industry for solution?":"Independent software vendors, horizontal across industries. [Priority verticals — to confirm.]",
-  "Target Customer Persona for solution?":"[CRO / VP Channel] — to be validated against OBP's closed and in-flight deals.",
+  "Target Customer Persona for solution?":"[CRO] — the revenue owner accountable for partner-sourced revenue. [VP Channel] co-sponsors where the channel function already exists. Both to be validated against OBP's closed and in-flight deals.",
  },
  "overview":{
   "Executive summary":[
