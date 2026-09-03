@@ -42,7 +42,7 @@ SOLUTIONS = [
   "Executive summary":[
    "Automatum and OBP propose the Marketplace Compliance Accelerator: a fixed-fee project that opens AWS Marketplace as a route to market for an ISV that cannot currently transact there, in 14 to 18 business days of delivery, for $10,000.",
    "Automatum leads the solution, owns the listed software and is seller of record; OBP delivers the engagement. The customer signs one agreement and transacts through AWS Marketplace on Automatum's listing, with software on one line and professional services on the other.",
-   "For the CRO the outcome is deals that can be closed on AWS rather than lost to procurement friction. For the CISO it is Well-Architected and FTR evidence an enterprise buyer will accept. The work is repeatable, the delivery window is provable, and Well-Architected data collection and remediation is automated by a licensed tool OBP operates. Proposed for wave one.",
+   "For the CRO the outcome is deals that can be closed on AWS rather than lost to procurement friction. For the CISO it is Well-Architected and FTR evidence an enterprise buyer will accept. The work is repeatable, the delivery window is provable, and Well-Architected data collection and remediation is automated by OBP's own tooling. Proposed for wave one.",
   ],
   "Description of Solution":[
    "Final delivery is a published, transacting AWS Marketplace listing, with the compliance evidence an enterprise buyer and AWS both require.",
@@ -51,7 +51,7 @@ SOLUTIONS = [
   ],
   "Technology considerations":[
    "Delivery is professional services against AWS-operated systems; there is no new software to build.",
-   "Components: ASecureCloud, licensed and operated by OBP, automates the data collection for the Well-Architected review, suggests answers to the questionnaire, and generates CloudFormation and AWS CLI templates that resolve findings — Premium edition is required for Well-Architected reviews, and licences are held as a reassignable pool. Automatum supplies the Marketplace listing the product publishes to, and is seller of record. AWS supplies Marketplace, AMMP, the Well-Architected tool and the FTR process.",
+   "Components: OBP operates automated Well-Architected data collection that suggests answers to the questionnaire and generates CloudFormation and AWS CLI templates resolving findings. Automatum supplies the Marketplace listing the product publishes to, and is seller of record. AWS supplies Marketplace, AMMP, the Well-Architected tool and the FTR process.",
    "Labour: OBP compliance engineering, plus [N] hours of the customer's own engineering availability for remediation. The customer supplies tax, bank and legal data for seller registration. " + COMMON_TECH_TAIL,
   ],
   "Market Fit":[
@@ -236,26 +236,26 @@ SOLUTIONS += [
   "AWS Services":"AWS Marketplace; Channel Partner Private Offers (CPPO); selling authorizations; AWS Partner Central / ACE; AWS Marketplace seller reporting.",
   "Expected Launch Date":"[Launch date — to confirm against the wave two submission schedule]",
   "Is this a Public Sector solution?":"No.",
-  "Is this a Business Outcomes Solution?":"Yes. The buyer is the CRO, co-sponsored by the VP Channel where that role exists, and the outcome is directly top-line — partner-sourced Marketplace revenue the ISV does not have today — and the solution combines AWS components (Marketplace, CPPO, selling authorizations, attribution), Automatum's listing and seller-of-record position, and OBP's channel function, with Kiflo Core as the partner system of record included in the fee. It replaces a channel manager plus a PRM subscription rather than supplying software.",
+  "Is this a Business Outcomes Solution?":"Yes. The buyer is the CRO, co-sponsored by the VP Channel where that role exists, and the outcome is directly top-line — partner-sourced Marketplace revenue the ISV does not have today — and the solution combines AWS components (Marketplace, CPPO, selling authorizations, attribution), Automatum's listing and seller-of-record position, and OBP's channel function, with OBP's partner system of record, included in the fee. It replaces a channel manager plus a PRM subscription rather than supplying software.",
   "Target Industry for solution?":"Independent software vendors, horizontal across industries. [Priority verticals — to confirm.]",
   "Target Customer Persona for solution?":"[CRO] — the revenue owner accountable for partner-sourced revenue. [VP Channel] co-sponsors where the channel function already exists. Both to be validated against OBP's closed and in-flight deals.",
  },
  "overview":{
   "Executive summary":[
    "Automatum and OBP propose Managed Partner Development: a twelve-month retainer that stands up and runs an ISV's reseller channel on AWS, priced $2,500 / $5,000 / $7,500 a month.",
-   "What the partners commit to is the roster under management and the machinery around it — up to six, up to twelve, or an uncapped roster of net new partners recruited and managed, a CPPO deal desk at the rung's turnaround, training on cadence, channel reviews with sourced-pipeline and attribution reporting, and Kiflo Core operated inside the fee. What they report, and target rather than guarantee, is partners issuing offers, because that depends on the partners themselves.",
+   "What the partners commit to is the roster under management and the machinery around it — up to six, up to twelve, or an uncapped roster of net new partners recruited and managed, a CPPO deal desk at the rung's turnaround, training on cadence, channel reviews with sourced-pipeline and attribution reporting, and OBP's partner system of record operated inside the fee. What they report, and target rather than guarantee, is partners issuing offers, because that depends on the partners themselves.",
    "Ramp from first outreach to a first partner transaction models at eight months, which sets the twelve-month term.",
   ],
   "Description of Solution":[
    "Final delivery is a working reseller channel: executed partner agreements and a margin schedule, a live partner portal carrying onboarding, deal registration and commission tracking, recruitment and enablement running on a named cadence, a deal desk answering registrations, and a monthly report whose headline number is partners issuing offers.",
    "Rung depth: up to six, twelve or an uncapped roster of net new partners recruited and under management; twice-yearly, quarterly or monthly training and enablement sessions; a CPPO deal desk at one business day, eight business hours or four business hours; quarterly, monthly or fortnightly channel reviews with sourced-pipeline and attribution reporting.",
-   "At every rung: recurring selling authorizations drafted, issued and tracked in AWS Marketplace; Kiflo Core stood up and operated inside the engagement fee; and Partner Revenue Measurement attribution configured for the channel.",
+   "At every rung: recurring selling authorizations drafted, issued and tracked in AWS Marketplace; OBP's partner system of record stood up and operated inside the engagement fee; and Partner Revenue Measurement attribution configured for the channel.",
    "AWS permits only one partner identifier per resource, so partner attribution runs on user agent string rather than competing tags.",
   ],
   "Technology considerations":[
    "Delivery is a staffed channel function against AWS-operated systems, plus one licensed component.",
    "AWS supplies Marketplace, the CPPO mechanism, selling authorizations and attribution. Automatum supplies the listing, the seller-of-record position and the offer issuance. OBP supplies recruitment, agreements, enablement, training, the deal desk and the reviews.",
-   "Kiflo Core is the partner system of record — portal, onboarding, deal registration and commission tracking, with HubSpot and Salesforce sync — stood up and operated by OBP inside the engagement fee, and it is the auditable source behind the partners-issuing-offers count. [Seats per rung — to confirm.] " + COMMON_TECH_TAIL,
+   "OBP's partner system of record — portal, onboarding, deal registration and commission tracking, with CRM sync — is stood up and operated inside the engagement fee, and it is the auditable source behind the partners-issuing-offers count. [Seats per rung — to confirm.] " + COMMON_TECH_TAIL,
    "One mechanism requires AWS and Automatum confirmation before the outcome model is final: whether, and by what mechanism, a third-party reseller can issue offers against Automatum's listing while Automatum is seller of record. The reported metric depends on it.",
   ],
   "Market Fit":[
@@ -280,20 +280,20 @@ SOLUTIONS += [
   ],
   "Initial  Financial projections":[
    "List price $2,500 / $5,000 / $7,500 a month across three rungs, on a twelve-month term. Priced on the seniority of the person on the account.",
-   "Kiflo Core licence cost is carried inside the engagement fee and must be stress-tested against the lowest rung in the portfolio. Revenue split between the partners is under negotiation. [Volume forecast, seats per rung, retainer payment terms and margin — to supply.]",
+   "The partner system of record is carried inside the engagement fee and must be stress-tested against the lowest rung in the portfolio. Revenue split between the partners is under negotiation. [Volume forecast, seats per rung, retainer payment terms and margin — to supply.]",
   ],
   "Draft Reference Architecture":["[Insert architecture diagram — to supply.]"],
   "First Customer Targets":["[Initial customers involved in solution design, with ACE opportunity links where entered — to supply.]"],
   "Findings and recommendations":[
    "Both partners recommend proceeding, in wave two.",
    "Findings: an eight-month ramp that sets the term, and a reported metric a customer can audit because it sits in a system of record. The material risk is a mechanism question rather than a delivery one — if a third-party reseller cannot issue offers against Automatum's listing under its seller-of-record position, the outcome model needs rebuilding. Confirm before build.",
-   "Open before build: the reseller offer-issuance mechanism; the CPPO boundary with Managed Marketplace Operations; Kiflo seats per rung and licence cost recovery; ownership of the partner agreements and the channel record at end of term or on non-renewal; and the staffing model.",
+   "Open before build: the reseller offer-issuance mechanism; the CPPO boundary with Managed Marketplace Operations; seats per rung and cost recovery for the partner system of record; ownership of the partner agreements and the channel record at end of term or on non-renewal; and the staffing model.",
   ],
  },
  "team":{
   "first line":"OBP is first line of support for the channel, the deal desk and the partner system of record, through a named channel manager with a named backup. Automatum is first line for the listing, offer issuance and selling authorizations. Recruited partners are supported by OBP; the ISV's own customers remain the ISV's.",
   "opportunities":"Both partners source, and AWS sources through ACE, where five opportunity submissions are committed for this solution. Managed Marketplace Operations is also a source: its customers already transact and are the natural candidates for a channel. Partner-sourced deals filed to ACE by OBP are counted separately from the programme's five per Solution ID. An opportunity belongs to exactly one solution. Where a customer buys more than one of the four, the higher solution's commit column governs any overlap and the same work is not billed twice.",
-  "commercial":"Not yet. The revenue split on each line, the flow of funds and payment trigger, Marketplace fee treatment and milestone apportionment are on the agenda for a partner call and remain unsettled. Two items are specific to this solution: Kiflo Core licence cost recovery inside the engagement fee, stress-tested against the lowest rung; and ownership of the executed partner agreements and the Kiflo channel record at end of term or on non-renewal.",
+  "commercial":"Not yet. The revenue split on each line, the flow of funds and payment trigger, Marketplace fee treatment and milestone apportionment are on the agenda for a partner call and remain unsettled. Two items are specific to this solution: cost recovery for the partner system of record inside the engagement fee, stress-tested against the lowest rung; and ownership of the executed partner agreements and the channel record at end of term or on non-renewal.",
  },
 },
 ]
