@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="1159" viewBox="0 0 1140 1159" font-family="Liberation Sans, Arial, Helvetica, sans-serif">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#5B6378"/></marker></defs>
+<rect width="1140" height="1159" fill="#FFFFFF"/>
+<text x="16.0" y="42.0" font-size="30" font-weight="700" fill="#15224B" text-anchor="start"><tspan x="16.0" dy="0.0">Managed Marketplace Operations</tspan></text>
+<text x="1124.0" y="40.0" font-size="19" fill="#5B6378" text-anchor="end"><tspan x="1124.0" dy="0.0">Draft reference architecture · Milestone 1</tspan></text>
+<line x1="16" y1="58" x2="1124" y2="58" stroke="#D8DDE8" stroke-width="1.4"/>
+<rect x="16" y="72.0" width="1108" height="159.8" fill="#F3F4F7"/>
+<rect x="16" y="72.0" width="5" height="159.8" fill="#6C7686"/>
+<text x="30.0" y="143.9" font-size="21" font-weight="700" fill="#3A424F" text-anchor="start"><tspan x="30.0" dy="0.0">ISV</tspan><tspan x="30.0" dy="26.7">customer</tspan></text>
+<rect x="16" y="231.8" width="1108" height="289.6" fill="#FDF3EA"/>
+<rect x="16" y="231.8" width="5" height="289.6" fill="#F36F20"/>
+<text x="30.0" y="345.6" font-size="21" font-weight="700" fill="#8A3B05" text-anchor="start"><tspan x="30.0" dy="0.0">OBP</tspan></text>
+<text x="30.0" y="377.6" font-size="17" fill="#8A3B05" text-anchor="start"><tspan x="30.0" dy="0.0">50 / 100 / 200</tspan><tspan x="30.0" dy="22.1">offers a year</tspan><tspan x="30.0" dy="22.1">by rung</tspan></text>
+<rect x="16" y="521.4" width="1108" height="232.4" fill="#EDF0F7"/>
+<rect x="16" y="521.4" width="5" height="232.4" fill="#15224B"/>
+<text x="30.0" y="643.6" font-size="21" font-weight="700" fill="#15224B" text-anchor="start"><tspan x="30.0" dy="0.0">Automatum</tspan></text>
+<rect x="16" y="753.8" width="1108" height="261.0" fill="#F0F6FC"/>
+<rect x="16" y="753.8" width="5" height="261.0" fill="#2E7CC4"/>
+<text x="30.0" y="890.3" font-size="21" font-weight="700" fill="#1B4F80" text-anchor="start"><tspan x="30.0" dy="0.0">AWS</tspan></text>
+<rect x="158.0" y="110.3" width="220.0" height="83.2" rx="7" fill="#FFFFFF" stroke="#6C7686" stroke-width="1.7"/><text x="268.0" y="142.2" font-size="22" fill="#3A424F" text-anchor="middle"><tspan x="268.0" dy="0.0">ISV revenue team</tspan><tspan x="268.0" dy="28.6">— offer requested</tspan></text>
+<rect x="872.0" y="96.0" width="220.0" height="111.8" rx="7" fill="#FFFFFF" stroke="#6C7686" stroke-width="1.7"/><text x="982.0" y="127.9" font-size="22" fill="#3A424F" text-anchor="middle"><tspan x="982.0" dy="0.0">Buyer or channel</tspan><tspan x="982.0" dy="28.6">partner accepts —</tspan><tspan x="982.0" dy="28.6">subscription</tspan></text>
+<rect x="396.0" y="255.8" width="220.0" height="83.2" rx="7" fill="#FFFFFF" stroke="#F36F20" stroke-width="1.7"/><text x="506.0" y="287.7" font-size="22" fill="#8A3B05" text-anchor="middle"><tspan x="506.0" dy="0.0">Offer desk drafts</tspan><tspan x="506.0" dy="28.6">the offer</tspan></text>
+<rect x="158.0" y="357.0" width="220.0" height="140.4" rx="7" fill="#FFFFFF" stroke="#F36F20" stroke-width="1.7"/><text x="268.0" y="388.9" font-size="22" fill="#8A3B05" text-anchor="middle"><tspan x="268.0" dy="0.0">Monthly operating</tspan><tspan x="268.0" dy="28.6">pack — offers,</tspan><tspan x="268.0" dy="28.6">revenue, listing</tspan><tspan x="268.0" dy="28.6">health</tspan></text>
+<rect x="634.0" y="545.4" width="220.0" height="83.2" rx="7" fill="#FFFFFF" stroke="#15224B" stroke-width="1.7"/><text x="744.0" y="577.3" font-size="22" fill="#15224B" text-anchor="middle"><tspan x="744.0" dy="0.0">Issued as seller of</tspan><tspan x="744.0" dy="28.6">record</tspan></text>
+<rect x="396.0" y="646.6" width="220.0" height="83.2" rx="7" fill="#FFFFFF" stroke="#15224B" stroke-width="1.7"/><text x="506.0" y="678.5" font-size="22" fill="#15224B" text-anchor="middle"><tspan x="506.0" dy="0.0">CRM and Partner</tspan><tspan x="506.0" dy="28.6">Central integration</tspan></text>
+<rect x="872.0" y="777.8" width="220.0" height="111.8" rx="7" fill="#FFFFFF" stroke="#2E7CC4" stroke-width="1.7"/><text x="982.0" y="809.7" font-size="22" fill="#1B4F80" text-anchor="middle"><tspan x="982.0" dy="0.0">AWS Marketplace</tspan><tspan x="982.0" dy="28.6">— private offer or</tspan><tspan x="982.0" dy="28.6">CPPO</tspan></text>
+<rect x="634.0" y="907.6" width="220.0" height="83.2" rx="7" fill="#FFFFFF" stroke="#2E7CC4" stroke-width="1.7"/><text x="744.0" y="939.5" font-size="22" fill="#1B4F80" text-anchor="middle"><tspan x="744.0" dy="0.0">Marketplace and</tspan><tspan x="744.0" dy="28.6">subscription data</tspan></text>
+<path d="M 314.0 193.5 L 314.0 297.4 L 396.0 297.4" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 616.0 297.4 L 744.0 297.4 L 744.0 545.4" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 854.0 587.0 L 982.0 587.0 L 982.0 777.8" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 1092.0 833.7 L 1114.0 833.7 L 1114.0 151.9 L 1092.0 151.9" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 982.0 889.6 L 982.0 949.2 L 854.0 949.2" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 634.0 949.2 L 506.0 949.2 L 506.0 729.8" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 396.0 688.2 L 268.0 688.2 L 268.0 497.4" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 222.0 357.0 L 222.0 193.5" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="16" y1="1028.8" x2="1124" y2="1028.8" stroke="#D8DDE8" stroke-width="1.4"/>
+<rect x="16.0" y="1036.8" width="585.6" height="32" rx="16" fill="#FFFFFF" stroke="#F36F20" stroke-width="1.4"/><text x="308.8" y="1059.8" font-size="20" fill="#8A3B05" text-anchor="middle"><tspan x="308.8" dy="0.0">Listing configuration changes — 5 / 3 / 1 business days by rung</tspan></text>
+<rect x="613.6" y="1036.8" width="401.6" height="32" rx="16" fill="#FFFFFF" stroke="#F36F20" stroke-width="1.4"/><text x="814.4" y="1059.8" font-size="20" fill="#8A3B05" text-anchor="middle"><tspan x="814.4" dy="0.0">Well-Architected reviews — 1 / 2 / 4 a year</tspan></text>
+<rect x="16.0" y="1076.8" width="613.2" height="32" rx="16" fill="#FFFFFF" stroke="#5B6378" stroke-width="1.4" stroke-dasharray="6 4"/><text x="322.6" y="1099.8" font-size="20" fill="#5B6378" text-anchor="middle"><tspan x="322.6" dy="0.0">CPPO boundary with Managed Partner Development — to confirm</tspan></text>
+<line x1="16" y1="1130.8000000000002" x2="50" y2="1130.8000000000002" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/><text x="60.0" y="1137.8" font-size="19" fill="#5B6378" text-anchor="start"><tspan x="60.0" dy="0.0">Committed by the partners</tspan></text><line x1="329.84375" y1="1130.8000000000002" x2="363.84375" y2="1130.8000000000002" stroke="#5B6378" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/><text x="373.8" y="1137.8" font-size="19" fill="#5B6378" text-anchor="start"><tspan x="373.8" dy="0.0">AWS decides it, or it is not yet confirmed</tspan></text>
+</svg>

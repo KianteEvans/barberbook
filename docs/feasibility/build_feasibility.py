@@ -1,8 +1,17 @@
-import copy, os, re, shutil, subprocess, zipfile
+import copy, os, re, zipfile
 from lxml import etree
+from PIL import Image
 
 W="{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+R="{http://schemas.openxmlformats.org/package/2006/relationships}"
 SRC="unpacked/word/document.xml"
+RELS="word/_rels/document.xml.rels"
+DIAGRAMS=os.path.join(os.path.dirname(os.path.abspath(__file__)),"diagrams")
+
+# the Draft Reference Architecture cell is 8509 twips wide; 5.70 in clears the
+# table's 85-twip overhang into the right margin without forcing the column open
+IMG_CX = 5212080
+IMG_REL, IMG_PART = "rId12", "word/media/image2.png"
 
 def txt(el): return "".join(el.itertext()).strip()
 
@@ -78,7 +87,8 @@ SOLUTIONS = [
    "List price $10,000 fixed, 50% on signature and 50% on completion. Twenty hours of remediation are included; further blocks of ten hours are $1,000 each.",
    "Revenue split between Automatum and OBP on the software and professional services lines is under negotiation. [Volume forecast and margin — to supply.]",
   ],
-  "Draft Reference Architecture":["[Insert architecture diagram — to supply.]"],
+  "Draft Reference Architecture":[{"image":"01_Marketplace-Compliance-Accelerator_architecture.png",
+   "alt":"Four lanes — ISV customer, OBP, Automatum and AWS. The ISV's product and the customer's remediation hours feed OBP's automated Well-Architected data collection and remediation, then the FTR submission and the listing build. Automatum completes seller registration and holds the listing and seller-of-record account in AMMP. AWS supplies the Well-Architected Tool, the Foundational Technical Review — dashed, because AWS's queue governs the date — and AWS Marketplace, where the enterprise buyer procures."}],
   "First Customer Targets":["[Initial customers involved in solution design, with ACE opportunity links where entered — to supply.]"],
   "Findings and recommendations":[
    "Both partners recommend proceeding, in wave one.",
@@ -144,7 +154,8 @@ SOLUTIONS = [
    "List price $2,500 / $5,000 / $7,500 a month across three strictly additive tiers, on a twelve-month term. Priced on the seniority of the person on the account.",
    "Included volumes and overflow rates per rung are being set alongside the staffing model. Revenue split between the partners is under negotiation. [Volume forecast, retainer payment terms and margin — to supply.]",
   ],
-  "Draft Reference Architecture":["[Insert architecture diagram — to supply.]"],
+  "Draft Reference Architecture":[{"image":"02_Managed-AWS-Alliances_architecture.png",
+   "alt":"Four lanes — ISV customer, OBP, Automatum and AWS. OBP's Director of Alliances runs the reviews, plans and reporting the ISV's CEO and CRO receive, and prepares and files programme applications into AWS Partner Central, which holds ACE opportunities, ISV Accelerate, Competency, MDF and BOX Program listing. Automatum supplies the listing and seller-of-record position; the Partner Central instance ACE opportunities are filed from is dashed, pending confirmation. The benefits the ISV captures return on a dashed arrow, because AWS decides them."}],
   "First Customer Targets":["[Initial customers involved in solution design, with ACE opportunity links where entered — to supply.]"],
   "Findings and recommendations":[
    "Both partners recommend proceeding, in wave one alongside the Marketplace Compliance Accelerator.",
@@ -214,7 +225,8 @@ SOLUTIONS += [
    "List price $1,500 / $3,000 / $6,000 a month on a twelve-month term — $18,000, $36,000 and $72,000 across the term, against included offer bands of 50, 100 and 200 offers a year. The rate per included offer is identical at all three rungs.",
    "Overflow rates above the included band are being set alongside the staffing model. Revenue split between the partners is under negotiation. [Volume forecast, retainer payment terms and margin — to supply.]",
   ],
-  "Draft Reference Architecture":["[Insert architecture diagram — to supply.]"],
+  "Draft Reference Architecture":[{"image":"03_Managed-Marketplace-Operations_architecture.png",
+   "alt":"Four lanes — ISV customer, OBP, Automatum and AWS — drawn as a loop. An offer requested by the ISV's revenue team is drafted by OBP's offer desk, issued by Automatum as seller of record, and carried by AWS Marketplace as a private offer or CPPO to the buyer or channel partner. Marketplace and subscription data returns through Automatum's CRM and Partner Central integration into OBP's monthly operating pack."}],
   "First Customer Targets":["[Initial customers involved in solution design, with ACE opportunity links where entered — to supply.]"],
   "Findings and recommendations":[
    "Both partners recommend proceeding, in wave two.",
@@ -282,7 +294,8 @@ SOLUTIONS += [
    "List price $2,500 / $5,000 / $7,500 a month across three rungs, on a twelve-month term. Priced on the seniority of the person on the account.",
    "The partner system of record is carried inside the engagement fee and must be stress-tested against the lowest rung in the portfolio. Revenue split between the partners is under negotiation. [Volume forecast, seats per rung, retainer payment terms and margin — to supply.]",
   ],
-  "Draft Reference Architecture":["[Insert architecture diagram — to supply.]"],
+  "Draft Reference Architecture":[{"image":"04_Managed-Partner-Development_architecture.png",
+   "alt":"Four lanes — ISV customer, OBP, Automatum and AWS. OBP recruits, contracts and enables reseller partners and runs the partner system of record covering deal registration, commissions and CRM sync. Automatum issues selling authorizations and CPPOs as seller of record — dashed, because the mechanism is not yet confirmed. AWS Marketplace carries them, the end customer transacts, and Partner Revenue Measurement attribution feeds OBP's monthly report on partners issuing offers."}],
   "First Customer Targets":["[Initial customers involved in solution design, with ACE opportunity links where entered — to supply.]"],
   "Findings and recommendations":[
    "Both partners recommend proceeding, in wave two.",
@@ -303,6 +316,50 @@ def norm(s):
     s = re.sub(r'\s+',' ',s).strip().lower()
     s = re.sub(r'\s*/\s*','/',s)
     return s.rstrip('?.').strip()
+
+# The template declares neither the drawingml nor the picture namespace on its root,
+# so the fragment carries both itself — which is how the template's own text boxes do it.
+DRAWING = (
+ '<w:drawing xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"'
+ ' xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"'
+ ' xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"'
+ ' xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"'
+ ' xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">'
+ '<wp:inline distT="0" distB="0" distL="0" distR="0">'
+ '<wp:extent cx="{cx}" cy="{cy}"/><wp:effectExtent l="0" t="0" r="0" b="0"/>'
+ '<wp:docPr id="{pid}" name="{name}" descr="{alt}"/>'
+ '<wp:cNvGraphicFramePr><a:graphicFrameLocks noChangeAspect="1"/></wp:cNvGraphicFramePr>'
+ '<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">'
+ '<pic:pic><pic:nvPicPr><pic:cNvPr id="{pid}" name="{name}" descr="{alt}"/>'
+ '<pic:cNvPicPr/></pic:nvPicPr>'
+ '<pic:blipFill><a:blip r:embed="{rid}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
+ '<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="{cx}" cy="{cy}"/></a:xfrm>'
+ '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr>'
+ '</pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing>')
+
+
+def xesc(t):
+    return t.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;').replace('"','&quot;')
+
+
+def make_image_para(model_p, spec):
+    """Clone the cell's paragraph, drop its runs, and hang an inline picture off it."""
+    p = copy.deepcopy(model_p)
+    for r in p.findall(W+'r'):
+        p.remove(r)
+    pPr = p.find(W+'pPr')
+    if pPr is None:
+        pPr = etree.Element(W+'pPr'); p.insert(0, pPr)
+    if pPr.find(W+'jc') is None:
+        jc = etree.Element(W+'jc'); jc.set(W+'val','center')
+        rPr = pPr.find(W+'rPr')                 # w:rPr is last in pPr; jc goes before it
+        pPr.insert(list(pPr).index(rPr) if rPr is not None else len(pPr), jc)
+    run = etree.SubElement(p, W+'r')
+    run.append(etree.fromstring(DRAWING.format(
+        cx=spec['cx'], cy=spec['cy'], pid=spec['pid'], rid=spec['rid'],
+        name=xesc(spec['image']), alt=xesc(spec['alt']))))
+    return p
+
 
 def make_para(model_p, text, bold=False):
     """Clone a paragraph in the cell, keep its formatting, swap the text."""
@@ -333,11 +390,12 @@ def make_para(model_p, text, bold=False):
     return p
 
 def fill_cell(tc, values):
-    """Replace a value cell's paragraphs with one paragraph per string."""
+    """Replace a value cell's paragraphs with one per value: text, or an inline picture."""
     paras = tc.findall(W+'p')
     if not paras: return False
     model = paras[0]
-    new = [make_para(model, v) for v in values]
+    new = [make_image_para(model, v) if isinstance(v, dict) else make_para(model, v)
+           for v in values]
     new = [n for n in new if n is not None]
     if not new: return False
     idx = list(tc).index(paras[0])
@@ -345,7 +403,28 @@ def fill_cell(tc, values):
     for off, p in enumerate(new): tc.insert(idx+off, p)
     return True
 
+def add_image_rel(rels_xml, rid, target):
+    root = etree.fromstring(rels_xml)
+    assert not any(r.get('Id') == rid for r in root), f'{rid} is already taken'
+    etree.SubElement(root, R+'Relationship', Id=rid, Target=target,
+                     Type='http://schemas.openxmlformats.org/officeDocument/2006/'
+                          'relationships/image')
+    return etree.tostring(root, xml_declaration=True, encoding='UTF-8', standalone=True)
+
+
 def build(sol, outpath):
+    arch = dict(sol['overview']['Draft Reference Architecture'][0])
+    png = os.path.join(DIAGRAMS, arch['image'])
+    with Image.open(png) as im:
+        pw, ph = im.size
+    arch.update(rid=IMG_REL, pid=1001, cx=IMG_CX, cy=int(round(IMG_CX * ph / pw)))
+
+    with zipfile.ZipFile('template.docx') as zin:      # parts the picture adds to the package
+        assert b'Extension="png"' in zin.read('[Content_Types].xml'), \
+            'the package does not declare PNG; a new Default would be needed'
+        extra = {IMG_PART: open(png, 'rb').read(),
+                 RELS: add_image_rel(zin.read(RELS), IMG_REL, 'media/image2.png')}
+
     tree = etree.parse(SRC)
     root = tree.getroot()
     body = root.find(W+'body')
@@ -377,6 +456,7 @@ def build(sol, outpath):
     wanted[norm('Date Submitted')] = ['[Date — to supply]']
     for k, v in REG_BRACKET.items(): wanted[norm(k)] = [v]
     for k, v in PARTNERSHIP: wanted[norm(k)] = [v]
+    wanted[norm('Draft Reference Architecture')] = [arch]
     wanted[norm('Partner 3 Name (if needed), add Partner 4+ below.')] = ['Not applicable — two partners.']
     wanted[norm('Which Partner is the first line of support? How does the support model work?')] = [sol['team']['first line']]
     wanted[norm('Who generated opportunities for the solution? If multiple, describe how the partners work together?')] = [sol['team']['opportunities']]
@@ -402,11 +482,18 @@ def build(sol, outpath):
                     filled += 1; seen.add(key)
     tree.write(SRC+'.tmp', xml_declaration=True, encoding='UTF-8', standalone=True)
 
-    shutil.copy('template.docx', outpath)
-    with zipfile.ZipFile('template.docx') as zin, zipfile.ZipFile(outpath,'w',zipfile.ZIP_DEFLATED) as zout:
+    with zipfile.ZipFile('template.docx') as zin, \
+         zipfile.ZipFile(outpath,'w',zipfile.ZIP_DEFLATED) as zout:
         for item in zin.infolist():
-            data = open(SRC+'.tmp','rb').read() if item.filename=='word/document.xml' else zin.read(item.filename)
+            if item.filename == 'word/document.xml':
+                data = open(SRC+'.tmp','rb').read()
+            elif item.filename in extra:
+                data = extra.pop(item.filename)
+            else:
+                data = zin.read(item.filename)
             zout.writestr(item, data)
+        for name, data in extra.items():          # parts the template does not have
+            zout.writestr(name, data)
     os.remove(SRC+'.tmp')
     return filled, set(wanted) - seen
 

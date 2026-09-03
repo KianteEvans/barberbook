@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="1033" viewBox="0 0 1140 1033" font-family="Liberation Sans, Arial, Helvetica, sans-serif">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#5B6378"/></marker></defs>
+<rect width="1140" height="1033" fill="#FFFFFF"/>
+<text x="16.0" y="42.0" font-size="30" font-weight="700" fill="#15224B" text-anchor="start"><tspan x="16.0" dy="0.0">Managed Partner Development</tspan></text>
+<text x="1124.0" y="40.0" font-size="19" fill="#5B6378" text-anchor="end"><tspan x="1124.0" dy="0.0">Draft reference architecture · Milestone 1</tspan></text>
+<line x1="16" y1="58" x2="1124" y2="58" stroke="#D8DDE8" stroke-width="1.4"/>
+<rect x="16" y="72.0" width="1108" height="131.2" fill="#F3F4F7"/>
+<rect x="16" y="72.0" width="5" height="131.2" fill="#6C7686"/>
+<text x="30.0" y="129.6" font-size="21" font-weight="700" fill="#3A424F" text-anchor="start"><tspan x="30.0" dy="0.0">ISV</tspan><tspan x="30.0" dy="26.7">customer</tspan></text>
+<rect x="16" y="203.2" width="1108" height="295.0" fill="#FDF3EA"/>
+<rect x="16" y="203.2" width="5" height="295.0" fill="#F36F20"/>
+<text x="30.0" y="308.7" font-size="21" font-weight="700" fill="#8A3B05" text-anchor="start"><tspan x="30.0" dy="0.0">OBP</tspan></text>
+<text x="30.0" y="340.7" font-size="17" fill="#8A3B05" text-anchor="start"><tspan x="30.0" dy="0.0">Deal desk — 1</tspan><tspan x="30.0" dy="22.1">business day /</tspan><tspan x="30.0" dy="22.1">8 hours / 4</tspan><tspan x="30.0" dy="22.1">hours by rung</tspan></text>
+<rect x="16" y="498.2" width="1108" height="188.4" fill="#EDF0F7"/>
+<rect x="16" y="498.2" width="5" height="188.4" fill="#15224B"/>
+<text x="30.0" y="598.4" font-size="21" font-weight="700" fill="#15224B" text-anchor="start"><tspan x="30.0" dy="0.0">Automatum</tspan></text>
+<rect x="16" y="686.6" width="1108" height="200.3" fill="#F0F6FC"/>
+<rect x="16" y="686.6" width="5" height="200.3" fill="#2E7CC4"/>
+<text x="30.0" y="792.8" font-size="21" font-weight="700" fill="#1B4F80" text-anchor="start"><tspan x="30.0" dy="0.0">AWS</tspan></text>
+<rect x="158.0" y="107.6" width="220.0" height="60.0" rx="7" fill="#FFFFFF" stroke="#6C7686" stroke-width="1.7"/><text x="268.0" y="142.2" font-size="22" fill="#3A424F" text-anchor="middle"><tspan x="268.0" dy="0.0">Reseller partners</tspan></text>
+<rect x="872.0" y="96.0" width="220.0" height="83.2" rx="7" fill="#FFFFFF" stroke="#6C7686" stroke-width="1.7"/><text x="982.0" y="127.9" font-size="22" fill="#3A424F" text-anchor="middle"><tspan x="982.0" dy="0.0">End customer</tspan><tspan x="982.0" dy="28.6">transacts</tspan></text>
+<rect x="158.0" y="241.5" width="220.0" height="140.4" rx="7" fill="#FFFFFF" stroke="#F36F20" stroke-width="1.7"/><text x="268.0" y="273.4" font-size="22" fill="#8A3B05" text-anchor="middle"><tspan x="268.0" dy="0.0">Recruitment,</tspan><tspan x="268.0" dy="28.6">agreements,</tspan><tspan x="268.0" dy="28.6">training and</tspan><tspan x="268.0" dy="28.6">enablement</tspan></text>
+<rect x="396.0" y="227.2" width="220.0" height="169.0" rx="7" fill="#FFFFFF" stroke="#F36F20" stroke-width="1.7"/><text x="506.0" y="259.1" font-size="22" fill="#8A3B05" text-anchor="middle"><tspan x="506.0" dy="0.0">Partner system of</tspan><tspan x="506.0" dy="28.6">record — deal</tspan><tspan x="506.0" dy="28.6">registration,</tspan><tspan x="506.0" dy="28.6">commissions, CRM</tspan><tspan x="506.0" dy="28.6">sync</tspan></text>
+<rect x="158.0" y="414.2" width="458.0" height="60.0" rx="7" fill="#FFFFFF" stroke="#F36F20" stroke-width="1.7"/><text x="387.0" y="448.8" font-size="22" fill="#8A3B05" text-anchor="middle"><tspan x="387.0" dy="0.0">Monthly report — partners issuing offers</tspan></text>
+<rect x="634.0" y="522.2" width="220.0" height="140.4" rx="7" fill="#FFFFFF" stroke="#15224B" stroke-width="1.7" stroke-dasharray="7 5"/><text x="744.0" y="554.1" font-size="22" fill="#15224B" text-anchor="middle"><tspan x="744.0" dy="0.0">Selling</tspan><tspan x="744.0" dy="28.6">authorizations and</tspan><tspan x="744.0" dy="28.6">CPPOs issued as</tspan><tspan x="744.0" dy="28.6">seller of record</tspan></text>
+<rect x="872.0" y="716.6" width="220.0" height="140.4" rx="7" fill="#FFFFFF" stroke="#2E7CC4" stroke-width="1.7"/><text x="982.0" y="748.5" font-size="22" fill="#1B4F80" text-anchor="middle"><tspan x="982.0" dy="0.0">AWS Marketplace</tspan><tspan x="982.0" dy="28.6">— selling</tspan><tspan x="982.0" dy="28.6">authorizations,</tspan><tspan x="982.0" dy="28.6">CPPO</tspan></text>
+<rect x="634.0" y="716.6" width="220.0" height="140.4" rx="7" fill="#FFFFFF" stroke="#2E7CC4" stroke-width="1.7"/><text x="744.0" y="748.5" font-size="22" fill="#1B4F80" text-anchor="middle"><tspan x="744.0" dy="0.0">Partner Revenue</tspan><tspan x="744.0" dy="28.6">Measurement —</tspan><tspan x="744.0" dy="28.6">attribution on user</tspan><tspan x="744.0" dy="28.6">agent string</tspan></text>
+<path d="M 268.0 241.5 L 268.0 167.6" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 378.0 137.6 L 506.0 137.6 L 506.0 227.2" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 616.0 311.7 L 744.0 311.7 L 744.0 522.2" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 854.0 592.4 L 982.0 592.4 L 982.0 716.6" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 1092.0 786.8 L 1114.0 786.8 L 1114.0 137.6 L 1092.0 137.6" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 872.0 786.8 L 854.0 786.8" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 634.0 786.8 L 387.0 786.8 L 387.0 474.2" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="16" y1="900.9" x2="1124" y2="900.9" stroke="#D8DDE8" stroke-width="1.4"/>
+<text x="16.0" y="928.9" font-size="19" fill="#5B6378" text-anchor="start"><tspan x="16.0" dy="0.0">Dashed: whether a reseller can issue offers against Automatum's listing while Automatum is seller of record is not settled — AWS</tspan><tspan x="16.0" dy="23.9">and Automatum to confirm, and the reported metric depends on it. AWS permits one partner identifier per resource, so attribution</tspan><tspan x="16.0" dy="23.9">runs on user agent string.</tspan></text>
+<line x1="16" y1="1004.9478260869565" x2="50" y2="1004.9478260869565" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/><text x="60.0" y="1011.9" font-size="19" fill="#5B6378" text-anchor="start"><tspan x="60.0" dy="0.0">Committed by the partners</tspan></text><line x1="329.84375" y1="1004.9478260869565" x2="363.84375" y2="1004.9478260869565" stroke="#5B6378" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/><text x="373.8" y="1011.9" font-size="19" fill="#5B6378" text-anchor="start"><tspan x="373.8" dy="0.0">AWS decides it, or it is not yet confirmed</tspan></text>
+</svg>

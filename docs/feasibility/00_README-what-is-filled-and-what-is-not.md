@@ -29,8 +29,12 @@ three groups:
    Central instance ACE opportunities are filed into, the CPPO boundary, and whether a third-party
    reseller can issue offers against Automatum's listing under its seller-of-record position.
 
-Also still to supply in every study: **Draft Reference Architecture** (a diagram) and
-**First Customer Targets** (with ACE opportunity links).
+Also still to supply in every study: **First Customer Targets**, with ACE opportunity
+links.
+
+**Draft Reference Architecture** is drawn in all four, from the study text. The diagrams
+show which AWS systems each solution touches and which partner owns each step: solid means
+the partners commit to it, dashed means AWS decides it or it is not yet confirmed.
 
 ## Two things worth deciding before you submit
 
