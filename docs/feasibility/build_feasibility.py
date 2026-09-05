@@ -484,8 +484,8 @@ def build(sol, outpath):
     os.remove(SRC+'.tmp')
     return filled, set(wanted) - seen
 
-os.makedirs('Automatum-OBP-Feasibility', exist_ok=True)
+os.makedirs('OBP-Auto-SaaS-Feas', exist_ok=True)
 for sol in SOLUTIONS:
-    out = f"Automatum-OBP-Feasibility/{sol['file']}_Feasibility-Study.docx"
+    out = f"OBP-Auto-SaaS-Feas/{sol['file']}_Feasibility-Study.docx"
     n, missed = build(sol, out)
     print(f"  {sol['name']:38s} {n:2d} fields filled" + (f"  UNMATCHED: {sorted(missed)}" if missed else ""))
