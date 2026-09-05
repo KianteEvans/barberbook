@@ -19,7 +19,7 @@ not redistributable and is not installed here.
     python3 build_diagrams.py
 """
 
-import os, subprocess
+import os, re, subprocess
 from PIL import Image, ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -225,6 +225,7 @@ class Diagram:
         self.by_lane = {l["name"]: l for l in self.lanes}
         self.lane_bottom = y
         self.nodes, self.over, self.under, self.strip_items = {}, [], [], []
+        self.wave, self.unsettled = "", ""
         self._placed = False
         self.h = 0
 
@@ -378,6 +379,7 @@ def d01():
                  ("obp", 198, "14–18 business days of delivery"),
                  ("automatum", 150, None),
                  ("aws", 168, None)], 640)
+    d.wave, d.unsettled = "Wave one", "AWS&rsquo;s review queue governs the FTR decision date."
     N = d.add
     c1 = N(Node("c1", "customer", 0, 1, "ISV product in the customer's AWS account"))
     c2 = N(Node("c2", "customer", 1, 1, "Customer engineering — remediation hours"))
@@ -417,6 +419,7 @@ def d02():
                  ("obp", 196, "Twelve months, three additive tiers"),
                  ("automatum", 162, None),
                  ("aws", 190, None)], 680)
+    d.wave, d.unsettled = "Wave one", "which Partner Central instance ACE opportunities are filed from."
     N = d.add
     c1 = N(Node("c1", "customer", 0, 1, "ISV — CEO and CRO"))
     c2 = N(Node("c2", "customer", 3, 1, "Programme benefits captured — MDF, credits, "
@@ -473,6 +476,7 @@ def d03():
                  ("obp", 200, "50 / 100 / 200 offers a year by rung"),
                  ("automatum", 190, None),
                  ("aws", 190, None)], 720)
+    d.wave, d.unsettled = "Wave two", "the CPPO boundary with Managed Partner Development."
     N = d.add
     c1 = N(Node("c1", "customer", 0, 1, "ISV revenue team — offer requested"))
     c2 = N(Node("c2", "customer", 3, 1, "Buyer or channel partner accepts — subscription"))
@@ -507,6 +511,7 @@ def d04():
                  ("obp", 214, "Deal desk — 1 business day / 8 hours / 4 hours by rung"),
                  ("automatum", 168, None),
                  ("aws", 192, None)], 720)
+    d.wave, d.unsettled = "Wave two", "whether a reseller can issue offers against Automatum&rsquo;s listing while Automatum is seller of record."
     N = d.add
     c1 = N(Node("c1", "customer", 0, 1, "Reseller partners"))
     c2 = N(Node("c2", "customer", 3, 1, "End customer transacts"))
@@ -569,7 +574,43 @@ def verify(png_path, w, h):
     return colours, frac
 
 
+# viewer ----------------------------------------------------------------------
+PLATE = '''      <section class="plate" id="s{num}">
+        <span class="rowlabel">Draft Reference Architecture</span>
+        <h2><span class="n">{num}</span>{title}</h2>
+        <p class="unsettled"><b>Marked unsettled &mdash;</b> {unsettled}</p>
+        <figure>{svg}</figure>
+      </section>
+'''
+
+
+def inline_svg(body, num, title):
+    """Prepare one SVG for a shared document: unique marker id, fluid size, a name."""
+    head_end = body.index('>') + 1
+    head, rest = body[:head_end], body[head_end:]
+    head = re.sub(r'\s(?:width|height)="[^"]*"', '', head)          # the viewBox drives size
+    head = head[:-1] + (' role="img" aria-label="{} — partner delivery architecture across four '
+                        'lanes: ISV customer, OBP, Automatum and AWS.">'.format(title))
+    out = head + rest
+    # every diagram names its arrowhead marker "arrow"; inlined together they would
+    # collide, and each url(#arrow) would resolve against whichever came first
+    return out.replace('id="arrow"', f'id="arrow-{num}"').replace('url(#arrow)', f'url(#arrow-{num})')
+
+
+def write_viewer(built):
+    tpl = open(os.path.join(HERE, 'viewer_template.html')).read()
+    plates = "".join(
+        PLATE.format(num=d.key[:2], title=d.title, unsettled=d.unsettled,
+                     svg=inline_svg(body, d.key[:2], d.title))
+        for d, body in built)
+    out = os.path.join(HERE, 'viewer.html')
+    with open(out, 'w') as fh:
+        fh.write(tpl.replace('{{PLATES}}', plates.rstrip('\n')))
+    return out
+
+
 def main():
+    built = []
     for fn in (d01, d02, d03, d04):
         d = fn()
         body = d.svg()
@@ -581,6 +622,8 @@ def main():
         colours, frac = verify(png, CANVAS_W, int(d.h))
         print(f"  {d.key:38s} {CANVAS_W}x{d.h:.0f} -> {DOC_WIDTH_IN:.2f} x "
               f"{DOC_WIDTH_IN * d.h / CANVAS_W:.2f} in | {colours} colours, {frac:.0%} white")
+        built.append((d, body))
+    print("  viewer ->", write_viewer(built))
 
 
 if __name__ == "__main__":
