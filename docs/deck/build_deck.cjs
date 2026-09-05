@@ -279,7 +279,7 @@ matrix(s,
   ['WHO SIGNS','WHAT IT REPLACES','THE LISTING BOUNDARY','COMPONENT','SOLUTION ID'],
   ['Marketplace Compliance Accelerator','Managed AWS Alliances','Managed Marketplace Operations','Managed Partner Development'],
   [
-    ['[CRO] · [CISO] co-sponsor','[CEO or CRO]','[CRO] · [COO] co-sponsor','[CRO] · [VP Channel] co-sponsor'],
+    ['[CRO] · [CISO] co-sponsor','[CRO] · [CEO] co-sponsor','[CRO] · [COO] co-sponsor','[CRO] · [VP Channel] co-sponsor'],
     ['Enterprise deals lost to Marketplace procurement, plus [N] engineer-weeks of compliance work','A Director of Alliances hire','A Marketplace ops / offer-desk hire plus compliance engineering hours','A channel manager plus a PRM subscription'],
     ['The fixed-fee route to a published listing in 14 to 18 business days, with nothing ongoing','The AWS partnership programme and the ISV’s own BOX Program listings — not the Marketplace listing work','Builds the listing AND operates it for twelve months — Launch includes WAFR, FTR and publication','Third-party sellers — not the customer’s own listing'],
     ['ASecureCloud','[none named — to confirm]','[none named — to confirm]','Kiflo, resold inside the fee'],
@@ -356,7 +356,7 @@ chrome(s, { eyebrow:'THE RETAINERS', eyebrowIcon:'eyebrow_p8.png', eyebrowColor:
   txt(s, h, { x:P(318.3 + i*203.8), y:P(200), w:P(190), h:P(14), fontFace:F.bold, bold:true,
     fontSize:8.5, color:C.orange, charSpacing:1.1 }));
 [
-  ['Managed AWS Alliances', ['$2,500 / mo','Essentials','stand the partnership up'], ['$5,000 / mo','Growth','scale the programs'], ['$7,500 / mo','Professional','open the AWS field'], '[CEO or CRO] · priced on seniority'],
+  ['Managed AWS Alliances', ['$2,500 / mo','Essentials','stand the partnership up'], ['$5,000 / mo','Growth','scale the programs'], ['$7,500 / mo','Professional','open the AWS field'], '[CRO] · [CEO] co-sponsor · priced on seniority'],
   ['Managed Marketplace Operations', ['$1,500 / mo','Launch','build, publish and transact'], ['$3,000 / mo','Operate','same nine services, deeper band'], ['$6,000 / mo','Scale','same nine services, top band'], '[CRO] · [COO] co-sponsor · priced on throughput'],
   ['Managed Partner Development', ['$2,500 / mo','Establish','up to (6) partners managed'], ['$5,000 / mo','Expand','up to (12) partners managed'], ['$7,500 / mo','Accelerate','roster uncapped'], '[CRO] · [VP Channel] co-sponsor · priced on seniority'],
 ].forEach((row, r) => {

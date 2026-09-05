@@ -358,13 +358,15 @@ customer artifact names its own solution only.
 
 | | Accelerator | Alliances | Operations | Partner Development |
 |---|---|---|---|---|
-| **Who signs** | `[CTO / VP Engineering]` | `[CEO or CRO]` | `[RevOps / deal desk or COO]` | `[CRO / VP Channel]` |
-| **What it replaces** | `[N]` engineer-weeks on Well-Architected, FTR and seller registration | A Director of Alliances hire | A Marketplace ops / offer-desk hire plus compliance engineering hours | A channel manager plus a PRM subscription |
+| **Who signs** | `[CRO]` · `[CISO]` co-sponsor | `[CRO]` · `[CEO]` co-sponsor | `[CRO]` · `[COO]` co-sponsor | `[CRO]` · `[VP Channel]` co-sponsor |
+| **What it replaces** | Enterprise deals lost to Marketplace procurement, plus `[N]` engineer-weeks of compliance work | A Director of Alliances hire | A Marketplace ops / offer-desk hire plus compliance engineering hours | A channel manager plus a PRM subscription |
 | **The listing boundary** | The one-time path to a published, transacting listing | The AWS partnership programme *around* a listing — not the listing work | Running a listing that already exists | Third-party sellers — not the customer's own listing |
 | **Component consumed** | ASecureCloud | `[none named in the deck — confirm]` | `[none named in the deck — confirm]` | Kiflo, resold inside the fee |
 | **Solution ID** | Its own, with its own milestone submission | Its own | Its own | Its own |
 
 Status line under row 1: *buyer profiles to be validated against OBP's closed and in-flight deals.*
+
+The CRO signs all four. The co-sponsor is the executive who shows up beside them in that particular deal — the CISO where the enterprise security review is what asks for the Well-Architected and FTR evidence, the CEO at ISVs below the size that carries a CRO, the COO where the listing is carried as an operational function, the VP Channel where a channel function already exists. Each solution's outcome is stated as net new revenue and net new customers for the ISV, and what those deals go on to drive: Marketplace transactions, ACE entries, net new AWS relationships and top of funnel.
 Do not claim Kiflo exclusivity — p11 does not assert it.
 
 **Footer:** "Same ladder, different job, different buyer, different cost base, different Solution ID."

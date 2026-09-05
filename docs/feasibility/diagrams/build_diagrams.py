@@ -421,7 +421,7 @@ def d02():
                  ("aws", 190, None)], 680)
     d.wave, d.unsettled = "Wave one", "which Partner Central instance ACE opportunities are filed from."
     N = d.add
-    c1 = N(Node("c1", "customer", 0, 1, "ISV — CEO and CRO"))
+    c1 = N(Node("c1", "customer", 0, 1, "ISV — CRO and CEO"))
     c2 = N(Node("c2", "customer", 3, 1, "Programme benefits captured — MDF, credits, "
                                         "co-sell leads"))
     o1 = N(Node("o1", "obp", 0, 1, "Director of Alliances — named owner and named backup",
