@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="887" viewBox="0 0 1140 887" font-family="Liberation Sans, Arial, Helvetica, sans-serif">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#5B6378"/></marker></defs>
+<rect width="1140" height="887" fill="#FFFFFF"/>
+<text x="16.0" y="42.0" font-size="30" font-weight="700" fill="#15224B" text-anchor="start"><tspan x="16.0" dy="0.0">Marketplace Compliance Accelerator</tspan></text>
+<text x="1124.0" y="40.0" font-size="19" fill="#5B6378" text-anchor="end"><tspan x="1124.0" dy="0.0">Draft reference architecture · Milestone 1</tspan></text>
+<line x1="16" y1="58" x2="1124" y2="58" stroke="#D8DDE8" stroke-width="1.4"/>
+<rect x="16" y="72.0" width="1108" height="159.8" fill="#F3F4F7"/>
+<rect x="16" y="72.0" width="5" height="159.8" fill="#6C7686"/>
+<text x="30.0" y="143.9" font-size="21" font-weight="700" fill="#3A424F" text-anchor="start"><tspan x="30.0" dy="0.0">ISV</tspan><tspan x="30.0" dy="26.7">customer</tspan></text>
+<rect x="16" y="231.8" width="1108" height="201.8" fill="#FDF3EA"/>
+<rect x="16" y="231.8" width="5" height="201.8" fill="#F36F20"/>
+<text x="30.0" y="301.7" font-size="21" font-weight="700" fill="#8A3B05" text-anchor="start"><tspan x="30.0" dy="0.0">OBP</tspan></text>
+<text x="30.0" y="333.7" font-size="17" fill="#8A3B05" text-anchor="start"><tspan x="30.0" dy="0.0">14–18</tspan><tspan x="30.0" dy="22.1">business days</tspan><tspan x="30.0" dy="22.1">of delivery</tspan></text>
+<rect x="16" y="433.6" width="1108" height="159.8" fill="#EDF0F7"/>
+<rect x="16" y="433.6" width="5" height="159.8" fill="#15224B"/>
+<text x="30.0" y="519.5" font-size="21" font-weight="700" fill="#15224B" text-anchor="start"><tspan x="30.0" dy="0.0">Automatum</tspan></text>
+<rect x="16" y="593.4" width="1108" height="171.2" fill="#F0F6FC"/>
+<rect x="16" y="593.4" width="5" height="171.2" fill="#2E7CC4"/>
+<text x="30.0" y="685.0" font-size="21" font-weight="700" fill="#1B4F80" text-anchor="start"><tspan x="30.0" dy="0.0">AWS</tspan></text>
+<rect x="158.0" y="96.0" width="220.0" height="111.8" rx="7" fill="#FFFFFF" stroke="#6C7686" stroke-width="1.7"/><text x="268.0" y="127.9" font-size="22" fill="#3A424F" text-anchor="middle"><tspan x="268.0" dy="0.0">ISV product in the</tspan><tspan x="268.0" dy="28.6">customer's AWS</tspan><tspan x="268.0" dy="28.6">account</tspan></text>
+<rect x="396.0" y="96.0" width="220.0" height="111.8" rx="7" fill="#FFFFFF" stroke="#6C7686" stroke-width="1.7"/><text x="506.0" y="127.9" font-size="22" fill="#3A424F" text-anchor="middle"><tspan x="506.0" dy="0.0">Customer</tspan><tspan x="506.0" dy="28.6">engineering —</tspan><tspan x="506.0" dy="28.6">remediation hours</tspan></text>
+<rect x="872.0" y="96.0" width="220.0" height="111.8" rx="7" fill="#FFFFFF" stroke="#6C7686" stroke-width="1.7"/><text x="982.0" y="127.9" font-size="22" fill="#3A424F" text-anchor="middle"><tspan x="982.0" dy="0.0">Enterprise buyer</tspan><tspan x="982.0" dy="28.6">procures through</tspan><tspan x="982.0" dy="28.6">AWS Marketplace</tspan></text>
+<rect x="158.0" y="276.8" width="220.0" height="111.8" rx="7" fill="#FFFFFF" stroke="#F36F20" stroke-width="1.7"/><text x="268.0" y="308.7" font-size="22" fill="#8A3B05" text-anchor="middle"><tspan x="268.0" dy="0.0">Automated</tspan><tspan x="268.0" dy="28.6">Well-Architected</tspan><tspan x="268.0" dy="28.6">data collection</tspan></text>
+<rect x="396.0" y="262.5" width="220.0" height="140.4" rx="7" fill="#FFFFFF" stroke="#F36F20" stroke-width="1.7"/><text x="506.0" y="294.4" font-size="22" fill="#8A3B05" text-anchor="middle"><tspan x="506.0" dy="0.0">Remediation</tspan><tspan x="506.0" dy="28.6">applied —</tspan><tspan x="506.0" dy="28.6">CloudFormation</tspan><tspan x="506.0" dy="28.6">and CLI templates</tspan></text>
+<rect x="634.0" y="291.1" width="220.0" height="83.2" rx="7" fill="#FFFFFF" stroke="#F36F20" stroke-width="1.7"/><text x="744.0" y="323.0" font-size="22" fill="#8A3B05" text-anchor="middle"><tspan x="744.0" dy="0.0">FTR prepared and</tspan><tspan x="744.0" dy="28.6">submitted</tspan></text>
+<rect x="872.0" y="276.8" width="220.0" height="111.8" rx="7" fill="#FFFFFF" stroke="#F36F20" stroke-width="1.7"/><text x="982.0" y="308.7" font-size="22" fill="#8A3B05" text-anchor="middle"><tspan x="982.0" dy="0.0">Listing built,</tspan><tspan x="982.0" dy="28.6">configured and</tspan><tspan x="982.0" dy="28.6">published</tspan></text>
+<rect x="634.0" y="471.9" width="220.0" height="83.2" rx="7" fill="#FFFFFF" stroke="#15224B" stroke-width="1.7"/><text x="744.0" y="503.8" font-size="22" fill="#15224B" text-anchor="middle"><tspan x="744.0" dy="0.0">Seller registration</tspan><tspan x="744.0" dy="28.6">completed</tspan></text>
+<rect x="872.0" y="457.6" width="220.0" height="111.8" rx="7" fill="#FFFFFF" stroke="#15224B" stroke-width="1.7"/><text x="982.0" y="489.5" font-size="22" fill="#15224B" text-anchor="middle"><tspan x="982.0" dy="0.0">Listing and</tspan><tspan x="982.0" dy="28.6">seller-of-record</tspan><tspan x="982.0" dy="28.6">account in AMMP</tspan></text>
+<rect x="158.0" y="623.1" width="220.0" height="111.8" rx="7" fill="#FFFFFF" stroke="#2E7CC4" stroke-width="1.7"/><text x="268.0" y="655.0" font-size="22" fill="#1B4F80" text-anchor="middle"><tspan x="268.0" dy="0.0">AWS</tspan><tspan x="268.0" dy="28.6">Well-Architected</tspan><tspan x="268.0" dy="28.6">Tool</tspan></text>
+<rect x="396.0" y="637.4" width="220.0" height="83.2" rx="7" fill="#FFFFFF" stroke="#2E7CC4" stroke-width="1.7" stroke-dasharray="7 5"/><text x="506.0" y="669.3" font-size="22" fill="#1B4F80" text-anchor="middle"><tspan x="506.0" dy="0.0">Foundational</tspan><tspan x="506.0" dy="28.6">Technical Review</tspan></text>
+<rect x="872.0" y="623.1" width="220.0" height="111.8" rx="7" fill="#FFFFFF" stroke="#2E7CC4" stroke-width="1.7"/><text x="982.0" y="655.0" font-size="22" fill="#1B4F80" text-anchor="middle"><tspan x="982.0" dy="0.0">AWS Marketplace</tspan><tspan x="982.0" dy="28.6">— published,</tspan><tspan x="982.0" dy="28.6">transacting listing</tspan></text>
+<path d="M 268.0 207.8 L 268.0 276.8" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 506.0 207.8 L 506.0 262.5" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 268.0 388.6 L 268.0 623.1" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M 378.0 332.7 L 396.0 332.7" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 616.0 332.7 L 634.0 332.7" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 854.0 332.7 L 872.0 332.7" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 744.0 374.3 L 744.0 428.9 L 506.0 428.9 L 506.0 637.4" fill="none" stroke="#5B6378" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+<path d="M 982.0 388.6 L 982.0 457.6" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 854.0 513.5 L 872.0 513.5" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 982.0 569.4 L 982.0 623.1" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 1092.0 679.0 L 1114.0 679.0 L 1114.0 151.9 L 1092.0 151.9" fill="none" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="16" y1="778.6" x2="1124" y2="778.6" stroke="#D8DDE8" stroke-width="1.4"/>
+<text x="16.0" y="806.6" font-size="19" fill="#5B6378" text-anchor="start"><tspan x="16.0" dy="0.0">AWS's review queue governs the FTR decision date. Architecture diagrams are maintained in AMMP to evidence the "Deployed on</tspan><tspan x="16.0" dy="23.9">AWS" badge.</tspan></text>
+<line x1="16" y1="858.5936305732484" x2="50" y2="858.5936305732484" stroke="#5B6378" stroke-width="2" marker-end="url(#arrow)"/><text x="60.0" y="865.6" font-size="19" fill="#5B6378" text-anchor="start"><tspan x="60.0" dy="0.0">Committed by the partners</tspan></text><line x1="329.84375" y1="858.5936305732484" x2="363.84375" y2="858.5936305732484" stroke="#5B6378" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/><text x="373.8" y="865.6" font-size="19" fill="#5B6378" text-anchor="start"><tspan x="373.8" dy="0.0">AWS decides it, or it is not yet confirmed</tspan></text>
+</svg>

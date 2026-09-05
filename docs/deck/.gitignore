@@ -1,0 +1,5 @@
+# QA render artifacts — regenerate with soffice + pdftoppm.
+# The PDF is rendered with substituted fonts (no Segoe UI here), so it
+# misrepresents spacing; open the .pptx in PowerPoint for a true view.
+slide-*.jpg
+BOX_Solutions_Revised.pdf
