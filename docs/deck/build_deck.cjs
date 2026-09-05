@@ -401,7 +401,7 @@ retainerPage({
   subtitle:'Put a named owner on the AWS partnership, and drive the ISV’s own AWS program progression. Three strictly additive tiers.',
   entry:'ENTRY CONDITION — the ISV holds the partner stage each program requires. [Marketplace listing as a prerequisite — to confirm.]',
   commitLine:'A named Director of Alliances at [N] hours a month with a named backup, [N] partnership reviews and [N] quarterly AWS plans delivered, and every application, event, check and artifact below prepared, filed or run.',
-  targetLine:'ISV Accelerate and Competency acceptance, MDF availability, BOX Program listings approved, and AWS-sourced leads — all AWS’s decisions.',
+  targetLine:'ISV Accelerate and Competency acceptance, MDF availability, BOX Program listings approved, and AWS-sourced leads — all AWS’s decisions — and behind them the net new customers and revenue the ISV closes through AWS.',
   note:'The ISV’s OWN BOX Program benefits, which this retainer drives them toward — separate from the four Automatum × OBP solutions and their milestones. [“BOX Program listing” to be defined; it is not the Accelerator’s Marketplace listing.]',
   rungList:[
     { name:'Essentials', price:'$2,500 / mo', head:'Stand the partnership up.',
@@ -455,7 +455,7 @@ retainerPage({
   subtitle:'Get a listing live and operate it at volume. All nine services at every rung, priced to the included offer band — the same rate per offer at each.',
   entry:'ENTRY CONDITION — none. Launch includes the listing work; the Accelerator remains the fixed-fee route to the same listing in 14 to 18 business days.',
   commitLine:'A named operations owner who takes the product through Well-Architected review, FTR and publication, then runs the offer desk to the band bought, with listing changes inside the rung’s turnaround and a monthly report on offers, Marketplace revenue and listing health.',
-  targetLine:'FTR acceptance, the publication date, offers accepted and Marketplace revenue — AWS’s review queue and the customer’s deal flow govern every one.',
+  targetLine:'FTR acceptance, the publication date, offers accepted, and the net new customers and Marketplace revenue they carry — AWS’s review queue and the customer’s deal flow govern every one.',
   note:'Nine services in three groups: compliance engineering · listing engineering · the offer desk and reporting. [Grouping proposed — confirm. CPPO also appears in Partner Development: originated there, executed here.]',
   rungList:[
     { name:'Launch', price:'$1,500 / mo', head:'Get it built, published and transacting.',
@@ -508,7 +508,7 @@ retainerPage({
   subtitle:'Build and run a reseller channel. Roster under management is what we commit; partners issuing offers is what we report.',
   entry:'WHY TWELVE MONTHS — ramp from first outreach to first partner transaction models at 8 months, which is what sets the term.',
   commitLine:'A named channel manager recruiting and managing the roster at the rung’s cap, a CPPO deal desk at the rung’s turnaround with selling authorizations drafted, issued and tracked, training on cadence, channel reviews with sourced-pipeline and attribution reporting, and Kiflo Core operated inside the fee.',
-  targetLine:'Partners issuing offers — the headline number — plus partner-sourced pipeline and revenue. Each partner clears its own AWS gate.',
+  targetLine:'Partners issuing offers — the headline number — plus the net new customers and revenue the channel sources. Each partner clears its own AWS gate.',
   note:'AWS permits only one partner identifier per resource, so partner attribution runs on user agent string rather than competing tags. [CPPO boundary with Managed Marketplace Operations — originated here, executed on the listing there — to confirm.]',
   rungList:[
     { name:'Establish', price:'$2,500 / mo', head:'Stand the channel up.',
