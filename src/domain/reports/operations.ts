@@ -16,9 +16,15 @@ import {
   topServices,
   revenueSeries,
   utilization,
+  rebookRateByBarber,
+  noShowRateByBarber,
+  retentionCohorts,
   type ApptFact,
   type PaymentFact,
   type BarberUtilization,
+  type BarberRebookRate,
+  type BarberNoShow,
+  type RetentionCohort,
   type ServiceStat,
   type DayPoint,
 } from "./report";
@@ -37,7 +43,21 @@ export interface ShopReport {
   readonly series: DayPoint[];
   readonly services: ServiceStat[];
   readonly utilization: BarberUtilization[];
+  /** Retention is measured over a longer lookback than the revenue window. */
+  readonly retentionLookbackDays: number;
+  readonly rebookWindowDays: number;
+  readonly rebook: BarberRebookRate[];
+  readonly noShowByBarber: BarberNoShow[];
+  readonly cohorts: RetentionCohort[];
 }
+
+/**
+ * Retention needs far more history than revenue does: a six-week rebook window
+ * cannot be judged inside a 30-day report window, so those metrics get their
+ * own longer lookback.
+ */
+const RETENTION_LOOKBACK_DAYS = 365;
+const REBOOK_WINDOW_DAYS = 42;
 
 export async function loadShopReport(
   windowDays = 30,
@@ -121,6 +141,29 @@ export async function loadShopReport(
     availableMin: Math.round(((weeklyMin.get(b.id) ?? 0) * windowDays) / 7),
   }));
 
+  // Retention facts over the longer lookback (no upper bound, so a future
+  // booking still counts as "they came back").
+  const retentionStart = new Date(now.getTime() - RETENTION_LOOKBACK_DAYS * 86_400_000);
+  const retentionRows = await db
+    .select({
+      status: appointments.status,
+      startAt: appointments.startAt,
+      clientId: appointments.clientId,
+      barberId: appointments.barberId,
+    })
+    .from(appointments)
+    .where(gte(appointments.startAt, retentionStart));
+  const retentionFacts: ApptFact[] = retentionRows.map((r) => ({
+    status: r.status,
+    startAt: r.startAt,
+    serviceId: "",
+    serviceName: "",
+    clientId: r.clientId,
+    barberId: r.barberId,
+    durationMin: 0,
+    valueCents: 0,
+  }));
+
   const completedCount = appts.filter((a) => a.status === "completed").length;
   const bookedCount = appts.filter(
     (a) => a.status === "confirmed" || a.status === "completed",
@@ -138,5 +181,13 @@ export async function loadShopReport(
     series: revenueSeries(appts, windowDays, now),
     services: topServices(appts),
     utilization: utilization(bookedMin, barberAvail),
+    retentionLookbackDays: RETENTION_LOOKBACK_DAYS,
+    rebookWindowDays: REBOOK_WINDOW_DAYS,
+    rebook: rebookRateByBarber(retentionFacts, activeBarbers, {
+      windowDays: REBOOK_WINDOW_DAYS,
+      now,
+    }),
+    noShowByBarber: noShowRateByBarber(retentionFacts, activeBarbers),
+    cohorts: retentionCohorts(retentionFacts, { now }).slice(-6),
   };
 }

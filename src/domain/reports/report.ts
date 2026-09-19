@@ -128,6 +128,181 @@ export function revenueSeries(
   return out;
 }
 
+const DAY_MS = 86_400_000;
+
+/** Statuses that mean the client came back (or is committed to coming back). */
+const RETURN_STATUSES = new Set([
+  "completed",
+  "confirmed",
+  "reserved",
+  "pending_deposit",
+]);
+
+export interface BarberRebookRate {
+  readonly barberId: string;
+  readonly barberName: string;
+  /** Completed visits whose rebook window has fully elapsed. */
+  readonly eligible: number;
+  /** Of those, how many were followed by a return to the SAME barber. */
+  readonly rebooked: number;
+  /** Return to the same barber: rebooked / eligible (0 when none eligible). */
+  readonly rate: number;
+  /** Return to the shop at all, same barber or not. */
+  readonly shopRate: number;
+}
+
+/**
+ * Per-barber rebook rate: of this barber's completed visits, how often did the
+ * client come back within `windowDays`?
+ *
+ * The denominator only counts visits whose window has FULLY ELAPSED. A cut
+ * from three days ago has not had six weeks to turn into a return, and
+ * counting it would drag every barber's rate toward zero as the window moves.
+ * Callers must therefore supply history well beyond `windowDays`.
+ */
+export function rebookRateByBarber(
+  appts: readonly ApptFact[],
+  barbers: ReadonlyArray<{ id: string; name: string }>,
+  { windowDays = 42, now }: { windowDays?: number; now: Date },
+): BarberRebookRate[] {
+  // Every return-ish visit per client, ascending, so the lookup is a scan.
+  const byClient = new Map<string, ApptFact[]>();
+  for (const a of appts) {
+    if (!RETURN_STATUSES.has(a.status)) continue;
+    const list = byClient.get(a.clientId) ?? [];
+    list.push(a);
+    byClient.set(a.clientId, list);
+  }
+  for (const list of byClient.values()) {
+    list.sort((x, y) => x.startAt.getTime() - y.startAt.getTime());
+  }
+
+  const cutoff = now.getTime() - windowDays * DAY_MS;
+  const tally = new Map<string, { eligible: number; same: number; shop: number }>();
+
+  for (const visit of appts) {
+    if (visit.status !== "completed") continue;
+    // Window must have fully elapsed for this visit to be judged.
+    if (visit.startAt.getTime() > cutoff) continue;
+
+    const t = visit.startAt.getTime();
+    const deadline = t + windowDays * DAY_MS;
+    const later = (byClient.get(visit.clientId) ?? []).filter(
+      (a) => a.startAt.getTime() > t && a.startAt.getTime() <= deadline,
+    );
+
+    const row = tally.get(visit.barberId) ?? { eligible: 0, same: 0, shop: 0 };
+    row.eligible += 1;
+    if (later.length > 0) row.shop += 1;
+    if (later.some((a) => a.barberId === visit.barberId)) row.same += 1;
+    tally.set(visit.barberId, row);
+  }
+
+  return barbers
+    .map((b) => {
+      const row = tally.get(b.id) ?? { eligible: 0, same: 0, shop: 0 };
+      return {
+        barberId: b.id,
+        barberName: b.name,
+        eligible: row.eligible,
+        rebooked: row.same,
+        rate: row.eligible === 0 ? 0 : row.same / row.eligible,
+        shopRate: row.eligible === 0 ? 0 : row.shop / row.eligible,
+      };
+    })
+    .sort((x, y) => y.rate - x.rate);
+}
+
+export interface BarberNoShow {
+  readonly barberId: string;
+  readonly barberName: string;
+  readonly resolved: number;
+  readonly noShows: number;
+  readonly rate: number;
+  /** Rate minus the shop-wide rate; positive is worse than average. */
+  readonly deltaVsShop: number;
+}
+
+/** Per-barber no-show rate with its gap to the shop-wide rate. */
+export function noShowRateByBarber(
+  appts: readonly ApptFact[],
+  barbers: ReadonlyArray<{ id: string; name: string }>,
+): BarberNoShow[] {
+  const shop = noShowRate(appts);
+  return barbers
+    .map((b) => {
+      const mine = appts.filter((a) => a.barberId === b.id);
+      const completed = mine.filter(isCompleted).length;
+      const noShows = mine.filter(isNoShow).length;
+      const resolved = completed + noShows;
+      const rate = resolved === 0 ? 0 : noShows / resolved;
+      return {
+        barberId: b.id,
+        barberName: b.name,
+        resolved,
+        noShows,
+        rate,
+        deltaVsShop: rate - shop,
+      };
+    })
+    .sort((x, y) => y.rate - x.rate);
+}
+
+export interface RetentionCohort {
+  /** First-visit month, YYYY-MM. */
+  readonly month: string;
+  readonly clients: number;
+  /** Share of the cohort with a second visit within N days. */
+  readonly at30: number;
+  readonly at60: number;
+  readonly at90: number;
+}
+
+/**
+ * Group clients by the month of their first completed visit and report how
+ * many came back within 30 / 60 / 90 days. A cohort is only reported once its
+ * 90-day window has elapsed, so the newest months do not look like churn.
+ */
+export function retentionCohorts(
+  appts: readonly ApptFact[],
+  { now }: { now: Date },
+): RetentionCohort[] {
+  const visitsByClient = new Map<string, Date[]>();
+  for (const a of appts) {
+    if (!isCompleted(a)) continue;
+    const list = visitsByClient.get(a.clientId) ?? [];
+    list.push(a.startAt);
+    visitsByClient.set(a.clientId, list);
+  }
+
+  const buckets = new Map<string, { clients: number; d30: number; d60: number; d90: number }>();
+  for (const dates of visitsByClient.values()) {
+    dates.sort((x, y) => x.getTime() - y.getTime());
+    const first = dates[0]!;
+    // Only judge cohorts whose 90-day window has fully elapsed.
+    if (first.getTime() + 90 * DAY_MS > now.getTime()) continue;
+
+    const month = first.toISOString().slice(0, 7);
+    const b = buckets.get(month) ?? { clients: 0, d30: 0, d60: 0, d90: 0 };
+    b.clients += 1;
+    const gap = dates[1] ? dates[1].getTime() - first.getTime() : Infinity;
+    if (gap <= 30 * DAY_MS) b.d30 += 1;
+    if (gap <= 60 * DAY_MS) b.d60 += 1;
+    if (gap <= 90 * DAY_MS) b.d90 += 1;
+    buckets.set(month, b);
+  }
+
+  return [...buckets.entries()]
+    .map(([month, b]) => ({
+      month,
+      clients: b.clients,
+      at30: b.clients === 0 ? 0 : b.d30 / b.clients,
+      at60: b.clients === 0 ? 0 : b.d60 / b.clients,
+      at90: b.clients === 0 ? 0 : b.d90 / b.clients,
+    }))
+    .sort((x, y) => x.month.localeCompare(y.month));
+}
+
 export interface BarberUtilization {
   readonly barberId: string;
   readonly barberName: string;

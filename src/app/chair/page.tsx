@@ -16,6 +16,7 @@ import { dayRangeUtc, loadSettings, todayInShopTz } from "@/domain/booking/load"
 import {
   loadChairAppointments,
   loadChairEarnings,
+  loadChairRebookRate,
   resolveBarberForUser,
 } from "@/domain/chair/operations";
 import {
@@ -75,6 +76,7 @@ export default async function ChairPage(): Promise<ReactNode> {
 
   const appts = await loadChairAppointments(barber.id, rangeStart, rangeEnd);
   const earnings = await loadChairEarnings(barber.id, 30);
+  const rebook = await loadChairRebookRate(barber.id, barber.displayName);
   const notesByClient = await loadNotesForClients([
     ...new Set(appts.map((a) => a.clientId)),
   ]);
@@ -124,7 +126,20 @@ export default async function ChairPage(): Promise<ReactNode> {
           <Stat label="Tips" value={formatMoney(earnings.tipsCents)} />
           <Stat label="Completed cuts" value={String(earnings.completedCount)} />
           <Stat label="Upcoming booked" value={String(earnings.upcomingCount)} />
+          <Stat
+            label="Clients who came back"
+            value={
+              rebook.eligible === 0
+                ? "-"
+                : `${Math.round(rebook.rate * 100)}%`
+            }
+          />
         </div>
+        <p style={{ margin: "12px 0 0", fontSize: 11, color: "var(--muted)" }}>
+          {rebook.eligible === 0
+            ? `Your rebook rate shows up once visits have had ${rebook.windowDays} days to turn into a return.`
+            : `Share of your last ${rebook.eligible} clients who booked with you again within ${rebook.windowDays} days.`}
+        </p>
       </Card>
 
       <Card

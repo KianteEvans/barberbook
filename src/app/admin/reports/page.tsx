@@ -101,6 +101,50 @@ export default async function AdminReportsPage(): Promise<ReactNode> {
           )}
         </Card>
 
+        <Card title="Client retention">
+          {r.rebook.every((b) => b.eligible === 0) ? (
+            <EmptyState
+              title="Not enough history yet"
+              hint={`A visit only counts once it has had ${r.rebookWindowDays} days to turn into a return.`}
+            />
+          ) : (
+            <>
+              <BarList
+                items={r.rebook.map((b) => ({
+                  label: b.barberName,
+                  value: b.rate,
+                  display: `${pct(b.rate)} of ${b.eligible}`,
+                }))}
+              />
+              <p style={{ fontSize: 11, color: "var(--muted)", marginTop: 10 }}>
+                Share of each barber&apos;s clients who came back to them within{" "}
+                {r.rebookWindowDays} days. Visits too recent to judge are left out.
+              </p>
+            </>
+          )}
+        </Card>
+
+        <Card title="No-shows by barber">
+          {r.noShowByBarber.every((b) => b.resolved === 0) ? (
+            <EmptyState title="No resolved visits yet" />
+          ) : (
+            <>
+              <BarList
+                items={r.noShowByBarber.map((b) => ({
+                  label: b.barberName,
+                  value: b.rate,
+                  display: `${pct(b.rate)} (${b.deltaVsShop >= 0 ? "+" : ""}${pct(
+                    b.deltaVsShop,
+                  )} vs shop)`,
+                }))}
+              />
+              <p style={{ fontSize: 11, color: "var(--muted)", marginTop: 10 }}>
+                Of visits that resolved either way. Positive is worse than the shop average.
+              </p>
+            </>
+          )}
+        </Card>
+
         <Card title="Barber utilization">
           {r.utilization.length === 0 ? (
             <EmptyState title="No active barbers" />
@@ -120,6 +164,44 @@ export default async function AdminReportsPage(): Promise<ReactNode> {
           )}
         </Card>
       </div>
+
+      <Card title="New-client retention by cohort">
+        {r.cohorts.length === 0 ? (
+          <EmptyState
+            title="No mature cohorts yet"
+            hint="A month appears here once its clients have had 90 days to come back."
+          />
+        ) : (
+          <>
+            <table>
+              <thead>
+                <tr>
+                  <th>First visit</th>
+                  <th>New clients</th>
+                  <th>Back in 30d</th>
+                  <th>60d</th>
+                  <th>90d</th>
+                </tr>
+              </thead>
+              <tbody>
+                {r.cohorts.map((c) => (
+                  <tr key={c.month}>
+                    <td style={{ fontWeight: 600, whiteSpace: "nowrap" }}>{c.month}</td>
+                    <td>{c.clients}</td>
+                    <td>{pct(c.at30)}</td>
+                    <td>{pct(c.at60)}</td>
+                    <td style={{ fontWeight: 600 }}>{pct(c.at90)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p style={{ fontSize: 11, color: "var(--muted)", marginTop: 10 }}>
+              Looking back {r.retentionLookbackDays} days. Months whose 90-day window
+              is still open are hidden.
+            </p>
+          </>
+        )}
+      </Card>
     </PageShell>
   );
 }

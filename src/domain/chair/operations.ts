@@ -1,6 +1,7 @@
-import { and, asc, eq, gte, lt, sql } from "drizzle-orm";
+import { and, asc, eq, gte, inArray, lt, sql } from "drizzle-orm";
 import { db } from "@/db/client";
 import { appointments, barbers, payments, services, users } from "@/db/schema";
+import { rebookRateByBarber } from "@/domain/reports/report";
 
 /** Barber-facing ("my chair") reads. */
 
@@ -68,6 +69,63 @@ export interface ChairEarnings {
   readonly revenueCents: number;
   readonly tipsCents: number;
   readonly upcomingCount: number;
+}
+
+/**
+ * This barber's own rebook rate: of their completed visits old enough to
+ * judge, how many clients came back to them within the window? Uses the same
+ * pure helper as the admin report so the two never disagree.
+ */
+export async function loadChairRebookRate(
+  barberId: string,
+  barberName: string,
+  now = new Date(),
+): Promise<{ rate: number; eligible: number; windowDays: number }> {
+  const windowDays = 42;
+  const lookbackStart = new Date(now.getTime() - 365 * 86_400_000);
+  // Every visit by THIS barber's clients - a client who defected to another
+  // chair must still be visible, or the rate would flatter the barber.
+  const mine = await db
+    .selectDistinct({ clientId: appointments.clientId })
+    .from(appointments)
+    .where(
+      and(eq(appointments.barberId, barberId), gte(appointments.startAt, lookbackStart)),
+    );
+  if (mine.length === 0) return { rate: 0, eligible: 0, windowDays };
+
+  const rows = await db
+    .select({
+      status: appointments.status,
+      startAt: appointments.startAt,
+      clientId: appointments.clientId,
+      barberId: appointments.barberId,
+    })
+    .from(appointments)
+    .where(
+      and(
+        gte(appointments.startAt, lookbackStart),
+        inArray(
+          appointments.clientId,
+          mine.map((m) => m.clientId),
+        ),
+      ),
+    );
+
+  const [row] = rebookRateByBarber(
+    rows.map((r) => ({
+      status: r.status,
+      startAt: r.startAt,
+      serviceId: "",
+      serviceName: "",
+      clientId: r.clientId,
+      barberId: r.barberId,
+      durationMin: 0,
+      valueCents: 0,
+    })),
+    [{ id: barberId, name: barberName }],
+    { windowDays, now },
+  );
+  return { rate: row?.rate ?? 0, eligible: row?.eligible ?? 0, windowDays };
 }
 
 /**

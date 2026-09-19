@@ -21,6 +21,8 @@ const CONN =
   process.env.DATABASE_URL ??
   "postgres://postgres:password@localhost:54331/barberbook";
 const TZ = "America/New_York";
+/** Days of appointment history to generate (deep enough for 90-day cohorts). */
+const HISTORY_DAYS = 200;
 const UPLOADS_DIR = process.env.UPLOADS_DIR ?? join(process.cwd(), "uploads");
 
 // Deterministic PRNG so reruns produce the same believable shop.
@@ -210,27 +212,73 @@ async function main(): Promise<void> {
     // --- Clients ---
     console.log("[demo] creating clients...");
     const clientHash = await bcrypt.hash("client1234", 10);
-    const clients: { id: string; name: string; phone: string }[] = [];
+    interface DemoClient {
+      id: string;
+      name: string;
+      phone: string;
+      /** First day they could possibly walk in. */
+      joinedAt: Date;
+      /** Some clients drift away; null means still active. */
+      churnedAt: Date | null;
+    }
+    const clients: DemoClient[] = [];
     const now = new Date();
-    for (let i = 0; i < 22; i++) {
-      const name = `${FIRST[i]!} ${LAST[i]!}`;
-      const email = `${FIRST[i]!.toLowerCase()}.${LAST[i]!.toLowerCase()}@demo.local`;
-      const phone = `917-555-0${String(100 + i)}`;
-      const createdAt = new Date(now.getTime() - between(30, 200) * 86_400_000);
+    const CLIENT_COUNT = 48;
+    for (let i = 0; i < CLIENT_COUNT; i++) {
+      // gcd(7,24)=1, so the pairing walks every first/last combination.
+      const first = FIRST[i % FIRST.length]!;
+      const last = LAST[(i * 7) % LAST.length]!;
+      const name = `${first} ${last}`;
+      const email = `${first.toLowerCase()}.${last.toLowerCase()}${
+        i >= FIRST.length ? i : ""
+      }@demo.local`;
+      const phone = `917-555-${String(1000 + i)}`;
+      // Clients arrive over time rather than all on day one - otherwise every
+      // retention cohort collapses into a single month.
+      const joinedDaysAgo =
+        i < 8
+          ? between(HISTORY_DAYS - 20, HISTORY_DAYS) // the regulars, here from the start
+          : between(10, HISTORY_DAYS - 25);
+      const createdAt = new Date(now.getTime() - joinedDaysAgo * 86_400_000);
+      // A third of the non-regulars stop coming at some point - without churn
+      // every retention number pins at 100% and the panel teaches nothing.
+      // Some drift off after a couple of visits; some never come back at all
+      // (a 1-day window means they show up once and vanish).
+      const churnedAt =
+        i >= 8 && chance(0.35)
+          ? new Date(
+              createdAt.getTime() +
+                between(1, Math.max(2, Math.min(60, joinedDaysAgo - 5))) * 86_400_000,
+            )
+          : null;
       const emailOptOut = i === 3 || i === 11;
       const smsOptOut = i === 7;
       const [row] = await sql<{ id: string }[]>`
         INSERT INTO users (email, password_hash, name, phone, role, email_opt_out, sms_opt_out, created_at)
         VALUES (${email}, ${clientHash}, ${name}, ${phone}, 'client', ${emailOptOut}, ${smsOptOut}, ${createdAt})
         RETURNING id`;
-      clients.push({ id: row!.id, name, phone });
+      clients.push({ id: row!.id, name, phone, joinedAt: createdAt, churnedAt });
     }
-    if (sampleClient) clients.push({ id: sampleClient.id, name: "Sample Client", phone: "555-010-0100" });
+    if (sampleClient) {
+      clients.push({
+        id: sampleClient.id,
+        name: "Sample Client",
+        phone: "555-010-0100",
+        joinedAt: new Date(now.getTime() - HISTORY_DAYS * 86_400_000),
+        churnedAt: null,
+      });
+    }
 
-    // Regulars book most of the visits; the tail is occasional.
+    // Regulars book most of the visits; the tail is occasional. Nobody can
+    // book before they existed.
     const regulars = clients.slice(0, 8);
-    const weightedClient = (): { id: string; name: string; phone: string } =>
-      chance(0.55) ? pick(regulars) : pick(clients);
+    const weightedClient = (on: Date): DemoClient => {
+      const active = (c: DemoClient): boolean =>
+        c.joinedAt.getTime() <= on.getTime() &&
+        (c.churnedAt === null || c.churnedAt.getTime() >= on.getTime());
+      const pool = (chance(0.55) ? regulars : clients).filter(active);
+      return pool.length > 0 ? pick(pool) : regulars[0]!;
+    };
 
     // --- Discount codes ---
     await sql`
@@ -315,7 +363,10 @@ async function main(): Promise<void> {
     };
 
     // One pass per barber per day, walking non-overlapping slots forward.
-    for (let dayOffset = -42; dayOffset <= 7; dayOffset++) {
+    // Six months of history: retention metrics (rebook rate, 90-day cohorts)
+    // can only judge visits older than their window, so a 6-week seed would
+    // leave those panels empty.
+    for (let dayOffset = -HISTORY_DAYS; dayOffset <= 7; dayOffset++) {
       const d = dateStr(addDays(now, dayOffset));
       const weekday = new Date(`${d}T12:00:00Z`).getDay();
       for (const b of barbers) {
@@ -323,7 +374,16 @@ async function main(): Promise<void> {
         if (!rule) continue;
         const menu = offeredServices(b.id);
         if (menu.length === 0) continue;
-        const target = dayOffset < 0 ? between(2, 5) : dayOffset === 0 ? between(3, 4) : between(2, 4);
+        // Recent weeks are busy; older history thins out so six months of
+        // depth does not balloon the row count.
+        const target =
+          dayOffset < -42
+            ? between(1, 3)
+            : dayOffset < 0
+              ? between(2, 5)
+              : dayOffset === 0
+                ? between(3, 4)
+                : between(2, 4);
         let cursor = rule.start_min + pick([0, 15, 30, 45, 60]);
         for (let k = 0; k < target; k++) {
           const service = pick(menu);
@@ -354,7 +414,7 @@ async function main(): Promise<void> {
               : undefined;
 
           await insertAppt({
-            client: weightedClient(),
+            client: weightedClient(startAt),
             barberId: b.id,
             service,
             startAt,
