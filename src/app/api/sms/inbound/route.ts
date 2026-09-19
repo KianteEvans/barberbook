@@ -5,14 +5,27 @@ import { appointments, users } from "@/db/schema";
 import { env, smsEnabled } from "@/env";
 import { parseSmsCommand } from "@/domain/sms/commands";
 import { cancelAppointmentOp } from "@/domain/booking/operations";
+import { loadSettings } from "@/domain/booking/load";
 import { promoteForSlot } from "@/domain/waitlist/operations";
+import { canSelfJoin } from "@/domain/walkins/selfjoin";
+import {
+  addWalkinOp,
+  countWaiting,
+  leaveByPhoneOp,
+  loadTicketByPhone,
+  phoneInLine,
+} from "@/domain/walkins/operations";
 
 /**
  * Inbound SMS webhook (Twilio). Clients text CANCEL / CONFIRM about their next
- * appointment. Requires TWILIO_* env; untestable locally without a public URL
- * and a Twilio number, so this is scaffolded and signature-verified but only
- * exercised in a real deployment.
+ * appointment, or JOIN / STATUS to work the walk-in line. Requires TWILIO_*
+ * env; untestable locally without a public URL and a Twilio number, so this is
+ * scaffolded and signature-verified but only exercised in a real deployment.
  */
+
+const HELP =
+  "Reply JOIN to get in the walk-in line, STATUS to check your spot, " +
+  "CONFIRM to confirm your next appointment, or CANCEL to cancel it.";
 
 function twiml(message: string): Response {
   const xml = `<?xml version="1.0" encoding="UTF-8"?><Response><Message>${message}</Message></Response>`;
@@ -62,11 +75,44 @@ export async function POST(req: Request): Promise<Response> {
   const command = parseSmsCommand(params.Body ?? "");
 
   const [user] = await db
-    .select({ id: users.id })
+    .select({ id: users.id, name: users.name })
     .from(users)
     .where(eq(users.phone, from));
   if (!user) {
     return twiml("We could not find your account. Please call the shop.");
+  }
+
+  // The line commands stand on their own - they must be handled before the
+  // "no upcoming appointment" guard below, since walking in needs no booking.
+  if (command.kind === "join") {
+    const settings = await loadSettings();
+    const decision = canSelfJoin({
+      enabled: settings.selfJoinEnabled,
+      waitingCount: await countWaiting(),
+      maxWaiting: settings.queueMaxWaiting,
+      alreadyInLine: await phoneInLine(from),
+    });
+    if (!decision.ok) return twiml(decision.message);
+    await addWalkinOp({
+      name: command.name ?? user.name,
+      phone: from,
+      source: "sms",
+    });
+    const ticket = await loadTicketByPhone(from);
+    return twiml(
+      ticket?.position
+        ? `You're #${ticket.position} in line, about ${ticket.estWaitMin} min. Reply STATUS to check, or CANCEL to drop out.`
+        : "You're in the line. Reply STATUS to check your spot.",
+    );
+  }
+  if (command.kind === "status") {
+    const ticket = await loadTicketByPhone(from);
+    if (!ticket) return twiml("You're not in the line. Reply JOIN to get in.");
+    return twiml(
+      ticket.status === "serving"
+        ? `You're up! Head to ${ticket.barberName ?? "the chair"}.`
+        : `You're #${ticket.position} in line, about ${ticket.estWaitMin} min.`,
+    );
   }
 
   const [next] = await db
@@ -88,10 +134,15 @@ export async function POST(req: Request): Promise<Response> {
     .limit(1);
 
   if (command.kind === "help") {
-    return twiml("Reply CANCEL to cancel your next appointment, or CONFIRM to confirm it.");
+    return twiml(HELP);
   }
   if (!next) {
-    return twiml("You have no upcoming appointments.");
+    // No booking to act on - but CANCEL should still drop them from the line
+    // rather than dead-ending on "no appointments".
+    if (command.kind === "cancel" && (await leaveByPhoneOp(from))) {
+      return twiml("You're out of the line. Reply JOIN to get back in.");
+    }
+    return twiml(`You have no upcoming appointments. ${HELP}`);
   }
 
   if (command.kind === "cancel") {
@@ -110,5 +161,5 @@ export async function POST(req: Request): Promise<Response> {
     return twiml("Thanks - your spot is locked in. See you soon!");
   }
 
-  return twiml("Reply CANCEL to cancel your next appointment, or CONFIRM to confirm it.");
+  return twiml(HELP);
 }

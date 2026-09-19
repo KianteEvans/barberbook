@@ -203,7 +203,8 @@ async function main(): Promise<void> {
     // --- Shop policy: loyalty + nudges on ---
     await sql`
       UPDATE shop_settings
-      SET loyalty_every_n = 5, rebook_after_days = 28, winback_after_days = 90
+      SET loyalty_every_n = 5, rebook_after_days = 28, winback_after_days = 90,
+          self_join_enabled = true, queue_max_waiting = 20
       WHERE id = 1`;
 
     // --- Clients ---
@@ -499,15 +500,17 @@ async function main(): Promise<void> {
     console.log("[demo] lining up walk-ins...");
     const [wSvc] = services;
     const wb = barbers[0]!;
+    // A believable floor: some added at the desk, some who checked in from
+    // their phone, one who texted JOIN.
     await sql`
-      INSERT INTO walk_ins (barber_id, name, phone, service_id, status, created_at, called_at, done_at)
+      INSERT INTO walk_ins (barber_id, name, phone, service_id, status, source, created_at, called_at, done_at)
       VALUES
-        (${wb.id}, 'Papi',  NULL, ${wSvc!.id}, 'serving', ${new Date(now.getTime() - 55 * 60_000)}, ${new Date(now.getTime() - 12 * 60_000)}, NULL),
-        (NULL, 'Jordan', '917-555-0250', ${wSvc!.id}, 'waiting', ${new Date(now.getTime() - 25 * 60_000)}, NULL, NULL),
-        (${barbers[1]!.id}, 'Smiley', NULL, NULL, 'waiting', ${new Date(now.getTime() - 14 * 60_000)}, NULL, NULL),
-        (NULL, 'Big Rob', '917-555-0251', NULL, 'waiting', ${new Date(now.getTime() - 6 * 60_000)}, NULL, NULL),
-        (${wb.id}, 'Nestor', NULL, ${wSvc!.id}, 'done', ${new Date(now.getTime() - 3 * 3_600_000)}, ${new Date(now.getTime() - 170 * 60_000)}, ${new Date(now.getTime() - 140 * 60_000)}),
-        (${barbers[2]!.id}, 'DJ', NULL, NULL, 'done', ${new Date(now.getTime() - 4 * 3_600_000)}, ${new Date(now.getTime() - 230 * 60_000)}, ${new Date(now.getTime() - 200 * 60_000)})`;
+        (${wb.id}, 'Papi',  NULL, ${wSvc!.id}, 'serving', 'staff', ${new Date(now.getTime() - 55 * 60_000)}, ${new Date(now.getTime() - 12 * 60_000)}, NULL),
+        (NULL, 'Jordan', '917-555-0250', ${wSvc!.id}, 'waiting', 'self', ${new Date(now.getTime() - 25 * 60_000)}, NULL, NULL),
+        (${barbers[1]!.id}, 'Smiley', NULL, NULL, 'waiting', 'staff', ${new Date(now.getTime() - 14 * 60_000)}, NULL, NULL),
+        (NULL, 'Big Rob', '917-555-0251', NULL, 'waiting', 'sms', ${new Date(now.getTime() - 6 * 60_000)}, NULL, NULL),
+        (${wb.id}, 'Nestor', NULL, ${wSvc!.id}, 'done', 'self', ${new Date(now.getTime() - 3 * 3_600_000)}, ${new Date(now.getTime() - 170 * 60_000)}, ${new Date(now.getTime() - 140 * 60_000)}),
+        (${barbers[2]!.id}, 'DJ', NULL, NULL, 'done', 'staff', ${new Date(now.getTime() - 4 * 3_600_000)}, ${new Date(now.getTime() - 230 * 60_000)}, ${new Date(now.getTime() - 200 * 60_000)})`;
 
     // --- Nudge bookkeeping: one rebook already sent ---
     const lapsed = clients[15]!;

@@ -1,9 +1,13 @@
 import type { ReactNode } from "react";
+import { asc, eq } from "drizzle-orm";
+import { db } from "@/db/client";
+import { barbers, services } from "@/db/schema";
 import { PageShell } from "@/components/ui/PageShell";
 import { Card, Badge, EmptyState } from "@/components/ui/primitives";
 import { loadWalkinQueue } from "@/domain/walkins/operations";
 import { loadSettings } from "@/domain/booking/load";
 import { AutoRefresh } from "./AutoRefresh";
+import { JoinLineForm } from "./JoinLineForm";
 
 export const dynamic = "force-dynamic";
 
@@ -16,6 +20,26 @@ export default async function QueueBoardPage(): Promise<ReactNode> {
   const settings = await loadSettings();
   const firstName = (name: string): string => name.trim().split(/\s+/)[0] ?? name;
 
+  const waiting = queue.filter((w) => w.status === "waiting");
+  const nextWait = waiting[0]?.estWaitMin ?? 0;
+  const canJoin = settings.selfJoinEnabled &&
+    (settings.queueMaxWaiting === 0 || waiting.length < settings.queueMaxWaiting);
+
+  const [barberOptions, serviceOptions] = canJoin
+    ? await Promise.all([
+        db
+          .select({ id: barbers.id, name: barbers.displayName })
+          .from(barbers)
+          .where(eq(barbers.active, true))
+          .orderBy(asc(barbers.displayName)),
+        db
+          .select({ id: services.id, name: services.name })
+          .from(services)
+          .where(eq(services.active, true))
+          .orderBy(asc(services.name)),
+      ])
+    : [[], []];
+
   return (
     <PageShell
       title="The line"
@@ -24,6 +48,33 @@ export default async function QueueBoardPage(): Promise<ReactNode> {
       stripe
     >
       <AutoRefresh seconds={30} />
+
+      {canJoin ? (
+        <Card
+          title="Get in line from your phone"
+          action={
+            <Badge tone={waiting.length === 0 ? "ok" : "warn"}>
+              {waiting.length === 0 ? "no wait" : `~${nextWait} min`}
+            </Badge>
+          }
+        >
+          <p style={{ margin: "0 0 14px", fontSize: 13, color: "var(--muted)" }}>
+            Add yourself to the line before you head over - we&apos;ll text you
+            when your chair is ready.
+          </p>
+          <JoinLineForm barbers={barberOptions} services={serviceOptions} />
+        </Card>
+      ) : (
+        settings.selfJoinEnabled && (
+          <Card>
+            <EmptyState
+              title="The line is full right now"
+              hint="Come by the shop or check back in a little while."
+            />
+          </Card>
+        )
+      )}
+
       <Card>
         {queue.length === 0 ? (
           <EmptyState

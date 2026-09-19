@@ -92,7 +92,28 @@ export default async function AdminWalkinsPage(): Promise<ReactNode> {
             <tbody>
               {queue.map((w) => (
                 <tr key={w.id}>
-                  <td style={{ fontWeight: 600, whiteSpace: "nowrap" }}>{w.name}</td>
+                  <td style={{ fontWeight: 600, whiteSpace: "nowrap" }}>
+                    {w.name}
+                    {w.source !== "staff" && (
+                      <span
+                        style={{
+                          marginLeft: 8,
+                          fontSize: 10,
+                          fontWeight: 700,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.04em",
+                          color: "var(--accent)",
+                        }}
+                        title={
+                          w.source === "self"
+                            ? "Added themselves online"
+                            : "Joined by text message"
+                        }
+                      >
+                        {w.source === "self" ? "online" : "sms"}
+                      </span>
+                    )}
+                  </td>
                   <td style={{ color: "var(--muted)" }}>{w.serviceName ?? "-"}</td>
                   <td style={{ color: "var(--muted)", whiteSpace: "nowrap" }}>
                     {w.barberName ?? "First available"}

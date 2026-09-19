@@ -1,15 +1,21 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getIdentity, type Identity } from "@/auth/session";
 import { parseOrThrow, formObject, type ActionState } from "@/domain/forms";
 import { toActionError, ForbiddenError } from "@/domain/errors";
 import { resolveBarberForUser } from "@/domain/chair/operations";
+import { loadSettings } from "@/domain/booking/load";
+import { canSelfJoin } from "./selfjoin";
 import {
   addWalkinOp,
   bookWalkinSlotOp,
   callNextWalkinOp,
+  countWaiting,
+  leaveByTokenOp,
+  phoneInLine,
   resolveWalkinOp,
   startWalkinOp,
 } from "./operations";
@@ -66,6 +72,75 @@ export async function addWalkinAction(
     });
     refresh();
     return { ok: true, detail: `${input.name} added to the line.` };
+  } catch (err) {
+    return { ok: false, error: toActionError(err) };
+  }
+}
+
+const selfJoinSchema = z.object({
+  name: z.string().trim().min(1, "Tell us your name.").max(60),
+  phone: z.string().trim().max(30).optional(),
+  serviceId: z.string().uuid().optional().or(z.literal("")),
+  barberId: z.string().uuid().optional().or(z.literal("")),
+  /** Honeypot: humans leave this empty; bots fill every field. */
+  website: z.string().max(0).optional(),
+});
+
+/**
+ * PUBLIC, unauthenticated: a client puts themselves in the walk-in line.
+ * Deliberately does NOT call requireStaff. Every refusal reason lives in the
+ * pure `canSelfJoin` gate; we return the client-safe message from it.
+ */
+export async function joinQueueSelfAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  let redirectTo: string;
+  try {
+    const input = parseOrThrow(selfJoinSchema, formObject(formData));
+    // A filled honeypot is a bot: look like success, write nothing.
+    if (input.website) return { ok: true, detail: "You're in the line." };
+
+    const settings = await loadSettings();
+    const phone = input.phone || null;
+    const decision = canSelfJoin({
+      enabled: settings.selfJoinEnabled,
+      waitingCount: await countWaiting(),
+      maxWaiting: settings.queueMaxWaiting,
+      alreadyInLine: phone ? await phoneInLine(phone) : false,
+    });
+    if (!decision.ok) return { ok: false, error: decision.message };
+
+    const { joinToken } = await addWalkinOp({
+      name: input.name,
+      phone,
+      serviceId: input.serviceId || null,
+      barberId: input.barberId || null,
+      source: "self",
+    });
+    refresh();
+    redirectTo = `/queue/${joinToken}`;
+  } catch (err) {
+    return { ok: false, error: toActionError(err) };
+  }
+  // Outside the try: redirect() signals by throwing.
+  redirect(redirectTo);
+}
+
+const leaveSchema = z.object({ token: z.string().uuid() });
+
+/** PUBLIC: a client drops out of the line with their own token. */
+export async function leaveQueueSelfAction(
+  _prev: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  try {
+    const input = parseOrThrow(leaveSchema, formObject(formData));
+    const left = await leaveByTokenOp(input.token);
+    refresh();
+    return left
+      ? { ok: true, detail: "You're out of the line. Come back any time." }
+      : { ok: false, error: "You're no longer waiting in the line." };
   } catch (err) {
     return { ok: false, error: toActionError(err) };
   }

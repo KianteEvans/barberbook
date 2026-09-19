@@ -22,6 +22,7 @@ export interface WalkinRow {
   readonly barberName: string | null;
   readonly serviceName: string | null;
   readonly status: "waiting" | "serving" | "done" | "no_show" | "canceled" | "booked";
+  readonly source: "staff" | "self" | "sms";
   readonly createdAt: Date;
   readonly calledAt: Date | null;
   /** Rough minutes until called; 0 when next or already serving. */
@@ -54,6 +55,7 @@ async function liveQueue(where?: SQL): Promise<WalkinRow[]> {
       barberName: barbers.displayName,
       serviceName: services.name,
       status: walkIns.status,
+      source: walkIns.source,
       createdAt: walkIns.createdAt,
       calledAt: walkIns.calledAt,
     })
@@ -92,13 +94,118 @@ export async function addWalkinOp(input: {
   phone?: string | null;
   serviceId?: string | null;
   barberId?: string | null;
-}): Promise<void> {
-  await db.insert(walkIns).values({
-    name: input.name,
-    phone: input.phone ?? null,
-    serviceId: input.serviceId ?? null,
-    barberId: input.barberId ?? null,
-  });
+  /** Who put them in the line; defaults to staff. */
+  source?: "staff" | "self" | "sms";
+}): Promise<{ id: string; joinToken: string }> {
+  const [row] = await db
+    .insert(walkIns)
+    .values({
+      name: input.name,
+      phone: input.phone ?? null,
+      serviceId: input.serviceId ?? null,
+      barberId: input.barberId ?? null,
+      source: input.source ?? "staff",
+    })
+    .returning({ id: walkIns.id, joinToken: walkIns.joinToken });
+  if (!row) throw new Error("insert failed");
+  return row;
+}
+
+/** How many people are currently waiting (excludes those already in a chair). */
+export async function countWaiting(): Promise<number> {
+  const [row] = await db
+    .select({ n: count() })
+    .from(walkIns)
+    .where(eq(walkIns.status, "waiting"));
+  return row?.n ?? 0;
+}
+
+/** Whether this phone already holds a live spot in the line. */
+export async function phoneInLine(phone: string): Promise<boolean> {
+  const [row] = await db
+    .select({ id: walkIns.id })
+    .from(walkIns)
+    .where(
+      and(eq(walkIns.phone, phone), inArray(walkIns.status, ["waiting", "serving"])),
+    );
+  return row !== undefined;
+}
+
+export interface QueueTicket {
+  readonly name: string;
+  readonly status: "waiting" | "serving" | "done" | "no_show" | "canceled" | "booked";
+  readonly barberName: string | null;
+  readonly serviceName: string | null;
+  /** 1-based spot in the waiting line; null once they're out of it. */
+  readonly position: number | null;
+  readonly estWaitMin: number;
+}
+
+/**
+ * Resolve a client's own ticket from their unguessable token. Returns the
+ * live position by counting the live queue, so it always agrees with the
+ * public board.
+ */
+export async function loadTicketByToken(token: string): Promise<QueueTicket | null> {
+  const [row] = await db
+    .select({
+      id: walkIns.id,
+      name: walkIns.name,
+      status: walkIns.status,
+      barberName: barbers.displayName,
+      serviceName: services.name,
+    })
+    .from(walkIns)
+    .leftJoin(barbers, eq(walkIns.barberId, barbers.id))
+    .leftJoin(services, eq(walkIns.serviceId, services.id))
+    .where(eq(walkIns.joinToken, token));
+  if (!row) return null;
+
+  if (row.status !== "waiting" && row.status !== "serving") {
+    return { ...row, position: null, estWaitMin: 0 };
+  }
+  const queue = await liveQueue();
+  const idx = queue.findIndex((q) => q.id === row.id);
+  const entry = idx >= 0 ? queue[idx] : undefined;
+  const waitingBefore = queue.slice(0, Math.max(0, idx)).filter((q) => q.status === "waiting").length;
+  return {
+    ...row,
+    position: row.status === "waiting" ? waitingBefore + 1 : null,
+    estWaitMin: entry?.estWaitMin ?? 0,
+  };
+}
+
+/** The live ticket held by a phone number, for inbound SMS STATUS. */
+export async function loadTicketByPhone(phone: string): Promise<QueueTicket | null> {
+  const [row] = await db
+    .select({ joinToken: walkIns.joinToken })
+    .from(walkIns)
+    .where(
+      and(eq(walkIns.phone, phone), inArray(walkIns.status, ["waiting", "serving"])),
+    )
+    .orderBy(asc(walkIns.createdAt))
+    .limit(1);
+  return row ? loadTicketByToken(row.joinToken) : null;
+}
+
+/** A client drops out of the line using their own token. */
+export async function leaveByTokenOp(token: string): Promise<boolean> {
+  const left = await db
+    .update(walkIns)
+    .set({ status: "canceled", doneAt: new Date() })
+    .where(and(eq(walkIns.joinToken, token), eq(walkIns.status, "waiting")))
+    .returning({ id: walkIns.id });
+  return left.length > 0;
+}
+
+/** Same, addressed by phone number - for an inbound SMS CANCEL. */
+export async function leaveByPhoneOp(phone: string): Promise<boolean> {
+  const left = await db
+    .update(walkIns)
+    .set({ status: "canceled", doneAt: new Date() })
+    .where(and(eq(walkIns.phone, phone), eq(walkIns.status, "waiting")))
+    .returning({ id: walkIns.id });
+  return left.length > 0;
 }
 
 /**

@@ -14,6 +14,7 @@ import { isBackdrop, type Backdrop } from "@/domain/backdrops";
 import { effectivePricing } from "@/domain/barbers/pricing";
 import { parseSpecialties } from "@/domain/barbers/specialties";
 import { formatMoney } from "@/domain/money";
+import { loadWalkinQueue } from "@/domain/walkins/operations";
 
 export const dynamic = "force-dynamic";
 
@@ -30,6 +31,14 @@ export default async function HomePage({
     : isBackdrop(settings?.backdrop)
       ? settings.backdrop
       : "skyline";
+  // Live walk-in wait, so the landing page answers "should I come in now?".
+  const liveQueue = await loadWalkinQueue();
+  const waitingNow = liveQueue.filter((w) => w.status === "waiting").length;
+  const nextWaitMin = liveQueue.find((w) => w.status === "waiting")?.estWaitMin ?? 0;
+  const selfJoinOpen =
+    (settings?.selfJoinEnabled ?? false) &&
+    (settings?.queueMaxWaiting === 0 || waitingNow < (settings?.queueMaxWaiting ?? 0));
+
   const activeBarbers = await db
     .select()
     .from(barbers)
@@ -133,6 +142,40 @@ export default async function HomePage({
               Memberships
             </ButtonLink>
           </div>
+          {selfJoinOpen && (
+            <Link
+              href="/queue"
+              className="chip"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                marginTop: 14,
+                padding: "8px 16px",
+                borderRadius: "var(--radius-full)",
+                border: "1px solid var(--border-strong)",
+                background: "color-mix(in srgb, var(--panel) 80%, transparent)",
+                textDecoration: "none",
+                color: "var(--text)",
+                fontSize: 13,
+                fontWeight: 600,
+              }}
+            >
+              <span
+                aria-hidden
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: "var(--radius-full)",
+                  background: waitingNow === 0 ? "var(--ok)" : "var(--accent)",
+                }}
+              />
+              {waitingNow === 0
+                ? "No wait right now - walk right in"
+                : `${waitingNow} in line - about ${nextWaitMin} min`}
+              <span style={{ color: "var(--accent)" }}>Get in line {"->"}</span>
+            </Link>
+          )}
         </div>
       </section>
 

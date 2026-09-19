@@ -34,6 +34,10 @@ export interface ShopSettingsRow {
   readonly rebookAfterDays: number;
   /** Win-back nudge after this many days lapsed; 0 = off. */
   readonly winbackAfterDays: number;
+  /** Clients may add themselves to the walk-in line. */
+  readonly selfJoinEnabled: boolean;
+  /** Cap on people waiting before self-join is refused; 0 = no cap. */
+  readonly queueMaxWaiting: number;
 }
 
 export async function loadSettings(): Promise<ShopSettingsRow> {

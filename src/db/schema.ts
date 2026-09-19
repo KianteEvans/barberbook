@@ -52,6 +52,10 @@ export const shopSettings = pgTable("shop_settings", {
   loyaltyEveryN: integer("loyalty_every_n").notNull().default(0),
   rebookAfterDays: integer("rebook_after_days").notNull().default(0),
   winbackAfterDays: integer("winback_after_days").notNull().default(0),
+  // Walk-in self-service: clients can add themselves to the line, up to a cap
+  // (0 = no cap).
+  selfJoinEnabled: boolean("self_join_enabled").notNull().default(true),
+  queueMaxWaiting: integer("queue_max_waiting").notNull().default(20),
 });
 
 export const discountCodes = pgTable("discount_codes", {
@@ -369,6 +373,12 @@ export const walkIns = pgTable("walk_ins", {
   })
     .notNull()
     .default("waiting"),
+  // Unguessable handle: lets a client check their spot and leave the line
+  // without an account.
+  joinToken: uuid("join_token").notNull().defaultRandom(),
+  source: text("source", { enum: ["staff", "self", "sms"] })
+    .notNull()
+    .default("staff"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   calledAt: timestamp("called_at", { withTimezone: true }),
   doneAt: timestamp("done_at", { withTimezone: true }),

@@ -16,6 +16,21 @@ describe("parseSmsCommand", () => {
   it("recognizes help", () => {
     expect(parseSmsCommand("HELP").kind).toBe("help");
   });
+  it("recognizes join and carries an optional name", () => {
+    expect(parseSmsCommand("JOIN")).toEqual({ kind: "join", name: null });
+    expect(parseSmsCommand("join")).toEqual({ kind: "join", name: null });
+    expect(parseSmsCommand("LINE  Malik  Rivera")).toEqual({
+      kind: "join",
+      name: "Malik Rivera",
+    });
+    // A runaway name can't blow past the column length.
+    const long = parseSmsCommand(`JOIN ${"a".repeat(200)}`);
+    expect(long.kind === "join" && long.name?.length).toBe(60);
+  });
+  it("recognizes status words", () => {
+    expect(parseSmsCommand("STATUS").kind).toBe("status");
+    expect(parseSmsCommand("wait").kind).toBe("status");
+  });
   it("falls back to unknown", () => {
     expect(parseSmsCommand("what time").kind).toBe("unknown");
     expect(parseSmsCommand("").kind).toBe("unknown");

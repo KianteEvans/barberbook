@@ -178,6 +178,26 @@ export default async function AdminSettingsPage(): Promise<ReactNode> {
               defaultValue={String(settings.winbackAfterDays)}
             />
           </Field>
+          <Field label="Let clients add themselves to the walk-in line">
+            <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14 }}>
+              <input
+                type="checkbox"
+                name="selfJoinEnabled"
+                defaultChecked={settings.selfJoinEnabled}
+              />
+              Show the &quot;get in line&quot; form on the public queue board
+            </label>
+          </Field>
+          <Field label="Max people waiting before self-join closes (0 = no cap)">
+            <TextInput
+              name="queueMaxWaiting"
+              type="number"
+              min={0}
+              max={200}
+              required
+              defaultValue={String(settings.queueMaxWaiting)}
+            />
+          </Field>
           <Field label="Landing backdrop">
             <Select name="backdrop" defaultValue={settings.backdrop}>
               {BACKDROPS.map((b) => (

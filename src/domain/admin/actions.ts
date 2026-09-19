@@ -174,6 +174,8 @@ const policySchema = z.object({
   loyaltyEveryN: z.coerce.number().int().min(0).max(50),
   rebookAfterDays: z.coerce.number().int().min(0).max(365),
   winbackAfterDays: z.coerce.number().int().min(0).max(365),
+  selfJoinEnabled: z.string().optional(),
+  queueMaxWaiting: z.coerce.number().int().min(0).max(200),
 });
 
 export async function savePolicyAction(
@@ -182,11 +184,16 @@ export async function savePolicyAction(
 ): Promise<ActionState> {
   try {
     await getAdminIdentity();
-    const input = parseOrThrow(policySchema, formObject(formData));
-    await db.update(shopSettings).set(input).where(eq(shopSettings.id, 1));
+    const { selfJoinEnabled, ...rest } = parseOrThrow(policySchema, formObject(formData));
+    await db
+      .update(shopSettings)
+      // A checkbox posts "on" or nothing at all.
+      .set({ ...rest, selfJoinEnabled: selfJoinEnabled === "on" })
+      .where(eq(shopSettings.id, 1));
     revalidatePath("/");
     revalidatePath("/admin");
     revalidatePath("/admin/settings");
+    revalidatePath("/queue");
     return { ok: true, detail: "Settings saved." };
   } catch (err) {
     return { ok: false, error: toActionError(err) };
