@@ -187,6 +187,7 @@ async function main(): Promise<void> {
     await sql`DELETE FROM reminder_log`;
     await sql`DELETE FROM notifications`;
     await sql`DELETE FROM payments`;
+    await sql`DELETE FROM payout_periods`;
     await sql`DELETE FROM sale_items`;
     await sql`DELETE FROM sales`;
     await sql`DELETE FROM series_occurrences`;
@@ -573,6 +574,26 @@ async function main(): Promise<void> {
         (NULL, 'Big Rob', '917-555-0251', NULL, 'waiting', 'sms', ${new Date(now.getTime() - 6 * 60_000)}, NULL, NULL),
         (${wb.id}, 'Nestor', NULL, ${wSvc!.id}, 'done', 'self', ${new Date(now.getTime() - 3 * 3_600_000)}, ${new Date(now.getTime() - 170 * 60_000)}, ${new Date(now.getTime() - 140 * 60_000)}),
         (${barbers[2]!.id}, 'DJ', NULL, NULL, 'done', 'staff', ${new Date(now.getTime() - 4 * 3_600_000)}, ${new Date(now.getTime() - 230 * 60_000)}, ${new Date(now.getTime() - 200 * 60_000)})`;
+
+    // --- How each chair is paid: a realistic mix of models ---
+    const COMP: Array<[string, string, number | null, number | null]> = [
+      ["commission", "60", 60, null],
+      ["commission", "55", 55, null],
+      ["booth_rent", "weekly", null, 20000],
+      ["commission", "65", 65, null],
+      ["booth_rent", "weekly", null, 17500],
+    ];
+    for (let i = 0; i < barbers.length; i++) {
+      const [type, , pct, rent] = COMP[i % COMP.length]!;
+      await sql`
+        UPDATE barbers
+        SET comp_type = ${type},
+            commission_pct = ${pct},
+            booth_rent_cents = ${rent},
+            booth_rent_period = ${rent === null ? null : "weekly"},
+            hourly_cents = NULL
+        WHERE id = ${barbers[i]!.id}`;
+    }
 
     // --- Register: a few days of counter sales with mixed tender ---
     console.log("[demo] ringing up register sales...");

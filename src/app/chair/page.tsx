@@ -29,6 +29,7 @@ import { queueForBarber } from "@/domain/walkins/operations";
 import { addWalkinAction } from "@/domain/walkins/actions";
 import { FormDrawer } from "@/components/ui/FormDrawer";
 import { WalkinResolve } from "@/components/ui/WalkinResolve";
+import { loadPayoutsForPeriod } from "@/domain/payroll/operations";
 import { formatMoney } from "@/domain/money";
 import { ChairActions } from "./ChairActions";
 import { ChairClientNotes } from "./ChairClientNotes";
@@ -81,6 +82,18 @@ export default async function ChairPage(): Promise<ReactNode> {
     ...new Set(appts.map((a) => a.clientId)),
   ]);
   const walkinQueue = await queueForBarber(barber.id);
+
+  // This barber's pay for the current two-week period, read-only.
+  const payEnd = todayInShopTz(settings.timezone);
+  const payStart = format(addDays(new Date(`${payEnd}T12:00:00Z`), -13), "yyyy-MM-dd");
+  const myPay = (
+    await loadPayoutsForPeriod({
+      start: payStart,
+      end: payEnd,
+      startUtc: new Date(`${payStart}T00:00:00.000Z`),
+      endUtc: new Date(new Date(`${payEnd}T00:00:00.000Z`).getTime() + 86_400_000),
+    })
+  ).find((p) => p.barberId === barber.id);
 
   const rules = await db
     .select()
@@ -141,6 +154,52 @@ export default async function ChairPage(): Promise<ReactNode> {
             : `Share of your last ${rebook.eligible} clients who booked with you again within ${rebook.windowDays} days.`}
         </p>
       </Card>
+
+      {myPay && myPay.comp.type !== "none" && (
+        <Card title="Your pay this period">
+          <div style={{ display: "grid", gap: 8 }}>
+            {myPay.payout.lines.map((l, i) => (
+              <div
+                key={`${l.label}-${i}`}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: 13,
+                  color: l.countsTowardNet ? "var(--text)" : "var(--muted)",
+                }}
+              >
+                <span>{l.label}</span>
+                <span style={{ fontWeight: 600 }}>{formatMoney(l.amountCents)}</span>
+              </div>
+            ))}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                borderTop: "1px solid var(--border)",
+                paddingTop: 8,
+                fontSize: 16,
+                fontWeight: 800,
+              }}
+            >
+              <span>{myPay.payout.balanceCents < 0 ? "You owe the shop" : "Coming to you"}</span>
+              <span>
+                {formatMoney(
+                  myPay.payout.balanceCents < 0
+                    ? -myPay.payout.balanceCents
+                    : myPay.payout.netCents,
+                )}
+              </span>
+            </div>
+            <p style={{ margin: 0, fontSize: 11, color: "var(--muted)" }}>
+              {format(new Date(`${payStart}T12:00:00Z`), "MMM d")} -{" "}
+              {format(new Date(`${payEnd}T12:00:00Z`), "MMM d")}. Greyed lines are for
+              the record: cash tips are already in your pocket.
+              {myPay.finalized?.status === "paid" ? " Marked paid." : ""}
+            </p>
+          </div>
+        </Card>
+      )}
 
       <Card
         title="Walk-in queue"

@@ -106,7 +106,39 @@ export const barbers = pgTable("barbers", {
   specialties: text("specialties"),
   photoFile: text("photo_file"),
   active: boolean("active").notNull().default(true),
+  // How this chair is paid.
+  compType: text("comp_type", {
+    enum: ["none", "commission", "booth_rent", "hourly"],
+  })
+    .notNull()
+    .default("none"),
+  commissionPct: integer("commission_pct"),
+  boothRentCents: integer("booth_rent_cents"),
+  boothRentPeriod: text("booth_rent_period", { enum: ["weekly", "monthly"] }),
+  hourlyCents: integer("hourly_cents"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const payoutPeriods = pgTable("payout_periods", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  barberId: uuid("barber_id")
+    .notNull()
+    .references(() => barbers.id, { onDelete: "cascade" }),
+  periodStart: date("period_start").notNull(),
+  periodEnd: date("period_end").notNull(),
+  compType: text("comp_type").notNull(),
+  grossCents: integer("gross_cents").notNull().default(0),
+  commissionCents: integer("commission_cents").notNull().default(0),
+  boothRentCents: integer("booth_rent_cents").notNull().default(0),
+  hourlyCents: integer("hourly_cents").notNull().default(0),
+  cardTipsCents: integer("card_tips_cents").notNull().default(0),
+  cashTipsCents: integer("cash_tips_cents").notNull().default(0),
+  adjustmentCents: integer("adjustment_cents").notNull().default(0),
+  netCents: integer("net_cents").notNull().default(0),
+  status: text("status", { enum: ["draft", "paid"] }).notNull().default("draft"),
+  note: text("note"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  paidAt: timestamp("paid_at", { withTimezone: true }),
 });
 
 export const barberServices = pgTable(
