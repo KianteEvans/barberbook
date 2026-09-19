@@ -292,18 +292,59 @@ export const seriesOccurrences = pgTable("series_occurrences", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+export const sales = pgTable("sales", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  barberId: uuid("barber_id").references(() => barbers.id),
+  clientId: uuid("client_id").references(() => users.id),
+  appointmentId: uuid("appointment_id").references(() => appointments.id),
+  subtotalCents: integer("subtotal_cents").notNull().default(0),
+  discountCents: integer("discount_cents").notNull().default(0),
+  tipCents: integer("tip_cents").notNull().default(0),
+  totalCents: integer("total_cents").notNull().default(0),
+  tender: text("tender", { enum: ["cash", "card", "other"] }).notNull(),
+  status: text("status", { enum: ["paid", "voided"] }).notNull().default("paid"),
+  note: text("note"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  voidedAt: timestamp("voided_at", { withTimezone: true }),
+});
+
+export const saleItems = pgTable("sale_items", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  saleId: uuid("sale_id")
+    .notNull()
+    .references(() => sales.id, { onDelete: "cascade" }),
+  kind: text("kind", { enum: ["service", "product", "custom"] }).notNull(),
+  serviceId: uuid("service_id").references(() => services.id),
+  productId: uuid("product_id"),
+  // Frozen at sale time so later price edits never rewrite history.
+  nameSnapshot: text("name_snapshot").notNull(),
+  unitPriceCents: integer("unit_price_cents").notNull(),
+  qty: integer("qty").notNull().default(1),
+  lineTotalCents: integer("line_total_cents").notNull(),
+});
+
 export const payments = pgTable("payments", {
   id: uuid("id").primaryKey().defaultRandom(),
   appointmentId: uuid("appointment_id").references(() => appointments.id),
   membershipId: uuid("membership_id").references(() => memberships.id),
   clientId: uuid("client_id").references(() => users.id),
+  saleId: uuid("sale_id").references(() => sales.id),
   type: text("type", {
-    enum: ["deposit", "remainder", "refund", "no_show_fee", "subscription", "tip"],
+    enum: [
+      "deposit",
+      "remainder",
+      "refund",
+      "no_show_fee",
+      "subscription",
+      "tip",
+      "sale",
+    ],
   }).notNull(),
   amountCents: integer("amount_cents").notNull(),
   status: text("status", { enum: ["pending", "succeeded", "failed", "refunded"] })
     .notNull()
     .default("pending"),
+  tender: text("tender", { enum: ["cash", "card", "other"] }),
   stripePaymentIntentId: text("stripe_payment_intent_id"),
   stripeRefundId: text("stripe_refund_id"),
   failureMessage: text("failure_message"),

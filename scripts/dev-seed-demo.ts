@@ -187,6 +187,8 @@ async function main(): Promise<void> {
     await sql`DELETE FROM reminder_log`;
     await sql`DELETE FROM notifications`;
     await sql`DELETE FROM payments`;
+    await sql`DELETE FROM sale_items`;
+    await sql`DELETE FROM sales`;
     await sql`DELETE FROM series_occurrences`;
     await sql`DELETE FROM recurring_series`;
     await sql`DELETE FROM waitlist_entries`;
@@ -571,6 +573,56 @@ async function main(): Promise<void> {
         (NULL, 'Big Rob', '917-555-0251', NULL, 'waiting', 'sms', ${new Date(now.getTime() - 6 * 60_000)}, NULL, NULL),
         (${wb.id}, 'Nestor', NULL, ${wSvc!.id}, 'done', 'self', ${new Date(now.getTime() - 3 * 3_600_000)}, ${new Date(now.getTime() - 170 * 60_000)}, ${new Date(now.getTime() - 140 * 60_000)}),
         (${barbers[2]!.id}, 'DJ', NULL, NULL, 'done', 'staff', ${new Date(now.getTime() - 4 * 3_600_000)}, ${new Date(now.getTime() - 230 * 60_000)}, ${new Date(now.getTime() - 200 * 60_000)})`;
+
+    // --- Register: a few days of counter sales with mixed tender ---
+    console.log("[demo] ringing up register sales...");
+    const RETAIL = [
+      { name: "Pomade", cents: 1800 },
+      { name: "Beard oil", cents: 2200 },
+      { name: "Shave butter", cents: 1600 },
+      { name: "Shop tee", cents: 2500 },
+    ];
+    let saleCount = 0;
+    for (let dayOffset = -6; dayOffset <= 0; dayOffset++) {
+      for (let k = 0; k < between(2, 6); k++) {
+        const b = pick(barbers);
+        const svc = pick(services);
+        const when = new Date(
+          at(dateStr(addDays(now, dayOffset)), between(10 * 60, 18 * 60)).getTime(),
+        );
+        if (when.getTime() > now.getTime()) continue;
+        const tender = chance(0.45) ? "cash" : chance(0.85) ? "card" : "other";
+        const withRetail = chance(0.35);
+        const retail = pick(RETAIL);
+        const subtotal = svc.price_cents + (withRetail ? retail.cents : 0);
+        const discount = chance(0.12) ? 500 : 0;
+        const net = subtotal - discount;
+        const tip = chance(0.5) ? Math.round((net * pick([15, 18, 20, 25])) / 100 / 100) * 100 : 0;
+
+        const [sale] = await sql<{ id: string }[]>`
+          INSERT INTO sales (barber_id, subtotal_cents, discount_cents, tip_cents, total_cents, tender, status, created_at)
+          VALUES (${b.id}, ${subtotal}, ${discount}, ${tip}, ${net + tip}, ${tender}, 'paid', ${when})
+          RETURNING id`;
+        await sql`
+          INSERT INTO sale_items (sale_id, kind, service_id, name_snapshot, unit_price_cents, qty, line_total_cents)
+          VALUES (${sale!.id}, 'service', ${svc.id}, ${svc.name}, ${svc.price_cents}, 1, ${svc.price_cents})`;
+        if (withRetail) {
+          await sql`
+            INSERT INTO sale_items (sale_id, kind, name_snapshot, unit_price_cents, qty, line_total_cents)
+            VALUES (${sale!.id}, 'custom', ${retail.name}, ${retail.cents}, 1, ${retail.cents})`;
+        }
+        await sql`
+          INSERT INTO payments (sale_id, type, amount_cents, status, tender, created_at)
+          VALUES (${sale!.id}, 'sale', ${net}, 'succeeded', ${tender}, ${when})`;
+        if (tip > 0) {
+          await sql`
+            INSERT INTO payments (sale_id, type, amount_cents, status, tender, created_at)
+            VALUES (${sale!.id}, 'tip', ${tip}, 'succeeded', ${tender}, ${when})`;
+        }
+        saleCount++;
+      }
+    }
+    console.log(`[demo] ${saleCount} register sales`);
 
     // --- Nudge bookkeeping: one rebook already sent ---
     const lapsed = clients[15]!;

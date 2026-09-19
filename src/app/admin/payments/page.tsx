@@ -27,6 +27,7 @@ export default async function AdminPaymentsPage(): Promise<ReactNode> {
       type: payments.type,
       amountCents: payments.amountCents,
       status: payments.status,
+      tender: payments.tender,
       failureMessage: payments.failureMessage,
       clientName: users.name,
     })
@@ -73,6 +74,7 @@ export default async function AdminPaymentsPage(): Promise<ReactNode> {
                 <th>When</th>
                 <th>Client</th>
                 <th>Type</th>
+                <th>Tender</th>
                 <th style={{ textAlign: "right" }}>Amount</th>
                 <th>Status</th>
                 <th>Note</th>
@@ -86,6 +88,7 @@ export default async function AdminPaymentsPage(): Promise<ReactNode> {
                   </td>
                   <td>{r.clientName ?? "-"}</td>
                   <td style={{ color: "var(--muted)" }}>{r.type.replace("_", " ")}</td>
+                  <td style={{ color: "var(--muted)" }}>{r.tender ?? "-"}</td>
                   <td style={{ textAlign: "right", fontWeight: 600 }}>
                     {formatMoney(r.amountCents)}
                   </td>
