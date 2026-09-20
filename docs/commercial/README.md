@@ -30,12 +30,54 @@ $80,001 per engagement year.
 | Governing law | New York; New York County venue; jury waiver |
 | Exclusivity | Non-exclusive both ways |
 | Payment to OBP | Pay-when-paid monthly, with a hard 60-day longstop |
-| $9,999 retention | Accrues pro rata at $833.25/month, not front-loaded |
+| Platform revenue | $9,999/year to Automatum in every case, accruing pro rata at $833.25/month |
+| Net new client | Service revenue retained in full by OBP |
+| Upsell of an existing Automatum customer | Service revenue split 75% OBP / 25% Automatum |
 
 Because the appointment is non-exclusive, the Client Registry (clause 4), the brand rules
 (clause 7 and Schedule 3) and non-circumvention (clause 15) carry the weight exclusivity would
 otherwise have. They are the only things separating "an Automatum client OBP delivers for"
 from "an OBP client".
+
+### Net new vs upsell
+
+The split depends on whether the client was already an Automatum subscriber. Clause 4.7
+classifies every client in the Client Registry at engagement order, on a documented-first-contact
+test with a 90-day lookback, and the classification is fixed for that engagement year.
+
+| | Net new client | Existing Automatum customer |
+|---|---|---|
+| Platform revenue ($9,999/yr) | New money, to Automatum | Already being paid, continues to Automatum |
+| Service revenue | 100% OBP | 75% OBP / 25% Automatum |
+| Tier 1 | OBP $20,001 | OBP $15,000.75, Automatum $5,000.25 |
+| Tier 2 | OBP $50,001 | OBP $37,500.75, Automatum $12,500.25 |
+| Tier 3 | OBP $80,001 | OBP $60,000.75, Automatum $20,000.25 |
+
+The client pays the same tier price either way.
+
+This exists because the original structure made upsells worthless to Automatum. With the
+$9,999 sitting inside the tier price, an existing subscriber moving onto Managed Partner
+Development took Automatum from $9,999 to $9,999 - zero incremental revenue on up to $90,000
+of brokered business, while OBP earned the same as on a net new logo. Automatum would have had
+every reason not to sell into its own base, which is the easiest base to sell to and one the
+feasibility study names as a primary source of reach. The 25% share on upsells is consideration
+for the client relationship Automatum contributes, and it makes an upsell worth more to
+Automatum than a net new client at every tier.
+
+Clause 4.7 also records **Client Source** (OBP / Automatum / Joint or ACE). Nothing currently
+turns on it, but it is the hook for sourcing credit if that is ever added - see the two open
+items below.
+
+**Still open, raised but not yet drafted:**
+
+1. **Legacy client agreements.** Clause 6.5's no-worse-than covenant assumes the client contract
+   is written after this one. An existing Automatum customer already has a contract, possibly
+   carrying service levels OBP never agreed to. Needs a rule: Automatum conforms it, or the
+   non-conforming terms are excluded from flow-down and stay Automatum's risk.
+2. **Inherited partner roster.** "Up to 6 net new partners" assumes a standing start. An
+   existing customer may arrive with partners already, so a roster baseline should be recorded
+   at engagement start and the treatment of the inherited roster settled - same shape as the
+   Tier 3 downgrade carry-over in Schedule 2 paragraph 5.3.
 
 ### Regenerating the .docx
 

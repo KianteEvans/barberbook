@@ -70,7 +70,24 @@ case as amended by AWS from time to time.
 names, email domains, templates, document styles and other brand assets that Automatum makes
 available to OBP for use in delivering the Services.
 
-"**Automatum Retention**" has the meaning given in clause 11.2.
+"**Client Source**" means whether a Registered Client is OBP-Sourced, Automatum-Sourced, or
+Joint or ACE-Sourced, determined and recorded under clause 4.7.
+
+"**Client Status**" means whether a Registered Client is a Net New Client or an Existing
+Automatum Client, determined and recorded under clause 4.7.
+
+"**Existing Automatum Client**" means a Client that, at the date its Engagement Order is
+executed or at any time in the ninety (90) days before that date, subscribes or subscribed to
+Automatum's Enterprise tier or any other paid Automatum subscription.
+
+"**Net New Client**" means a Client that is not an Existing Automatum Client.
+
+"**Platform Revenue**" means nine thousand nine hundred ninety nine dollars ($9,999) per
+Engagement Year, being the price of Automatum's Enterprise tier. Platform Revenue belongs to
+Automatum in every case.
+
+"**Service Revenue**" means the Collected Client Fees for an Engagement Year less the Platform
+Revenue. Clause 11.2 states how Service Revenue is divided, which depends on Client Status.
 
 "**Business Day**" means a day other than a Saturday, Sunday or public holiday in the State of
 New York.
@@ -132,7 +149,7 @@ margin schedule forms, training curricula, enablement content, processes and kno
 OBP owns or licenses and uses in delivering the Services, together with the Partner System of
 Record.
 
-"**OBP Service Revenue**" has the meaning given in clause 11.2.
+"**OBP Service Revenue**" means OBP's share of the Service Revenue, as determined by clause 11.2.
 
 "**Offer-Issuing Partner**" means, in respect of a Registered Client and a measurement period,
 a Recruited Partner that has issued at least one CPPO against that Client's listing during
@@ -264,8 +281,9 @@ Engagement Order for that Client. Automatum maintains the Client Registry and pr
 with a current copy on request and in any event with each monthly statement under clause 11.6.
 
 **4.3 Engagement Order contents.** Each Engagement Order states at least: the Client's legal
-name; the Tier; the Engagement start date and Engagement Year dates; the Client Fees; the
-resulting OBP Service Revenue calculated under clause 11.2; the named personnel required by
+name; the Tier; the Client Status and the Client Source determined under clause 4.7; the
+Engagement start date and Engagement Year dates; the Client Fees; the resulting OBP Service
+Revenue calculated under clause 11.2; the named personnel required by
 clause 9; the PSR seat allocation; and any variation to this Agreement permitted by clause
 2.3(a).
 
@@ -286,6 +304,24 @@ Registered Client.
 **4.6 Removal.** A Client remains in the Client Registry while its Engagement is in effect and
 for the tail period stated in clause 15.4, after which it is marked closed. Closure does not
 affect obligations that survive under clause 23.6.
+
+**4.7 Client Status and Client Source.** Each Engagement Order records, and the Client Registry
+carries, two classifications determined at the date the Engagement Order is executed:
+
+  a. **Client Status**, being Net New Client or Existing Automatum Client as defined in clause
+     1.1. Automatum will disclose to OBP, before the Engagement Order is executed, whether the
+     proposed Client subscribes or has subscribed to any paid Automatum subscription in the
+     ninety (90) days before that date, and will provide reasonable evidence on request. Client
+     Status determines the division of Service Revenue under clause 11.2.
+  b. **Client Source**, being OBP-Sourced, Automatum-Sourced, or Joint or ACE-Sourced, decided
+     by which Party first made documented contact with the Client about the Solution, or Joint
+     or ACE-Sourced where the opportunity arrived through AWS ACE or neither Party can show
+     first contact.
+
+  Both classifications are fixed when the Engagement Order is executed and are not revisited
+  for that Engagement Year. A Client's Status is re-determined only on a renewal Engagement
+  Order, at which point a Net New Client that has since become a subscriber is an Existing
+  Automatum Client. A dispute about either classification is escalated under clause 26.2.
 
 ---
 
@@ -619,20 +655,32 @@ Engagement Month, the Client Fees actually received by Automatum for that month,
 and of any payment processing fees, and net of any AWS Marketplace listing fee if and to the
 extent clause 11.10 applies.
 
-**11.2 The split.** For each Engagement Year:
+**11.2 The split.** For each Engagement Year, the Collected Client Fees divide into Platform
+Revenue and Service Revenue. Platform Revenue is $9,999 and belongs to Automatum whatever the
+Client Status. Service Revenue divides according to Client Status:
 
-  a. "**Automatum Retention**" is nine thousand nine hundred ninety nine dollars ($9,999),
-     being Automatum's Enterprise tier, which accrues pro rata across the twelve (12)
-     Engagement Months of that Engagement Year at eight hundred thirty three dollars and
-     twenty five cents ($833.25) per Engagement Month; and
-  b. "**OBP Service Revenue**" is the balance of the Collected Client Fees for that Engagement
-     Year after the Automatum Retention, which accrues monthly as set out in Schedule 2.
+  a. **Net New Client.** The Platform Revenue is paid to Automatum and the whole of the Service
+     Revenue is retained by OBP. Automatum takes no share of Service Revenue, because the
+     Platform Revenue is revenue Automatum did not have before the Engagement.
+  b. **Existing Automatum Client.** The Client already pays the Platform Revenue under its
+     existing subscription and that subscription continues unchanged. The Service Revenue is
+     divided seventy five percent (75%) to OBP and twenty five percent (25%) to Automatum. The
+     Parties record that Automatum's twenty five percent is consideration for the Client
+     relationship it brought to the Engagement, and that without it an upsell of Automatum's
+     own subscriber base would earn Automatum nothing beyond the subscription it was already
+     collecting.
 
-  Schedule 2 states the resulting figures for each Tier. The Automatum Retention is the same
-  amount at every Tier.
+  The Client Fees are the same at a given Tier whatever the Client Status, so a Client pays the
+  same price for the Solution whether it is new to Automatum or not.
 
-**11.3 No front-loading.** The Automatum Retention accrues pro rata under clause 11.2(a) and
-is not recovered from the earliest Client payments in priority to the OBP Service Revenue.
+  Schedule 2 states the resulting figures for each Tier and each Client Status, and the
+  rounding rule for monthly accrual.
+
+**11.3 Accrual and no front-loading.** Platform Revenue accrues pro rata across the twelve (12)
+Engagement Months of an Engagement Year at eight hundred thirty three dollars and twenty five
+cents ($833.25) per Engagement Month, and is not recovered from the earliest Client payments in
+priority to the OBP Service Revenue. Each Party's share of Service Revenue accrues monthly at
+one twelfth of its annual share, and OBP Service Revenue is paid under clause 11.5.
 
 **11.4 Invoicing.** OBP will invoice Automatum monthly in arrears for the OBP Service Revenue
 accrued in the preceding Engagement Month, together with any amount payable under Schedule 2
@@ -648,8 +696,8 @@ be withheld and only until the dispute is resolved.
 **11.6 Automatum's collection obligations.** Automatum will invoice each Registered Client
 within five (5) Business Days of the due date under the Client Agreement, will pursue
 collection diligently, and will provide OBP with a monthly statement showing, for each
-Registered Client, the Client Fees invoiced, the amounts collected, the Automatum Retention
-accrued and the OBP Service Revenue accrued.
+Registered Client, the Client Status, the Client Fees invoiced, the amounts collected, the
+Platform Revenue accrued, and each Party's share of Service Revenue accrued.
 
 **11.7 No unilateral concessions.** Automatum will not settle, waive, discount or credit any
 Client Fees in a way that reduces OBP Service Revenue without OBP's prior written consent. If
@@ -1312,33 +1360,65 @@ customers, is out of scope and chargeable under clause 14.5 at the rate card in 
 
 ## 1. The split
 
-The Automatum Retention is $9,999 per Engagement Year at every Tier, accruing at $833.25 per
-Engagement Month under clause 11.2(a). The OBP Service Revenue is the balance.
+Platform Revenue is $9,999 per Engagement Year at every Tier and belongs to Automatum in every
+case, accruing at $833.25 per Engagement Month under clause 11.3. Service Revenue is the
+balance of the Collected Client Fees and divides according to Client Status.
 
-| Tier | Client Fees per month | Client Fees per Engagement Year | Automatum Retention per year | OBP Service Revenue per year | OBP Service Revenue per month | Automatum share of gross |
+**Net New Client - Platform Revenue to Automatum, Service Revenue retained by OBP**
+
+| Tier | Client Fees per month | Client Fees per Engagement Year | Platform Revenue to Automatum | Service Revenue | OBP share (100%) | OBP per month |
 |---|---|---|---|---|---|---|
-| 1 | $2,500 | $30,000 | $9,999 | $20,001 | $1,666.75 | 33.3% |
-| 2 | $5,000 | $60,000 | $9,999 | $50,001 | $4,166.75 | 16.7% |
-| 3 | $7,500 | $90,000 | $9,999 | $80,001 | $6,666.75 | 11.1% |
+| 1 | $2,500 | $30,000 | $9,999 | $20,001 | $20,001 | $1,666.75 |
+| 2 | $5,000 | $60,000 | $9,999 | $50,001 | $50,001 | $4,166.75 |
+| 3 | $7,500 | $90,000 | $9,999 | $80,001 | $80,001 | $6,666.75 |
+
+**Existing Automatum Client - Service Revenue split 75% OBP / 25% Automatum**
+
+The Client's existing subscription continues and is not part of the Engagement. The figures
+below are the Engagement itself.
+
+| Tier | Client Fees per month | Service Revenue per Engagement Year | OBP share (75%) | Automatum share (25%) | OBP per month | Automatum total per year |
+|---|---|---|---|---|---|---|
+| 1 | $2,500 | $20,001 | $15,000.75 | $5,000.25 | $1,250.06 | $14,999.25 |
+| 2 | $5,000 | $50,001 | $37,500.75 | $12,500.25 | $3,125.06 | $22,499.25 |
+| 3 | $7,500 | $80,001 | $60,000.75 | $20,000.25 | $5,000.06 | $29,999.25 |
+
+"Automatum total per year" is the $9,999 Platform Revenue the Client already pays plus
+Automatum's 25% share, and is stated so the two Client Statuses can be compared. Under this
+split an upsell is worth more to Automatum than a Net New Client at every Tier, which is the
+result the Parties intend, because on an upsell Automatum contributes the Client relationship.
+
+**Rounding.** Monthly accrual is one twelfth of the annual share rounded to the nearest cent,
+and the final Engagement Month of each Engagement Year takes the rounding difference so that
+the twelve monthly amounts total the annual share exactly.
 
 These figures assume the Client Fees are collected in full. Clause 11.1 and clause 11.2 govern
-where they are not: both the Automatum Retention and the OBP Service Revenue accrue only
+where they are not: Platform Revenue and each Party's share of Service Revenue accrue only
 against Collected Client Fees, and a shortfall is borne by each Party in the proportions above
 for the affected Engagement Month.
 
 ## 2. Worked example - full Engagement Year, Tier 2
 
-Client Fees collected $60,000. Automatum Retention $9,999 accruing at $833.25 per month. OBP
-Service Revenue $50,001 accruing at $4,166.75 per month. OBP invoices $4,166.75 monthly in
-arrears under clause 11.4.
+**Net New Client.** Client Fees collected $60,000. Platform Revenue $9,999 to Automatum,
+accruing at $833.25 per month. Service Revenue $50,001, retained in full by OBP and accruing at
+$4,166.75 per month. OBP invoices $4,166.75 monthly in arrears under clause 11.4.
+
+**Existing Automatum Client.** The same $60,000 is collected and the Client's existing
+subscription continues alongside it. Service Revenue $50,001 divides $37,500.75 to OBP and
+$12,500.25 to Automatum. OBP invoices $3,125.06 monthly in arrears, with the final Engagement
+Month of the Engagement Year taking the rounding difference under paragraph 1.
 
 ## 3. Worked example - Engagement terminated at the end of Engagement Month 3, Tier 1
 
 | | Amount |
 |---|---|
 | Client Fees collected (3 x $2,500) | $7,500.00 |
-| Automatum Retention accrued (3 x $833.25) | $2,499.75 |
+| Platform Revenue accrued (3 x $833.25) | $2,499.75 |
 | OBP Service Revenue accrued (3 x $1,666.75) | $5,000.25 |
+
+Had the same Client been an Existing Automatum Client, the three months would have accrued
+$2,499.75 of Platform Revenue under its continuing subscription, $3,750.19 of Service Revenue
+to OBP and $1,250.06 to Automatum.
 
 Neither Party recovers a further amount from the other on account of the terminated
 Engagement, except as clause 4 of this Schedule provides. Automatum has recovered $2,499.75 of
@@ -1657,7 +1737,10 @@ Effective Date]**
 | Engagement start date | |
 | Engagement Year dates | |
 | Client Fees per month | |
-| Automatum Retention per Engagement Year | $9,999 |
+| Client Status (clause 4.7) | Net New Client / Existing Automatum Client |
+| Client Source (clause 4.7) | OBP-Sourced / Automatum-Sourced / Joint or ACE-Sourced |
+| Platform Revenue per Engagement Year | $9,999 |
+| Service Revenue split | 100% OBP (Net New) / 75% OBP, 25% Automatum (Existing) |
 | OBP Service Revenue per month | |
 | Named Channel Manager | |
 | Named Backup Channel Manager | |
@@ -1768,11 +1851,13 @@ Reviews, up to six partner recruitments and the PSR licence. **Open commercial i
 Tier 1 is viable at that price.** This Agreement does not resolve it and neither Party has
 warranted that it is.
 
-**3.4 Automatum's margin as prime.** At Tier 3 the Automatum Retention is 11.1% of gross, and
-Automatum carries client credit risk, service level liability, collection risk and the client
-relationship. **Open commercial item: whether the Retention is a margin or a pass-through of
-Automatum's own cost**, and whether a prime management fee should sit on top of it. The
-feasibility study does not say. This Agreement implements the study's figures as written.
+**3.4 Automatum's margin as prime.** On a Net New Client at Tier 3 the Platform Revenue is
+11.1% of gross, and Automatum carries client credit risk, service level liability, collection
+risk and the client relationship. **Open commercial item: whether the Platform Revenue is a
+margin or a pass-through of Automatum's own cost.** The feasibility study does not say. Clause
+11.2(b) resolves the equivalent question for an Existing Automatum Client by giving Automatum a
+25% share of Service Revenue; no equivalent management fee applies to a Net New Client, where
+Automatum's return is the Platform Revenue alone.
 
 **3.5 Stress testing at the wrong end.** PSR licensing was stress-tested against Tier 1, the
 cheapest and most predictable case, while Tier 3 carries an uncapped roster. If the PSR is
