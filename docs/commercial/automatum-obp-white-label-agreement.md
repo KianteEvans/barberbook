@@ -181,8 +181,8 @@ services to anyone, including another AWS Marketplace seller. This is subject on
 15, which operates solely in respect of Registered Clients and Recruited Partners.
 
 **3.3 No volume commitment.** Automatum commits to no minimum number of Engagements,
-Registered Clients or Client Fees, and OBP has not relied on any forecast, including any
-projection in the feasibility study for the Solution.
+Registered Clients or Client Fees, and OBP has not relied on any forecast, projection or
+business case exchanged before the Effective Date.
 
 **3.4 No agency.** OBP is an independent contractor, not Automatum's agent, employee, partner
 or joint venturer, and may not bind Automatum except as Automatum authorizes in writing for a
@@ -613,9 +613,9 @@ maintain the AWS registrations, certifications and programme statuses its role r
 AWS's authority, or as able to bind AWS.
 
 **13.3 AWS is not a party.** AWS is not a party to this Agreement and owes no obligation under
-it. Nothing here or in the feasibility study for the Solution is a commitment by AWS,
-including its reference to ACE opportunity submissions, which Schedule 8 records as a
-programme assumption only.
+it. Nothing in this Agreement, and nothing said or exchanged before it, is a commitment by
+AWS. Any expectation of ACE opportunity submissions is a programme assumption recorded in
+Schedule 8 only.
 
 **13.4 Solution identifier and overlap.** Opportunities for the Solution map to the single
 solution identifier in Schedule 8. Where an opportunity falls within both the Solution and
@@ -968,9 +968,8 @@ recognized courier, or by email to the address stated for legal notices with a c
 courier, effective on delivery or the next Business Day if delivered outside business hours.
 
 **26.5 Entire agreement.** This Agreement is the entire agreement on its subject matter and
-supersedes all prior discussions, understandings and representations, including the
-feasibility study for the Solution, which is a discussion document and binds neither Party.
-Neither Party has relied on any statement not set out here. This does not limit liability for
+supersedes all prior discussions, understandings and representations, none of which binds
+either Party. Neither Party has relied on any statement not set out here. This does not limit liability for
 fraud.
 
 **26.6 Amendment, waiver and severability.** An amendment is effective only in writing signed
@@ -1262,9 +1261,8 @@ Client's unavailability.
 
 ## 4. Metric dictionary
 
-**4.1 Primary metric - Offer-Issuing Partners.** The metric the feasibility study calls
-"partners issuing offers": the number of distinct Recruited Partners that created at least one
-private offer or CPPO against the Registered Client's product during the reporting month, read
+**4.1 Primary metric - Offer-Issuing Partners.** The number of distinct Recruited Partners
+that created at least one private offer or CPPO against the Registered Client's product during the reporting month, read
 from the PSR offer record and reconciled against AWS Marketplace seller reporting. It applies
 only if the dependency in clause 14.2 is confirmed available by the longstop date in Schedule
 8.
@@ -1466,8 +1464,8 @@ clause 14 and never by assumption. This register must read nil before execution.
 
 **3.1 Engagement fees are invoiced directly.** Schedule 2 assumes engagement fees are invoiced
 by Automatum to the Client directly, not transacted through AWS Marketplace, so no listing fee
-reduces them. The study's arithmetic assumes this: at Tier 1 the stated $9,999 and $20,001 sum
-to exactly $30,000. If engagement fees are later transacted through Marketplace, a listing fee
+reduces them. The figures require it: at Tier 1, $9,999 and $20,001 sum to exactly $30,000,
+leaving no room for a listing fee. If engagement fees are later transacted through Marketplace, a listing fee
 of approximately 3% would be $900, $1,800 and $2,700 per Engagement Year at Tiers 1 to 3, and
 its allocation must be agreed under clause 11.9.
 
@@ -1493,8 +1491,9 @@ most predictable case, while Tier 3 carries an uncapped roster. If the PSR is pr
 partner or seat, Tier 3 is where the model breaks. Schedule 5 Part A records the question and
 Schedule 1 paragraph 3 provides the pass-through.
 
-**3.6 AWS is not committed.** The study's reference to five ACE opportunity submissions is a
-programme assumption only, not a commitment by AWS, Automatum or OBP. Clause 13.3 governs.
+**3.6 AWS is not committed.** An expectation that AWS ACE will submit five opportunities to
+the Solution is a programme assumption only, not a commitment by AWS, Automatum or OBP. Clause
+13.3 governs.
 
 **3.7 Partner AWS prerequisites.** Recruited Partner timelines depend on the partner
 completing AWS registration, tax, banking and service-linked role requirements, outside the

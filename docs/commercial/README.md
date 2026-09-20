@@ -12,16 +12,15 @@ A white label commercial agreement under which **Automatum** is the prime, custo
 party and **Only Best Practices** is the delivery subcontractor, performing the entire channel
 function under Automatum's brand and invisible to the ISV client.
 
-It exists because the feasibility study ("Automatum x OBP -
-Managed Partner Development") states under *Solution Team Structure* that "The Automatum x
-Only Best Practices Commercial Agreement for Managed Partner Development has been reviewed and
-executed." This is that agreement. **The study's date will need reconciling with the actual
-execution date** - as drafted the study asserts an executed agreement that did not yet exist.
+Automatum sells Managed Partner Development to software vendors that want a reseller channel
+built and run on AWS. OBP performs that channel function. This agreement papers the
+relationship between the two of them; the agreements with the vendors themselves are separate
+documents.
 
-All commercial terms are taken from the study: the three tiers and their prices, the partner
-ceilings, the deal desk turnarounds, the review and training cadences, the $9,999 Automatum
-Enterprise tier platform revenue, and the resulting OBP service revenue of $20,001 / $50,001 /
-$80,001 per engagement year.
+The commercial terms are: the three tiers and their prices, the partner ceilings, the deal desk
+turnarounds, the review and training cadences, the $9,999 Automatum Enterprise tier platform
+revenue, and the resulting OBP service revenue of $20,001 / $50,001 / $80,001 per engagement
+year.
 
 ### Decisions taken
 
@@ -59,8 +58,8 @@ This exists because the original structure made upsells worthless to Automatum. 
 $9,999 sitting inside the tier price, an existing subscriber moving onto Managed Partner
 Development took Automatum from $9,999 to $9,999 - zero incremental revenue on up to $90,000
 of brokered business, while OBP earned the same as on a net new logo. Automatum would have had
-every reason not to sell into its own base, which is the easiest base to sell to and one the
-feasibility study names as a primary source of reach. The 25% share on upsells is consideration
+every reason not to sell into its own base, which is the easiest base to sell to and the
+obvious source of early volume. The 25% share on upsells is consideration
 for the client relationship Automatum contributes, and it makes an upsell worth more to
 Automatum than a net new client at every tier.
 
@@ -134,7 +133,7 @@ certificates. These resolve through clause 14 and must never be closed by assump
 
 ### Terms chosen as market defaults, not instructed
 
-The study does not supply these numbers. They are drafted as market-standard defaults. This
+These numbers were not specified. They are drafted as market-standard defaults. This
 list used to sit in Schedule 8 of the agreement; it was drafting commentary rather than a term,
 so it now lives only here. It is the record of which figures were invented and need a
 deliberate decision rather than passing silently:
@@ -150,7 +149,7 @@ deliberate decision rather than passing silently:
 - initial term - 24 months, so an engagement order signed late still runs to expiry (clause 23.1)
 - transition period - 90 days, extendable to 180 (clause 24.1)
 
-### Open commercial questions the study leaves unresolved
+### Open commercial questions
 
 These are flagged in Schedule 8 paragraph 3 rather than papered over. They are business
 decisions, not drafting gaps.
@@ -162,21 +161,20 @@ decisions, not drafting gaps.
    by Automatum accepting early churn as its own loss.
 2. **Tier 1 viability.** $20,001 a year funds a named channel manager, a named backup, a
    next-business-day deal desk, two training sessions, four channel reviews, up to six partner
-   recruitments and the PSR licence. The study stress-tested licensing at this tier but says
-   nothing about labour.
+   recruitments and the PSR licence. Licensing was stress-tested at this tier; labour was not.
 3. **Automatum's margin as prime.** At Tier 3 the retention is 11.1% of gross while Automatum
-   carries client credit risk, SLA liability, collection risk and the client relationship. The
-   study does not say whether $9,999 is margin or a pass-through of Automatum's own cost. The
-   agreement implements the study's figures as written.
+   carries client credit risk, SLA liability, collection risk and the client relationship.
+   Whether $9,999 is margin or a pass-through of Automatum's own cost has never been settled,
+   and the agreement implements the figures as they stand.
 4. **Stress testing at the wrong end.** Licensing was tested against Tier 1, the most
    predictable case, while Tier 3 carries an uncapped roster. If the PSR is priced per partner,
    Tier 3 is where the model breaks. Schedule 1 paragraph 4 provides a cost pass-through if so.
 5. **Marketplace fee.** Schedule 2 assumes engagement fees are invoiced directly, not
-   transacted through AWS Marketplace - the study's own arithmetic requires this, since $9,999
-   plus $20,001 is exactly $30,000 with no room for a listing fee. If that changes, roughly 3%
-   (about $900 / $1,800 / $2,700 a year) needs a home. Clause 11.10.
+   transacted through AWS Marketplace - the figures require this, since $9,999 plus $20,001 is
+   exactly $30,000 with no room for a listing fee. If that changes, roughly 3%
+   (about $900 / $1,800 / $2,700 a year) needs a home. Clause 11.9.
 
-### Problems in the study the agreement resolves rather than inherits
+### Drafting problems resolved rather than inherited
 
 - **Tier 1 and Tier 2 sold the same turnaround.** "1 business day" and "8 business hours" are
   the same period if a business day is eight hours. Schedule 4 paragraph 1 defines Tier 1 as
@@ -203,8 +201,6 @@ decisions, not drafting gaps.
 - **Co-employment risk.** OBP staff on Automatum email presenting as Automatum's team for 12
   months is a recognisable joint-employer pattern. Clause 7.6 and Schedule 3 paragraph 1 set
   out exactly what personnel may and may not say.
-- **The AWS non-binding footer** on the study is not carried across. This document is intended
-  to bind.
 
 ### Not included
 
