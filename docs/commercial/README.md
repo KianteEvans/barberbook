@@ -12,7 +12,7 @@ A white label commercial agreement under which **Automatum** is the prime, custo
 party and **Only Best Practices** is the delivery subcontractor, performing the entire channel
 function under Automatum's brand and invisible to the ISV client.
 
-It exists because the AWS Business Outcomes Xcelerator feasibility study ("Automatum x OBP -
+It exists because the feasibility study ("Automatum x OBP -
 Managed Partner Development") states under *Solution Team Structure* that "The Automatum x
 Only Best Practices Commercial Agreement for Managed Partner Development has been reviewed and
 executed." This is that agreement. **The study's date will need reconciling with the actual
@@ -120,7 +120,7 @@ notices; signatory names and titles; the Effective Date; named Channel Manager, 
 Tier 3 Deal Desk Owner; relationship managers and escalation executives; PSR vendor details
 and certifications; the subprocessor list; rate card day rates; insurance limits; the AWS
 Marketplace listing identifier and seller of record entity; the APN account OBP files
-partner-sourced opportunities under; the BOX solution identifier; and the longstop date for
+partner-sourced opportunities under; the solution identifier; and the longstop date for
 the Marketplace authorization dependency.
 
 **Figures to confirm** - PSR seats per tier; named-owner committed hours per tier; the Tier 3

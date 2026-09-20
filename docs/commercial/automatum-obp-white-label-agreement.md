@@ -302,9 +302,8 @@ writing, remains fully liable for them, and may not subcontract any role named u
 seller of record registration, and the AWS Partner Network status and entitlements needed to
 issue private offers, CPPOs and Selling Authorizations.
 
-**6.2 AWS relationship.** Automatum owns the AWS relationship for the listing, the Solution
-and the AWS Business Outcomes Xcelerator submission, including obtaining the confirmation in
-clause 14.2.
+**6.2 AWS relationship.** Automatum owns the AWS relationship for the listing and the
+Solution, including obtaining the confirmation in clause 14.2.
 
 **6.3 Issuance.** Automatum will issue private offers, CPPOs and Selling Authorizations
 promptly on receiving an Issuance-Ready Package or Selling Authorization request, and within
