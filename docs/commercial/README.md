@@ -84,7 +84,7 @@ items below.
 The agreement has been through a leaning pass: rationale that explained *why* a clause exists
 was moved here, the duplication between clause 5 and Schedule 1 was collapsed, and
 words-and-numerals doubling ("ninety (90) days") was dropped for numerals. 17,092 words to
-13,831, 40 pages to 36, with every obligation, figure, cap and protection intact - 42 of them
+13,689, 40 pages to 35, with every obligation, figure, cap and protection intact - 44 of them
 checked individually, and the generated .docx round-tripped against the Markdown with zero
 content lost.
 
@@ -134,8 +134,10 @@ certificates. These resolve through clause 14 and must never be closed by assump
 
 ### Terms chosen as market defaults, not instructed
 
-The study does not supply these numbers. They are drafted as market-standard defaults and
-listed here so they get a deliberate decision rather than passing silently:
+The study does not supply these numbers. They are drafted as market-standard defaults. This
+list used to sit in Schedule 8 of the agreement; it was drafting commentary rather than a term,
+so it now lives only here. It is the record of which figures were invented and need a
+deliberate decision rather than passing silently:
 
 - service credit flow-down caps - 10% of gross monthly client fees per month, 20% where two or
   more service levels are missed, 15% of annual OBP service revenue per year (clause 8.5)

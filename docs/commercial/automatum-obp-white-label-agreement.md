@@ -1449,11 +1449,10 @@ first. Clause 9.7 makes exceeding a ratio an independent breach.
 
 ## 1. How to read this Schedule
 
-**to supply** is a known fact awaiting transcription. **to confirm** is a commercial figure
-requiring a decision or test, and every one inside an operative obligation carries a default
-that applies if this Agreement is executed before it is closed. **to verify** is an external
-dependency neither Party controls, resolved by clause 14 and never by assumption. This
-register must read nil before execution.
+**to supply** is a fact awaiting transcription. **to confirm** is a commercial figure needing
+a decision or test; each one inside an operative obligation takes the default in paragraph 5
+if this Agreement is executed first. **to verify** is an external dependency, resolved by
+clause 14 and never by assumption. This register must read nil before execution.
 
 ## 2. Dependencies to verify
 
@@ -1480,19 +1479,15 @@ Agreement carries a minimum term with an early termination charge, whether Autom
 Enterprise tier is monthly cancellable, or whether Automatum accepts early churn as its own
 loss.** Default if not closed: Automatum bears the shortfall.
 
-**3.3 Tier 1 cost to serve.** The study records that PSR licensing was stress-tested against
-the lowest tier but records nothing about labour. At Tier 1 the $20,001 of Service Revenue
-funds a named Channel Manager, a named Backup, a deal desk answering by close of the next
-Business Day, two training sessions, four Channel Reviews, up to six partner recruitments and
-the PSR licence. **Open commercial item: whether Tier 1 is viable at that price.** Neither
-Party warrants that it is.
+**3.3 Tier 1 cost to serve.** PSR licensing was stress-tested against Tier 1; labour was not.
+Whether Tier 1 is viable at $20,001 of Service Revenue per Engagement Year is an open
+commercial item, and neither Party warrants that it is.
 
-**3.4 Automatum's margin as prime.** On a Net New Client at Tier 3 the Platform Revenue is
-11.1% of gross while Automatum carries client credit risk, service level liability, collection
-risk and the client relationship. **Open commercial item: whether the Platform Revenue is a
-margin or a pass-through of Automatum's own cost.** Clause 11.1(b) answers the equivalent
-question for an Existing Automatum Client by giving Automatum 25% of Service Revenue; no
-equivalent applies to a Net New Client.
+**3.4 Automatum's margin as prime.** On a Net New Client, Automatum's return is the Platform
+Revenue alone, 11.1% of gross at Tier 3, against client credit risk, service level liability
+and collection risk. Whether that is margin or a pass-through of Automatum's own cost is an
+open commercial item; clause 11.1(b) settles the equivalent question for an Existing Automatum
+Client.
 
 **3.5 Stress testing at the wrong end.** PSR licensing was stress-tested against Tier 1, the
 most predictable case, while Tier 3 carries an uncapped roster. If the PSR is priced per
@@ -1536,14 +1531,6 @@ govern.
 | Tier 3 Baseline Assumptions | 30 active partners and 4 onboardings per month |
 | PSR partner record threshold for cost pass-through | The threshold in OBP's licence, failing which no pass-through applies |
 | Unlimited partner licence warranty (Tier 3) | Not warranted, so the pass-through in Schedule 1 paragraph 3 applies |
-
-## 6. Terms chosen as market defaults
-
-Not in the feasibility study, drafted as market-standard defaults and flagged for a deliberate
-decision: the service credit caps in clause 8.5; the liability caps in clauses 21.3 and 21.4;
-the non-circumvention tails in clauses 15.2, 15.3 and 15.5 and the liquidated sums in clauses
-15.5 and 15.6; the payment terms and longstop in clause 11.4; the Initial Term in clause 23.1;
-and the transition period in clause 24.1.
 
 ---
 
