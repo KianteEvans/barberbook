@@ -20,7 +20,7 @@ execution date** - as drafted the study asserts an executed agreement that did n
 
 All commercial terms are taken from the study: the three tiers and their prices, the partner
 ceilings, the deal desk turnarounds, the review and training cadences, the $9,999 Automatum
-Enterprise tier retention, and the resulting OBP service revenue of $20,001 / $50,001 /
+Enterprise tier platform revenue, and the resulting OBP service revenue of $20,001 / $50,001 /
 $80,001 per engagement year.
 
 ### Decisions taken
@@ -79,6 +79,20 @@ items below.
    at engagement start and the treatment of the inherited roster settled - same shape as the
    Tier 3 downgrade carry-over in Schedule 2 paragraph 5.3.
 
+### A note on length
+
+The agreement has been through a leaning pass: rationale that explained *why* a clause exists
+was moved here, the duplication between clause 5 and Schedule 1 was collapsed, and
+words-and-numerals doubling ("ninety (90) days") was dropped for numerals. 17,092 words to
+13,831, 40 pages to 36, with every obligation, figure, cap and protection intact - 42 of them
+checked individually, and the generated .docx round-tripped against the Markdown with zero
+content lost.
+
+One thing was *added* in that pass rather than removed: clause 4.5 now lets OBP decline an
+engagement order where the client's existing client agreement does not meet clause 6.5. That
+is a partial answer to open item 1 above and costs six words; strike it if you would rather
+settle that question separately.
+
 ### Regenerating the .docx
 
 `build-docx.mjs` converts the Markdown to the Word document. It needs the `docx` npm package,
@@ -129,8 +143,8 @@ listed here so they get a deliberate decision rather than passing silently:
   and $50,000; super-cap at 200% / $250,000 (clauses 21.3, 21.4)
 - non-circumvention tail - 24 months for clients, 12 months for partners and personnel; $35,000
   liquidated damages per circumvented client; 30% of first-year compensation for personnel
-  (clauses 15.2, 15.3, 15.6, 15.7)
-- payment - 10 business days from client payment, 60-day longstop (clause 11.5)
+  (clauses 15.2, 15.3, 15.5, 15.7)
+- payment - 10 business days from client payment, 60-day longstop (clause 11.4)
 - initial term - 24 months, so an engagement order signed late still runs to expiry (clause 23.1)
 - transition period - 90 days, extendable to 180 (clause 24.1)
 
@@ -163,23 +177,23 @@ decisions, not drafting gaps.
 ### Problems in the study the agreement resolves rather than inherits
 
 - **Tier 1 and Tier 2 sold the same turnaround.** "1 business day" and "8 business hours" are
-  the same period if a business day is eight hours. Schedule 4 paragraph 2 defines Tier 1 as
+  the same period if a business day is eight hours. Schedule 4 paragraph 1 defines Tier 1 as
   close of the *next* business day (up to about 16 business hours) so the tiers actually differ.
 - **The deal desk SLA spans both parties.** Automatum issues offers as seller of record, so OBP
   cannot warrant end-to-end turnaround. Schedule 4 splits every turnaround into an OBP leg and
   an Automatum leg, and only OBP-leg failures flow down (clause 8.2).
 - **The 365-day "Active" test is unachievable late in a 12-month engagement.** A partner
-  recruited in month 10 cannot qualify. Schedule 1 paragraph 7 adds trailing measurement, a
+  recruited in month 10 cannot qualify. Schedule 1 paragraph 5 adds trailing measurement, a
   post-term measurement date and exclusion of partners onboarded in the final 90 days.
-- **"Up to 6 / up to 12" is a ceiling, not a promise.** Clause 5.3 says so explicitly, because
+- **"Up to 6 / up to 12" is a ceiling, not a promise.** Clause 5.2 says so explicitly, because
   a client will read it as a commitment and the supplier as a cap.
 - **"First transaction by end of Q1" contradicts the AWS-dependency disclaimer.** Schedule 1
   paragraph 6 makes it a target with a best-efforts obligation, not a warranty.
-- **"OBP supplies partner agreements" was ambiguous.** Clause 5.4 makes OBP the drafter and
+- **"OBP supplies partner agreements" was ambiguous.** Clause 5.3 makes OBP the drafter and
   administrator, never a principal - otherwise the whole partner roster is contractually OBP's
   and exit becomes impossible.
 - **Which APN account OBP files ACE opportunities under.** If OBP files under its own, its name
-  appears on records the client and AWS can see and the white label is blown. Clause 5.11 and
+  appears on records the client and AWS can see and the white label is blown. Clause 5.1(j) and
   Schedule 8 require this to be named.
 - **Escrow would not have worked.** OBP licenses rather than owns the PSR, so escrowed source
   would give Automatum a codebase it cannot operate. Clause 10.5 and 10.8 use a standing data
