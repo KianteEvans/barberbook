@@ -614,14 +614,12 @@ AWS's authority, or as able to bind AWS.
 
 **13.3 AWS is not a party.** AWS is not a party to this Agreement and owes no obligation under
 it. Nothing in this Agreement, and nothing said or exchanged before it, is a commitment by
-AWS. Any expectation of ACE opportunity submissions is a programme assumption recorded in
-Schedule 8 only.
+AWS.
 
 **13.4 Solution identifier and overlap.** Opportunities for the Solution map to the single
 solution identifier in Schedule 8. Where an opportunity falls within both the Solution and
-another offering of either Party, the Parties will attribute it to one solution identifier,
-applying the higher-tier offering's commitment structure, so no opportunity is billed twice.
-Schedule 8 records the worked basis and the tie-break where tiers are equal.
+another offering of either Party, the Parties will agree in writing which it is attributed to,
+so that no opportunity is counted or billed twice.
 
 **13.5 ACE integrity.** Neither Party will submit an ACE opportunity it knows or ought
 reasonably to know to be inaccurate, duplicated or misattributed. Clause 5.1(j) governs the
@@ -1476,26 +1474,10 @@ Agreement carries a minimum term with an early termination charge, whether Autom
 Enterprise tier is monthly cancellable, or whether Automatum accepts early churn as its own
 loss.** Default if not closed: Automatum bears the shortfall.
 
-**3.3 Tier 1 cost to serve.** PSR licensing was stress-tested against Tier 1; labour was not.
-Whether Tier 1 is viable at $20,001 of Service Revenue per Engagement Year is an open
-commercial item, and neither Party warrants that it is.
+**3.3 Cost to serve.** Neither Party warrants that the Client Fees at any Tier are sufficient
+to cover its own cost of performance, and clause 14.1 applies if they are not.
 
-**3.4 Automatum's margin as prime.** On a Net New Client, Automatum's return is the Platform
-Revenue alone, 11.1% of gross at Tier 3, against client credit risk, service level liability
-and collection risk. Whether that is margin or a pass-through of Automatum's own cost is an
-open commercial item; clause 11.1(b) settles the equivalent question for an Existing Automatum
-Client.
-
-**3.5 Stress testing at the wrong end.** PSR licensing was stress-tested against Tier 1, the
-most predictable case, while Tier 3 carries an uncapped roster. If the PSR is priced per
-partner or seat, Tier 3 is where the model breaks. Schedule 5 Part A records the question and
-Schedule 1 paragraph 3 provides the pass-through.
-
-**3.6 AWS is not committed.** An expectation that AWS ACE will submit five opportunities to
-the Solution is a programme assumption only, not a commitment by AWS, Automatum or OBP. Clause
-13.3 governs.
-
-**3.7 Partner AWS prerequisites.** Recruited Partner timelines depend on the partner
+**3.4 Partner AWS prerequisites.** Recruited Partner timelines depend on the partner
 completing AWS registration, tax, banking and service-linked role requirements, outside the
 control of either Party and the Registered Client. Clause 8.3 and Schedule 1 paragraph 4
 govern.
@@ -1515,7 +1497,7 @@ govern.
 | Insurance limits for each required cover | Joint |
 | AWS Marketplace listing identifier and seller of record entity | Automatum |
 | The APN account under which OBP files partner-sourced opportunities under clause 5.1(j) | Automatum |
-| The solution identifier under clause 13.4, and the tie-break where overlapping offerings are of equal tier | Automatum |
+| The solution identifier under clause 13.4 | Automatum |
 | Longstop date for the dependency in paragraph 2 | Automatum |
 
 ## 5. Figures to confirm

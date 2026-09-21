@@ -151,8 +151,11 @@ deliberate decision rather than passing silently:
 
 ### Open commercial questions
 
-These are flagged in Schedule 8 paragraph 3 rather than papered over. They are business
-decisions, not drafting gaps.
+These are business decisions, not drafting gaps. Items 1 and 5 are recorded as assumptions in
+Schedule 8 paragraph 3 of the agreement because they bear on pricing mechanics. Items 2, 3 and 4
+are recorded only here: they question whether the pricing works, which the agreement settles in
+Schedule 2 rather than relitigates. Clause 14.1 and Schedule 8 paragraph 3.3 carry the operative
+consequence - neither party warrants that the fees at any tier cover its own cost of performance.
 
 1. **The $9,999 on early churn.** Under pro rata accrual, an engagement ending in month 3
    recovers only $2,499.75 of a retention Automatum likely commits annually. The gap cannot be
