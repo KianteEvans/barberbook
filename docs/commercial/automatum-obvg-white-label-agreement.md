@@ -16,14 +16,14 @@ number], of [to supply: OBVG principal address] ("**OBVG**"). Each is a "Party".
 position for its listing, and issues private offers and Selling Authorizations under it. OBVG
 operates a managed channel function and licenses and operates a partner system of record.
 
-**B.** Managed Partner Development is OBVG's service. OBVG developed it and it forms part of
-the OBVG Materials. Under it a software vendor with a live AWS Marketplace listing engages a
-single provider to build and run its reseller channel on AWS. Automatum sells it under the
-Automatum Brand on the terms of this Agreement.
+**B.** Managed Partner Development is a service developed and owned by OBVG and comprised in
+the OBVG Materials, under which a software vendor with a live AWS Marketplace listing engages
+a single provider to build and run its reseller channel on AWS. Automatum offers it to its
+clients under the Automatum Brand on the terms of this Agreement.
 
-**C.** Automatum contracts with, invoices and faces each client. OBVG performs the channel
-function as Automatum's subcontractor under Automatum's brand and is not presented to the
-client as a separate provider. The arrangement is non-exclusive.
+**C.** Automatum contracts with, invoices and is the sole counterparty to each client. OBVG
+performs the channel function as Automatum's subcontractor under Automatum's brand and is not
+presented to the client as a separate provider.
 
 The Parties agree as follows.
 
@@ -103,7 +103,7 @@ costs and expenses, including reasonable attorneys' fees.
 margin schedule forms, curricula, enablement content, processes and know-how OBVG owns or
 licenses and uses in delivering the Services, together with the PSR.
 
-"**OBVG Service Revenue**" means OBVG's share of Service Revenue under clause 11.2.
+"**OBVG Service Revenue**" means OBVG's share of Service Revenue under clause 11.1.
 
 "**Offer-Issuing Partner**" means, for a Registered Client and a measurement period, a
 Recruited Partner that issued at least one CPPO against that Client's listing in that period,
@@ -134,7 +134,7 @@ permitting a Recruited Partner to resell a listed product.
 Agreement for failing to meet a service level.
 
 "**Service Revenue**" means the Collected Client Fees for an Engagement Year less the Platform
-Revenue. Clause 11.2 divides it.
+Revenue. Clause 11.1 divides it.
 
 "**Services**" means the services OBVG performs under clause 5 and Schedule 1. "**Solution**"
 means the Managed Partner Development solution in Schedule 1. "**Tier**" means Tier 1, 2 or 3
@@ -151,8 +151,11 @@ Partner and attributable to a Registered Client's listing.
 Headings do not affect interpretation. "Including" is not limiting. "$" means United States
 dollars and all amounts exclude Taxes. References to clauses and Schedules are to this
 Agreement, and the Schedules form part of it. The singular includes the plural. A reference to
-a statute or AWS Program Term is to it as amended or replaced. No rule of construction
-operates against the drafter.
+a statute or AWS Program Term is to it as amended or replaced. A bracketed item marked "to
+confirm" within an operative provision has the value stated for it in Schedule 8 paragraph 4
+until the Parties confirm a different value in writing. The items in Schedule 8 paragraph 1
+are dependencies to which clause 14 applies. No rule of construction operates against the
+drafter.
 
 ---
 
@@ -229,7 +232,7 @@ fixed at execution and not revisited during that Engagement Year:
   a. **Client Status** - Net New Client or Existing Automatum Client. Automatum will disclose
      before execution whether the proposed Client holds or held any paid Automatum
      subscription in the preceding 90 days, with reasonable evidence on request. Client Status
-     determines the division of Service Revenue under clause 11.2.
+     determines the division of Service Revenue under clause 11.1.
   b. **Client Source** - OBVG-Sourced, Automatum-Sourced, or Joint or ACE-Sourced, by which
      Party first made documented contact with the Client about the Solution, and Joint or
      ACE-Sourced where the opportunity came through ACE or neither Party can show first
@@ -1140,10 +1143,8 @@ Automatum, and OBVG invoices $3,125.06 monthly.
 | Automatum share of Service Revenue | nil | $1,250.06 |
 
 Neither Party recovers a further amount on account of the terminated Engagement except under
-paragraph 4. Automatum has recovered $2,499.75 of the $9,999 it commits annually for its
-Enterprise tier; that shortfall follows from the pro rata accrual in clause 11.2 and is
-addressed, if at all, in the Client Agreement. Schedule 8 paragraph 3.2 records it as an open
-item.
+paragraph 4. Automatum bears the difference between the $2,499.75 accrued and the $9,999 it
+commits annually for its Enterprise tier, under Schedule 8 paragraph 2.2.
 
 ## 4. Early termination of an Engagement
 
@@ -1424,7 +1425,27 @@ Effective Date]**
 | Prior Relationships notified under clause 4.4 | |
 | Variations under clause 2.2, if any | |
 
-Signed for and on behalf of Automatum and OBVG.
+<br>
+
+**For and on behalf of Automatum**
+
+| | |
+|---|---|
+| Signature | |
+| Name | |
+| Title | |
+| Date | |
+
+<br>
+
+**For and on behalf of OBVG**
+
+| | |
+|---|---|
+| Signature | |
+| Name | |
+| Title | |
+| Date | |
 
 ---
 
@@ -1453,49 +1474,38 @@ first. Clause 9.7 makes exceeding a ratio an independent breach.
 
 ---
 
-# Schedule 8 - Dependencies, Assumptions and Open Items
+# Schedule 8 - Dependencies, Assumptions and Defaults
 
-## 1. How to read this Schedule
+## 1. Dependencies
 
-**to supply** is a fact awaiting transcription. **to confirm** is a commercial figure needing
-a decision or test; each one inside an operative obligation takes the default in paragraph 5
-if this Agreement is executed first. **to verify** is an external dependency, resolved by
-clause 14 and never by assumption. This register must read nil before execution.
-
-## 2. Dependencies to verify
-
-| Item | Owner | Longstop | Consequence if not verified |
+| Item | Owner | Longstop | Consequence if not resolved |
 |---|---|---|---|
 | Whether, and by what mechanism, a third-party reseller can issue offers against Automatum's listing while Automatum is seller of record | Automatum | [to supply: longstop date, the earlier of 45 days from the Effective Date and first publication of the Tier table] | The fallback metric in Schedule 4 paragraph 4.2 applies automatically under clause 14.2. Neither Party is in breach or liable. |
 | PSR vendor continuity undertaking under clause 10.7 | OBVG | Before the first Engagement Order | Automatum may proceed, decline, or require an alternative PSR. |
-| Capacity test of Schedule 4 and the Tier 3 roster | Joint | Before publication of the Tier table | No Tier table published and no Engagement Order executed at an untested Tier. Clause 14.4. |
+| Capacity test of Schedule 4 and the Tier 3 roster | Joint | Before publication of the Tier table | No Tier table is published and no Engagement Order is executed at an untested Tier, and clause 14.4 applies. |
 | Insurance certificates under clause 22 | OBVG | Before the first Engagement Order | No Engagement Order is executed. |
 
-## 3. Assumptions
+## 2. Assumptions
 
-**3.1 Engagement fees are invoiced directly.** Schedule 2 assumes engagement fees are invoiced
-by Automatum to the Client directly, not transacted through AWS Marketplace, so no listing fee
-reduces them. The figures require it: at Tier 1, $9,999 and $20,001 sum to exactly $30,000,
-leaving no room for a listing fee. If engagement fees are later transacted through Marketplace, a listing fee
-of approximately 3% would be $900, $1,800 and $2,700 per Engagement Year at Tiers 1 to 3, and
-its allocation must be agreed under clause 11.9.
+**2.1 Direct invoicing.** Schedule 2 assumes that engagement fees are invoiced by Automatum to
+the Client directly, are not transacted through AWS Marketplace, and are not reduced by any
+listing fee. If engagement fees are later transacted through AWS Marketplace, the allocation of
+any listing fee is agreed under clause 11.9.
 
-**3.2 Automatum's Enterprise tier commitment.** Automatum's $9,999 is assumed to be committed
-annually. Under the pro rata accrual in clause 11.2, an Engagement terminating at the end of
-Engagement Month 3 recovers only $2,499.75 of it. **Open commercial item: whether the Client
-Agreement carries a minimum term with an early termination charge, whether Automatum's
-Enterprise tier is monthly cancellable, or whether Automatum accepts early churn as its own
-loss.** Default if not closed: Automatum bears the shortfall.
+**2.2 Enterprise tier commitment.** Automatum's $9,999 is assumed to be committed annually
+under the Client Agreement. Platform Revenue accrues under clause 11.2, and Automatum bears any
+shortfall between the Platform Revenue accrued on an Engagement that ends before the end of an
+Engagement Year and the amount Automatum has committed for that year.
 
-**3.3 Cost to serve.** Neither Party warrants that the Client Fees at any Tier are sufficient
-to cover its own cost of performance, and clause 14.1 applies if they are not.
+**2.3 Cost of performance.** Neither Party warrants that the Client Fees at any Tier are
+sufficient to cover its own cost of performance, and clause 14.1 applies if they are not.
 
-**3.4 Partner AWS prerequisites.** Recruited Partner timelines depend on the partner
+**2.4 Partner AWS prerequisites.** Recruited Partner timelines depend on the partner
 completing AWS registration, tax, banking and service-linked role requirements, outside the
 control of either Party and the Registered Client. Clause 8.3 and Schedule 1 paragraph 4
 govern.
 
-## 4. Facts to supply
+## 3. Facts to supply
 
 | Item | Owner |
 |---|---|
@@ -1511,19 +1521,19 @@ govern.
 | AWS Marketplace listing identifier and seller of record entity | Automatum |
 | The APN account under which OBVG files partner-sourced opportunities under clause 5.1(j) | Automatum |
 | The solution identifier under clause 13.4 | Automatum |
-| Longstop date for the dependency in paragraph 2 | Automatum |
+| Longstop date for the dependency in paragraph 1 | Automatum |
 
-## 5. Figures to confirm
+## 4. Figures to confirm
 
-| Item | Default if not confirmed at execution |
+| Item | Value applying until confirmed |
 |---|---|
 | PSR seats per Tier | Seats sufficient for the named personnel, the Client's nominated administrators and every Recruited Partner on the roster |
 | Named-owner committed hours per Tier | Hours sufficient to meet Schedule 4 for the Tier, with clause 9.7 continuing to bind |
 | Tier 3 Deal Desk Owner coverage window | Business Hours |
 | Onboarding Throughput Rate and concurrent onboardings (Tier 3) | 4 onboardings per month and 6 concurrent |
 | Tier 3 Baseline Assumptions | 30 active partners and 4 onboardings per month |
-| PSR partner record threshold for cost pass-through | The threshold in OBVG's licence, failing which no pass-through applies |
-| Unlimited partner licence warranty (Tier 3) | Not warranted, so the pass-through in Schedule 1 paragraph 3 applies |
+| PSR partner record threshold for cost pass-through | The threshold in OBVG's licence; if none, no pass-through applies |
+| Unlimited partner licence warranty (Tier 3) | Not warranted; the pass-through in Schedule 1 paragraph 3 applies |
 
 ---
 

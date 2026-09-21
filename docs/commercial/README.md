@@ -32,6 +32,7 @@ year.
 | Platform revenue | $9,999/year to Automatum in every case, accruing pro rata at $833.25/month |
 | Net new client | Service revenue retained in full by OBVG |
 | Upsell of an existing Automatum customer | Service revenue split 75% OBVG / 25% Automatum |
+| Spelling | American throughout, following the governing law; "license" as noun and verb, "program" |
 
 Because the appointment is non-exclusive, the Client Registry (clause 4), the brand rules
 (clause 7 and Schedule 3) and non-circumvention (clause 15) carry the weight exclusivity would
@@ -171,12 +172,12 @@ the Marketplace authorization dependency.
 
 **Figures to confirm** - PSR seats per tier; named-owner committed hours per tier; the Tier 3
 coverage window; the Tier 3 onboarding throughput rate and baseline assumptions; the PSR
-partner record threshold. Each carries a stated default in Schedule 8 paragraph 5 that applies
+partner record threshold. Each carries a stated default in Schedule 8 paragraph 4 that applies
 if the agreement is executed before the figure is settled.
 
-**Dependencies to verify** - the AWS Marketplace authorization mechanism (Schedule 8
-paragraph 2), the PSR vendor continuity undertaking, the capacity test, and insurance
-certificates. These resolve through clause 14 and must never be closed by assumption.
+**Dependencies** - the AWS Marketplace authorization mechanism (Schedule 8 paragraph 1), the
+PSR vendor continuity undertaking, the capacity test, and insurance certificates. Clause 1.2
+makes them dependencies under clause 14; they are resolved there, never by assumption.
 
 ### Terms chosen as market defaults, not instructed
 
@@ -199,9 +200,9 @@ deliberate decision rather than passing silently:
 ### Open commercial questions
 
 These are business decisions, not drafting gaps. Items 1 and 5 are recorded as assumptions in
-Schedule 8 paragraph 3 of the agreement because they bear on pricing mechanics. Items 2, 3 and 4
+Schedule 8 paragraph 2 of the agreement because they bear on pricing mechanics. Items 2, 3 and 4
 are recorded only here: they question whether the pricing works, which the agreement settles in
-Schedule 2 rather than relitigates. Clause 14.1 and Schedule 8 paragraph 3.3 carry the operative
+Schedule 2 rather than relitigates. Clause 14.1 and Schedule 8 paragraph 2.3 carry the operative
 consequence - neither party warrants that the fees at any tier cover its own cost of performance.
 Item 6 is not a pricing question: it is a deliberate choice about OBVG's own reuse rights,
 recorded here so it is not later rediscovered as an oversight.
@@ -235,6 +236,20 @@ recorded here so it is not later rediscovered as an oversight.
 
 ### Drafting problems resolved rather than inherited
 
+- **Three cross-references pointed at the wrong clause.** The definitions of OBVG Service
+  Revenue and Service Revenue, and clause 4.7(a), cited clause 11.2 for the division of Service
+  Revenue. Clause 11.1 is the division; 11.2 is accrual. Each reference resolved to a real
+  clause, so a resolution check passed - the target simply did not do what the citing sentence
+  said. Only the two references to 11.2 *for accrual* were right.
+- **Schedule 8 carried its own reading instructions.** "How to read this Schedule" defined three
+  placeholder markers - one of them, "to verify", used nowhere - and ended "This register must
+  read nil before execution." A bold "Open commercial item" sat inside paragraph 3.2. The two
+  rules that did work (a "to confirm" figure takes its stated default; the dependencies are
+  clause 14 dependencies) moved to clause 1.2 as interpretation rules; the rest went. The
+  schedule is now "Dependencies, Assumptions and Defaults", and the Enterprise-tier shortfall
+  is stated as a rule (Automatum bears it) rather than parked as a question.
+- **Schedule 6 had no execution block.** The form of Engagement Order ended "Signed for and on
+  behalf of Automatum and OBVG." against Schedule 9's full two-party block. It now matches.
 - **Tier 1 and Tier 2 sold the same turnaround.** "1 business day" and "8 business hours" are
   the same period if a business day is eight hours. Schedule 4 paragraph 1 defines Tier 1 as
   close of the *next* business day (up to about 16 business hours) so the tiers actually differ.
