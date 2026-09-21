@@ -283,7 +283,7 @@ flush();
 const doc = new Document({
   creator: "Automatum",
   title: "White Label Delivery Agreement - Managed Partner Development",
-  description: "Automatum x Only Best Practices white label delivery agreement",
+  description: "Automatum x Only Best Venture Group white label delivery agreement",
   styles: {
     default: {
       document: { run: { font: FONT, size: 22 }, paragraph: { spacing: { line: 276 } } },
