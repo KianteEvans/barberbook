@@ -78,14 +78,50 @@ items below.
    at engagement start and the treatment of the inherited roster settled - same shape as the
    Tier 3 downgrade carry-over in Schedule 2 paragraph 5.3.
 
+### The IP position
+
+The premise is that Managed Partner Development is OBVG's service and Automatum sells it under
+its own brand. Three clauses carry that, and one recital used to undercut it.
+
+- **Clause 16.1** keeps background IP where it started and says in terms that nothing in the
+  agreement transfers ownership of the OBVG Materials or the Automatum Brand.
+- **Clause 16.2** vests everything created in delivering the Services in OBVG and folds it into
+  the OBVG Materials. Without it the agreement allocated only two buckets - IP owned before the
+  Effective Date, and IP developed independently of the agreement - and work done *under* the
+  agreement fell in neither. That mattered because "OBVG Materials" is defined as what OBVG
+  "owns or licenses", which is circular: for a playbook improved during an engagement, whether
+  it is OBVG Materials is the very question in dispute. 16.2 also states that no IP is jointly
+  owned, and that Automatum's approvals, instructions and specifications buy it no interest -
+  which is what stops clause 5.6 and Schedule 3 paragraph 3 being read as co-authorship.
+- **Clause 16.4** gives Automatum a perpetual, sublicensable licence to the client-facing
+  deliverables and expressly no right in the OBVG Materials behind them. The purpose limiter
+  ("for that Client's own channel and for Automatum's performance of the relevant Client
+  Agreement") and that final sentence are what stop the licence swallowing the methodology. The
+  same artefacts - playbooks, enablement content, templates - appear on both sides of the line,
+  so the line has to be drawn explicitly.
+
+Recital B used to read "The Parties have developed Managed Partner Development". Because Managed
+Partner Development is the defined Solution, that sentence asserted joint development of the
+thing being sold. Recitals are not operative and clause 26.5 is an entire-agreement clause, but
+New York courts read recitals to construe ambiguity - and the gap in clause 16 supplied the
+ambiguity. It now names OBVG as the developer.
+
+Already in place and supporting the same position: no IP assignment runs in either direction
+(clause 26.3 is corporate assignment only); clause 10.9 characterises the step-in rights as
+licences of intellectual property under section 365(n) of the Bankruptcy Code, which only works
+if OBVG is the licensor; and the warranty and indemnity split - clauses 19.2 and 20.1 for the
+Services and OBVG Materials, 19.3 and 20.2 for the Automatum Brand - tracks the ownership split
+exactly.
+
 ### A note on length
 
 The agreement has been through a leaning pass: rationale that explained *why* a clause exists
 was moved here, the duplication between clause 5 and Schedule 1 was collapsed, and
-words-and-numerals doubling ("ninety (90) days") was dropped for numerals. 17,092 words to
-13,689, 40 pages to 35, with every obligation, figure, cap and protection intact - 44 of them
-checked individually, and the generated .docx round-tripped against the Markdown with zero
-content lost.
+words-and-numerals doubling ("ninety (90) days") was dropped for numerals. That pass took it
+from 17,092 words to 13,689 and 40 pages to 35, with every obligation, figure, cap and
+protection intact - 44 of them checked individually, and the generated .docx round-tripped
+against the Markdown with zero content lost. The passes since - removing the feasibility-study
+references, the scope audit, and the clause 16 IP changes - leave it at 13,645 words.
 
 One thing was *added* in that pass rather than removed: clause 4.5 now lets OBVG decline an
 engagement order where the client's existing client agreement does not meet clause 6.5. That
@@ -111,9 +147,10 @@ as delivered it printed as a faint grey box on white paper. Brand colours are bl
 and orange `#F4741B`. The logo renders at 0.65 x 0.44 inches, which keeps the "ONLY BEST
 VENTURE GROUP" wordmark legible at print size.
 
-Automatum's mark is not in the document. A single party's logo on all 35 pages reads as OBVG's
-paper rather than a mutual agreement, so it is worth adding Automatum's alongside it before
-this goes out for signature.
+Only OBVG's mark appears, and that is deliberate. The service is OBVG's; Automatum is buying
+the right to sell it under its own brand. This is a supply agreement on the supplier's paper,
+not a joint venture on shared paper, and co-branding the execution copy would signal a
+mutuality that clauses 3.4 and 26.2 expressly deny.
 
 ### Before signature
 
@@ -166,6 +203,8 @@ Schedule 8 paragraph 3 of the agreement because they bear on pricing mechanics. 
 are recorded only here: they question whether the pricing works, which the agreement settles in
 Schedule 2 rather than relitigates. Clause 14.1 and Schedule 8 paragraph 3.3 carry the operative
 consequence - neither party warrants that the fees at any tier cover its own cost of performance.
+Item 6 is not a pricing question: it is a deliberate choice about OBVG's own reuse rights,
+recorded here so it is not later rediscovered as an oversight.
 
 1. **The $9,999 on early churn.** Under pro rata accrual, an engagement ending in month 3
    recovers only $2,499.75 of a retention Automatum likely commits annually. The gap cannot be
@@ -186,6 +225,13 @@ consequence - neither party warrants that the fees at any tier cover its own cos
    transacted through AWS Marketplace - the figures require this, since $9,999 plus $20,001 is
    exactly $30,000 with no room for a listing fee. If that changes, roughly 3%
    (about $900 / $1,800 / $2,700 a year) needs a home. Clause 11.9.
+6. **Schedule 3 paragraph 3 bars OBVG from reusing client work.** "OBVG will not publish,
+   present or reuse any material produced for a Registered Client outside that Engagement,
+   subject to clause 16.1." Clause 16.2 now makes that material OBVG's, but this sentence still
+   stops OBVG taking it to the next client - so OBVG owns a playbook it cannot reuse, which cuts
+   against running one methodology across many engagements. Left as drafted deliberately. To
+   change it, the carve-out has to reach clause 16.2 and the bar narrows to publication, client
+   identification and brand leakage.
 
 ### Drafting problems resolved rather than inherited
 
@@ -209,7 +255,7 @@ consequence - neither party warrants that the fees at any tier cover its own cos
   appears on records the client and AWS can see and the white label is blown. Clause 5.1(j) and
   Schedule 8 require this to be named.
 - **Escrow would not have worked.** OBVG licenses rather than owns the PSR, so escrowed source
-  would give Automatum a codebase it cannot operate. Clause 10.5 and 10.8 use a standing data
+  would give Automatum a codebase it cannot operate. Clause 10.4 and 10.7 use a standing data
   replica plus a vendor continuity undertaking instead.
 - **Co-employment risk.** OBVG staff on Automatum email presenting as Automatum's team for 12
   months is a recognisable joint-employer pattern. Clause 7.6 and Schedule 3 paragraph 1 set

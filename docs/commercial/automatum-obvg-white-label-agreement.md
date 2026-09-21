@@ -16,9 +16,10 @@ number], of [to supply: OBVG principal address] ("**OBVG**"). Each is a "Party".
 position for its listing, and issues private offers and Selling Authorizations under it. OBVG
 operates a managed channel function and licenses and operates a partner system of record.
 
-**B.** The Parties have developed Managed Partner Development, under which a software vendor
-with a live AWS Marketplace listing engages a single provider to build and run its reseller
-channel on AWS.
+**B.** Managed Partner Development is OBVG's service. OBVG developed it and it forms part of
+the OBVG Materials. Under it a software vendor with a live AWS Marketplace listing engages a
+single provider to build and run its reseller channel on AWS. Automatum sells it under the
+Automatum Brand on the terms of this Agreement.
 
 **C.** Automatum contracts with, invoices and faces each client. OBVG performs the channel
 function as Automatum's subcontractor under Automatum's brand and is not presented to the
@@ -338,8 +339,9 @@ mitigate.
 ## 7. White Label and Brand
 
 **7.1 Brand licence.** Automatum grants OBVG a non-exclusive, non-transferable, royalty-free
-licence for the Term to use the Automatum Brand solely to perform the Services under Schedule
-3. OBVG acquires no other rights and all goodwill accrues to Automatum.
+licence for the Term and any transition period under clause 24.3 to use the Automatum Brand
+solely to perform the Services under Schedule 3 and its obligations under clause 24. OBVG
+acquires no other rights and all goodwill accrues to Automatum.
 
 **7.2 Delivery under the Automatum Brand.** OBVG will perform all client-facing and
 partner-facing elements of the Services under the Automatum Brand, using Automatum-supplied
@@ -691,7 +693,7 @@ as a Registered Client for the purpose of displacing that Client's product.
 **15.4 Automatum's covenant.** During the Term and for 12 months after the later of expiry and
 termination of the relevant Engagement Order, Automatum will not provide services of the kind
 comprised in the Services to a Registered Client using OBVG Materials outside the licence in
-clause 16.3, or using personnel recruited from OBVG in breach of clause 15.5.
+clause 16.4, or using personnel recruited from OBVG in breach of clause 15.5.
 
 **15.5 Personnel.** During the Term and for 12 months after the later of expiry and
 termination of the relevant Engagement Order, neither Party will solicit for employment or
@@ -724,16 +726,27 @@ the Effective Date or develops independently of this Agreement. OBVG retains all
 OBVG Materials, including the PSR, and Automatum retains all rights in the Automatum Brand.
 Nothing here transfers ownership of either.
 
-**16.2 Client Data.** Clause 10.3 governs.
+**16.2 Service IP.** All intellectual property created in performing the Services vests in OBVG
+on creation and forms part of the OBVG Materials, including any improvement, refinement,
+extension or derivative of the OBVG Materials or the PSR and any methodology, playbook,
+template, curriculum or process developed in the course of an Engagement. No intellectual
+property is owned jointly under this Agreement. No approval, instruction, specification,
+requirement, feedback or other contribution by Automatum or a Registered Client gives Automatum
+or that Client ownership of, or any interest in, the OBVG Materials. Automatum's rights in the
+OBVG Materials are the licences expressly granted in this Agreement and no others.
 
-**16.3 Client-facing deliverables.** OBVG grants Automatum a perpetual, irrevocable,
+**16.3 Client Data.** Clause 10.3 governs.
+
+**16.4 Client-facing deliverables.** OBVG grants Automatum a perpetual, irrevocable,
 non-exclusive, worldwide, royalty-free, sublicensable licence to use, copy, modify and
 distribute the client-facing deliverables produced for a Registered Client, including that
 Client's partner agreements, margin schedule, enablement content, playbooks and reports, for
 that Client's own channel and for Automatum's performance of the relevant Client Agreement.
-This licence survives termination.
+This licence survives termination. It is limited to those deliverables as produced for that
+Registered Client and gives Automatum no right in the OBVG Materials from which they were
+produced.
 
-**16.4 Feedback.** Each Party may use without restriction or obligation any suggestion or
+**16.5 Feedback.** Each Party may use without restriction or obligation any suggestion or
 feedback the other gives about its products or services.
 
 ---
@@ -902,7 +915,7 @@ insolvency process, has a receiver, administrator or trustee appointed over a ma
 its assets, makes a general assignment for the benefit of creditors, or ceases business.
 Clause 10.9 applies to licences granted here.
 
-**23.6 Survival.** Clauses 1, 2, 7.7, 10.3, 10.5, 10.7, 10.8, 10.9, 11 for amounts accrued,
+**23.6 Survival.** Clauses 1, 2, 7.1, 7.7, 10.3, 10.5, 10.7, 10.8, 10.9, 11 for amounts accrued,
 12.4, 15, 16, 17, 18, 20, 21, 22, 23.6, 24, 26 and 27 survive termination, with any provision
 that by its nature is intended to.
 
@@ -920,7 +933,7 @@ Data under clause 10.4 with a restore test; knowledge transfer; handover of in-f
 registrations, CPPOs and Selling Authorization requests; run-out and reconciliation of accrued
 partner commissions; introductions to the Recruited Partner roster on Automatum-branded
 correspondence; disconnection of any CRM synchronization with a certificate of deletion; and
-continuation of the licence in clause 16.3.
+continuation of the licence in clause 16.4.
 
 **24.3 Conduct.** Throughout, OBVG continues to perform the Services, the service levels
 continue to apply, and clause 7 continues to apply so that no Client or Recruited Partner
@@ -977,7 +990,7 @@ to the minimum extent needed to make it enforceable, or severed if it cannot be,
 continues; clause 15.7 applies to clause 15.
 
 **26.7 No third party rights.** No person other than the Parties may enforce this Agreement,
-except that a Registered Client may enforce clause 16.3 to the extent necessary to retain the
+except that a Registered Client may enforce clause 16.4 to the extent necessary to retain the
 materials its channel runs on.
 
 **26.8 Counterparts.** This Agreement may be executed in counterparts, including by electronic
