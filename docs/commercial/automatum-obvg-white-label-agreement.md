@@ -34,7 +34,7 @@ The Parties agree as follows.
 ### 1.1 Definitions
 
 "**Active Partner**" means a Recruited Partner that has completed at least one Transaction in
-the preceding 365 days, whatever its onboarding status.
+the preceding 365 days, regardless of its onboarding status.
 
 "**ACE**" means the AWS Partner Central APN Customer Engagements program. "**AWS**" means
 Amazon Web Services, Inc. and its affiliates. "**AWS Marketplace**" means the AWS Marketplace
@@ -117,8 +117,7 @@ registration and commission tracking, with HubSpot and Salesforce synchronizatio
 subject to any Privacy Law. "**Privacy Law**" means any law on the protection of Personal Data
 applicable to a Party's performance.
 
-"**Platform Revenue**" means $9,999 per Engagement Year, being the price of Automatum's
-Enterprise tier. It belongs to Automatum in every case.
+"**Platform Revenue**" means $9,999 per Engagement Year.
 
 "**Recruited Partner**" means a reseller, systems integrator, managed service provider or
 other channel partner OBVG recruits, contracts or onboards for a Registered Client under this
@@ -134,7 +133,7 @@ permitting a Recruited Partner to resell a listed product.
 Agreement for failing to meet a service level.
 
 "**Service Revenue**" means the Collected Client Fees for an Engagement Year less the Platform
-Revenue. Clause 11.1 divides it.
+Revenue, allocated between the Parties under clause 11.1.
 
 "**Services**" means the services OBVG performs under clause 5 and Schedule 1. "**Solution**"
 means the Managed Partner Development solution in Schedule 1. "**Tier**" means Tier 1, 2 or 3
@@ -179,10 +178,10 @@ it. Clause 6.5 governs flow-down.
 **3.1 Appointment.** Automatum appoints OBVG as a delivery subcontractor to perform the
 Services for Registered Clients under the Automatum Brand, and OBVG accepts.
 
-**3.2 Non-exclusive.** The appointment is non-exclusive both ways. Automatum may perform the
-Services itself or appoint others for any client, and OBVG may provide the same or similar
+**3.2 Non-exclusive.** The appointment is non-exclusive for each Party. Automatum may perform
+the Services itself or appoint others for any client, and OBVG may provide the same or similar
 services to anyone, including another AWS Marketplace seller. This is subject only to clause
-15, which operates solely in respect of Registered Clients and Recruited Partners.
+15.
 
 **3.3 No volume commitment.** Automatum commits to no minimum number of Engagements,
 Registered Clients or Client Fees, and OBVG has not relied on any forecast, projection or
@@ -233,10 +232,10 @@ fixed at execution and not revisited during that Engagement Year:
      before execution whether the proposed Client holds or held any paid Automatum
      subscription in the preceding 90 days, with reasonable evidence on request. Client Status
      determines the division of Service Revenue under clause 11.1.
-  b. **Client Source** - OBVG-Sourced, Automatum-Sourced, or Joint or ACE-Sourced, by which
-     Party first made documented contact with the Client about the Solution, and Joint or
-     ACE-Sourced where the opportunity came through ACE or neither Party can show first
-     contact.
+  b. **Client Source** - OBVG-Sourced, Automatum-Sourced, or Joint or ACE-Sourced. A Client is
+     OBVG-Sourced or Automatum-Sourced according to which Party first made documented contact
+     with the Client about the Solution, and Joint or ACE-Sourced where the opportunity came
+     through ACE or neither Party can show first contact.
 
   Client Status is re-determined on a renewal Engagement Order. A dispute about either
   classification is escalated under clause 26.2.
@@ -273,23 +272,22 @@ levels in Schedule 4, using suitably skilled personnel and with reasonable skill
   k. deliver the monthly reporting pack in Schedule 4 within 5 Business Days of month end, in
      the Automatum Brand and in a form Automatum can pass to the Client unaltered.
 
-**5.2 Recruitment is a ceiling, not a minimum.** The partner numbers in Schedule 1 are the
-maximum OBVG must recruit and onboard. OBVG does not warrant, and need not procure, that any
-minimum number of partners is recruited, onboarded, authorized, transacts or becomes an Active
-Partner, and Automatum will not represent otherwise. This clause prevails over any contrary
-reading of Schedule 1.
+**5.2 Recruitment ceiling.** The partner numbers in Schedule 1 are the maximum OBVG must
+recruit and onboard. OBVG does not warrant, and need not procure, that any minimum number of
+partners is recruited, onboarded, authorized, transacts or becomes an Active Partner, and
+Automatum will not represent otherwise.
 
 **5.3 Partner contracting.** Each partner agreement is executed between the Registered Client,
-or Automatum as its agent, and the Recruited Partner. **OBVG is not a party to any partner
-agreement as principal** and will not enter into one in its own name. OBVG administers them as
-agent under the authority in the Engagement Order and no wider.
+or Automatum as its agent, and the Recruited Partner. OBVG is not a party to any partner
+agreement as principal and will not enter into one in its own name. OBVG administers them as
+agent under, and only to the extent of, the authority in the Engagement Order.
 
 **5.4 Deal desk boundary.** OBVG's deal desk obligation ends on delivery of the Issuance-Ready
-Package. Issuance is Automatum's under clause 6.3.
+Package. Clause 6.3 governs issuance.
 
-**5.5 First line of support.** OBVG is first line for the channel, the deal desk and the PSR,
-through the personnel named under clause 9, routed through the single Automatum-branded intake
-in Schedule 3.
+**5.5 First line of support.** OBVG provides first-line support for the channel, the deal desk
+and the PSR, through the personnel named under clause 9, routed through the single
+Automatum-branded intake in Schedule 3.
 
 **5.6 Instructions.** OBVG will follow Automatum's reasonable written instructions relating to
 the Services, except where doing so would breach this Agreement, an AWS Program Term or any
@@ -306,8 +304,8 @@ writing, remains fully liable for them, and may not subcontract any role named u
 seller of record registration, and the AWS Partner Network status and entitlements needed to
 issue private offers, CPPOs and Selling Authorizations.
 
-**6.2 AWS relationship.** Automatum owns the AWS relationship for the listing and the
-Solution, including obtaining the confirmation in clause 14.2.
+**6.2 AWS relationship.** Automatum is responsible for the AWS relationship for the listing
+and the Solution, including for obtaining the confirmation in clause 14.2.
 
 **6.3 Issuance.** Automatum will issue private offers, CPPOs and Selling Authorizations
 promptly on receiving an Issuance-Ready Package or Selling Authorization request, and within
@@ -316,13 +314,12 @@ the Automatum leg in Schedule 4.
 **6.4 Client contracting and collection.** Automatum will contract with each Client, invoice
 the Client Fees and pursue collection under clause 11.
 
-**6.5 No-worse-than covenant.** Automatum warrants that no Client Agreement for a Registered
+**6.5 Client Agreement baseline.** Automatum warrants that no Client Agreement for a Registered
 Client contains, in respect of services OBVG performs, a service level stricter than Schedule
 4, a service credit percentage or at-risk amount above the caps in Schedule 4, a guaranteed
 partner number, transaction volume, revenue outcome or activation rate, or a metric definition
 inconsistent with Schedule 4. Anything agreed beyond this baseline is Automatum's own risk, is
-excluded from clause 8.4, and does not increase OBVG's obligations. This covenant is the
-consideration for the full flow-down in clause 8.4.
+excluded from clause 8.4, and does not increase OBVG's obligations.
 
 **6.6 No onward commitments.** Automatum will make no representation, warranty or commitment
 to a Client or prospective Client about the Services, the Solution, partner numbers, offer
@@ -341,8 +338,8 @@ mitigate.
 
 ## 7. White Label and Brand
 
-**7.1 Brand licence.** Automatum grants OBVG a non-exclusive, non-transferable, royalty-free
-licence for the Term and any transition period under clause 24.3 to use the Automatum Brand
+**7.1 Brand license.** Automatum grants OBVG a non-exclusive, non-transferable, royalty-free
+license for the Term and any transition period under clause 24.3 to use the Automatum Brand
 solely to perform the Services under Schedule 3 and its obligations under clause 24. OBVG
 acquires no other rights and all goodwill accrues to Automatum.
 
@@ -357,8 +354,8 @@ will not identify itself to a Client or Recruited Partner as the provider of the
 except under clause 7.5.
 
 **7.4 No direct client contact.** OBVG will not contact a Registered Client outside the
-channels and personas in Schedule 3, and will not contact a Registered Client at all about a
-dispute between the Parties, including any payment dispute.
+channels and personas in Schedule 3, and will not contact a Registered Client about a dispute
+between the Parties, including any payment dispute.
 
 **7.5 Permitted disclosure.** OBVG may disclose its role where required by law, a regulator, an
 AWS Program Term, or a Client Agreement Automatum has notified to OBVG in writing, giving
@@ -366,9 +363,8 @@ Automatum reasonable advance notice where it lawfully can.
 
 **7.6 Employment status.** OBVG is the sole employer of its personnel. Automatum does not
 direct, supervise or control how they perform the Services. OBVG's personnel will not state or
-imply that they are employed by Automatum, and Schedule 3 states what they may and may not say.
-Each Party will implement the measures in Schedule 3 against a finding of joint or
-co-employment.
+imply that they are employed by Automatum and will comply with Schedule 3 in describing their
+role. Each Party will implement the measures in Schedule 3 relating to employment status.
 
 **7.7 No publicity.** Neither Party will refer to the other, to this Agreement, to any
 Registered Client or to any Recruited Partner in any marketing material, case study, release,
@@ -382,21 +378,20 @@ Agreement.
 
 ## 8. Service Levels and Service Credits
 
-**8.1 Service levels.** OBVG will meet the service levels in Schedule 4, which state for each
-what starts and stops the clock, the measurement source, and the division between the OBVG leg
-and the Automatum leg.
+**8.1 Service levels.** OBVG will meet the service levels in Schedule 4, measured as Schedule 4
+provides.
 
-**8.2 Split legs.** Because Automatum issues offers and Selling Authorizations as seller of
-record, the deal desk and Selling Authorization service levels are measured in two legs. OBVG
-is responsible only for the OBVG leg, and a failure of the Automatum leg gives rise to no
-flow-down under clause 8.4. Where root cause analysis is genuinely inconclusive between the
-legs, responsibility is apportioned equally and either Party may escalate under clause 26.2.
+**8.2 Split legs.** The deal desk and Selling Authorization service levels are measured in two
+legs, the OBVG leg and the Automatum leg, as Schedule 4 provides. OBVG is responsible only for
+the OBVG leg, and a failure of the Automatum leg gives rise to no flow-down under clause 8.4.
+Where root cause analysis does not establish which leg caused the failure, responsibility is
+apportioned equally and either Party may escalate under clause 26.2.
 
 **8.3 Excused events.** A service level does not run, and no failure occurs, to the extent
 delay is caused by a Relief Event, a Force Majeure Event, an incomplete or non-conforming Deal
 Desk Request, a Recruited Partner's failure to complete AWS registration, tax, banking or
 service-linked role requirements, a Registered Client's act or omission, or an act or omission
-of AWS. A change in OBVG's personnel is **not** an excused event and service levels continue to
+of AWS. A change in OBVG's personnel is not an excused event and service levels continue to
 run through any replacement under clause 9.
 
 **8.4 Flow-down of Service Credits.** Where Automatum must give a Registered Client a Service
@@ -447,14 +442,14 @@ provide a 10 Business Day handover overlap at its own cost. Clause 8.3 applies t
 
 **9.5 Removal.** Automatum may require removal of a named person from an Engagement for
 material underperformance, misconduct, breach of Schedule 3, or repeated attributable service
-level failures, and replacement is at OBVG's cost. This is a request to remove the person from
-the Engagement, not a direction to dismiss or discipline, and OBVG remains solely responsible
-for all employment decisions.
+level failures, and replacement is at OBVG's cost. A removal request does not direct OBVG to
+dismiss or discipline the person, and OBVG remains solely responsible for all employment
+decisions.
 
 **9.6 No dedication.** Named personnel are assigned on a shared service basis and are not
-exclusively dedicated unless the Engagement Order says so.
+exclusively dedicated unless the Engagement Order provides otherwise.
 
-**9.7 Capacity ratios.** OBVG will not exceed the accounts-per-owner ratios in Schedule 7.
+**9.7 Capacity ratios.** OBVG will not exceed the capacity ratios in Schedule 7 paragraph 2.
 Exceeding a ratio is a breach whether or not a service level has been missed, and Automatum
 may require a remediation plan under clause 8.7 on that basis alone.
 
@@ -467,14 +462,14 @@ the PSR rather than held only by individuals.
 ## 10. Partner System of Record
 
 **10.1 Rights warranty.** OBVG warrants that it holds all rights needed to provide and operate
-the PSR as contemplated here, including to present it under the Automatum Brand and to grant
-the access and licences in this clause, and that its own licence from the PSR vendor runs
+the PSR under this Agreement, including to present it under the Automatum Brand and to grant
+the access and licenses in this clause, and that its own license from the PSR vendor runs
 beyond the expiry of the longest Engagement Order then in effect plus the transition period in
 clause 24.1.
 
 **10.2 White label configuration.** Each Registered Client's tenant is configured under the
 Automatum Brand, with no PSR vendor or OBVG branding visible to the Client or any Recruited
-Partner, except where the vendor's licence makes removal impossible, in which case OBVG will
+Partner, except where the vendor's license makes removal impossible, in which case OBVG will
 notify Automatum before the tenant goes live.
 
 **10.3 Data ownership and permitted use.** Client Data is owned by the Registered Client it
@@ -506,12 +501,12 @@ or require an alternative PSR.
 **10.8 Step-in.** Automatum may step in on a Chronic Failure, an insolvency event affecting
 OBVG, a material service failure threatening a Registered Client's service levels, or an AWS
 compliance event. OBVG will then grant Automatum and any nominee access, credentials and
-administrative rights to the PSR and a royalty-free licence to the OBVG Materials for the
+administrative rights to the PSR and a royalty-free license to the OBVG Materials for the
 remainder of the affected Engagement Orders plus the transition period. Step-in does not
 relieve OBVG of liability for any earlier period. Automatum will step out on 30 days' notice
 once the trigger is remedied, on an agreed plan.
 
-**10.9 Insolvency.** The rights and licences under clauses 10.7 and 10.8 are licences of
+**10.9 Insolvency.** The rights and licenses under clauses 10.7 and 10.8 are licenses of
 intellectual property for the purposes of section 365(n) of the United States Bankruptcy Code,
 and Automatum may elect to retain its rights under that section. Neither Party will assert
 that those rights terminate automatically on the other's insolvency.
@@ -520,23 +515,20 @@ that those rights terminate automatically on the other's insolvency.
 
 ## 11. Fees, Invoicing and Payment
 
-**11.1 The split.** For each Engagement Year the Collected Client Fees divide into Platform
-Revenue and Service Revenue. Platform Revenue is $9,999 and belongs to Automatum whatever the
-Client Status. Service Revenue divides by Client Status:
+**11.1 Division of Collected Client Fees.** For each Engagement Year the Collected Client Fees
+divide into Platform Revenue and Service Revenue. Platform Revenue of $9,999 is allocated to
+Automatum regardless of Client Status. Service Revenue divides by Client Status:
 
-  a. **Net New Client** - the whole of the Service Revenue is retained by OBVG, and Automatum
-     takes no share of it.
-  b. **Existing Automatum Client** - the Client already pays the Platform Revenue under its
-     existing subscription, which continues unchanged, and the Service Revenue is divided 75%
-     to OBVG and 25% to Automatum in consideration of the Client relationship Automatum brings
-     to the Engagement.
+  a. **Net New Client** - the Service Revenue is allocated 100% to OBVG.
+  b. **Existing Automatum Client** - the Client continues to pay the Platform Revenue under its
+     existing subscription, which is unchanged, and the Service Revenue is allocated 75% to
+     OBVG and 25% to Automatum.
 
-  Client Fees are the same at a given Tier whatever the Client Status. Schedule 2 states the
-  figures and the rounding rule.
+  Client Fees for a Tier do not vary with Client Status. Schedule 2 applies.
 
 **11.2 Accrual.** Platform Revenue accrues pro rata across the 12 Engagement Months of an
-Engagement Year at $833.25 per Engagement Month, and is not recovered from the earliest Client
-payments in priority to OBVG Service Revenue. Each Party's share of Service Revenue accrues
+Engagement Year at $833.25 per Engagement Month, and is not recovered from Collected Client
+Fees in priority to OBVG Service Revenue. Each Party's share of Service Revenue accrues
 monthly at one twelfth of its annual share.
 
 **11.3 Invoicing.** OBVG will invoice Automatum monthly in arrears for the OBVG Service Revenue
@@ -570,11 +562,11 @@ Clause 7.4 applies throughout.
 month or the maximum rate permitted by law, whichever is lower. Neither Party may set off
 except for sums that are liquidated, undisputed and due.
 
-**11.9 Marketplace transaction of engagement fees.** Engagement fees are invoiced by Automatum
-directly to each Client and are not transacted through AWS Marketplace, so no AWS Marketplace
-listing fee applies to them, and the figures in Schedule 2 depend on that. If the Parties
-later agree to transact engagement fees through AWS Marketplace, the allocation of the
-resulting listing fee must be agreed under clause 14.5 before that begins.
+**11.9 Marketplace transaction of Client Fees.** Automatum will invoice Client Fees directly to
+each Client and will not transact them through AWS Marketplace. If the Parties later agree to
+transact Client Fees through AWS Marketplace, the allocation of the resulting listing fee must
+be agreed under clause 14.5 before that begins, and an AWS Marketplace listing fee is deducted
+in calculating Collected Client Fees only under that agreed allocation.
 
 **11.10 Taxes.** Each Party bears its own taxes on its own income. Amounts payable are
 exclusive of Taxes, which Automatum will pay in addition where properly chargeable. If
@@ -599,7 +591,8 @@ headline metric is the number of Offer-Issuing Partners, or the fallback metric 
 will reconcile it against AWS Marketplace seller reporting monthly and report any discrepancy.
 
 **12.3 Disputes.** Automatum may dispute a reported figure within 15 Business Days of
-receiving the report, resolved by reference to the event log under clause 10.5.
+receiving the report, and the dispute is resolved by reference to the event log under clause
+10.5.
 
 **12.4 Records and audit.** Each Party will keep accurate records of its performance for the
 Term plus 3 years, and clause 10.5 governs the event log. Automatum may audit OBVG's compliance
@@ -612,7 +605,7 @@ another OBVG client's confidential information.
 ## 13. AWS Program Compliance
 
 **13.1 Compliance.** Each Party will comply with the AWS Program Terms applicable to it and
-maintain the AWS registrations, certifications and programme statuses its role requires.
+maintain the AWS registrations, certifications and program statuses its role requires.
 
 **13.2 No representation as AWS.** Neither Party will represent itself as AWS, as acting with
 AWS's authority, or as able to bind AWS.
@@ -630,8 +623,8 @@ so that no opportunity is counted or billed twice.
 reasonably to know to be inaccurate, duplicated or misattributed. Clause 5.1(j) governs the
 account under which OBVG files.
 
-**13.6 AWS programme change.** If AWS changes an AWS Program Term, a Marketplace mechanism or
-a programme rule so that a commitment in Schedule 1 or 4 becomes impossible or materially more
+**13.6 AWS program change.** If AWS changes an AWS Program Term, a Marketplace mechanism or
+a program rule so that a commitment in Schedule 1 or 4 becomes impossible or materially more
 onerous, clause 14.3 applies.
 
 ---
@@ -642,38 +635,37 @@ onerous, clause 14.3 applies.
 assumption proving incorrect is not a breach, and the consequence is as stated in Schedule 8
 or this clause.
 
-**14.2 The Marketplace authorization dependency.** It is not yet confirmed whether, and by
-what mechanism, a third-party reseller can issue offers against Automatum's listing while
-Automatum is seller of record, and the Offer-Issuing Partner metric depends on it. Automatum
-owns obtaining AWS's confirmation and will use reasonable efforts to obtain a written answer
-by the longstop date in Schedule 8. If the mechanism is confirmed available by then, the
+**14.2 Marketplace authorization dependency.** As at the Effective Date, AWS has not
+confirmed whether, or by what mechanism, a third-party reseller may issue offers against
+Automatum's listing while Automatum is seller of record. Automatum is responsible for
+obtaining AWS's confirmation and will use reasonable efforts to obtain a written answer by the
+longstop date in Schedule 8. If the mechanism is confirmed available by then, the
 primary metric in Schedule 4 applies. If it is not, the fallback metric in Schedule 4 applies
 automatically from the next Engagement Month, without further agreement, and neither Party is
 in breach or liable to the other. Neither Party warrants the outcome.
 
-**14.3 AWS programme change relief.** Where clause 13.6 applies, the affected obligation is
+**14.3 AWS program change relief.** Where clause 13.6 applies, the affected obligation is
 suspended, the Parties will meet within 10 Business Days to agree a change under clause 14.5,
 and if they have not agreed within 30 days either may terminate the affected Engagement Order
 on 30 days' notice, with Client Fees pro-rated to termination and no termination liability on
 either side.
 
-**14.4 Capacity test.** The service levels in Schedule 4 and the Tier 3 roster in Schedule 1
-have not been capacity tested. Neither Party will publish the Tier table to the market, and no
-Engagement Order may be executed at a Tier, until the capacity test in Schedule 8 has been
-passed for that Tier.
+**14.4 Capacity test.** Neither Party will publish the Tier table to the market, and no
+Engagement Order may be executed at a Tier, until the capacity test in Schedule 8, covering
+the service levels in Schedule 4 and the Tier 3 roster in Schedule 1, has been passed for that
+Tier.
 
 **14.5 Change control.** Any change to the Services, the service levels, a Tier, the Schedules
 or the commercial terms takes effect only in a change order signed by both Parties stating the
-change and its effect on the Services and on OBVG Service Revenue. Neither Party must agree a
-change. Work outside the Services is chargeable at the Schedule 2 rate card.
+change and its effect on the Services and on OBVG Service Revenue. Neither Party is obliged to
+agree to any change. Work outside the Services is chargeable at the Schedule 2 rate card.
 
 ---
 
 ## 15. Non-Circumvention and Non-Solicitation
 
-**15.1 Purpose.** The appointment being non-exclusive, this clause is the protection each
-Party receives in place of exclusivity. It is limited to Registered Clients and Recruited
-Partners and does not restrain either Party's business generally.
+**15.1 Scope.** This clause is limited to Registered Clients and Recruited Partners and does
+not restrain either Party's business generally.
 
 **15.2 Registered Clients.** During the Term and for 24 months after the later of expiry and
 termination of the relevant Engagement Order, OBVG will not directly or indirectly solicit,
@@ -684,18 +676,16 @@ services. This does not apply to a Prior Relationship under clause 4.4, to gener
 not targeted at Registered Clients, or to an approach the Registered Client initiates where
 OBVG declines it and notifies Automatum within 5 Business Days.
 
-**15.3 Recruited Partners.** The population of AWS resellers is finite and a reseller
-typically carries many vendor lines, so a general restriction on OBVG working with firms it has
-recruited would protect no legitimate interest. OBVG may work with any Recruited Partner on
-other engagements. During the Term and for 12 months after, OBVG will not use Client Data to
-solicit any partner away from a Registered Client's channel, procure or encourage a Recruited
-Partner to terminate or breach its agreement relating to a Registered Client's channel, or
-introduce a Recruited Partner to a competing software provider in the same solution category
-as a Registered Client for the purpose of displacing that Client's product.
+**15.3 Recruited Partners.** OBVG may work with any Recruited Partner on other engagements.
+During the Term and for 12 months after, OBVG will not use Client Data to solicit any partner
+away from a Registered Client's channel, procure or encourage a Recruited Partner to terminate
+or breach its agreement relating to a Registered Client's channel, or introduce a Recruited
+Partner to a competing software provider in the same solution category as a Registered Client
+for the purpose of displacing that Client's product.
 
 **15.4 Automatum's covenant.** During the Term and for 12 months after the later of expiry and
 termination of the relevant Engagement Order, Automatum will not provide services of the kind
-comprised in the Services to a Registered Client using OBVG Materials outside the licence in
+comprised in the Services to a Registered Client using OBVG Materials outside the license in
 clause 16.4, or using personnel recruited from OBVG in breach of clause 15.5.
 
 **15.5 Personnel.** During the Term and for 12 months after the later of expiry and
@@ -727,7 +717,7 @@ to make it enforceable.
 **16.1 Background IP.** Each Party retains all rights in intellectual property it owned before
 the Effective Date or develops independently of this Agreement. OBVG retains all rights in the
 OBVG Materials, including the PSR, and Automatum retains all rights in the Automatum Brand.
-Nothing here transfers ownership of either.
+Nothing in this Agreement transfers ownership of the OBVG Materials or the Automatum Brand.
 
 **16.2 Service IP.** All intellectual property created in performing the Services vests in OBVG
 on creation and forms part of the OBVG Materials, including any improvement, refinement,
@@ -736,16 +726,16 @@ template, curriculum or process developed in the course of an Engagement. No int
 property is owned jointly under this Agreement. No approval, instruction, specification,
 requirement, feedback or other contribution by Automatum or a Registered Client gives Automatum
 or that Client ownership of, or any interest in, the OBVG Materials. Automatum's rights in the
-OBVG Materials are the licences expressly granted in this Agreement and no others.
+OBVG Materials are the licenses expressly granted in this Agreement and no others.
 
 **16.3 Client Data.** Clause 10.3 governs.
 
 **16.4 Client-facing deliverables.** OBVG grants Automatum a perpetual, irrevocable,
-non-exclusive, worldwide, royalty-free, sublicensable licence to use, copy, modify and
+non-exclusive, worldwide, royalty-free, sublicensable license to use, copy, modify and
 distribute the client-facing deliverables produced for a Registered Client, including that
 Client's partner agreements, margin schedule, enablement content, playbooks and reports, for
 that Client's own channel and for Automatum's performance of the relevant Client Agreement.
-This licence survives termination. It is limited to those deliverables as produced for that
+This license survives termination. It is limited to those deliverables as produced for that
 Registered Client and gives Automatum no right in the OBVG Materials from which they were
 produced.
 
@@ -818,7 +808,7 @@ third party intellectual property rights.
 
 **19.3 Automatum.** Automatum warrants that it holds and will maintain the listing, seller of
 record registration, AWS Partner Network status and entitlements in clause 6.1; that it may
-grant the licence in clause 7.1; and that each Client Agreement for a Registered Client
+grant the license in clause 7.1; and that each Client Agreement for a Registered Client
 complies with clause 6.5.
 
 **19.4 Compliance covenant.** Each Party will comply with applicable anti-bribery and
@@ -850,7 +840,7 @@ loss of, or a defect in, the listing, seller of record position or AWS Partner N
 entitlements; infringement of intellectual property rights by the Automatum Brand; and its
 breach of an AWS Program Term.
 
-**20.3 Conduct.** The indemnified Party will notify promptly, give sole control of defence and
+**20.3 Conduct.** The indemnified Party will notify promptly, give sole control of defense and
 settlement, and cooperate reasonably at the indemnifying Party's cost. The indemnifying Party
 will not settle in a way imposing a non-indemnified obligation or admission of liability
 without consent. Late notice reduces the indemnity only to the extent of resulting prejudice.
@@ -897,16 +887,16 @@ reduced.
 ## 23. Term and Termination
 
 **23.1 Term.** This Agreement begins on the Effective Date and continues for 24 months (the
-"Initial Term"), then renews for successive 12 month periods unless either Party gives 90
-days' notice before the end of the then current period. "Term" means the Initial Term with any
+"Initial Term"), then renews for successive 12-month periods unless either Party gives 90
+days' notice before the end of the then-current period. "Term" means the Initial Term with any
 renewal.
 
-**23.2 No orphaning.** Expiry or termination does not terminate an Engagement Order then in
-effect. Each continues to its natural expiry and this Agreement continues to govern it, unless
-that Engagement Order is itself terminated under this clause.
+**23.2 Continuation of Engagement Orders.** Expiry or termination does not terminate an
+Engagement Order then in effect. Each continues to its natural expiry and this Agreement
+continues to govern it, unless that Engagement Order is itself terminated under this clause.
 
 **23.3 Convenience.** Either Party may terminate this Agreement on 90 days' notice. Clause
-23.2 applies, so this stops new Engagement Orders but does not end existing ones.
+23.2 applies.
 
 **23.4 Cause.** Either Party may terminate this Agreement, or a single Engagement Order,
 immediately on notice if the other commits a material breach that is incapable of remedy, or
@@ -916,11 +906,11 @@ terminate a single Engagement Order under clause 8.7, and OBVG under clause 11.7
 **23.5 Insolvency.** Either Party may terminate immediately on notice if the other enters an
 insolvency process, has a receiver, administrator or trustee appointed over a material part of
 its assets, makes a general assignment for the benefit of creditors, or ceases business.
-Clause 10.9 applies to licences granted here.
+Clause 10.9 applies to the licenses granted under this Agreement.
 
 **23.6 Survival.** Clauses 1, 2, 7.1, 7.7, 10.3, 10.5, 10.7, 10.8, 10.9, 11 for amounts accrued,
-12.4, 15, 16, 17, 18, 20, 21, 22, 23.6, 24, 26 and 27 survive termination, with any provision
-that by its nature is intended to.
+12.4, 15, 16, 17, 18, 20, 21, 22, 23.6, 24, 26 and 27 survive termination, together with any
+other provision that by its nature is intended to survive termination.
 
 ---
 
@@ -936,11 +926,11 @@ Data under clause 10.4 with a restore test; knowledge transfer; handover of in-f
 registrations, CPPOs and Selling Authorization requests; run-out and reconciliation of accrued
 partner commissions; introductions to the Recruited Partner roster on Automatum-branded
 correspondence; disconnection of any CRM synchronization with a certificate of deletion; and
-continuation of the licence in clause 16.4.
+continuation of the license in clause 16.4.
 
-**24.3 Conduct.** Throughout, OBVG continues to perform the Services, the service levels
-continue to apply, and clause 7 continues to apply so that no Client or Recruited Partner
-learns of OBVG's role or of the termination except as Automatum directs.
+**24.3 Conduct.** During the transition period, OBVG continues to perform the Services, the
+service levels continue to apply, and clause 7 continues to apply so that no Client or
+Recruited Partner learns of OBVG's role or of the termination except as Automatum directs.
 
 ---
 
@@ -951,8 +941,8 @@ control, including act of God, war, terrorism, civil unrest, epidemic, strike af
 third party, failure of a utility or telecommunications provider, and an unplanned AWS
 platform outage (a "Force Majeure Event").
 
-**25.2** A change by AWS to an AWS Program Term, a Marketplace mechanism or a programme rule
-is **not** a Force Majeure Event; clauses 13.6 and 14.3 govern it.
+**25.2** A change by AWS to an AWS Program Term, a Marketplace mechanism or a program rule
+is not a Force Majeure Event; clauses 13.6 and 14.3 govern it.
 
 **25.3** The affected Party will notify promptly and use reasonable efforts to mitigate. If a
 Force Majeure Event continues 60 consecutive days, either Party may terminate the affected
@@ -979,12 +969,12 @@ competitor of the other, the other may terminate on 60 days' notice, and clause 
 
 **26.4 Notices.** Notices must be in writing to the addresses in Schedule 8, by hand, by
 recognized courier, or by email to the address stated for legal notices with a copy by
-courier, effective on delivery or the next Business Day if delivered outside business hours.
+courier, effective on delivery or the next Business Day if delivered outside Business Hours.
 
 **26.5 Entire agreement.** This Agreement is the entire agreement on its subject matter and
 supersedes all prior discussions, understandings and representations, none of which binds
-either Party. Neither Party has relied on any statement not set out here. This does not limit liability for
-fraud.
+either Party. Neither Party has relied on any statement not set out in this Agreement. This
+does not limit liability for fraud.
 
 **26.6 Amendment, waiver and severability.** An amendment is effective only in writing signed
 by both Parties or by change order under clause 14.5. A waiver is effective only in writing,
@@ -994,7 +984,7 @@ continues; clause 15.7 applies to clause 15.
 
 **26.7 No third party rights.** No person other than the Parties may enforce this Agreement,
 except that a Registered Client may enforce clause 16.4 to the extent necessary to retain the
-materials its channel runs on.
+client-facing deliverables on which its channel operates.
 
 **26.8 Counterparts.** This Agreement may be executed in counterparts, including by electronic
 signature, each an original and all together one instrument.
@@ -1021,12 +1011,12 @@ OUT OF OR RELATING TO THIS AGREEMENT.
 
 ## 1. The Solution
 
-Managed Partner Development is a 12 month engagement under which Automatum builds and runs a
-reseller channel on AWS for a Registered Client. Delivery is executed partner agreements and a
-margin schedule, a live partner portal carrying onboarding, deal registration and commission
-tracking, recruitment and enablement on a named cadence, a deal desk answering registrations,
-and a monthly report whose headline number is the Offer-Issuing Partner count. Clause 5.1
-states what OBVG performs; this Schedule states what varies by Tier.
+Managed Partner Development is a 12-month engagement under which Automatum builds and runs a
+reseller channel on AWS for a Registered Client. The deliverables are executed partner
+agreements and a margin schedule, a live partner portal carrying onboarding, deal registration
+and commission tracking, recruitment and enablement on a named cadence, a deal desk answering
+registrations, and a monthly report whose primary metric is the Offer-Issuing Partner count.
+The Services at each Tier are those in clause 5.1, varied only as set out in this Schedule.
 
 ## 2. Tier matrix
 
@@ -1036,15 +1026,15 @@ states what OBVG performs; this Schedule states what varies by Tier.
 | Net new Recruited Partners (ceiling) | up to 6 | up to 12 | uncapped roster |
 | Training and enablement sessions | twice yearly | quarterly | monthly |
 | Deal desk turnaround (total) | by close of the next Business Day | 8 Business Hours | 4 Business Hours |
-| Channel Reviews | quarterly | monthly | fortnightly |
+| Channel Reviews | quarterly | monthly | every two weeks |
 
-Everything else in clause 5.1 applies at every Tier. Clause 5.2 governs the partner numbers,
-which are a ceiling and not a minimum.
+The remaining Services in clause 5.1 apply at every Tier. Clause 5.2 governs the partner
+numbers.
 
-## 3. Tier 3: uncapped roster, not unlimited rate
+## 3. Tier 3 roster and onboarding throughput
 
 There is no contractual ceiling on the total number of Recruited Partners over a Tier 3
-Engagement. OBVG's obligation is throughput:
+Engagement. OBVG's Tier 3 obligations are as follows:
 
 - OBVG will process up to the Onboarding Throughput Rate in the Engagement Order per month and
   maintain up to the stated number of concurrent onboardings, as a first-in-first-out queue
@@ -1054,30 +1044,26 @@ Engagement. OBVG's obligation is throughput:
   monthly onboarding volume. If actual volume exceeds 150% of Baseline over any rolling 3
   months, either Party may invoke clause 14.5 and Automatum will use reasonable efforts to
   obtain an uplift or a move to a bespoke tier. If the Client will not agree, OBVG's obligation
-  is capped at Baseline plus fair use and Automatum carries the difference against the Client.
-- Above the partner record threshold in the Engagement Order, incremental PSR licence cost
+  is capped at Baseline plus fair use and Automatum bears any resulting shortfall in its
+  obligations to the Client.
+- Above the partner record threshold in the Engagement Order, incremental PSR license cost
   passes through at cost under clause 14.5, unless OBVG has warranted in the Engagement Order
-  that it holds an unlimited-partner licence.
+  that it holds an unlimited-partner license.
 
-## 4. Partner milestones are targets, not warranties
+## 4. Partner milestones
 
-The programme target is that a Recruited Partner achieves its first Transaction by the end of
-the first quarter following its partner agreement signature date. This is a target supported
-by a best efforts obligation and a reporting duty, not a warranty, because partner timelines
-depend on the partner completing AWS registration, tax, banking and service-linked role
-requirements, which is outside the control of OBVG, Automatum and the Registered Client. Clause
-8.3 stops the clock while a partner is pending those requirements.
+The program target is that a Recruited Partner achieves its first Transaction by the end of
+the first quarter following its partner agreement signature date. The target is supported by
+a best efforts obligation and a reporting duty and is not a warranty. Clause 8.3 applies while
+a partner is pending AWS registration, tax, banking or service-linked role requirements.
 
 ## 5. Active Partner measurement
 
-An Engagement Year is 12 months and an Active Partner must have transacted within 365 days, so
-a partner recruited late in an Engagement cannot reach Active Partner status within it.
-Accordingly Active Partner counts are measured on a trailing basis and again at a post-term
-measurement date 3 months after the end of the Engagement Year; Recruited Partners onboarded
-in the final 90 days of an Engagement Year are excluded from any in-term ratio expressed by
-reference to Active Partners; and no fee, credit or commitment is calculated by reference to
-an Active Partner count for a period in which the partner could not arithmetically have
-qualified.
+Active Partner counts are measured on a trailing basis and again at a post-term measurement
+date 3 months after the end of the Engagement Year; Recruited Partners onboarded in the final
+90 days of an Engagement Year are excluded from any in-term ratio expressed by reference to
+Active Partners; and no fee, credit or commitment is calculated by reference to an Active
+Partner count for a period in which the partner could not have qualified.
 
 ## 6. Out of scope
 
@@ -1089,11 +1075,11 @@ direct customers, is chargeable under clause 14.5 at the Schedule 2 rate card.
 
 # Schedule 2 - Commercial Terms
 
-## 1. The split
+## 1. Division of Collected Client Fees
 
-Platform Revenue is $9,999 per Engagement Year at every Tier and belongs to Automatum in every
-case, accruing at $833.25 per Engagement Month. Service Revenue is the balance and divides by
-Client Status under clause 11.1.
+Platform Revenue is $9,999 per Engagement Year at every Tier and is allocated to Automatum
+regardless of Client Status, accruing at $833.25 per Engagement Month. Service Revenue is the
+balance and divides by Client Status under clause 11.1.
 
 **Net New Client - Service Revenue retained in full by OBVG**
 
@@ -1113,25 +1099,27 @@ The Client's existing subscription continues and is not part of the Engagement.
 | 2 | $50,001 | $37,500.75 | $12,500.25 | $3,125.06 | $22,499.25 |
 | 3 | $80,001 | $60,000.75 | $20,000.25 | $5,000.06 | $29,999.25 |
 
-"Automatum total per year" is the $9,999 the Client already pays plus Automatum's 25% share,
-stated so the two Client Statuses can be compared.
+"Automatum total per year" is the $9,999 the Client pays under its existing subscription plus
+Automatum's 25% share of Service Revenue.
 
 **Rounding.** Monthly accrual is one twelfth of the annual share rounded to the nearest cent,
 and the final Engagement Month of each Engagement Year takes the rounding difference so the
 twelve amounts total the annual share exactly.
 
-These figures assume Client Fees are collected in full. Where they are not, Platform Revenue
-and each Party's share of Service Revenue accrue only against Collected Client Fees, and the
-shortfall is borne in the proportions above for the affected Engagement Month.
+The amounts in this paragraph are stated on the basis that Client Fees are collected in full.
+Where they are not, Platform Revenue and each Party's share of Service Revenue accrue only
+against Collected Client Fees, and the shortfall is borne in the proportions in this paragraph
+for the affected Engagement Month.
 
 ## 2. Worked example - Tier 2, full Engagement Year
 
-**Net New Client.** $60,000 collected. Platform Revenue $9,999 to Automatum at $833.25 per
-month. Service Revenue $50,001 retained by OBVG at $4,166.75 per month.
+**Net New Client.** Client Fees of $60,000 are collected. Platform Revenue of $9,999 accrues
+to Automatum at $833.25 per month, and Service Revenue of $50,001 is retained by OBVG at
+$4,166.75 per month.
 
-**Existing Automatum Client.** The same $60,000 collected, the Client's existing subscription
-continuing alongside. Service Revenue $50,001 divides $37,500.75 to OBVG and $12,500.25 to
-Automatum, and OBVG invoices $3,125.06 monthly.
+**Existing Automatum Client.** Client Fees of $60,000 are collected and the Client's existing
+subscription continues separately and outside the Engagement. Service Revenue of $50,001
+divides $37,500.75 to OBVG and $12,500.25 to Automatum, and OBVG invoices $3,125.06 monthly.
 
 ## 3. Worked example - Tier 1, terminated at the end of Engagement Month 3
 
@@ -1152,22 +1140,26 @@ commits annually for its Enterprise tier, under Schedule 8 paragraph 2.2.
 |---|---|
 | Client terminates, or the Engagement expires | Each Party keeps what accrued. Any early termination charge collected is split in the proportions in paragraph 1 for that Tier and Client Status. |
 | OBVG's breach or Chronic Failure | Each Party keeps what accrued. OBVG forfeits its share of any early termination charge and funds transition assistance under clause 24.1. |
-| Automatum's breach or convenience | OBVG is paid the greater of 3 months' OBVG Service Revenue and the OBVG Service Revenue for the remainder of the Engagement Year, plus evidenced demobilization costs. |
+| Automatum's breach, or termination by Automatum for convenience | OBVG is paid the greater of 3 months' OBVG Service Revenue and the OBVG Service Revenue for the remainder of the Engagement Year, plus evidenced demobilization costs. |
 | No fault under clause 14.3 or 25.3 | Losses lie where they fall. Each Party keeps what accrued, and any early termination charge collected is split in the proportions in paragraph 1. |
 
 ## 5. Tier changes
 
-**5.1 Upgrade.** Effective the first day of the Engagement Month following the Client's written
-request. The enhanced service levels apply from 30 days after, so OBVG can staff to them.
+**5.1 Upgrade.** An upgrade takes effect on the first day of the Engagement Month following
+the Client's written request. The enhanced service levels apply from the 30th day after the
+upgrade takes effect.
 
-**5.2 Downgrade.** Effective only at an Engagement quarter boundary on 60 days' notice.
+**5.2 Downgrade.** A downgrade takes effect only at an Engagement quarter boundary, being the
+end of each period of three Engagement Months from the start of the Engagement Year, and only
+on 60 days' notice.
 
 **5.3 Roster carry-over on downgrade.** The new Tier's partner ceiling applies to net new
 Recruited Partners only. Continued management of an existing roster above the level the new
-Tier supports is, by change order under clause 14.5, chargeable at the rate card; or resolved
-by trimming the roster to the supported level within 60 days; or resolved by re-scoping as a
-bespoke tier. Absent agreement within 60 days, OBVG's obligation is limited to the new Tier's
-supported level and Automatum carries the difference against the Client.
+Tier supports is addressed in one of three ways: it is chargeable at the rate card by change
+order under clause 14.5; the roster is reduced to the supported level within 60 days; or the
+Engagement is re-scoped as a bespoke tier. Absent agreement within 60 days, OBVG's obligation
+is limited to the new Tier's supported level and Automatum bears any resulting shortfall in
+its obligations to the Client.
 
 ## 6. Rate card
 
@@ -1178,7 +1170,7 @@ roster carry-over under paragraph 5.3 are charged at:
 |---|---|
 | Channel Manager | [to supply: day rate] |
 | Deal Desk Analyst | [to supply: day rate] |
-| Programme Director | [to supply: day rate] |
+| Program Director | [to supply: day rate] |
 | PSR Administrator | [to supply: day rate] |
 
 A day is 8 hours. Travel and expenses are chargeable at cost with prior written approval.
@@ -1189,33 +1181,33 @@ A day is 8 hours. Travel and expenses are chargeable at cost with prior written 
 
 ## 1. Identity
 
-**1.1** OBVG personnel doing client-facing or partner-facing work operate under the Automatum
-Brand, using Automatum-supplied email addresses on an Automatum domain, Automatum calendar
-invitations, document templates and email signatures. Automatum supplies and administers these
-accounts and may revoke them at any time.
+**1.1** OBVG personnel performing client-facing or partner-facing work operate under the
+Automatum Brand, using Automatum-supplied email addresses on an Automatum domain, Automatum
+calendar invitations, document templates and email signatures. Automatum supplies and
+administers these accounts and may revoke them at any time.
 
 **1.2** OBVG personnel are presented as "the Automatum channel team". They may say they are
-part of that team, that they work on Automatum's channel programme, and that they are
-contractors or partners of Automatum where directly asked. They may **not** state or imply
+part of that team, that they work on Automatum's channel program, and that they are
+contractors or partners of Automatum where directly asked. They may not state or imply
 that they are employed by Automatum, sign any document as an employee or officer of Automatum,
 or complete an employment verification, reference or immigration form in Automatum's name.
 
 **1.3** Automatum does not set OBVG personnel's hours, supervise their manner of work, conduct
 their performance reviews or determine their compensation. OBVG supplies their equipment and
-working environment. Requests about an individual go to OBVG's relationship manager under
-clause 9.5, never to the individual.
+working environment. Requests concerning an individual are made to OBVG's relationship manager
+under clause 9.5 and not to the individual.
 
 ## 2. Communications
 
 **2.1** All Client and partner contact routes through a single Automatum-branded intake
 channel stated in the Engagement Order, and OBVG triages and routes under Schedule 4 paragraph
-6.
+5.
 
 **2.2** OBVG will not initiate contact with a Registered Client outside that channel and the
 named personas, and will not contact a Registered Client about any matter between the Parties.
 
-**2.3** Calls and meetings are held on Automatum-branded conferencing, recorded per
-Automatum's policy and applicable law.
+**2.3** Calls and meetings are held on Automatum-branded conferencing and recorded in
+accordance with Automatum's policy and applicable law.
 
 **2.4** The CRM of record for client-facing activity is Automatum's, as stated in the
 Engagement Order. OBVG will not hold Registered Client contact records in its own systems
@@ -1244,8 +1236,8 @@ roster on Automatum-branded correspondence.
 A Deal Desk Request is "Complete" when it contains every item in the request form in the
 Engagement Order. The clock starts when a Complete request is received through the intake
 channel, or at the start of the next Business Hour if received outside Business Hours, and
-stops when the responsible Party delivers its output. Turnaround splits into two legs, because
-Automatum issues offers as seller of record and OBVG cannot control issuance.
+stops when the responsible Party delivers its output. Turnaround is measured in two legs, the
+OBVG leg and the Automatum leg.
 
 | Tier | Total turnaround | OBVG leg: Complete request to Issuance-Ready Package | Automatum leg: package to offer issued |
 |---|---|---|---|
@@ -1254,14 +1246,14 @@ Automatum issues offers as seller of record and OBVG cannot control issuance.
 | 3 | 4 Business Hours | 2.5 Business Hours | 1.5 Business Hours |
 
 Tier 1 is satisfied if the offer is issued by close of the Business Day following the Business
-Day of receipt, permitting up to approximately 16 Business Hours elapsed; Tier 2 is a fixed 8
-Business Hours from receipt. The two are defined separately because a Business Day and 8
-Business Hours would otherwise be the same period. Clause 8.2 governs attribution between legs.
+Day of receipt; Tier 2 is a fixed 8 Business Hours from receipt. Clause 8.2 governs attribution
+between legs.
 
 ## 2. Selling Authorizations
 
-At every Tier: OBVG leg, request to submission to Automatum, 2 Business Days; Automatum leg,
-submission to issuance, 2 Business Days.
+At every Tier, the OBVG leg runs from receipt of a Selling Authorization request to its
+submission to Automatum and is 2 Business Days, and the Automatum leg runs from that submission
+to issuance of the Selling Authorization and is 2 Business Days.
 
 ## 3. Cadence commitments
 
@@ -1315,21 +1307,22 @@ clock starts on handover.
 
 ## 6. Credits
 
-Clause 8.4 governs flow-down, clause 8.5 the caps and clause 8.7 Chronic Failure. A Service
-Credit is measured against the Registered Client's gross monthly Client Fees, being the basis
-on which the Client Agreement computes it. There is no earn-back.
+Clause 8.4 governs flow-down of Service Credits, clause 8.5 governs the caps on that flow-down
+and clause 8.7 governs Chronic Failure. A Service Credit is measured against the Registered
+Client's gross monthly Client Fees. A Service Credit deducted under clause 8.4 is not reversed
+or reduced by reference to subsequent service level performance.
 
 ---
 
 # Schedule 5 - Partner System of Record
 
-## Part A - Vendor and licence
+## Part A - Vendor and license
 
 | Item | Detail |
 |---|---|
 | PSR vendor legal name | [to supply: PSR vendor legal name] |
 | Product name and edition | [to supply: product name and edition] |
-| OBVG's licence term and expiry | [to supply: licence term and expiry date] |
+| OBVG's license term and expiry | [to supply: license term and expiry date] |
 | Unlimited partner records? | [to confirm: yes, or the threshold above which cost passes through under Schedule 1 paragraph 3] |
 | Seats included per Tier | [to confirm: seats for Tier 1 / Tier 2 / Tier 3] |
 | White label branding and custom domain supported? | [to confirm: yes or no, and any element that cannot be unbranded under clause 10.2] |
@@ -1337,21 +1330,23 @@ on which the Client Agreement computes it. There is no earn-back.
 | Hosting regions | [to supply: hosting regions] |
 | Security certifications | [to supply: SOC 2 Type II / ISO 27001 status and report date] |
 
-Clause 10.1 warrants the licence term outlasts the longest Engagement Order plus the
-transition period. Licence cost sits within the OBVG Service Revenue, subject to Schedule 1
-paragraph 3.
+Clause 10.1 applies to the license term. The PSR license cost is included in the OBVG Service
+Revenue and is not separately chargeable, subject to Schedule 1 paragraph 3.
 
 ## Part B - Functional scope
 
-For each Registered Client, under the Automatum Brand: a partner portal; onboarding workflow
-including AWS registration, tax, banking and service-linked role status tracking; deal
-registration, approval and decline workflow with audit history; commission tracking and
-accrual against the margin schedule; offer and Selling Authorization records, being the audit
-source for the metrics in Schedule 4 paragraph 4; synchronization with HubSpot and Salesforce
-as specified in the Engagement Order, which states whose instances, which is master, the
-direction, and who holds the licences, and where a Registered Client's instance is in scope
-the Client's cooperation is a dependency to which clause 6.7 applies; reporting supporting the
-monthly pack; and the append-only event log required by clause 10.5.
+The PSR provides, for each Registered Client and under the Automatum Brand: a partner portal;
+an onboarding workflow including AWS registration, tax, banking and service-linked role status
+tracking; a deal registration, approval and decline workflow with audit history; commission
+tracking and accrual against the margin schedule; offer and Selling Authorization records,
+being the audit source for the metrics in Schedule 4 paragraph 4; synchronization with HubSpot
+and Salesforce as specified in the Engagement Order, which states the instances to be
+synchronized, the master system, the direction of synchronization and which party holds each
+license; reporting supporting the monthly reporting pack under clause 5.1(k); and the
+append-only event log required by clause 10.5.
+
+Where a Registered Client's HubSpot or Salesforce instance is in scope for synchronization,
+the Client's cooperation is a dependency to which clause 6.7 applies.
 
 ## Part C - Data, processing and security
 
@@ -1381,17 +1376,17 @@ Clause 18.3 governs changes.
 
 ## Part D - Form of vendor continuity undertaking
 
-The undertaking required by clause 10.7 is given by the PSR vendor in favour of Automatum and
-provides, in substance, that on OBVG's insolvency, cessation of business, or termination of
+The undertaking required by clause 10.7 must be given by the PSR vendor in favor of Automatum
+and provide, in substance, that on OBVG's insolvency, cessation of business, or termination of
 this Agreement for OBVG's breach, the vendor will at Automatum's election and on its notice
 contract directly with Automatum or its nominee for the remainder of the affected Engagement
 Orders plus the transition period in clause 24.1; at the rates OBVG then pays or rates
-benchmarked to the vendor's then current list price for equivalent volume, whichever is lower;
+benchmarked to the vendor's then-current list price for equivalent volume, whichever is lower;
 preserve each affected Registered Client's tenant and data intact and available without
 interruption; and not delete or withhold tenant data for at least 90 days after the triggering
 event.
 
-[to supply: executed vendor continuity undertaking, to be attached]
+[to supply: executed vendor continuity undertaking]
 
 ---
 
@@ -1421,7 +1416,7 @@ Effective Date]**
 | Ideal partner profile | |
 | Deal Desk Request and Issuance-Ready Package forms | Attached |
 | Baseline Assumptions and Onboarding Throughput Rate (Tier 3) | |
-| Unlimited partner licence warranted? (Tier 3) | Yes / No |
+| Unlimited partner license warranted? (Tier 3) | Yes / No |
 | Prior Relationships notified under clause 4.4 | |
 | Variations under clause 2.2, if any | |
 
@@ -1461,9 +1456,10 @@ Effective Date]**
 
 ## 2. Capacity ratios
 
-Engagements are weighted by Tier: Tier 1 counts 1, Tier 2 counts 2, Tier 3 counts 4. A Channel
-Manager may hold at most 12 weighted points and at most 4 Tier 3 Engagements, whichever binds
-first. Clause 9.7 makes exceeding a ratio an independent breach.
+Engagements are weighted by Tier: a Tier 1 Engagement counts as 1 weighted point, a Tier 2
+Engagement as 2 weighted points and a Tier 3 Engagement as 4 weighted points. A Channel
+Manager may hold at most 12 weighted points and at most 4 Tier 3 Engagements, whichever limit
+is reached first. Clause 9.7 applies.
 
 ## 3. Relationship managers
 
@@ -1487,10 +1483,10 @@ first. Clause 9.7 makes exceeding a ratio an independent breach.
 
 ## 2. Assumptions
 
-**2.1 Direct invoicing.** Schedule 2 assumes that engagement fees are invoiced by Automatum to
-the Client directly, are not transacted through AWS Marketplace, and are not reduced by any
-listing fee. If engagement fees are later transacted through AWS Marketplace, the allocation of
-any listing fee is agreed under clause 11.9.
+**2.1 Direct invoicing.** Schedule 2 assumes that Client Fees are invoiced by Automatum to the
+Client directly, are not transacted through AWS Marketplace, and are not reduced by any listing
+fee. If Client Fees are later transacted through AWS Marketplace, the allocation of any listing
+fee is agreed under clause 11.9.
 
 **2.2 Enterprise tier commitment.** Automatum's $9,999 is assumed to be committed annually
 under the Client Agreement. Platform Revenue accrues under clause 11.2, and Automatum bears any
@@ -1532,8 +1528,8 @@ govern.
 | Tier 3 Deal Desk Owner coverage window | Business Hours |
 | Onboarding Throughput Rate and concurrent onboardings (Tier 3) | 4 onboardings per month and 6 concurrent |
 | Tier 3 Baseline Assumptions | 30 active partners and 4 onboardings per month |
-| PSR partner record threshold for cost pass-through | The threshold in OBVG's licence; if none, no pass-through applies |
-| Unlimited partner licence warranty (Tier 3) | Not warranted; the pass-through in Schedule 1 paragraph 3 applies |
+| PSR partner record threshold for cost pass-through | The threshold in OBVG's license; if none, no pass-through applies |
+| Unlimited partner license warranty (Tier 3) | Not warranted; the pass-through in Schedule 1 paragraph 3 applies |
 
 ---
 

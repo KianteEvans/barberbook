@@ -114,6 +114,94 @@ if OBVG is the licensor; and the warranty and indemnity split - clauses 19.2 and
 Services and OBVG Materials, 19.3 and 20.2 for the Automatum Brand - tracks the ownership split
 exactly.
 
+### Why certain terms are drawn the way they are
+
+The agreement states its rules without giving reasons; an executed instrument that explains
+itself reads as a draft. The reasons are here, attributed to the clause each one explains, so
+a reviewer can test the rule against its purpose.
+
+**Money**
+
+- **Platform Revenue is $9,999 (clause 1.1).** The figure is the list price of Automatum's
+  Enterprise tier. It is fixed in the definition and does not float with that price; the
+  linkage is recorded as an assumption in Schedule 8 paragraph 2.2.
+- **The 25% share on an Existing Automatum Client (clause 11.1(b))** is consideration for the
+  Client relationship Automatum brings to the Engagement. That Client already pays the $9,999
+  under its existing subscription, which continues unchanged and is outside the Engagement.
+- **Accrual is pro rata, not front-loaded (clause 11.2).** Platform Revenue accrues at $833.25
+  a month and is not recovered from Collected Client Fees ahead of OBVG Service Revenue. Where
+  a Client pays short, the shortfall is borne in the Schedule 2 proportions for that month.
+- **Client Fees are invoiced directly (clause 11.9).** A Marketplace listing fee would break the
+  Schedule 2 arithmetic: at Tier 1, $9,999 plus $20,001 is exactly $30,000, leaving no room for
+  one. At roughly 3% it would be about $900, $1,800 and $2,700 a year at Tiers 1 to 3. The
+  clause states this as a covenant; Schedule 8 paragraph 2.1 records it as an assumption.
+- **Enhanced service levels start 30 days after an upgrade (Schedule 2 paragraph 5.1)** so
+  OBVG has time to staff to the higher Tier.
+- **Service Credits are measured against gross monthly Client Fees (Schedule 4 paragraph 6)**
+  because that is the base on which the Client Agreement computes them. A credit once deducted
+  is not reversed by later performance - the rule formerly written as "no earn-back".
+
+**Scope of the appointment**
+
+- **Clause 15 exists because the appointment is non-exclusive.** The non-circumvention and
+  non-solicitation covenants are the protection each Party receives in place of exclusivity,
+  and the clause is deliberately confined to Registered Clients and Recruited Partners. That
+  confinement is now stated once, in clause 15.1, rather than repeated in clause 3.2.
+- **Clause 15.3 restricts conduct, not counterparties.** The population of AWS resellers is
+  finite and a reseller typically carries many vendor lines, so a general bar on OBVG working
+  with firms it has recruited would protect no legitimate interest and would be hard to enforce
+  in New York. The clause therefore permits work with any Recruited Partner and prohibits only
+  the specific acts that damage a Registered Client's channel.
+- **Recruitment is a ceiling (clause 5.2).** Schedule 1's partner numbers are the most OBVG
+  must recruit, not a minimum it warrants. The former sentence "this clause prevails over any
+  contrary reading of Schedule 1" was redundant: clause 2.2 already ranks the clauses above the
+  Schedules.
+- **Clause 6.5 caps what Automatum may promise a Client** because the full flow-down of Service
+  Credits in clause 8.4 was negotiated on the footing that OBVG's exposure never exceeds
+  Schedule 4. The former sentence calling 6.5 "the consideration for" 8.4 was struck: the
+  consideration is the mutual promises as a whole, and singling one out invited a
+  failure-of-consideration argument.
+
+**Service mechanics**
+
+- **Deal desk and Selling Authorization turnaround run in two legs (clause 8.2, Schedule 4
+  paragraph 1)** because Automatum, as seller of record, issues the offer, and OBVG cannot
+  control issuance timing. Clause 8.2 allocates responsibility between the legs; the Schedule 4
+  table sets each leg's duration.
+- **Tier 1 and Tier 2 turnaround are defined on different bases (Schedule 4 paragraph 1).**
+  "Close of the next Business Day" and "8 Business Hours" are the same period if a Business Day
+  is eight hours. Tier 1 is therefore defined as close of the Business Day following receipt,
+  which in the worst case allows about 16 Business Hours to elapse, and Tier 2 as a fixed 8
+  Business Hours from receipt.
+- **The first-Transaction milestone is a target, not a warranty (Schedule 1 paragraph 4)**
+  because a partner's timeline depends on its own AWS registration, tax, banking and
+  service-linked role steps, which neither Party nor the Registered Client controls. Schedule 8
+  paragraph 2.4 records the dependency; clause 8.3 excuses the delay.
+- **Active Partners are counted on a trailing basis (Schedule 1 paragraph 5).** An Engagement
+  Year is 12 months and an Active Partner must have transacted within 365 days, so a partner
+  recruited late in the year cannot qualify inside it. Hence the trailing measure, the further
+  count 3 months after year end, and the exclusion of partners onboarded in the final 90 days.
+- **Tier 3 has an uncapped roster but a capped rate (Schedule 1 paragraph 3).** There is no
+  ceiling on total Recruited Partners, but OBVG's obligation is limited by the Onboarding
+  Throughput Rate in the Engagement Order; requests above it queue without breach.
+- **Clause 14.2 makes Automatum obtain AWS's confirmation** because the Offer-Issuing Partner
+  metric depends on a third-party reseller being able to issue offers against Automatum's
+  listing while Automatum is seller of record. If that is not confirmed by the longstop date,
+  the fallback metric in Schedule 4 applies. The clause anchors the position "as at the
+  Effective Date" so it stays true after signature.
+- **Clause 14.4 gates the Tier table on a capacity test** because, at signature, the Schedule
+  4 service levels and the Tier 3 roster had not been tested against real staffing.
+- **Termination for convenience ends the framework, not the work (clause 23.3).** Ninety days'
+  notice stops new Engagement Orders; those in effect run to expiry under clause 23.2.
+
+**The PSR**
+
+- **Schedule 5 Part A points to clause 10.1 rather than restating the licence-term warranty.**
+  The restatement had already drifted - it omitted "then in effect" and the clause 24.1
+  transition anchor - and two versions of one warranty invite argument about which governs.
+- **Schedule 5 Part D states the requirement rather than asserting the undertaking as given,**
+  because clause 10.7 contemplates that the vendor may decline to give it.
+
 ### A note on length
 
 The agreement has been through a leaning pass: rationale that explained *why* a clause exists
@@ -122,7 +210,8 @@ words-and-numerals doubling ("ninety (90) days") was dropped for numerals. That 
 from 17,092 words to 13,689 and 40 pages to 35, with every obligation, figure, cap and
 protection intact - 44 of them checked individually, and the generated .docx round-tripped
 against the Markdown with zero content lost. The passes since - removing the feasibility-study
-references, the scope audit, and the clause 16 IP changes - leave it at 13,645 words.
+references, the scope audit, the clause 16 IP changes, and the prose pass - leave it at
+13,515 words.
 
 One thing was *added* in that pass rather than removed: clause 4.5 now lets OBVG decline an
 engagement order where the client's existing client agreement does not meet clause 6.5. That
@@ -179,6 +268,12 @@ if the agreement is executed before the figure is settled.
 PSR vendor continuity undertaking, the capacity test, and insurance certificates. Clause 1.2
 makes them dependencies under clause 14; they are resolved there, never by assumption.
 
+**Two terms to settle** - Schedule 1 paragraph 3 caps Tier 3 onboarding at "Baseline plus fair
+use", and "fair use" is undefined; it needs a percentage over Baseline or a reference to the
+Engagement Order. Schedule 2 paragraph 5.2 now defines an "Engagement quarter boundary" as the
+end of each period of three Engagement Months from the start of the Engagement Year; if
+calendar quarters were intended, change it there.
+
 ### Terms chosen as market defaults, not instructed
 
 These numbers were not specified. They are drafted as market-standard defaults. This
@@ -205,7 +300,8 @@ are recorded only here: they question whether the pricing works, which the agree
 Schedule 2 rather than relitigates. Clause 14.1 and Schedule 8 paragraph 2.3 carry the operative
 consequence - neither party warrants that the fees at any tier cover its own cost of performance.
 Item 6 is not a pricing question: it is a deliberate choice about OBVG's own reuse rights,
-recorded here so it is not later rediscovered as an oversight.
+recorded here so it is not later rediscovered as an oversight. Item 7 is a gap the prose pass
+exposed: a payout with no trigger.
 
 1. **The $9,999 on early churn.** Under pro rata accrual, an engagement ending in month 3
    recovers only $2,499.75 of a retention Automatum likely commits annually. The gap cannot be
@@ -233,6 +329,14 @@ recorded here so it is not later rediscovered as an oversight.
    against running one methodology across many engagements. Left as drafted deliberately. To
    change it, the carve-out has to reach clause 16.2 and the bar narrows to publication, client
    identification and brand leakage.
+7. **Schedule 2 paragraph 4 pays OBVG on "termination by Automatum for convenience" of an
+   Engagement, but no such right exists.** Clause 23.3 lets either Party terminate the
+   *Agreement* for convenience, and clause 23.2 then keeps every Engagement Order in effect
+   running to expiry. The only ways a single Engagement Order ends early are cause (clauses
+   8.7, 11.7, 23.4), change-order deadlock (clause 14.5) or the Client terminating. So the row
+   can never fire as drafted. Either Automatum gets a right to terminate a single Engagement
+   Order on notice - in which case the row is the price of it - or the row comes out. That is
+   a commercial choice, not a drafting one, so it is recorded rather than made.
 
 ### Drafting problems resolved rather than inherited
 
@@ -248,6 +352,24 @@ recorded here so it is not later rediscovered as an oversight.
   clause 14 dependencies) moved to clause 1.2 as interpretation rules; the rest went. The
   schedule is now "Dependencies, Assumptions and Defaults", and the Enterprise-tier shortfall
   is stated as a rule (Automatum bears it) rather than parked as a question.
+- **The text carried its own drafting history.** Three parallel sweeps of the instrument found
+  about a hundred places where a sentence made sense only as a reply to an instruction or as
+  commentary on the document itself: a drafting note explaining why two SLA periods were
+  defined differently, a pointer to "an open item", rationale opening operative clauses
+  ("Because Automatum issues offers…", "This covenant is the consideration for…"),
+  self-adjudication ("This clause prevails over any contrary reading of Schedule 1"),
+  headings that argued a point ("targets, not warranties"), "here" for "in this Agreement",
+  "whatever" for "regardless of", bold on a mid-sentence word, and verbless fragments standing
+  as operative provisions. Each was verified by two independent reviewers before being
+  changed; 68 rewrites were applied and 29 candidates deliberately kept because they do legal
+  work. The reasons removed from the text are preserved above under "Why certain terms are
+  drawn the way they are". British spellings were normalised to American to match the
+  governing law.
+- **Three terms did not match their definitions.** Clause 11.9 and Schedule 8 said "engagement
+  fees" where the defined term is Client Fees; clause 9.7 said "accounts-per-owner ratios"
+  where Schedule 7 states capacity ratios in weighted points; Schedule 5 Part A restated the
+  clause 10.1 licence-term warranty in words that had drifted from it. All three now use the
+  defined term or point to the clause.
 - **Schedule 6 had no execution block.** The form of Engagement Order ended "Signed for and on
   behalf of Automatum and OBVG." against Schedule 9's full two-party block. It now matches.
 - **Tier 1 and Tier 2 sold the same turnaround.** "1 business day" and "8 business hours" are
