@@ -28,11 +28,12 @@ try {
 }
 
 const {
-  AlignmentType, BorderStyle, Document, Footer, HeadingLevel, PageBreak, PageNumber,
-  Packer, Paragraph, ShadingType, Table, TableCell, TableRow, TextRun, WidthType,
+  AlignmentType, BorderStyle, Document, Footer, Header, HeadingLevel, ImageRun, PageBreak,
+  PageNumber, Packer, Paragraph, ShadingType, Table, TableCell, TableRow, TextRun, WidthType,
 } = D;
 
 const SRC = join(here, "automatum-obp-white-label-agreement.md");
+const LOGO = join(here, "assets", "obvg-logo.png");
 const OUT = join(here, "automatum-obp-white-label-agreement.docx");
 
 // US Letter, 1 inch margins, in DXA (1440 = 1 inch).
@@ -293,8 +294,28 @@ const doc = new Document({
       properties: {
         page: {
           size: { width: 12240, height: 15840 },
-          margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 },
+          margin: { top: 1700, right: 1440, bottom: 1440, left: 1440, header: 620 },
         },
+      },
+      headers: {
+        default: new Header({
+          children: [
+            new Paragraph({
+              alignment: AlignmentType.LEFT,
+              spacing: { after: 80 },
+              border: {
+                bottom: { style: BorderStyle.SINGLE, size: 4, space: 6, color: "CCCCCC" },
+              },
+              children: [
+                new ImageRun({
+                  type: "png",
+                  data: readFileSync(LOGO),
+                  transformation: { width: 62, height: 42 },
+                }),
+              ],
+            }),
+          ],
+        }),
       },
       footers: {
         default: new Footer({
