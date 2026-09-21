@@ -32,9 +32,9 @@ const {
   PageNumber, Packer, Paragraph, ShadingType, Table, TableCell, TableRow, TextRun, WidthType,
 } = D;
 
-const SRC = join(here, "automatum-obp-white-label-agreement.md");
+const SRC = join(here, "automatum-obvg-white-label-agreement.md");
 const LOGO = join(here, "assets", "obvg-logo.png");
-const OUT = join(here, "automatum-obp-white-label-agreement.docx");
+const OUT = join(here, "automatum-obvg-white-label-agreement.docx");
 
 // US Letter, 1 inch margins, in DXA (1440 = 1 inch).
 const CONTENT_WIDTH = 12240 - 1440 * 2;

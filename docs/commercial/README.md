@@ -2,8 +2,8 @@
 
 ## Automatum x Only Best Venture Group - White Label Delivery Agreement
 
-`automatum-obp-white-label-agreement.md` is the source of truth.
-`automatum-obp-white-label-agreement.docx` is generated from it for signature - do not edit
+`automatum-obvg-white-label-agreement.md` is the source of truth.
+`automatum-obvg-white-label-agreement.docx` is generated from it for signature - do not edit
 the .docx by hand, because the next regeneration will overwrite it.
 
 ### What it is
@@ -120,7 +120,7 @@ this goes out for signature.
 Everything below must be closed. Find every one of them with:
 
 ```bash
-grep -n "to supply\|to confirm" docs/commercial/automatum-obp-white-label-agreement.md
+grep -n "to supply\|to confirm" docs/commercial/automatum-obvg-white-label-agreement.md
 ```
 
 **Facts to supply** - both parties' legal entity names, entity types, states of organization
