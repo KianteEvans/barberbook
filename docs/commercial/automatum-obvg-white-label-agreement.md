@@ -203,7 +203,7 @@ the Services and for its personnel and subcontractors.
 Agreement. A Client is within scope only once entered in it.
 
 **4.2 Adding a Client.** A Client is added when the Parties execute an Engagement Order.
-Automatum maintains the Registry and provides a current copy with each monthly statement under
+Automatum maintains the Client Registry and provides a current copy with each monthly statement under
 clause 11.5 and on request.
 
 **4.3 Engagement Order contents.** Each Engagement Order states at least: the Client's legal
@@ -222,7 +222,7 @@ competes with an existing OBVG client, or because the proposed Client's existing
 Agreement does not meet clause 6.5. Declining is not a breach, and Automatum may then serve
 that Client itself or through another provider.
 
-**4.6 Removal.** A Client remains in the Registry while its Engagement is in effect and for
+**4.6 Removal.** A Client remains in the Client Registry while its Engagement is in effect and for
 the period in clause 15.2, then is marked closed. Closure does not affect clause 23.6.
 
 **4.7 Client Status and Client Source.** Each Engagement Order records two classifications,
@@ -238,7 +238,7 @@ fixed at execution and not revisited during that Engagement Year:
      through ACE or neither Party can show first contact.
 
   Client Status is re-determined on a renewal Engagement Order. A dispute about either
-  classification is escalated under clause 26.2.
+  classification is escalated under clause 26.1.
 
 ---
 
@@ -316,7 +316,7 @@ the Client Fees and pursue collection under clause 11.
 
 **6.5 Client Agreement baseline.** Automatum warrants that no Client Agreement for a Registered
 Client contains, in respect of services OBVG performs, a service level stricter than Schedule
-4, a service credit percentage or at-risk amount above the caps in Schedule 4, a guaranteed
+4, a Service Credit percentage or at-risk amount above the caps in clause 8.5, a guaranteed
 partner number, transaction volume, revenue outcome or activation rate, or a metric definition
 inconsistent with Schedule 4. Anything agreed beyond this baseline is Automatum's own risk, is
 excluded from clause 8.4, and does not increase OBVG's obligations.
@@ -339,7 +339,7 @@ mitigate.
 ## 7. White Label and Brand
 
 **7.1 Brand license.** Automatum grants OBVG a non-exclusive, non-transferable, royalty-free
-license for the Term and any transition period under clause 24.3 to use the Automatum Brand
+license for the Term and any transition period under clause 24.1 to use the Automatum Brand
 solely to perform the Services under Schedule 3 and its obligations under clause 24. OBVG
 acquires no other rights and all goodwill accrues to Automatum.
 
@@ -385,7 +385,7 @@ provides.
 legs, the OBVG leg and the Automatum leg, as Schedule 4 provides. OBVG is responsible only for
 the OBVG leg, and a failure of the Automatum leg gives rise to no flow-down under clause 8.4.
 Where root cause analysis does not establish which leg caused the failure, responsibility is
-apportioned equally and either Party may escalate under clause 26.2.
+apportioned equally and either Party may escalate under clause 26.1.
 
 **8.3 Excused events.** A service level does not run, and no failure occurs, to the extent
 delay is caused by a Relief Event, a Force Majeure Event, an incomplete or non-conforming Deal
@@ -426,9 +426,9 @@ Engagement Order under clause 23.4 with transition assistance at OBVG's cost.
 and, at Tier 3, a Deal Desk Owner with a stated coverage window, each with the committed hours
 and coverage window in Schedule 7.
 
-**9.2 Approval.** Automatum approves initial appointees, not to be unreasonably withheld,
-conditioned or delayed, and deemed given if Automatum does not object within 5 Business Days
-of receiving the appointee's details.
+**9.2 Approval.** Initial appointees are subject to Automatum's approval, not to be
+unreasonably withheld, conditioned or delayed, and deemed given if Automatum does not object
+within 5 Business Days of receiving the appointee's details.
 
 **9.3 Minimum tenure.** OBVG will not voluntarily remove or reassign a named person for 12
 months or the remainder of the Engagement, whichever is shorter, unless the person resigns,
@@ -537,7 +537,7 @@ change in Tier.
 
 **11.4 Payment.** Automatum will pay each undisputed invoice within 10 Business Days of
 receiving the corresponding Client payment, and in any event within 60 days of the invoice
-date whether or not the Client has paid. The 60 day longstop does not apply where the Client
+date whether or not the Client has paid. The 60-day longstop does not apply where the Client
 has entered an insolvency process, or is withholding payment because of a dispute caused by
 OBVG's performance, in which case only the disputed portion may be withheld and only until
 resolved.
@@ -570,11 +570,11 @@ in calculating Collected Client Fees only under that agreed allocation.
 
 **11.10 Taxes.** Each Party bears its own taxes on its own income. Amounts payable are
 exclusive of Taxes, which Automatum will pay in addition where properly chargeable. If
-withholding is required by law, the payer will gross up so the payee receives what it would
+withholding is required by law, the payer will gross up so that the payee receives what it would
 have received absent the withholding.
 
 **11.11 Audit of billing.** Once per calendar year OBVG may audit Automatum's records of Client
-Fees invoiced and collected for Registered Clients, on 30 days' notice, in business hours, at
+Fees invoiced and collected for Registered Clients, on 30 days' notice, during Business Hours, at
 OBVG's cost. If the audit shows an understatement of OBVG Service Revenue above 5% for the
 period audited, Automatum bears the audit cost and pays the shortfall with interest under
 clause 11.8.
@@ -596,7 +596,7 @@ receiving the report, and the dispute is resolved by reference to the event log 
 
 **12.4 Records and audit.** Each Party will keep accurate records of its performance for the
 Term plus 3 years, and clause 10.5 governs the event log. Automatum may audit OBVG's compliance
-once per calendar year on 30 days' notice, in business hours, at Automatum's cost, and more
+once per calendar year on 30 days' notice, during Business Hours, at Automatum's cost, and more
 frequently after a Chronic Failure or security incident. Audits will not require disclosure of
 another OBVG client's confidential information.
 
@@ -650,7 +650,7 @@ and if they have not agreed within 30 days either may terminate the affected Eng
 on 30 days' notice, with Client Fees pro-rated to termination and no termination liability on
 either side.
 
-**14.4 Capacity test.** Neither Party will publish the Tier table to the market, and no
+**14.4 Capacity test.** Neither Party will publish the Tier matrix to the market, and no
 Engagement Order may be executed at a Tier, until the capacity test in Schedule 8, covering
 the service levels in Schedule 4 and the Tier 3 roster in Schedule 1, has been passed for that
 Tier.
@@ -906,7 +906,7 @@ terminate a single Engagement Order under clause 8.7, and OBVG under clause 11.7
 **23.5 Insolvency.** Either Party may terminate immediately on notice if the other enters an
 insolvency process, has a receiver, administrator or trustee appointed over a material part of
 its assets, makes a general assignment for the benefit of creditors, or ceases business.
-Clause 10.9 applies to the licenses granted under this Agreement.
+Clause 10.9 applies.
 
 **23.6 Survival.** Clauses 1, 2, 7.1, 7.7, 10.3, 10.5, 10.7, 10.8, 10.9, 11 for amounts accrued,
 12.4, 15, 16, 17, 18, 20, 21, 22, 23.6, 24, 26 and 27 survive termination, together with any
@@ -1041,10 +1041,10 @@ Engagement. OBVG's Tier 3 obligations are as follows:
   with queue position visible in the PSR. Requests above the rate are queued, and queuing is
   not a service level failure.
 - Each Tier 3 Engagement Order states Baseline Assumptions for active partner count and
-  monthly onboarding volume. If actual volume exceeds 150% of Baseline over any rolling 3
+  monthly onboarding volume. If actual volume exceeds 150% of the Baseline Assumptions over any rolling 3
   months, either Party may invoke clause 14.5 and Automatum will use reasonable efforts to
   obtain an uplift or a move to a bespoke tier. If the Client will not agree, OBVG's obligation
-  is capped at Baseline plus fair use and Automatum bears any resulting shortfall in its
+  is capped at the Baseline Assumptions plus fair use and Automatum bears any resulting shortfall in its
   obligations to the Client.
 - Above the partner record threshold in the Engagement Order, incremental PSR license cost
   passes through at cost under clause 14.5, unless OBVG has warranted in the Engagement Order
@@ -1053,9 +1053,10 @@ Engagement. OBVG's Tier 3 obligations are as follows:
 ## 4. Partner milestones
 
 The program target is that a Recruited Partner achieves its first Transaction by the end of
-the first quarter following its partner agreement signature date. The target is supported by
-a best efforts obligation and a reporting duty and is not a warranty. Clause 8.3 applies while
-a partner is pending AWS registration, tax, banking or service-linked role requirements.
+the first quarter following its partner agreement signature date. OBVG pursues the target
+under clause 5.1 and reports progress against it in the monthly reporting pack under clause
+12.1. The target is not a warranty. Clause 8.3 applies while a partner is pending AWS
+registration, tax, banking or service-linked role requirements.
 
 ## 5. Active Partner measurement
 
@@ -1103,7 +1104,7 @@ The Client's existing subscription continues and is not part of the Engagement.
 Automatum's 25% share of Service Revenue.
 
 **Rounding.** Monthly accrual is one twelfth of the annual share rounded to the nearest cent,
-and the final Engagement Month of each Engagement Year takes the rounding difference so the
+and the final Engagement Month of each Engagement Year takes the rounding difference so that the
 twelve amounts total the annual share exactly.
 
 The amounts in this paragraph are stated on the basis that Client Fees are collected in full.
@@ -1138,10 +1139,10 @@ commits annually for its Enterprise tier, under Schedule 8 paragraph 2.2.
 
 | Cause | Outcome |
 |---|---|
-| Client terminates, or the Engagement expires | Each Party keeps what accrued. Any early termination charge collected is split in the proportions in paragraph 1 for that Tier and Client Status. |
-| OBVG's breach or Chronic Failure | Each Party keeps what accrued. OBVG forfeits its share of any early termination charge and funds transition assistance under clause 24.1. |
+| Client terminates, or the Engagement expires | Each Party retains the amounts accrued to it. Any early termination charge collected is split in the proportions in paragraph 1 for that Tier and Client Status. |
+| OBVG's breach or Chronic Failure | Each Party retains the amounts accrued to it. OBVG forfeits its share of any early termination charge and funds transition assistance under clause 24.1. |
 | Automatum's breach, or termination by Automatum for convenience | OBVG is paid the greater of 3 months' OBVG Service Revenue and the OBVG Service Revenue for the remainder of the Engagement Year, plus evidenced demobilization costs. |
-| No fault under clause 14.3 or 25.3 | Losses lie where they fall. Each Party keeps what accrued, and any early termination charge collected is split in the proportions in paragraph 1. |
+| No fault under clause 14.3 or 25.3 | Losses lie where they fall. Each Party retains the amounts accrued to it, and any early termination charge collected is split in the proportions in paragraph 1. |
 
 ## 5. Tier changes
 
@@ -1258,7 +1259,7 @@ to issuance of the Selling Authorization and is 2 Business Days.
 ## 3. Cadence commitments
 
 Training and enablement sessions and Channel Reviews run at the Tier cadences in the Schedule
-1 tier matrix, and the monthly reporting pack is due within 5 Business Days of month end at
+1 Tier matrix, and the monthly reporting pack is due within 5 Business Days of month end at
 every Tier. A cadence commitment is met if the session or review is offered on at least two
 proposed dates within the period and is held, or is not held because of the Registered
 Client's unavailability.
@@ -1476,9 +1477,9 @@ is reached first. Clause 9.7 applies.
 
 | Item | Owner | Longstop | Consequence if not resolved |
 |---|---|---|---|
-| Whether, and by what mechanism, a third-party reseller can issue offers against Automatum's listing while Automatum is seller of record | Automatum | [to supply: longstop date, the earlier of 45 days from the Effective Date and first publication of the Tier table] | The fallback metric in Schedule 4 paragraph 4.2 applies automatically under clause 14.2. Neither Party is in breach or liable. |
+| Whether, and by what mechanism, a third-party reseller can issue offers against Automatum's listing while Automatum is seller of record | Automatum | [to supply: longstop date, the earlier of 45 days from the Effective Date and first publication of the Tier matrix] | The fallback metric in Schedule 4 paragraph 4.2 applies automatically under clause 14.2. Neither Party is in breach or liable. |
 | PSR vendor continuity undertaking under clause 10.7 | OBVG | Before the first Engagement Order | Automatum may proceed, decline, or require an alternative PSR. |
-| Capacity test of Schedule 4 and the Tier 3 roster | Joint | Before publication of the Tier table | No Tier table is published and no Engagement Order is executed at an untested Tier, and clause 14.4 applies. |
+| Capacity test of Schedule 4 and the Tier 3 roster | Joint | Before publication of the Tier matrix | No Tier matrix is published and no Engagement Order is executed at an untested Tier, and clause 14.4 applies. |
 | Insurance certificates under clause 22 | OBVG | Before the first Engagement Order | No Engagement Order is executed. |
 
 ## 2. Assumptions
@@ -1501,30 +1502,23 @@ completing AWS registration, tax, banking and service-linked role requirements, 
 control of either Party and the Registered Client. Clause 8.3 and Schedule 1 paragraph 4
 govern.
 
-## 3. Facts to supply
+## 3. Particulars
 
-| Item | Owner |
+| Particular | Value |
 |---|---|
-| Both Parties' legal entity names, entity types, states of organization, registration numbers | Joint |
-| Principal and notice addresses, including the address for legal notices under clause 26.4 | Joint |
-| Signatory names and titles, and the Effective Date | Joint |
-| Named Channel Manager, Backup and Tier 3 Deal Desk Owner per Engagement | OBVG |
-| Relationship managers and escalation executives (Schedule 7 paragraph 3) | Joint |
-| PSR vendor details and certifications (Schedule 5 Part A) | OBVG |
-| Subprocessor list (Schedule 5 Part C paragraph 4) | OBVG |
-| Rate card day rates (Schedule 2 paragraph 6) | OBVG |
-| Insurance limits for each required cover | Joint |
-| AWS Marketplace listing identifier and seller of record entity | Automatum |
-| The APN account under which OBVG files partner-sourced opportunities under clause 5.1(j) | Automatum |
-| The solution identifier under clause 13.4 | Automatum |
-| Longstop date for the dependency in paragraph 1 | Automatum |
+| Address for notices to Automatum under clause 26.4 | [to supply: Automatum notice address] |
+| Address for notices to OBVG under clause 26.4 | [to supply: OBVG notice address] |
+| AWS Marketplace listing identifier and seller of record entity | [to supply: listing identifier and seller of record entity] |
+| APN account under which OBVG files partner-sourced opportunities under clause 5.1(j) | [to supply: APN account] |
+| Solution identifier under clause 13.4 | [to supply: solution identifier] |
+| Limit of each insurance cover required by clause 22 | [to supply: limit for each cover] |
 
 ## 4. Figures to confirm
 
 | Item | Value applying until confirmed |
 |---|---|
 | PSR seats per Tier | Seats sufficient for the named personnel, the Client's nominated administrators and every Recruited Partner on the roster |
-| Named-owner committed hours per Tier | Hours sufficient to meet Schedule 4 for the Tier, with clause 9.7 continuing to bind |
+| Named role committed hours per Tier | Hours sufficient to meet Schedule 4 for the Tier, with clause 9.7 continuing to bind |
 | Tier 3 Deal Desk Owner coverage window | Business Hours |
 | Onboarding Throughput Rate and concurrent onboardings (Tier 3) | 4 onboardings per month and 6 concurrent |
 | Tier 3 Baseline Assumptions | 30 active partners and 4 onboardings per month |

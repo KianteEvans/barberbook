@@ -189,7 +189,7 @@ a reviewer can test the rule against its purpose.
   listing while Automatum is seller of record. If that is not confirmed by the longstop date,
   the fallback metric in Schedule 4 applies. The clause anchors the position "as at the
   Effective Date" so it stays true after signature.
-- **Clause 14.4 gates the Tier table on a capacity test** because, at signature, the Schedule
+- **Clause 14.4 gates the Tier matrix on a capacity test** because, at signature, the Schedule
   4 service levels and the Tier 3 roster had not been tested against real staffing.
 - **Termination for convenience ends the framework, not the work (clause 23.3).** Ninety days'
   notice stops new Engagement Orders; those in effect run to expiry under clause 23.2.
@@ -211,7 +211,7 @@ from 17,092 words to 13,689 and 40 pages to 35, with every obligation, figure, c
 protection intact - 44 of them checked individually, and the generated .docx round-tripped
 against the Markdown with zero content lost. The passes since - removing the feasibility-study
 references, the scope audit, the clause 16 IP changes, and the prose pass - leave it at
-13,515 words.
+13,463 words.
 
 One thing was *added* in that pass rather than removed: clause 4.5 now lets OBVG decline an
 engagement order where the client's existing client agreement does not meet clause 6.5. That
@@ -259,7 +259,7 @@ Marketplace listing identifier and seller of record entity; the APN account OBVG
 partner-sourced opportunities under; the solution identifier; and the longstop date for
 the Marketplace authorization dependency.
 
-**Figures to confirm** - PSR seats per tier; named-owner committed hours per tier; the Tier 3
+**Figures to confirm** - PSR seats per tier; named role committed hours per tier; the Tier 3
 coverage window; the Tier 3 onboarding throughput rate and baseline assumptions; the PSR
 partner record threshold. Each carries a stated default in Schedule 8 paragraph 4 that applies
 if the agreement is executed before the figure is settled.
@@ -267,6 +267,17 @@ if the agreement is executed before the figure is settled.
 **Dependencies** - the AWS Marketplace authorization mechanism (Schedule 8 paragraph 1), the
 PSR vendor continuity undertaking, the capacity test, and insurance certificates. Clause 1.2
 makes them dependencies under clause 14; they are resolved there, never by assumption.
+
+**Two standards to confirm** - Schedule 1 paragraph 4 formerly said the first-Transaction
+target was "supported by a best efforts obligation". No clause imposed one; "best efforts"
+appeared nowhere else, and it is an onerous standard in New York. The paragraph now ties the
+target to the obligations that exist (clause 5.1 recruitment, clause 12.1 reporting). If a
+best-efforts standard on partner milestones is intended, it needs an operative sentence, and
+OBVG should price it. Clause 23.5 formerly said clause 10.9 "applies to the licenses granted
+under this Agreement"; 10.9 by its terms covers only the clause 10.7 and 10.8 rights. The
+pointer is now the bare "Clause 10.9 applies." If section 365(n) protection is meant to extend
+to the clause 16.4 deliverables license and the clause 7.1 brand license on an OBVG insolvency,
+clause 10.9 has to say so.
 
 **Two terms to settle** - Schedule 1 paragraph 3 caps Tier 3 onboarding at "Baseline plus fair
 use", and "fair use" is undefined; it needs a percentage over Baseline or a reference to the
@@ -362,9 +373,18 @@ exposed: a payout with no trigger.
   "whatever" for "regardless of", bold on a mid-sentence word, and verbless fragments standing
   as operative provisions. Each was verified by two independent reviewers before being
   changed; 68 rewrites were applied and 29 candidates deliberately kept because they do legal
-  work. The reasons removed from the text are preserved above under "Why certain terms are
-  drawn the way they are". British spellings were normalised to American to match the
-  governing law.
+  work. Five further readers then read the result cold - two for register, three checking
+  that every cross-reference lands on a clause that does what the citing sentence says - and
+  found 22 more, each confirmed by two refuters. Four were wrong references: two escalation
+  clauses cited 26.2 (independent contractors) for 26.1 (governance and escalation); clause
+  7.1 cited 24.3 for the transition period that 24.1 establishes; clause 6.5 cited Schedule 4
+  for caps that live in clause 8.5. The rest were defined terms used in a different form
+  ("the Registry", "Baseline", "Tier table", "service credit", "business hours"), and a
+  Schedule 8 "Facts to supply" checklist, with an Owner column, that would have read as a
+  to-do list in an executed instrument; it is now a Particulars table holding the five values
+  that clauses actually point to. The reasons removed from the text are preserved above under
+  "Why certain terms are drawn the way they are". British spellings were normalised to
+  American to match the governing law.
 - **Three terms did not match their definitions.** Clause 11.9 and Schedule 8 said "engagement
   fees" where the defined term is Client Fees; clause 9.7 said "accounts-per-owner ratios"
   where Schedule 7 states capacity ratios in weighted points; Schedule 5 Part A restated the
