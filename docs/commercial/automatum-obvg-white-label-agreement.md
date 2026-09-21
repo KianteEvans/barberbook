@@ -262,7 +262,7 @@ levels in Schedule 4, using suitably skilled personnel and with reasonable skill
   f. prepare and submit to Automatum requests for recurring Selling Authorizations, and track
      their status in the PSR;
   g. deliver Channel Reviews at the Tier cadence;
-  h. stand up, configure, host, operate, support and maintain the PSR under clause 10 and
+  h. establish, configure, host, operate, support and maintain the PSR under clause 10 and
      Schedule 5, within the OBVG Service Revenue and not separately chargeable;
   i. support configuration of AWS Partner Revenue Measurement attribution so far as within
      OBVG's control, and where action is required of Automatum, the Client or AWS, specify what

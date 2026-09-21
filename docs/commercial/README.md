@@ -211,7 +211,7 @@ from 17,092 words to 13,689 and 40 pages to 35, with every obligation, figure, c
 protection intact - 44 of them checked individually, and the generated .docx round-tripped
 against the Markdown with zero content lost. The passes since - removing the feasibility-study
 references, the scope audit, the clause 16 IP changes, and the prose pass - leave it at
-13455 words.
+13,454 words.
 
 One thing was *added* in that pass rather than removed: clause 4.5 now lets OBVG decline an
 engagement order where the client's existing client agreement does not meet clause 6.5. That
