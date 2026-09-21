@@ -2,7 +2,7 @@
 
 **Managed Partner Development**
 
-This Agreement is made as of [to supply: Effective Date] between
+This Agreement is made as of [to supply: Effective Date] (the "**Effective Date**") between
 **[to supply: Automatum legal entity name]**, a [to supply: entity type] organized under the
 laws of [to supply: state of organization], company number [to supply: registration number],
 of [to supply: Automatum principal address] ("**Automatum**"), and
@@ -22,7 +22,7 @@ a single provider to build and run its reseller channel on AWS. Automatum offers
 clients under the Automatum Brand on the terms of this Agreement.
 
 **C.** Automatum contracts with, invoices and is the sole counterparty to each client. OBVG
-performs the channel function as Automatum's subcontractor under Automatum's brand and is not
+performs the channel function as Automatum's subcontractor under the Automatum Brand and is not
 presented to the client as a separate provider.
 
 The Parties agree as follows.
@@ -636,7 +636,7 @@ assumption proving incorrect is not a breach, and the consequence is as stated i
 or this clause.
 
 **14.2 Marketplace authorization dependency.** As at the Effective Date, AWS has not
-confirmed whether, or by what mechanism, a third-party reseller may issue offers against
+confirmed whether, or by what mechanism, a third party reseller may issue offers against
 Automatum's listing while Automatum is seller of record. Automatum is responsible for
 obtaining AWS's confirmation and will use reasonable efforts to obtain a written answer by the
 longstop date in Schedule 8. If the mechanism is confirmed available by then, the
@@ -843,7 +843,7 @@ breach of an AWS Program Term.
 **20.3 Conduct.** The indemnified Party will notify promptly, give sole control of defense and
 settlement, and cooperate reasonably at the indemnifying Party's cost. The indemnifying Party
 will not settle in a way imposing a non-indemnified obligation or admission of liability
-without consent. Late notice reduces the indemnity only to the extent of resulting prejudice.
+without the indemnified Party's consent. Late notice reduces the indemnity only to the extent of resulting prejudice.
 
 ---
 
@@ -929,8 +929,8 @@ correspondence; disconnection of any CRM synchronization with a certificate of d
 continuation of the license in clause 16.4.
 
 **24.3 Conduct.** During the transition period, OBVG continues to perform the Services, the
-service levels continue to apply, and clause 7 continues to apply so that no Client or
-Recruited Partner learns of OBVG's role or of the termination except as Automatum directs.
+service levels continue to apply, and clause 7 continues to apply. OBVG will not disclose its
+role or the termination to any Client or Recruited Partner except as Automatum directs.
 
 ---
 
@@ -1247,7 +1247,7 @@ OBVG leg and the Automatum leg.
 | 3 | 4 Business Hours | 2.5 Business Hours | 1.5 Business Hours |
 
 Tier 1 is satisfied if the offer is issued by close of the Business Day following the Business
-Day of receipt; Tier 2 is a fixed 8 Business Hours from receipt. Clause 8.2 governs attribution
+Day of receipt; the Tier 2 total turnaround is a fixed 8 Business Hours from receipt. Clause 8.2 governs attribution
 between legs.
 
 ## 2. Selling Authorizations
@@ -1407,7 +1407,7 @@ Effective Date]**
 | Engagement start date and Engagement Year dates | |
 | Client Fees per month | |
 | Platform Revenue per Engagement Year | $9,999 |
-| Service Revenue split | 100% OBVG (Net New) / 75% OBVG, 25% Automatum (Existing) |
+| Service Revenue split | 100% OBVG (Net New Client) / 75% OBVG, 25% Automatum (Existing Automatum Client) |
 | OBVG Service Revenue per month | |
 | Named Channel Manager and Backup | |
 | Named Deal Desk Owner (Tier 3) and coverage window | |
@@ -1453,7 +1453,7 @@ Effective Date]**
 |---|---|---|---|
 | Channel Manager | 1, 2, 3 | [to confirm: hours per Tier] | Business Hours |
 | Backup Channel Manager | 1, 2, 3 | [to confirm: hours per Tier] | Business Hours |
-| Deal Desk Owner | 3 | [to confirm: hours] | [to confirm: coverage window, stated in the Engagement Order] |
+| Deal Desk Owner | 3 | [to confirm: hours] | As stated in the Engagement Order |
 
 ## 2. Capacity ratios
 
@@ -1477,7 +1477,7 @@ is reached first. Clause 9.7 applies.
 
 | Item | Owner | Longstop | Consequence if not resolved |
 |---|---|---|---|
-| Whether, and by what mechanism, a third-party reseller can issue offers against Automatum's listing while Automatum is seller of record | Automatum | [to supply: longstop date, the earlier of 45 days from the Effective Date and first publication of the Tier matrix] | The fallback metric in Schedule 4 paragraph 4.2 applies automatically under clause 14.2. Neither Party is in breach or liable. |
+| Whether, and by what mechanism, a third party reseller can issue offers against Automatum's listing while Automatum is seller of record | Automatum | The earlier of 45 days after the Effective Date and the first publication of the Tier matrix | The fallback metric in Schedule 4 paragraph 4.2 applies automatically under clause 14.2. Neither Party is in breach or liable. |
 | PSR vendor continuity undertaking under clause 10.7 | OBVG | Before the first Engagement Order | Automatum may proceed, decline, or require an alternative PSR. |
 | Capacity test of Schedule 4 and the Tier 3 roster | Joint | Before publication of the Tier matrix | No Tier matrix is published and no Engagement Order is executed at an untested Tier, and clause 14.4 applies. |
 | Insurance certificates under clause 22 | OBVG | Before the first Engagement Order | No Engagement Order is executed. |
