@@ -211,7 +211,7 @@ from 17,092 words to 13,689 and 40 pages to 35, with every obligation, figure, c
 protection intact - 44 of them checked individually, and the generated .docx round-tripped
 against the Markdown with zero content lost. The passes since - removing the feasibility-study
 references, the scope audit, the clause 16 IP changes, and the prose pass - leave it at
-13,463 words.
+13455 words.
 
 One thing was *added* in that pass rather than removed: clause 4.5 now lets OBVG decline an
 engagement order where the client's existing client agreement does not meet clause 6.5. That
@@ -268,7 +268,10 @@ if the agreement is executed before the figure is settled.
 PSR vendor continuity undertaking, the capacity test, and insurance certificates. Clause 1.2
 makes them dependencies under clause 14; they are resolved there, never by assumption.
 
-**Two standards to confirm** - Schedule 1 paragraph 4 formerly said the first-Transaction
+**Three standards to confirm** - Schedule 4 paragraph 1 states the Tier 1 turnaround in prose
+because the table's "by close of the next Business Day after receipt" is ambiguous about which
+day starts the clock; Tiers 2 and 3 are plain hour counts and the table alone carries them.
+Schedule 1 paragraph 4 formerly said the first-Transaction
 target was "supported by a best efforts obligation". No clause imposed one; "best efforts"
 appeared nowhere else, and it is an onerous standard in New York. The paragraph now ties the
 target to the obligations that exist (clause 5.1 recruitment, clause 12.1 reporting). If a

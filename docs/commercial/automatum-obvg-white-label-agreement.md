@@ -203,8 +203,8 @@ the Services and for its personnel and subcontractors.
 Agreement. A Client is within scope only once entered in it.
 
 **4.2 Adding a Client.** A Client is added when the Parties execute an Engagement Order.
-Automatum maintains the Client Registry and provides a current copy with each monthly statement under
-clause 11.5 and on request.
+Automatum maintains the Client Registry and provides a current copy with each monthly statement
+under clause 11.5 and on request.
 
 **4.3 Engagement Order contents.** Each Engagement Order states at least: the Client's legal
 name; the Tier; the Client Status and Client Source; the Engagement start and Engagement Year
@@ -213,8 +213,8 @@ dates; the Client Fees and the resulting OBVG Service Revenue; the personnel nam
 
 **4.4 Prior relationships.** Before an Engagement Order is executed, OBVG may notify Automatum
 in writing, with reasonable evidence, of a pre-existing relationship with the proposed Client
-or a named partner of it. A relationship so notified is a "Prior Relationship" and is carved
-out of clause 15.2. A relationship not notified before execution is not a Prior Relationship.
+or a named partner of it. A relationship so notified is a "Prior Relationship" and is excluded
+from clause 15.2. A relationship not notified before execution is not a Prior Relationship.
 
 **4.5 Refusal.** OBVG may decline a proposed Engagement Order within 5 Business Days, acting
 reasonably, including for lack of capacity at the proposed Tier, because the proposed Client
@@ -229,9 +229,9 @@ the period in clause 15.2, then is marked closed. Closure does not affect clause
 fixed at execution and not revisited during that Engagement Year:
 
   a. **Client Status** - Net New Client or Existing Automatum Client. Automatum will disclose
-     before execution whether the proposed Client holds or held any paid Automatum
-     subscription in the preceding 90 days, with reasonable evidence on request. Client Status
-     determines the division of Service Revenue under clause 11.1.
+     before execution whether the proposed Client holds or held any paid Automatum subscription
+     in the preceding 90 days, with reasonable evidence on request. Client Status determines
+     the division of Service Revenue under clause 11.1.
   b. **Client Source** - OBVG-Sourced, Automatum-Sourced, or Joint or ACE-Sourced. A Client is
      OBVG-Sourced or Automatum-Sourced according to which Party first made documented contact
      with the Client about the Solution, and Joint or ACE-Sourced where the opportunity came
@@ -694,7 +694,7 @@ engagement any employee or contractor of the other who was materially involved i
 Services. This does not restrict general advertising not targeted at the other's personnel,
 responses to unsolicited applications, or engaging a person who ceased to be engaged by the
 other more than 6 months earlier. A Party in breach will pay the other 30% of the person's
-first year total compensation.
+first-year total compensation.
 
 **15.6 Liquidated damages.** If OBVG breaches clause 15.2 in respect of a Registered Client,
 OBVG will pay Automatum $35,000 for that Client. Automatum's loss in that event is the loss of
@@ -843,7 +843,8 @@ breach of an AWS Program Term.
 **20.3 Conduct.** The indemnified Party will notify promptly, give sole control of defense and
 settlement, and cooperate reasonably at the indemnifying Party's cost. The indemnifying Party
 will not settle in a way imposing a non-indemnified obligation or admission of liability
-without the indemnified Party's consent. Late notice reduces the indemnity only to the extent of resulting prejudice.
+without the indemnified Party's consent. Late notice reduces the indemnity only to the extent
+of resulting prejudice.
 
 ---
 
@@ -1040,12 +1041,12 @@ Engagement. OBVG's Tier 3 obligations are as follows:
   maintain up to the stated number of concurrent onboardings, as a first-in-first-out queue
   with queue position visible in the PSR. Requests above the rate are queued, and queuing is
   not a service level failure.
-- Each Tier 3 Engagement Order states Baseline Assumptions for active partner count and
-  monthly onboarding volume. If actual volume exceeds 150% of the Baseline Assumptions over any rolling 3
-  months, either Party may invoke clause 14.5 and Automatum will use reasonable efforts to
+- Each Tier 3 Engagement Order states Baseline Assumptions for Active Partner count and monthly
+  onboarding volume. If actual volume exceeds 150% of the Baseline Assumptions over any rolling
+  3 months, either Party may invoke clause 14.5 and Automatum will use reasonable efforts to
   obtain an uplift or a move to a bespoke tier. If the Client will not agree, OBVG's obligation
-  is capped at the Baseline Assumptions plus fair use and Automatum bears any resulting shortfall in its
-  obligations to the Client.
+  is capped at the Baseline Assumptions plus fair use and Automatum bears any resulting
+  shortfall in its obligations to the Client.
 - Above the partner record threshold in the Engagement Order, incremental PSR license cost
   passes through at cost under clause 14.5, unless OBVG has warranted in the Engagement Order
   that it holds an unlimited-partner license.
@@ -1164,7 +1165,7 @@ its obligations to the Client.
 
 ## 6. Rate card
 
-Out of scope work under clause 14.5, chargeable transition assistance under clause 24.1, and
+Out-of-scope work under clause 14.5, chargeable transition assistance under clause 24.1, and
 roster carry-over under paragraph 5.3 are charged at:
 
 | Role | Day rate |
@@ -1247,8 +1248,7 @@ OBVG leg and the Automatum leg.
 | 3 | 4 Business Hours | 2.5 Business Hours | 1.5 Business Hours |
 
 Tier 1 is satisfied if the offer is issued by close of the Business Day following the Business
-Day of receipt; the Tier 2 total turnaround is a fixed 8 Business Hours from receipt. Clause 8.2 governs attribution
-between legs.
+Day of receipt. Clause 8.2 governs attribution between legs.
 
 ## 2. Selling Authorizations
 
@@ -1266,11 +1266,11 @@ Client's unavailability.
 
 ## 4. Metric dictionary
 
-**4.1 Primary metric - Offer-Issuing Partners.** The number of distinct Recruited Partners
-that created at least one private offer or CPPO against the Registered Client's product during the reporting month, read
-from the PSR offer record and reconciled against AWS Marketplace seller reporting. It applies
-only if the dependency in clause 14.2 is confirmed available by the longstop date in Schedule
-8.
+**4.1 Primary metric - Offer-Issuing Partners.** The number of distinct Recruited Partners that
+created at least one private offer or CPPO against the Registered Client's product during the
+reporting month, read from the PSR offer record and reconciled against AWS Marketplace seller
+reporting. It applies only if the dependency in clause 14.2 is confirmed available by the
+longstop date in Schedule 8.
 
 **4.2 Fallback metric - Partner-Attributed Transactions.** The number of Transactions issued
 by Automatum against a Selling Authorization or private offer attributed to a named Recruited
@@ -1521,7 +1521,7 @@ govern.
 | Named role committed hours per Tier | Hours sufficient to meet Schedule 4 for the Tier, with clause 9.7 continuing to bind |
 | Tier 3 Deal Desk Owner coverage window | Business Hours |
 | Onboarding Throughput Rate and concurrent onboardings (Tier 3) | 4 onboardings per month and 6 concurrent |
-| Tier 3 Baseline Assumptions | 30 active partners and 4 onboardings per month |
+| Tier 3 Baseline Assumptions | 30 Active Partners and 4 onboardings per month |
 | PSR partner record threshold for cost pass-through | The threshold in OBVG's license; if none, no pass-through applies |
 | Unlimited partner license warranty (Tier 3) | Not warranted; the pass-through in Schedule 1 paragraph 3 applies |
 
