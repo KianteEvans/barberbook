@@ -438,7 +438,11 @@ details off anything a client sees.
 - `build-2pager.mjs` - its own `.docx` builder. Deliberately not `build-docx.mjs`, which stamps
   `assets/obvg-logo.png` into a running header on every page. Nothing in the 2-pager builder
   reads the assets directory.
-- `managed-partner-development-2pager.docx` - the built sheet, two US Letter pages.
+- `managed-partner-development-2pager.html` - the designed page, and the source of the PDF.
+- `build-2pager-pdf.mjs` - renders that page to PDF, inlining the Google faces first so the
+  file embeds the real type rather than falling back to whatever the rendering machine has.
+- `managed-partner-development-2pager.docx` and `.pdf` - the built sheet, two US Letter pages
+  each.
 
 Three clauses govern what the sheet may say, and they are the reason it reads the way it does:
 
