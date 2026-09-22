@@ -1,0 +1,407 @@
+<title>Managed Partner Development</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;450;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  /* Sizes are in rem against a 10px root, so the print rules can re-scale the whole
+     sheet from one declaration instead of overriding every element. */
+  :root {
+    font-size: 62.5%;
+
+    --ground:  #F1F4F3;
+    --sheet:   #FFFFFF;
+    --ink:     #16191A;
+    --body:    #33393A;
+    --muted:   #5B6563;
+    --rule:    #DBE0DE;
+    --hair:    #EAEEEC;
+    --accent:  #0D5557;
+    --accent-ink: #0D5557;
+    --accent-wash: #EAF1F0;
+    --shadow: 0 1px 2px rgba(20,30,28,.05), 0 8px 28px rgba(20,30,28,.06);
+
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans:  "IBM Plex Sans", system-ui, -apple-system, Segoe UI, sans-serif;
+    --mono:  "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0E1211;
+      --sheet:  #171B1B;
+      --ink:    #EDF1EF;
+      --body:   #C8D0CE;
+      --muted:  #8C9794;
+      --rule:   #2B3332;
+      --hair:   #232A29;
+      --accent: #5FBDB8;
+      --accent-ink: #7FCFC9;
+      --accent-wash: #1B2A29;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0E1211;
+    --sheet:  #171B1B;
+    --ink:    #EDF1EF;
+    --body:   #C8D0CE;
+    --muted:  #8C9794;
+    --rule:   #2B3332;
+    --hair:   #232A29;
+    --accent: #5FBDB8;
+    --accent-ink: #7FCFC9;
+    --accent-wash: #1B2A29;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--body);
+    font-family: var(--sans);
+    font-size: 1.5rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    padding-inline: 1.6rem;
+    padding-block: 2.8rem 4.4rem;
+  }
+
+  .doc { max-width: 81.6rem; margin-inline: auto; display: flex; flex-direction: column; gap: 2.2rem; }
+
+  .sheet {
+    background: var(--sheet);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    padding: clamp(2.4rem, 5.2vw, 5.6rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2.6rem;
+  }
+
+  /* ---------------------------------------------------------- masthead */
+  .masthead {
+    display: flex; flex-wrap: wrap; align-items: baseline;
+    justify-content: space-between; gap: 1rem 2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .mark {
+    font-family: var(--mono); font-weight: 600; font-size: 1.4rem;
+    letter-spacing: .16em; color: var(--ink);
+  }
+  .mark span { color: var(--muted); font-weight: 400; }
+  .masthead .kicker {
+    font-family: var(--mono); font-size: 1.1rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted);
+  }
+
+  /* ------------------------------------------------------------- title */
+  .title-block { display: flex; flex-direction: column; gap: 1.2rem; }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(3.4rem, 6.4vw, 5.2rem);
+    line-height: 1.04;
+    letter-spacing: -.015em;
+    color: var(--ink);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .deck {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 2.6vw, 2.1rem);
+    line-height: 1.35;
+    color: var(--accent-ink);
+    margin: 0;
+    max-width: 60ch;
+    text-wrap: balance;
+  }
+  .lead { margin: 0; max-width: 68ch; font-size: 1.6rem; line-height: 1.6; }
+  .lead strong { color: var(--ink); font-weight: 600; }
+
+  .whofor {
+    font-family: var(--mono); font-size: 1.2rem; line-height: 1.5;
+    color: var(--muted); margin: 0;
+    padding-left: 1.4rem; border-left: 2px solid var(--accent);
+  }
+
+  /* ----------------------------------------------------------- section */
+  section { display: flex; flex-direction: column; gap: 1.4rem; }
+  h2 {
+    font-family: var(--mono);
+    font-size: 1.15rem; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent-ink);
+    margin: 0; padding-bottom: .7rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* what you get */
+  .offer { columns: 2; column-gap: 3rem; }
+  @media (max-width: 620px) { .offer { columns: 1; } }
+  .offer > div { break-inside: avoid; margin-bottom: 1.6rem; display: flex; flex-direction: column; gap: .3rem; }
+  .offer > div:last-child { margin-bottom: 0; }
+  .offer h3 {
+    margin: 0; font-size: 1.4rem; font-weight: 600; color: var(--ink);
+    font-family: var(--sans); letter-spacing: -.005em;
+  }
+  .offer p { margin: 0; font-size: 1.35rem; line-height: 1.5; color: var(--body); }
+
+  /* how it runs — numbered because it is genuinely a sequence */
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.8rem; margin: 0; padding: 0; list-style: none; counter-reset: s; }
+  @media (max-width: 720px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 420px) { .steps { grid-template-columns: 1fr; } }
+  .steps li { counter-increment: s; display: flex; flex-direction: column; gap: .5rem; padding-top: 1.1rem; border-top: 2px solid var(--accent); }
+  .steps li::before {
+    content: counter(s, decimal-leading-zero);
+    font-family: var(--mono); font-size: 1.1rem; font-weight: 600;
+    letter-spacing: .08em; color: var(--accent-ink);
+  }
+  .steps b { font-size: 1.35rem; color: var(--ink); font-weight: 600; }
+  .steps span { font-size: 1.3rem; line-height: 1.45; }
+
+  /* ------------------------------------------------------------- table */
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 1.35rem; }
+  th, td { text-align: left; vertical-align: top; padding: .9rem 1.2rem; border-bottom: 1px solid var(--hair); }
+  thead th {
+    font-family: var(--mono); font-size: 1.1rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent-ink); background: var(--accent-wash);
+    border-bottom: 1px solid var(--rule); white-space: nowrap;
+  }
+  tbody th {
+    font-weight: 500; color: var(--muted); font-size: 1.3rem;
+    width: 34%; min-width: 15rem;
+  }
+  .tiers tbody th { width: 29%; }
+  .tiers td { font-variant-numeric: tabular-nums; }
+  .tiers .price td { font-family: var(--mono); font-weight: 600; font-size: 1.6rem; color: var(--ink); padding-block: 1.1rem; }
+  .tiers tbody tr:last-child th, .tiers tbody tr:last-child td { border-bottom: 0; }
+  .sla th { width: 42%; }
+  .sla td { font-variant-numeric: tabular-nums; }
+  .sla tbody tr:last-child th, .sla tbody tr:last-child td { border-bottom: 0; }
+  .note { margin: 0; font-size: 1.3rem; color: var(--muted); }
+
+  /* ------------------------------------------------------------ metric */
+  .metric { display: flex; flex-direction: column; gap: .8rem; padding: 1.6rem 1.8rem; background: var(--accent-wash); border-left: 3px solid var(--accent); border-radius: 2px; }
+  .metric .label { font-family: var(--mono); font-size: 1.05rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); }
+  .metric .name { font-family: var(--serif); font-size: 2.2rem; line-height: 1.15; color: var(--ink); }
+  .metric p { margin: 0; font-size: 1.3rem; line-height: 1.5; }
+
+  .alongside { margin: 0; font-size: 1.35rem; }
+  .alongside b { color: var(--ink); font-weight: 600; }
+
+  /* ------------------------------------------------------------- fine */
+  .fine {
+    margin: 0; padding-top: 1.4rem; border-top: 1px solid var(--rule);
+    font-size: 1.1rem; line-height: 1.5; color: var(--muted);
+  }
+  .sheet > .fine { margin-top: auto; }
+
+  /* ------------------------------------------------------------ print */
+  /* Two US Letter pages. The root size re-scales the sheet; the rules under it
+     close up the spacing that a screen reading wants and a printed page does not. */
+  @page { size: letter; margin: 0.55in; }
+  @media print {
+    :root { font-size: 53%; }
+    body { background: #fff; padding: 0; line-height: 1.5; }
+    .doc { gap: 0; max-width: none; }
+    .sheet {
+      border: 0; box-shadow: none; border-radius: 0; padding: 0;
+      gap: 1.9rem; break-after: page;
+    }
+    .sheet:last-child { break-after: auto; }
+    section { gap: 1rem; }
+    h2 { padding-bottom: .45rem; }
+    h1 { font-size: 3.6rem; }
+    .deck { font-size: 1.9rem; }
+    .title-block { gap: .9rem; }
+    .offer { column-gap: 2.6rem; }
+    .offer > div { margin-bottom: 1.2rem; }
+    .offer p { line-height: 1.42; }
+    .steps span { line-height: 1.38; }
+    .metric p, .lead { line-height: 1.45; }
+    .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.6rem; }
+    th, td { padding: .5rem 1rem; }
+    .tiers .price td { padding-block: .7rem; }
+    .metric { gap: .5rem; padding: 1.1rem 1.4rem; }
+    .metric .name { font-size: 1.8rem; }
+    .fine { padding-top: .9rem; }
+    table, .metric { break-inside: avoid; }
+  }
+</style>
+
+<main class="doc">
+
+  <!-- ============================================================ page 1 -->
+  <article class="sheet">
+    <header class="masthead">
+      <div class="mark">AUTOMATUM<span> ／ channel</span></div>
+      <div class="kicker">AWS Marketplace</div>
+    </header>
+
+    <div class="title-block">
+      <h1>Managed Partner Development</h1>
+      <p class="deck">Build and run your AWS Marketplace reseller channel.</p>
+      <p class="lead">A 12-month engagement that recruits resellers for your listing, contracts
+        them, enables them and runs the deal desk that gets offers issued. <strong>You keep the
+        listing, the seller of record position and the customer relationship.</strong> We run the
+        channel behind it.</p>
+      <p class="whofor">For software vendors with a live AWS Marketplace listing.</p>
+    </div>
+
+    <section>
+      <h2>What you get</h2>
+      <p class="note">Every tier includes all of the following.</p>
+      <div class="offer">
+        <div>
+          <h3>Partner recruitment and onboarding</h3>
+          <p>We identify, qualify, recruit and onboard resellers against the ideal partner profile
+            we agree with you. Every candidate is screened before onboarding against sanctions and
+            denied party lists, adverse media, beneficial ownership including whether any owner or
+            controller is a government official, AWS Partner Network standing, and financial
+            standing.</p>
+        </div>
+        <div>
+          <h3>Partner contracting</h3>
+          <p>We draft, issue and administer the partner agreement and the margin schedule. The
+            agreement is between you and the partner; we run the paperwork.</p>
+        </div>
+        <div>
+          <h3>AWS readiness</h3>
+          <p>We guide each partner through AWS registration, tax and banking details, and
+            service-linked role creation.</p>
+        </div>
+        <div>
+          <h3>A live partner portal</h3>
+          <p>Onboarding workflow, deal registration with approval and decline history, and
+            commission tracking against the margin schedule, synchronized with HubSpot or
+            Salesforce as you specify.</p>
+        </div>
+        <div>
+          <h3>Enablement and training</h3>
+          <p>Sessions at your tier cadence covering your product, offer mechanics, deal
+            registration and the margin schedule.</p>
+        </div>
+        <div>
+          <h3>A CPPO deal desk</h3>
+          <p>Partner deal registrations answered to a published turnaround, with every private
+            offer and CPPO structured and priced ready for issue.</p>
+        </div>
+        <div>
+          <h3>Selling Authorizations</h3>
+          <p>Prepared, submitted and tracked to issue.</p>
+        </div>
+        <div>
+          <h3>Opportunity hygiene</h3>
+          <p>Partner-sourced opportunities filed to ACE, tracked distinctly, with AWS Partner
+            Revenue Measurement attribution configured and verified.</p>
+        </div>
+        <div>
+          <h3>A monthly report</h3>
+          <p>Delivered within 5 business days of month end, in your brand, in a form you can pass
+            on unaltered.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>How it runs</h2>
+      <ol class="steps">
+        <li><b>Scope</b><span>We agree the ideal partner profile, the tier and the intake
+          channel.</span></li>
+        <li><b>Recruit and onboard</b><span>Candidates screened, contracted, AWS-registered and
+          enabled.</span></li>
+        <li><b>Transact</b><span>Partners register deals through the desk; offers and Selling
+          Authorizations go out to the turnaround for your tier.</span></li>
+        <li><b>Report and review</b><span>Monthly pack, plus a channel review at your tier
+          cadence.</span></li>
+      </ol>
+    </section>
+  </article>
+
+  <!-- ============================================================ page 2 -->
+  <article class="sheet">
+    <section>
+      <h2>Choose a tier</h2>
+      <div class="scroll">
+        <table class="tiers">
+          <thead>
+            <tr><th scope="col"><span class="sr">Measure</span></th><th scope="col">Tier 1</th><th scope="col">Tier 2</th><th scope="col">Tier 3</th></tr>
+          </thead>
+          <tbody>
+            <tr class="price"><th scope="row">Monthly fee</th><td>$2,500</td><td>$5,000</td><td>$7,500</td></tr>
+            <tr><th scope="row">Net new partner capacity over the engagement</th><td>up to 6</td><td>up to 12</td><td>uncapped roster</td></tr>
+            <tr><th scope="row">Training and enablement</th><td>twice yearly</td><td>quarterly</td><td>monthly</td></tr>
+            <tr><th scope="row">Deal desk turnaround</th><td>by close of the next business day</td><td>8 business hours</td><td>4 business hours</td></tr>
+            <tr><th scope="row">Channel reviews</th><td>quarterly</td><td>monthly</td><td>every two weeks</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Tier 3 runs an uncapped roster with an agreed monthly onboarding rate;
+        requests above the rate queue in order, with queue position visible in the portal.</p>
+    </section>
+
+    <section>
+      <h2>Service levels</h2>
+      <div class="scroll">
+        <table class="sla">
+          <thead>
+            <tr><th scope="col">Commitment</th><th scope="col">Standard</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Selling Authorization, request to issue</th><td>4 business days</td></tr>
+            <tr><th scope="row">Monthly reporting pack</th><td>Within 5 business days of month end</td></tr>
+            <tr><th scope="row">Cannot transact, or portal unavailable</th><td>1 business hour response, updates every 4 business hours</td></tr>
+            <tr><th scope="row">Partner blocked on a live deal</th><td>4 business hour response, daily updates</td></tr>
+            <tr><th scope="row">Query not blocking a deal</th><td>1 business day response</td></tr>
+            <tr><th scope="row">Information or change request</th><td>3 business days response</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">All contact arrives through a single intake channel, triaged within
+        2 business hours.</p>
+    </section>
+
+    <section>
+      <h2>What gets reported</h2>
+      <div class="metric">
+        <div class="label">Headline number</div>
+        <div class="name">Offer-Issuing Partners</div>
+        <p>Distinct partners that issued at least one private offer or CPPO against your listing
+          that month, read from the portal and reconciled against AWS Marketplace seller
+          reporting.</p>
+      </div>
+      <p class="alongside"><b>Alongside it:</b> partners onboarded this month and cumulatively,
+        partners pending AWS prerequisites, active partners, deal registrations received, approved
+        and declined, deal desk performance, Selling Authorizations requested and issued, and
+        attributed channel revenue.</p>
+    </section>
+
+    <section>
+      <h2>Not included</h2>
+      <p class="note">Bespoke integration work, partner marketing spend, channel incentive
+        funding, legal advice, and services to your own direct customers. Each is quoted
+        separately.</p>
+    </section>
+
+    <p class="fine">Partner numbers are recruitment capacity for the tier, not a guaranteed
+      outcome: we do not warrant that any number of partners is recruited, onboarded, authorized,
+      transacts or becomes active. A partner reaching its first transaction by the end of the
+      quarter following signature is a program target, not a warranty. Where AWS Marketplace
+      mechanics require it, the headline number is Partner-Attributed Transactions. Business hours
+      are 9:00 a.m. to 6:00 p.m. Eastern Time on a business day. Scope, service levels and metrics
+      are as set out in the engagement documentation, which governs.</p>
+  </article>
+
+</main>
+
+<style>
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>

@@ -427,3 +427,31 @@ The client-facing agreement between Automatum and each ISV, and the partner/rese
 and margin schedule OBVG papers for each client, are separate documents. Note that clause 6.5
 constrains what the client agreement may contain: it may not carry service levels stricter
 than Schedule 4, credits above the caps, or any guaranteed outcome.
+
+## Client-facing collateral
+
+`collateral/` holds the sheet Automatum hands an ISV. It is Automatum-branded end to end: the
+agreement's clause 7.3 and Schedule 3 paragraph 3 keep OBVG's name, logo, domain and contact
+details off anything a client sees.
+
+- `managed-partner-development-2pager.md` - the copy, and the source both outputs are built from.
+- `build-2pager.mjs` - its own `.docx` builder. Deliberately not `build-docx.mjs`, which stamps
+  `assets/obvg-logo.png` into a running header on every page. Nothing in the 2-pager builder
+  reads the assets directory.
+- `managed-partner-development-2pager.docx` - the built sheet, two US Letter pages.
+
+Three clauses govern what the sheet may say, and they are the reason it reads the way it does:
+
+- **Clause 6.6** lets Automatum make no representation to a Client about the Services, partner
+  numbers, offer issuance or any metric beyond Schedules 1 and 4, and indemnifies OBVG for
+  anything said past that line. Every figure on the sheet is lifted from the Schedule 1 tier
+  matrix or Schedule 4, unchanged.
+- **Clause 5.2** makes the partner numbers a recruitment ceiling. So the sheet reads "up to 6"
+  and "up to 12", never a bare count, and never a transacting or activation outcome.
+- **Clause 7.7** bars any reference to a Registered Client or Recruited Partner in marketing
+  material, which rules out logos, case studies and named references.
+
+Two translations happen on the way out. Schedule 4 measures deal desk turnaround and Selling
+Authorizations in an OBVG leg and an Automatum leg; the client sees only the total, so the
+sheet carries 4 Business Days for a Selling Authorization rather than 2 + 2. And the Partner
+System of Record is named on the sheet as the partner portal.
